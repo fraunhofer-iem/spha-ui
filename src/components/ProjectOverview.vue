@@ -60,20 +60,6 @@ const formattedLastCommitDate = computed(() => {
 
     <!-- Card Body: Project Details -->
     <div class="card-body p-4">
-      <!-- Project URL -->
-      <div class="mb-3">
-        <label for="projectUrlInput" class="form-label text-muted small">URL</label>
-        <div class="input-group">
-          <input type="text" id="projectUrlInput" class="form-control" :value="projectUrl" readonly>
-          <a :href="projectUrl" target="_blank" class="btn btn-outline-secondary" role="button">
-            <i class="bi bi-box-arrow-up-right"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card Footer: Stats -->
-    <div class="card-footer p-3">
       <div class="row text-center">
         <!-- Stars -->
         <div class="col stat-item justify-content-center">
@@ -102,7 +88,20 @@ const formattedLastCommitDate = computed(() => {
           </div>
         </div>
       </div>
+
+      <div class="mb-3">
+        <label for="projectUrlInput" class="form-label text-muted small">URL</label>
+        <div class="input-group">
+          <input type="text" id="projectUrlInput" class="form-control" :value="projectUrl" readonly>
+          <a :href="projectUrl" target="_blank" class="btn btn-outline-secondary" role="button">
+            <i class="bi bi-box-arrow-up-right"></i>
+          </a>
+        </div>
+      </div>
+
     </div>
+
+
   </div>
 </template>
 

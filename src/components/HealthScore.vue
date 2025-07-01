@@ -26,9 +26,9 @@ const scoreColorClass = computed(() => {
     </div>
 
     <!-- Card Body -->
-    <div class="card-body align-items-center p-4 text-center justify-content-center">
+    <div class="card-body">
       <figure class="figure">
-        <img :src="SphaIcon" alt="Project" class="img-fluid"/>
+        <img :src="SphaIcon" alt="Project" class="figure-img img-fluid rounded"/>
       </figure>
       <div class="text-center">
         <div :class="['fs-3 fw-bold', scoreColorClass]">
@@ -42,12 +42,12 @@ const scoreColorClass = computed(() => {
 
 <style scoped>
 .figure {
-  max-width: 80%;
+  max-width: 50%;
   max-height: 250px;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto 1.5rem auto;
 }
 
 .figure img {
@@ -55,4 +55,5 @@ const scoreColorClass = computed(() => {
   width: auto;
   object-fit: contain;
 }
+
 </style>
