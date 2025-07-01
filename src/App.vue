@@ -32,14 +32,7 @@ const projectName = "SPHA Dashboard";
       </div>
     </div>
 
-    <TopLevelKpiOverview
-        :data="[
-    { label: 'KPI A', values: [30, 20, 10] },
-    { label: 'KPI B', values: [25, 15, 20] },
-    { label: 'KPI C', values: [10, 30, 25] }
-  ]"
-        :subKpiLabels="['Efficiency', 'Quality', 'Speed']"
-    />
+    <TopLevelKpiOverview/>
   </div>
 
 </template>
