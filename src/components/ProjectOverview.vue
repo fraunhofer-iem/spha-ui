@@ -5,6 +5,7 @@ interface ProjectOverviewProps {
   projectUrl?: string
   projectName?: string
   contributors?: number
+  lastCommitDate?: string
   stars?: number
 }
 
@@ -26,6 +27,24 @@ const formattedStars = computed(() => {
     return "Number of Stars not found"
   }
   return props.stars.toLocaleString();
+});
+
+// Format last commit date
+const formattedLastCommitDate = computed(() => {
+  if (!props.lastCommitDate) {
+    return "Last commit date not found"
+  }
+
+  const date = new Date(props.lastCommitDate);
+  if (isNaN(date.getTime())) {
+    return "Invalid date"
+  }
+
+  return date.toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
 });
 
 </script>
@@ -56,7 +75,16 @@ const formattedStars = computed(() => {
     <!-- Card Footer: Stats -->
     <div class="card-footer p-3">
       <div class="row text-center">
-        <!-- Contributors Stat -->
+        <!-- Stars -->
+        <div class="col stat-item justify-content-center">
+          <i class="bi bi-star-fill text-warning me-2"></i>
+          <div>
+            <div class="fs-5 fw-semibold">{{ formattedStars }}</div>
+            <div class="text-muted small">Stars</div>
+          </div>
+        </div>
+
+        <!-- Contributors -->
         <div class="col stat-item justify-content-center">
           <i class="bi bi-people-fill text-primary me-2"></i>
           <div>
@@ -64,12 +92,13 @@ const formattedStars = computed(() => {
             <div class="text-muted small">Contributors</div>
           </div>
         </div>
-        <!-- Stars Stat -->
+
+        <!-- Last Commit -->
         <div class="col stat-item justify-content-center">
-          <i class="bi bi-star-fill text-warning me-2"></i>
+          <i class="bi bi-clock-history text-secondary me-2"></i>
           <div>
-            <div class="fs-5 fw-semibold">{{ formattedStars }}</div>
-            <div class="text-muted small">Stars</div>
+            <div class="fs-6 fw-semibold">{{ formattedLastCommitDate }}</div>
+            <div class="text-muted small">Last Commit</div>
           </div>
         </div>
       </div>

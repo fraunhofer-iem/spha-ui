@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {onMounted, onUnmounted, ref, watch} from 'vue';
-import {ArcElement, Chart, Legend, PieController, Tooltip} from 'chart.js';
+import {ArcElement, Chart, DoughnutController, Legend, Tooltip} from 'chart.js';
 
-Chart.register(PieController, ArcElement, Tooltip, Legend);
+Chart.register(DoughnutController, ArcElement, Tooltip, Legend);
 
 const props = defineProps<{
   languages: Record<string, number>;
@@ -22,7 +22,7 @@ const renderChart = () => {
   }
 
   chartInstance = new Chart(chartCanvas.value, {
-    type: 'pie',
+    type: 'doughnut',
     data: {
       labels,
       datasets: [
@@ -59,7 +59,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="card project-card h-100 d-flex flex-column">
+  <div class="card h-100 d-flex flex-column">
     <div class="card-header p-3">
       <h5 class="card-title mb-0 fw-bold">
         <i class="bi bi-journal-code me-2"></i> Programming Languages
@@ -79,6 +79,13 @@ onUnmounted(() => {
   border-radius: 0.75rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
+}
+
+.card-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
 }
 
 .card:hover {
