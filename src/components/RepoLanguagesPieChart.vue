@@ -59,7 +59,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="card h-100 d-flex flex-column">
+  <div class="card dashboard-card h-100 d-flex flex-column">
     <div class="card-header p-3">
       <h5 class="card-title mb-0 fw-bold">
         <i class="bi bi-journal-code me-2"></i> Programming Languages
@@ -73,25 +73,6 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* Custom styling for the card for a more modern look */
-.card {
-  border: none;
-  border-radius: 0.75rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-}
-
-.card-header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #dee2e6;
-  border-top-left-radius: 0.75rem;
-  border-top-right-radius: 0.75rem;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-}
 
 .chart-container {
   height: 200px;

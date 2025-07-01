@@ -50,7 +50,7 @@ const formattedLastCommitDate = computed(() => {
 </script>
 <template>
 
-  <div class="card project-card">
+  <div class="card dashboard-card">
     <!-- Card Header: Project Name -->
     <div class="card-header p-3">
       <h5 class="card-title mb-0 fw-bold">
@@ -108,39 +108,4 @@ const formattedLastCommitDate = computed(() => {
 
 <style scoped>
 
-/* Custom styling for the card for a more modern look */
-.project-card {
-  border: none;
-  border-radius: 0.75rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-}
-
-.project-card .card-header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #dee2e6;
-  border-top-left-radius: 0.75rem;
-  border-top-right-radius: 0.75rem;
-}
-
-.project-card .card-footer {
-  background-color: #ffffff;
-  border-top: 1px solid #dee2e6;
-  border-bottom-left-radius: 0.75rem;
-  border-bottom-right-radius: 0.75rem;
-}
-
-.stat-item {
-  display: flex;
-  align-items: center;
-}
-
-.stat-item i {
-  font-size: 1.25rem;
-}
 </style>
