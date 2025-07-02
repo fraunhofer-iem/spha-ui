@@ -86,6 +86,11 @@ const createChart = () => {
         grid: {
           display: false
         },
+        ticks: {
+          font: {
+            size: 16
+          }
+        }
       },
     },
     plugins: {
@@ -103,7 +108,7 @@ const createChart = () => {
         }
       },
       legend: {
-        display: false
+        display: false,
       }
     }
   };

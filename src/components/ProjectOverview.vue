@@ -54,7 +54,7 @@ const formattedLastCommitDate = computed(() => {
     <!-- Card Header: Project Name -->
     <div class="card-header p-3">
       <h5 class="card-title mb-0 fw-bold">
-        <i class="bi bi-journal-code me-2"></i>{{ projectName }}
+        <i class="bi bi-bookmark me-2"></i>{{ projectName }}
       </h5>
     </div>
 

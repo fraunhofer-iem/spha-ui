@@ -62,7 +62,7 @@ onUnmounted(() => {
   <div class="card dashboard-card h-100 d-flex flex-column">
     <div class="card-header p-3">
       <h5 class="card-title mb-0 fw-bold">
-        <i class="bi bi-journal-code me-2"></i> Programming Languages
+        <i class="bi bi-braces me-2"></i> Programming Languages
       </h5>
     </div>
 
