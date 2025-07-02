@@ -7,6 +7,7 @@ import {
   Chart,
   type ChartData,
   type ChartOptions,
+  type Color,
   LinearScale,
   Title,
   Tooltip,
@@ -30,15 +31,38 @@ let chartInstance: Chart | null = null;
 const createChart = () => {
   if (!chartCanvas.value) return;
 
+  const colors: Array<Color> = [
+    '#007bff', '#28a745', '#ffc107', '#dc3545', '#6610f2',
+  ]
+
   const data: ChartData<'bar'> = {
     labels: props.kpis.map(kpi => kpi.name),
-    datasets: [{
-      label: 'KPI Score',
-      data: props.kpis.map(kpi => kpi.score),
-      backgroundColor: 'rgba(54, 162, 235, 0.7)',
-      borderColor: 'rgba(54, 162, 235, 1)',
-      borderWidth: 1,
-    }],
+    datasets: [
+
+      {
+        label: 'KPI Score',
+        data: props.kpis.map(kpi => kpi.score),
+        backgroundColor: props.kpis.map((_kpi, idx) => {
+          if (idx >= colors.length) {
+            return colors[idx % colors.length];
+          }
+          return colors[idx]
+        }),
+        borderWidth: 3,
+        borderColor: 'rgba(1, 1, 1, 1)',
+        stack: 'stack1',
+        borderRadius: 5,
+      },
+      {
+        label: 'Track',
+        data: props.kpis.map(() => 100),
+        backgroundColor: 'rgba(230, 230, 230, 0.5)',
+        borderWidth: 3,
+        borderColor: 'rgba(1, 1, 1, 1)',
+        stack: 'stack1',
+        borderRadius: 5,
+      },
+    ],
   };
 
   const options: ChartOptions<'bar'> = {
@@ -46,8 +70,13 @@ const createChart = () => {
     maintainAspectRatio: false,
     scales: {
       y: {
+        stacked: false,
+        display: false,
+        grid: {
+          display: false,
+        },
         beginAtZero: true,
-        max: 100,
+        max: 101,
         title: {
           display: true,
           text: 'Score',
@@ -62,17 +91,21 @@ const createChart = () => {
     plugins: {
       tooltip: {
         callbacks: {
-          afterLabel: (context) => {
-            const index = context.dataIndex;
-            return props.kpis[index]?.description || '';
+          labelColor(tooltipItem) {
+            return {
+              borderColor: 'rgba(1, 1, 1, 1)',
+              backgroundColor: colors[tooltipItem.dataIndex],
+            }
           },
-        },
+          label: (context) => {
+            return props.kpis[context.dataIndex]?.description || '';
+          }
+        }
       },
-      title: {
-        display: false,
-        text: 'Top-Level KPI Overview',
-      },
-    },
+      legend: {
+        display: false
+      }
+    }
   };
 
   chartInstance = new Chart(chartCanvas.value, {
@@ -105,7 +138,7 @@ watch(() => props.kpis, () => {
       </h5>
     </div>
     <div class="card-body">
-      <div class="chart-container" style="position: relative; height: 400px;">
+      <div class="chart-container" style="position: relative; height: 300px;">
         <canvas ref="chartCanvas"></canvas>
       </div>
     </div>
