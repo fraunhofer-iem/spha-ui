@@ -32,7 +32,13 @@ const projectName = "SPHA Dashboard";
       </div>
     </div>
 
-    <TopLevelKpiOverview/>
+    <TopLevelKpiOverview :kpis="[
+    { name: 'Security', score: 85, description: 'Based on CVE scan and secrets detection.' },
+    { name: 'Quality', score: 72, description: 'Includes linting and test coverage.' },
+    { name: 'Compliance', score: 90, description: 'Assessed via SPDX and license checks.' },
+    { name: 'Traceability', score: 65, description: 'Based on issue-commit linkage.' },
+    { name: 'Sustainability', score: 78, description: 'Considers activity over time and contributor bus factor.' }
+    ]"/>
   </div>
 
 </template>
