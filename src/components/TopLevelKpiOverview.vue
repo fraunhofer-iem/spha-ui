@@ -136,11 +136,14 @@ watch(() => props.kpis, () => {
 </script>
 
 <template>
-  <div class="card dashboard-card shadow-sm">
-    <div class="card-header p-3">
+  <div class="card dashboard-card">
+    <div class="card-header p-3 d-flex justify-content-between align-items-center">
       <h5 class="card-title mb-0 fw-bold">
         <i class="bi bi-bar-chart-line me-2"></i> Top-Level KPI Overview
       </h5>
+      <button class="btn btn-outline-primary btn-sm">
+        Details
+      </button>
     </div>
     <div class="card-body">
       <div class="chart-container" style="position: relative; height: 300px;">
@@ -149,6 +152,7 @@ watch(() => props.kpis, () => {
     </div>
   </div>
 </template>
+
 
 <style scoped>
 .chart-container {

@@ -19,10 +19,20 @@ const projectName = "SPHA Dashboard";
 </script>
 
 <template>
+  <nav class="navbar bg-body-tertiary">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img
+            src="./assets/img/SPHA_Logo_Secondary.svg"
+            alt="Software Product Health Assistant"
+            width="250">
+      </a>
+    </div>
+  </nav>
   <div class="container mt-4">
     <div class="row align-items-stretch">
       <div class="col-md-4 mb-3 d-flex">
-        <HealthScore :score="score" class="w-100" />
+        <HealthScore :score="score" class="w-100"/>
       </div>
       <div class="col-md-4 mb-3 d-flex">
         <ProjectOverview
@@ -35,7 +45,7 @@ const projectName = "SPHA Dashboard";
         />
       </div>
       <div class="col-md-4 mb-3 d-flex">
-        <RepoLanguagesPieChart :languages="repoLanguages" class="w-100" />
+        <RepoLanguagesPieChart :languages="repoLanguages" class="w-100"/>
       </div>
     </div>
 

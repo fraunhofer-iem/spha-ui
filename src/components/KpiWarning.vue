@@ -4,10 +4,13 @@
 
 <template>
   <div class="card dashboard-card h-100 d-flex flex-column">
-    <div class="card-header p-3">
+    <div class="card-header p-3 d-flex justify-content-between align-items-center">
       <h5 class="card-title mb-0 fw-bold">
         <i class="bi bi-cloud-lightning-rain me-2"></i> Critical KPIs
       </h5>
+      <button class="btn btn-outline-primary btn-sm">
+        Details
+      </button>
     </div>
 
     <div class="card-body">
