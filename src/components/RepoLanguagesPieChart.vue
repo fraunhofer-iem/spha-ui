@@ -41,7 +41,7 @@ const renderChart = () => {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          position: 'bottom',
+          position: 'right',
         },
       },
     },

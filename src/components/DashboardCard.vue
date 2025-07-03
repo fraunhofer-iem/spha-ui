@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {computed} from 'vue';
 
 interface DashboardCardProps {
   title: string;
@@ -11,7 +10,7 @@ interface DashboardCardProps {
   flexColumn?: boolean;
 }
 
-const props = withDefaults(defineProps<DashboardCardProps>(), {
+withDefaults(defineProps<DashboardCardProps>(), {
   icon: '',
   showButton: false,
   buttonText: 'Details',
@@ -24,12 +23,6 @@ const emit = defineEmits<{
   (e: 'button-click'): void
 }>();
 
-const cardClasses = computed(() => {
-  const classes = ['card', 'dashboard-card'];
-  if (props.fullHeight) classes.push('h-100');
-  if (props.flexColumn) classes.push('n');
-  return classes.join(' ');
-});
 
 const handleButtonClick = () => {
   emit('button-click');

@@ -34,7 +34,7 @@ const projectName = "SPHA Dashboard";
       <div class="col-md-4 mb-3">
         <HealthScore :score="score"/>
       </div>
-      <div class="col-md-4 mb-3 ">
+      <div class="col-md-4 mb-3">
         <ProjectOverview
             :stars="stars"
             :last-commit-date="lastCommitDate"
