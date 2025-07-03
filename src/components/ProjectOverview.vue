@@ -50,7 +50,7 @@ const formattedLastCommitDate = computed(() => {
 </script>
 <template>
 
-  <div class="card dashboard-card">
+  <div class="card dashboard-card h-100">
     <!-- Card Header: Project Name -->
     <div class="card-header p-3">
       <h5 class="card-title mb-0 fw-bold">
@@ -62,7 +62,7 @@ const formattedLastCommitDate = computed(() => {
     <div class="card-body p-4">
       <div class="row text-center">
         <!-- Stars -->
-        <div class="col stat-item justify-content-center">
+        <div class="col stat-item">
           <i class="bi bi-star-fill text-warning me-2"></i>
           <div>
             <div class="fs-5 fw-semibold">{{ formattedStars }}</div>
@@ -71,7 +71,7 @@ const formattedLastCommitDate = computed(() => {
         </div>
 
         <!-- Contributors -->
-        <div class="col stat-item justify-content-center">
+        <div class="col stat-item">
           <i class="bi bi-people-fill text-primary me-2"></i>
           <div>
             <div class="fs-5 fw-semibold">{{ formattedContributors }}</div>
@@ -80,7 +80,7 @@ const formattedLastCommitDate = computed(() => {
         </div>
 
         <!-- Last Commit -->
-        <div class="col stat-item justify-content-center">
+        <div class="col stat-item">
           <i class="bi bi-clock-history text-secondary me-2"></i>
           <div>
             <div class="fs-6 fw-semibold">{{ formattedLastCommitDate }}</div>
@@ -89,7 +89,7 @@ const formattedLastCommitDate = computed(() => {
         </div>
       </div>
 
-      <div class="mb-3">
+      <div class="mt-3">
         <label for="projectUrlInput" class="form-label text-muted small">URL</label>
         <div class="input-group">
           <input type="text" id="projectUrlInput" class="form-control" :value="projectUrl" readonly>

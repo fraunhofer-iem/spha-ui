@@ -17,7 +17,7 @@ const scoreColorClass = computed(() => {
 </script>
 
 <template>
-  <div class="card dashboard-card h-100 d-flex flex-column">
+  <div class="card dashboard-card h-100">
     <!-- Card Header -->
     <div class="card-header p-3">
       <h5 class="card-title mb-0 fw-bold">

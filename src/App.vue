@@ -30,22 +30,22 @@ const projectName = "SPHA Dashboard";
     </div>
   </nav>
   <div class="container mt-4">
-    <div class="row align-items-stretch">
-      <div class="col-md-4 mb-3 d-flex">
-        <HealthScore :score="score" class="w-100"/>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <HealthScore :score="score"/>
       </div>
-      <div class="col-md-4 mb-3 d-flex">
+      <div class="col-md-4 mb-3 ">
         <ProjectOverview
             :stars="stars"
             :last-commit-date="lastCommitDate"
             :project-name="projectName"
             :project-url="projectUrl"
             :contributors="contributors"
-            class="w-100"
+
         />
       </div>
-      <div class="col-md-4 mb-3 d-flex">
-        <RepoLanguagesPieChart :languages="repoLanguages" class="w-100"/>
+      <div class="col-md-4 mb-3">
+        <RepoLanguagesPieChart :languages="repoLanguages"/>
       </div>
     </div>
 
