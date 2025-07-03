@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {computed} from 'vue';
 import SphaIcon from './../assets/img/SPHA_Icon_Light.svg';
+import DashboardCard from './DashboardCard.vue';
 
 interface ScoreCardProps {
   score: number; // must be between 0 and 100
@@ -17,28 +18,18 @@ const scoreColorClass = computed(() => {
 </script>
 
 <template>
-  <div class="card dashboard-card h-100">
-    <!-- Card Header -->
-    <div class="card-header p-3">
-      <h5 class="card-title mb-0 fw-bold">
-        <i class="bi bi-journal-code me-2"></i> Project Health Score
-      </h5>
-    </div>
-
-    <!-- Card Body -->
-    <div class="card-body">
-      <figure class="figure">
-        <img :src="SphaIcon" alt="Project" class="figure-img img-fluid rounded"/>
-      </figure>
-      <div class="text-center">
-        <div :class="['fs-3 fw-bold', scoreColorClass]">
-          {{ score }} / 100
-        </div>
-        <div class="text-muted small">Score</div>
+  <DashboardCard title="Project Health Score" icon="journal-code">
+    <figure class="figure">
+      <img :src="SphaIcon" alt="Project" class="figure-img img-fluid rounded"/>
+    </figure>
+    <div class="text-center">
+      <div :class="['fs-3 fw-bold', scoreColorClass]">
+        {{ score }} / 100
       </div>
+      <div class="text-muted small">Score</div>
     </div>
-  </div>
-</template>>
+  </DashboardCard>
+</template>
 
 <style scoped>
 .figure {

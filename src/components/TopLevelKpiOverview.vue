@@ -12,6 +12,7 @@ import {
   Title,
   Tooltip,
 } from 'chart.js';
+import DashboardCard from './DashboardCard.vue';
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip, Title);
 
@@ -133,24 +134,25 @@ watch(() => props.kpis, () => {
   chartInstance?.destroy();
   createChart();
 }, {deep: true});
+
+const handleButtonClick = () => {
+  // Handle button click event
+  console.log('Details button clicked');
+};
 </script>
 
 <template>
-  <div class="card dashboard-card">
-    <div class="card-header p-3 d-flex justify-content-between align-items-center">
-      <h5 class="card-title mb-0 fw-bold">
-        <i class="bi bi-bar-chart-line me-2"></i> Top-Level KPI Overview
-      </h5>
-      <button class="btn btn-outline-primary btn-sm">
-        Details
-      </button>
+  <DashboardCard 
+    title="Top-Level KPI Overview" 
+    icon="bar-chart-line" 
+    :showButton="true" 
+    buttonText="Details"
+    @button-click="handleButtonClick"
+  >
+    <div class="chart-container" style="position: relative; height: 300px;">
+      <canvas ref="chartCanvas"></canvas>
     </div>
-    <div class="card-body">
-      <div class="chart-container" style="position: relative; height: 300px;">
-        <canvas ref="chartCanvas"></canvas>
-      </div>
-    </div>
-  </div>
+  </DashboardCard>
 </template>
 
 

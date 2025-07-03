@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {computed} from "vue";
+import DashboardCard from "./DashboardCard.vue";
 
 interface ProjectOverviewProps {
   projectUrl?: string
@@ -49,17 +50,8 @@ const formattedLastCommitDate = computed(() => {
 
 </script>
 <template>
-
-  <div class="card dashboard-card h-100">
-    <!-- Card Header: Project Name -->
-    <div class="card-header p-3">
-      <h5 class="card-title mb-0 fw-bold">
-        <i class="bi bi-bookmark me-2"></i>{{ projectName }}
-      </h5>
-    </div>
-
-    <!-- Card Body: Project Details -->
-    <div class="card-body p-4">
+  <DashboardCard :title="projectName" icon="bookmark">
+    <div class="p-4">
       <div class="row text-center">
         <!-- Stars -->
         <div class="col stat-item">
@@ -98,11 +90,8 @@ const formattedLastCommitDate = computed(() => {
           </a>
         </div>
       </div>
-
     </div>
-
-
-  </div>
+  </DashboardCard>
 </template>
 
 <style scoped>

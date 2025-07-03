@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {onMounted, onUnmounted, ref, watch} from 'vue';
 import {ArcElement, Chart, DoughnutController, Legend, Tooltip} from 'chart.js';
+import DashboardCard from './DashboardCard.vue';
 
 Chart.register(DoughnutController, ArcElement, Tooltip, Legend);
 
@@ -59,22 +60,16 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="card dashboard-card h-100">
-    <div class="card-header p-3">
-      <h5 class="card-title mb-0 fw-bold">
-        <i class="bi bi-braces me-2"></i> Programming Languages
-      </h5>
-    </div>
-
-    <div class="card-body p-3 chart-container">
+  <DashboardCard title="Programming Languages" icon="braces">
+    <div class="p-3 chart-container">
       <canvas ref="chartCanvas" class="w-100 h-100"></canvas>
     </div>
-  </div>
+  </DashboardCard>
 </template>
 
 <style scoped>
 
 .chart-container {
-  height: 200px;
+  height: 220px;
 }
 </style>
