@@ -4,6 +4,7 @@ import RepoLanguagesPieChart from "./components/RepoLanguagesPieChart.vue";
 import HealthScore from "./components/HealthScore.vue";
 import TopLevelKpiOverview from "./components/TopLevelKpiOverview.vue";
 import KpiWarning from "./components/KpiWarning.vue";
+import ToolOverview from "./components/ToolOverview.vue";
 
 const repoLanguages = {
   Java: 40,
@@ -50,7 +51,7 @@ const projectName = "SPHA Dashboard";
     </div>
 
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-8 mb-3">
         <TopLevelKpiOverview
             :kpis="[
             { name: 'Security', score: 85, description: 'Based on CVE scan and secrets detection.' },
@@ -61,8 +62,17 @@ const projectName = "SPHA Dashboard";
           ]"
         />
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 mb-3">
         <KpiWarning/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 mb-3">
+        <ToolOverview :tools="[
+            { name: 'Trufflehog',scanDate: '2025-06-10', findings: 10, downloadLink: '', icon: ''},
+            { name: 'OSV',scanDate: '2025-06-10', findings: 2, downloadLink: '', icon: ''},
+            { name: 'GitHub',scanDate: '2025-06-10', findings: 20, downloadLink: '', icon: ''},
+            ]"/>
       </div>
     </div>
   </div>
