@@ -49,7 +49,7 @@ const createChart = () => {
           }
           return colors[idx]
         }),
-        borderWidth: 3,
+        borderWidth: 1,
         borderColor: 'rgba(1, 1, 1, 1)',
         stack: 'stack1',
         borderRadius: 5,
@@ -58,7 +58,7 @@ const createChart = () => {
         label: 'Track',
         data: props.kpis.map(() => 100),
         backgroundColor: 'rgba(230, 230, 230, 0.5)',
-        borderWidth: 3,
+        borderWidth: 1,
         borderColor: 'rgba(1, 1, 1, 1)',
         stack: 'stack1',
         borderRadius: 5,

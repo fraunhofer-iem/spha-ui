@@ -62,7 +62,7 @@ onUnmounted(() => {
 <template>
   <DashboardCard title="Programming Languages" icon="braces">
     <div class="p-3 chart-container">
-      <canvas ref="chartCanvas" class="w-100 h-100"></canvas>
+      <canvas ref="chartCanvas"></canvas>
     </div>
   </DashboardCard>
 </template>
