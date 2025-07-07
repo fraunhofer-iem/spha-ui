@@ -34,14 +34,14 @@ const renderChart = () => {
     dLabel: {
       type: 'doughnutLabel',
       content: () => [
-        `${props.score} / 100`,
+        `${props.score}/100`,
         'score'
       ],
       position: {
-        y: '-55%'
+        // y: '-40%'
       },
-      font: [{size: 80, weight: 'bold'}, {size: 40}],
-      color: [scoreColorClass.value, 'grey']
+      font: [{size: 60, weight: 'bold'}, {size: 25}],
+      color: ['black', 'grey']
     }
   };
 
@@ -61,8 +61,7 @@ const renderChart = () => {
       datasets: [
         {
           data,
-          borderWidth: 1,
-          borderColor: 'rgba(1, 1, 1, 1)',
+          borderWidth: 0,
           backgroundColor(ctx) {
             if (ctx.dataIndex == 1) {
               return 'rgba(230, 230, 230, 0.5)'
@@ -75,10 +74,15 @@ const renderChart = () => {
       ],
     },
     options: {
-      aspectRatio: 2,
-      cutout: 66,
-      circumference: 180,
-      rotation: -90,
+      layout: {
+        padding: 10
+      },
+      responsive: true,
+      aspectRatio: 1,
+      maintainAspectRatio: true,
+      cutout: '80%',
+      circumference: 240,
+      rotation: -120,
       plugins: plugin,
     },
   });
@@ -98,12 +102,17 @@ onUnmounted(() => {
 
 <template>
   <DashboardCard title="Project Health Score" icon="journal-code">
-    <div class="chart-container d-flex align-items-center justify-content-center">
-      <canvas ref="chartCanvas2" class="w-75"></canvas>
+    <div class="chart-container align-items-center justify-content-center">
+      <canvas ref="chartCanvas2"></canvas>
     </div>
   </DashboardCard>
 </template>
 
 <style scoped>
+.chart-container {
+  .chart-container {
+    height: 120px;
+  }
+}
 
 </style>

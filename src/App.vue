@@ -11,7 +11,7 @@ const repoLanguages = {
   Kotlin: 60
 }
 
-const score = 80;
+const score = 10;
 const stars = 1000;
 const contributors = 100;
 const lastCommitDate = "2022-01-01";
