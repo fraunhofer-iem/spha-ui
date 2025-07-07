@@ -55,8 +55,8 @@ const formattedLastCommitDate = computed(() => {
       <div class="grid-container">
         <div class="row border-bottom">
           <!-- Stars -->
-          <div class="col pb-4 border-end align-items-center d-flex justify-content-center stat-item">
-            <div class="d-flex align-items-center">
+          <div class="col pb-4 border-end d-flex justify-content-center stat-item">
+            <div class="d-flex align-items-center icon-container">
               <i class="bi bi-star icon-circle me-4"></i>
               <div>
                 <div class="fs-4 fw-semibold">{{ formattedStars }}</div>
@@ -65,8 +65,8 @@ const formattedLastCommitDate = computed(() => {
             </div>
           </div>
           <!-- Last Commit -->
-          <div class="col pb-4 stat-item align-items-center d-flex justify-content-center">
-            <div class="d-flex align-items-center">
+          <div class="col pb-4 stat-item d-flex justify-content-center">
+            <div class="d-flex align-items-center icon-container">
               <i class="bi icon-circle bi-clock-history me-4"></i>
               <div>
                 <div class="fs-5 fw-semibold">{{ formattedLastCommitDate }}</div>
@@ -78,8 +78,8 @@ const formattedLastCommitDate = computed(() => {
 
         <div class="row">
           <!-- Contributors -->
-          <div class="col border-end stat-item pt-4">
-            <div class="d-flex align-items-center align-items-center d-flex justify-content-center">
+          <div class="col border-end stat-item pt-4 d-flex justify-content-center">
+            <div class="d-flex align-items-center icon-container">
               <i class="bi icon-circle bi-person me-4"></i>
               <div>
                 <div class="fs-4 fw-semibold">{{ formattedContributors }}</div>
@@ -124,5 +124,11 @@ const formattedLastCommitDate = computed(() => {
   height: 4rem;
   border-radius: 50%; /* Makes it circular */
   font-size: 2.0rem; /* Adjust icon size */
+}
+
+.icon-container {
+  min-width: 100%; /* Ensure container takes full width */
+  justify-content: flex-start; /* Align content to the start */
+  padding-left: 20%; /* Add padding to create visual centering while maintaining icon alignment */
 }
 </style>
