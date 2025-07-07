@@ -57,7 +57,7 @@ const formattedLastCommitDate = computed(() => {
           <!-- Stars -->
           <div class="col pb-4 border-end align-items-center d-flex justify-content-center stat-item">
             <div class="d-flex align-items-center">
-              <i class="bi bi-star-fill text-warning me-4"></i>
+              <i class="bi bi-star icon-circle me-4"></i>
               <div>
                 <div class="fs-4 fw-semibold">{{ formattedStars }}</div>
                 <div class="text-muted stat-label">Stars</div>
@@ -67,7 +67,7 @@ const formattedLastCommitDate = computed(() => {
           <!-- Last Commit -->
           <div class="col pb-4 stat-item align-items-center d-flex justify-content-center">
             <div class="d-flex align-items-center">
-              <i class="bi bi-clock-history text-secondary me-4"></i>
+              <i class="bi icon-circle bi-clock-history me-4"></i>
               <div>
                 <div class="fs-5 fw-semibold">{{ formattedLastCommitDate }}</div>
                 <div class="text-muted stat-label">Last Commit</div>
@@ -80,7 +80,7 @@ const formattedLastCommitDate = computed(() => {
           <!-- Contributors -->
           <div class="col border-end stat-item pt-4">
             <div class="d-flex align-items-center align-items-center d-flex justify-content-center">
-              <i class="bi bi-people-fill text-primary me-4"></i>
+              <i class="bi icon-circle bi-person me-4"></i>
               <div>
                 <div class="fs-4 fw-semibold">{{ formattedContributors }}</div>
                 <div class="text-muted stat-label">Contributors</div>
@@ -89,7 +89,7 @@ const formattedLastCommitDate = computed(() => {
           </div>
 
           <div class="col pt-4">
-            <label for="projectUrlInput" class="form-label text-muted stat-label">URL</label>
+            <label for="projectUrlInput" class="form-label text-muted stat-label">Project Repository</label>
             <div class="input-group">
               <input type="text" id="projectUrlInput" class="form-control" :value="projectUrl" readonly>
               <a :href="projectUrl" target="_blank" class="btn btn-outline-secondary" role="button">
@@ -110,11 +110,19 @@ const formattedLastCommitDate = computed(() => {
   max-width: 100%;
 }
 
-.bi {
-  font-size: 2.0rem; /* Make icons larger */
-}
-
 .stat-label {
   font-size: 1.0rem; /* Make labels slightly larger than small */
+}
+
+.icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #E9ECF1;
+  color: #3D4BF6;
+  width: 4rem;      /* Adjust size */
+  height: 4rem;
+  border-radius: 50%; /* Makes it circular */
+  font-size: 2.0rem; /* Adjust icon size */
 }
 </style>
