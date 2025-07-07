@@ -51,44 +51,45 @@ const formattedLastCommitDate = computed(() => {
 </script>
 <template>
   <DashboardCard :title="projectName">
-    <div class="container text-center">
-
-      <div class="row border-bottom">
-        <!-- Stars -->
-        <div class="col border-end stat-item">
-          <i class="bi bi-star-fill text-warning me-2"></i>
-          <div>
-            <div class="fs-5 fw-semibold">{{ formattedStars }}</div>
-            <div class="text-muted small">Stars</div>
+    <div class="container text-center h-100 d-flex justify-content-center align-items-center">
+      <div class="grid-container">
+        <div class="row border-bottom">
+          <!-- Stars -->
+          <div class="col border-end stat-item">
+            <i class="bi bi-star-fill text-warning me-2"></i>
+            <div>
+              <div class="fs-5 fw-semibold">{{ formattedStars }}</div>
+              <div class="text-muted small">Stars</div>
+            </div>
           </div>
-        </div>
-        <!-- Last Commit -->
-        <div class="col stat-item">
-          <i class="bi bi-clock-history text-secondary me-2"></i>
-          <div>
-            <div class="fs-6 fw-semibold">{{ formattedLastCommitDate }}</div>
-            <div class="text-muted small">Last Commit</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <!-- Contributors -->
-        <div class="col border-end stat-item">
-          <i class="bi bi-people-fill text-primary me-2"></i>
-          <div>
-            <div class="fs-5 fw-semibold">{{ formattedContributors }}</div>
-            <div class="text-muted small">Contributors</div>
+          <!-- Last Commit -->
+          <div class="col stat-item">
+            <i class="bi bi-clock-history text-secondary me-2"></i>
+            <div>
+              <div class="fs-6 fw-semibold">{{ formattedLastCommitDate }}</div>
+              <div class="text-muted small">Last Commit</div>
+            </div>
           </div>
         </div>
 
-        <div class="col">
-          <label for="projectUrlInput" class="form-label text-muted small">URL</label>
-          <div class="input-group">
-            <input type="text" id="projectUrlInput" class="form-control" :value="projectUrl" readonly>
-            <a :href="projectUrl" target="_blank" class="btn btn-outline-secondary" role="button">
-              <i class="bi bi-box-arrow-up-right"></i>
-            </a>
+        <div class="row">
+          <!-- Contributors -->
+          <div class="col border-end stat-item">
+            <i class="bi bi-people-fill text-primary me-2"></i>
+            <div>
+              <div class="fs-5 fw-semibold">{{ formattedContributors }}</div>
+              <div class="text-muted small">Contributors</div>
+            </div>
+          </div>
+
+          <div class="col">
+            <label for="projectUrlInput" class="form-label text-muted small">URL</label>
+            <div class="input-group">
+              <input type="text" id="projectUrlInput" class="form-control" :value="projectUrl" readonly>
+              <a :href="projectUrl" target="_blank" class="btn btn-outline-secondary" role="button">
+                <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -98,5 +99,8 @@ const formattedLastCommitDate = computed(() => {
 </template>
 
 <style scoped>
-
+.grid-container {
+  width: 100%;
+  max-width: 100%;
+}
 </style>
