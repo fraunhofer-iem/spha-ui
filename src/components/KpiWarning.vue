@@ -32,5 +32,7 @@ const handleButtonClick = () => {
 </template>
 
 <style scoped>
-
+.bi {
+  font-size: 1.5rem; /* Make icons larger */
+}
 </style>
