@@ -33,9 +33,6 @@ const renderChart = () => {
         `${props.score}/100`,
         'score'
       ],
-      position: {
-         // y: '-5'
-      },
       font: [{size: 40},{size: 40, weight: 'bold'}, {size: 25}],
       color: ['black','black', 'grey']
     }
@@ -100,7 +97,7 @@ onUnmounted(() => {
       <canvas ref="chartCanvas2"></canvas>
     </div>
     <footer>
-      <div class="d-grid ps-5 pe-5 pt-4 pb-3">
+      <div class="d-grid ps-4 pe-4 pt-4 pb-3">
         <button type="button" class="text-primary-emphasis bg-primary-subtle btn btn-lg">Details</button>
       </div>
     </footer>

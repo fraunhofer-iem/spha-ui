@@ -32,10 +32,10 @@ const projectName = "SPHA Dashboard";
   </nav>
   <div class="container mt-4">
     <div class="row">
-      <div class="col-md-4 mb-3">
+      <div class="col-md-3 mb-3">
         <HealthScore :score="score"/>
       </div>
-      <div class="col-md-4 mb-3">
+      <div class="col-md-6 mb-3">
         <ProjectOverview
             :stars="stars"
             :last-commit-date="lastCommitDate"
@@ -45,7 +45,7 @@ const projectName = "SPHA Dashboard";
 
         />
       </div>
-      <div class="col-md-4 mb-3">
+      <div class="col-md-3 mb-3">
         <RepoLanguagesPieChart :languages="repoLanguages"/>
       </div>
     </div>
