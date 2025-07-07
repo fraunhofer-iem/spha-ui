@@ -1,21 +1,13 @@
 /* Global styling for reusable dashboard cards */
-.dashboard-card {
+.dashboard-card  {
   border: none;
-  border-radius: 0.75rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  border-radius: 1.75rem;
   transition: all 0.3s ease;
+  background-color: #F7F9FB;
 
   .card-header {
-    background-color: #ffffff;
-    border-bottom: 1px solid #dee2e6;
-    border-top-left-radius: 0.75rem;
-    border-top-right-radius: 0.75rem;
-  }
-
-  .card-footer {
-    background-color: #ffffff;
-    border-top: 1px solid #dee2e6;
-    border-bottom-left-radius: 0.75rem;
-    border-bottom-right-radius: 0.75rem;
+    background-color: #F7F9FB;
+    border: none;
+    border-radius: 1.75rem;
   }
 }

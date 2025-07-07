@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import {computed, onMounted, onUnmounted, ref, watch} from 'vue';
+import {onMounted, onUnmounted, ref, watch} from 'vue';
 import {ArcElement, Chart, DoughnutController, Legend, Tooltip} from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import DashboardCard from './DashboardCard.vue';
+import {blue_chart} from "../assets/styles/Colors.ts";
 
 // https://www.chartjs.org/chartjs-plugin-annotation/3.1.0/guide/types/doughnutLabel.html
 Chart.register(DoughnutController, ArcElement, Tooltip, Legend, annotationPlugin);
@@ -24,24 +25,19 @@ const renderChart = () => {
     chartInstance.destroy();
   }
 
-  const scoreColorClass = computed(() => {
-    if (props.score >= 80) return 'green'; // green
-    if (props.score >= 50) return 'yellow'; // yellow
-    return 'red'; // red
-  });
-
   const annotation = {
     dLabel: {
       type: 'doughnutLabel',
       content: () => [
+          '⭐',
         `${props.score}/100`,
         'score'
       ],
       position: {
-        // y: '-40%'
+         // y: '-5'
       },
-      font: [{size: 60, weight: 'bold'}, {size: 25}],
-      color: ['black', 'grey']
+      font: [{size: 40},{size: 40, weight: 'bold'}, {size: 25}],
+      color: ['black','black', 'grey']
     }
   };
 
@@ -66,9 +62,7 @@ const renderChart = () => {
             if (ctx.dataIndex == 1) {
               return 'rgba(230, 230, 230, 0.5)'
             }
-            if (props.score >= 80) return 'green'; // green
-            if (props.score >= 50) return 'yellow'; // yellow
-            return 'red'; // red
+            return blue_chart
           },
         },
       ],
@@ -78,7 +72,7 @@ const renderChart = () => {
         padding: 10
       },
       responsive: true,
-      aspectRatio: 1,
+      aspectRatio: 0,
       maintainAspectRatio: true,
       cutout: '80%',
       circumference: 240,
@@ -101,18 +95,21 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <DashboardCard title="Project Health Score" icon="journal-code">
-    <div class="chart-container align-items-center justify-content-center">
+  <DashboardCard title="Project Health Score">
+    <div class="chart-container">
       <canvas ref="chartCanvas2"></canvas>
     </div>
+    <footer>
+      <div class="d-grid ps-5 pe-5 pt-4 pb-3">
+        <button type="button" class="text-primary-emphasis bg-primary-subtle btn btn-lg">Details</button>
+      </div>
+    </footer>
   </DashboardCard>
 </template>
 
 <style scoped>
 .chart-container {
-  .chart-container {
-    height: 120px;
-  }
+    height: 220px;
 }
 
 </style>
