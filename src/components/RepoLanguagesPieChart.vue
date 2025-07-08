@@ -2,8 +2,10 @@
 import {nextTick, onMounted, onUnmounted, ref, watch} from 'vue';
 import {ArcElement, Chart, DoughnutController, Legend, Tooltip} from 'chart.js';
 import DashboardCard from './DashboardCard.vue';
+import annotationPlugin from "chartjs-plugin-annotation";
+import {blue_chart} from "../assets/styles/Colors.ts";
 
-Chart.register(DoughnutController, ArcElement, Tooltip, Legend);
+Chart.register(DoughnutController, ArcElement, Tooltip, Legend, annotationPlugin);
 
 const props = defineProps<{
   languages: Record<string, number>;
@@ -17,12 +19,13 @@ const legendRef = ref<HTMLDivElement | null>(null);
 // Update grid layout when container size changes
 let resizeObserver: ResizeObserver | null = null;
 
+const colors = [
+  blue_chart, '#28a745', '#ffc107', '#dc3545', '#6610f2',
+  '#20c997', '#fd7e14', '#6c757d', '#17a2b8', '#e83e8c'
+];
+
 // Get color for a language based on its index
 const getColorForLanguage = (language: string) => {
-  const colors = [
-    '#007bff', '#28a745', '#ffc107', '#dc3545', '#6610f2',
-    '#20c997', '#fd7e14', '#6c757d', '#17a2b8', '#e83e8c'
-  ];
   const index = Object.keys(props.languages).indexOf(language);
   return colors[index % colors.length];
 };
@@ -37,6 +40,14 @@ const renderChart = () => {
     chartInstance.destroy();
   }
 
+  const annotation = {
+    dLabel: {
+      type: 'doughnutLabel',
+      content: '</>',
+      font: [{size: 40}]
+    }
+  };
+
   chartInstance = new Chart(chartCanvas.value, {
     type: 'doughnut',
     data: {
@@ -47,10 +58,9 @@ const renderChart = () => {
           borderWidth: 5,
           borderColor: '#F7F9FB',
           data,
-          backgroundColor: [
-            '#007bff', '#28a745', '#ffc107', '#dc3545', '#6610f2',
-            '#20c997', '#fd7e14', '#6c757d', '#17a2b8', '#e83e8c'
-          ],
+          backgroundColor: (ctx) => {
+            return colors[ctx.dataIndex]
+          },
         },
       ],
     },
@@ -63,6 +73,9 @@ const renderChart = () => {
       maintainAspectRatio: true,
       cutout: '80%',
       plugins: {
+        annotation: {
+          annotations: annotation
+        },
         legend: {
           display: false
         }
@@ -104,18 +117,16 @@ onUnmounted(() => {
 
 <template>
   <DashboardCard title="Programming Languages">
-    <div class="p-3 chart-container">
+    <div class="ps-3 pe-3 chart-container">
       <canvas ref="chartCanvas"></canvas>
 
     </div>
     <hr class="my-3"/>
-    <div ref="legendRef" class="container text-start">
-      <div class="row">
-        <div v-for="language in Object.keys(props.languages)" :key="language" class="col-sm-4 mb-1">
-          <div>
-            <span class="legend-color" :style="{ backgroundColor: getColorForLanguage(language) }"></span>
-            <span class="legend-label">{{ language }}</span>
-          </div>
+    <div ref="legendRef" class="legend-container d-flex flex-wrap flex-column text-start align-content-start">
+      <div v-for="language in Object.keys(props.languages)" :key="language" class="ps-2 pe-2">
+        <div>
+          <span class="legend-color" :style="{ backgroundColor: getColorForLanguage(language) }"></span>
+          <span class="legend-label">{{ language }}</span>
         </div>
       </div>
     </div>
@@ -130,10 +141,8 @@ onUnmounted(() => {
 
 /* Using Bootstrap grid instead of custom grid */
 
-.legend-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 4px;
+.legend-container {
+  max-height: 80px;
 }
 
 .legend-color {

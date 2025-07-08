@@ -9,12 +9,6 @@ import ToolOverview from "./components/ToolOverview.vue";
 const repoLanguages = {
   Java: 40,
   Kotlin: 60,
-  Java2: 40,
-  Kotlin2: 60,
-  Java3: 40,
-  Kotlin3: 60,
-  Java5: 40,
-  Kotlin5: 60,
 }
 
 const score = 10;
@@ -26,8 +20,8 @@ const projectName = "SPHA Dashboard";
 </script>
 
 <template>
-  <nav class="navbar bg-body-tertiary">
-    <div class="container">
+  <nav class="navbar">
+    <div class="container mt-2">
       <a class="navbar-brand" href="#">
         <img
             src="./assets/img/SPHA_Logo_Secondary.svg"
