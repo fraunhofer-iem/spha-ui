@@ -5,6 +5,7 @@ import HealthScore from "./components/HealthScore.vue";
 import TopLevelKpiOverview from "./components/TopLevelKpiOverview.vue";
 import KpiWarning from "./components/KpiWarning.vue";
 import ToolOverview from "./components/ToolOverview.vue";
+import {onMounted, onUnmounted, ref} from "vue";
 
 const repoLanguages = {
   Java: 40,
@@ -17,17 +18,46 @@ const contributors = 100;
 const lastCommitDate = "2022-01-01";
 const projectUrl = "https://github.com/SPHA/SPHA-Dashboard";
 const projectName = "SPHA Dashboard";
+
+const formattedTime = ref<string>('');
+
+const updateTime = () => {
+  const now = new Date();
+  formattedTime.value = now.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  });
+};
+
+let intervalId: number;
+
+onMounted(() => {
+  updateTime();
+  intervalId = window.setInterval(updateTime, 10000);
+});
+
+onUnmounted(() => {
+  clearInterval(intervalId);
+});
 </script>
 
 <template>
   <nav class="navbar">
-    <div class="container mt-2">
+    <div class="container mt-2 d-flex justify-content-between align-items-center">
       <a class="navbar-brand" href="#">
         <img
             src="./assets/img/SPHA_Logo_Secondary.svg"
             alt="Software Product Health Assistant"
             width="250">
       </a>
+      <h3 class="fw-bold mx-auto">{{projectName}}</h3>
+      <div class="d-flex align-items-center">
+        <div class="me-3 time-display p-3">
+          <p class="h5">{{formattedTime}}</p>
+        </div>
+        <button type="button" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg">Settings</button>
+      </div>
     </div>
   </nav>
   <div class="container mt-4">
@@ -79,5 +109,4 @@ const projectName = "SPHA Dashboard";
 </template>
 
 <style scoped>
-
 </style>

@@ -50,7 +50,7 @@ const formattedLastCommitDate = computed(() => {
 
 </script>
 <template>
-  <DashboardCard :title="projectName">
+  <DashboardCard title="Project Overview">
     <div class="container text-center h-100 d-flex justify-content-center align-items-center">
       <div class="grid-container">
         <div class="row border-bottom">

@@ -29,12 +29,11 @@ const renderChart = () => {
     dLabel: {
       type: 'doughnutLabel',
       content: () => [
-        '⭐',
         `${props.score}/100`,
         'score'
       ],
-      font: [{size: 40}, {size: 40, weight: 'bold'}, {size: 25}],
-      color: ['black', 'black', 'grey']
+      font: [ {size: 40, weight: 'bold'}, {size: 25}],
+      color: ['black', 'grey']
     }
   };
 
