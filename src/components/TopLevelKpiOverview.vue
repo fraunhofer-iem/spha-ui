@@ -13,6 +13,7 @@ import {
   Tooltip,
 } from 'chart.js';
 import DashboardCard from './DashboardCard.vue';
+import {background_grey, blue_chart} from "../assets/styles/Colors.ts";
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip, Title);
 
@@ -43,25 +44,18 @@ const createChart = () => {
       {
         label: 'KPI Score',
         data: props.kpis.map(kpi => kpi.score),
-        backgroundColor: props.kpis.map((_kpi, idx) => {
-          if (idx >= colors.length) {
-            return colors[idx % colors.length];
-          }
-          return colors[idx]
-        }),
-        borderWidth: 1,
-        borderColor: 'rgba(1, 1, 1, 1)',
+        backgroundColor: blue_chart,
+        borderWidth: 0,
         stack: 'stack1',
-        borderRadius: 5,
+        borderRadius: 8,
       },
       {
         label: 'Track',
         data: props.kpis.map(() => 100),
-        backgroundColor: 'rgba(230, 230, 230, 0.5)',
-        borderWidth: 1,
-        borderColor: 'rgba(1, 1, 1, 1)',
+        backgroundColor: background_grey,
+        borderWidth: 0,
         stack: 'stack1',
-        borderRadius: 5,
+        borderRadius: 8,
       },
     ],
   };
@@ -69,6 +63,7 @@ const createChart = () => {
   const options: ChartOptions<'bar'> = {
     responsive: true,
     maintainAspectRatio: false,
+    barThickness: 60,
     scales: {
       y: {
         stacked: false,
@@ -97,12 +92,6 @@ const createChart = () => {
     plugins: {
       tooltip: {
         callbacks: {
-          labelColor(tooltipItem) {
-            return {
-              borderColor: 'rgba(1, 1, 1, 1)',
-              backgroundColor: colors[tooltipItem.dataIndex],
-            }
-          },
           label: (context) => {
             return props.kpis[context.dataIndex]?.description || '';
           }
@@ -142,15 +131,33 @@ const handleButtonClick = () => {
 </script>
 
 <template>
-  <DashboardCard 
-    title="Top-Level KPI Overview" 
-    icon="bar-chart-line" 
-    :showButton="true" 
-    buttonText="Details"
-    @button-click="handleButtonClick"
+  <DashboardCard
+      title="Top-Level KPI Overview"
+      icon="bar-chart-line"
+      :showButton="true"
+      buttonText="Details"
+      @button-click="handleButtonClick"
   >
-    <div class="chart-container" style="position: relative; height: 300px;">
-      <canvas ref="chartCanvas"></canvas>
+    <div class="container">
+      <div class="row">
+        <div class="col col-md-9 h-100">
+          <div class="chart-container" style="position: relative; height: 300px;">
+            <canvas ref="chartCanvas"></canvas>
+          </div>
+        </div>
+        <div class="col col-md-3">
+          <div class="row align-items-end h-100">
+            <div class="col">
+              <p class="text-start text-muted">
+                Three out of five KPIs are above the threshold. Click Details below to see more.
+              </p>
+              <div class="d-grid">
+                <button type="button" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg">Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </DashboardCard>
 </template>

@@ -51,7 +51,7 @@ const projectName = "SPHA Dashboard";
     </div>
 
     <div class="row">
-      <div class="col-md-8 mb-3">
+      <div class="col-md-9 mb-3">
         <TopLevelKpiOverview
             :kpis="[
             { name: 'Security', score: 85, description: 'Based on CVE scan and secrets detection.' },
@@ -62,7 +62,7 @@ const projectName = "SPHA Dashboard";
           ]"
         />
       </div>
-      <div class="col-md-4 mb-3">
+      <div class="col-md-3 mb-3">
         <KpiWarning/>
       </div>
     </div>
