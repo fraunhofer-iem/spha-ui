@@ -146,11 +146,14 @@ const handleButtonClick = () => {
           </div>
         </div>
         <div class="col col-md-3">
-          <div class="row align-items-end h-100">
-            <div class="col">
+          <div class="d-flex flex-column justify-content-between h-100">
+            <div>
               <p class="text-start text-muted">
-                Three out of five KPIs are above the threshold. Click Details below to see more.
+                Three out of five KPIs are above the threshold. The project is in good shape.
+                Click Details below to see more.
               </p>
+            </div>
+            <div class="mt-auto">
               <div class="d-grid">
                 <button type="button" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg">Details</button>
               </div>
