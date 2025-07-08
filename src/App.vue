@@ -8,7 +8,13 @@ import ToolOverview from "./components/ToolOverview.vue";
 
 const repoLanguages = {
   Java: 40,
-  Kotlin: 60
+  Kotlin: 60,
+  Java2: 40,
+  Kotlin2: 60,
+  Java3: 40,
+  Kotlin3: 60,
+  Java5: 40,
+  Kotlin5: 60,
 }
 
 const score = 10;
