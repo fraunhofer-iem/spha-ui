@@ -150,7 +150,7 @@ const handleButtonClick = () => {
               </p>
             </div>
             <div class="mt-auto">
-              <div class="d-grid">
+              <div class="d-grid mb-2">
                 <button type="button" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg">Details
                 </button>
               </div>
