@@ -25,58 +25,57 @@ const renderChart = () => {
     chartInstance.destroy();
   }
 
-  const annotation = {
+  const annotation: any = {
     dLabel: {
       type: 'doughnutLabel',
       content: () => [
-          '⭐',
+        '⭐',
         `${props.score}/100`,
         'score'
       ],
-      font: [{size: 40},{size: 40, weight: 'bold'}, {size: 25}],
-      color: ['black','black', 'grey']
+      font: [{size: 40}, {size: 40, weight: 'bold'}, {size: 25}],
+      color: ['black', 'black', 'grey']
     }
   };
 
-  const plugin = {
-    annotation: {
-      annotations: annotation
-    },
-    legend: {
-      display: false,
-    }
-  }
 
-  chartInstance = new Chart(chartCanvas2.value, {
-    type: 'doughnut',
-    data: {
-      labels,
-      datasets: [
-        {
-          data,
-          borderWidth: 0,
-          backgroundColor(ctx) {
-            if (ctx.dataIndex == 1) {
-              return 'rgba(230, 230, 230, 0.5)'
-            }
-            return blue_chart
-          },
+      chartInstance = new Chart(chartCanvas2.value, {
+        type: 'doughnut',
+        data: {
+          labels,
+          datasets: [
+            {
+              data,
+              borderWidth: 0,
+              backgroundColor(ctx) {
+                if (ctx.dataIndex == 1) {
+                  return 'rgba(230, 230, 230, 0.5)'
+                }
+                return blue_chart
+              },
+            },
+          ],
         },
-      ],
-    },
-    options: {
-      layout: {
-        padding: 10
-      },
-      responsive: true,
-      aspectRatio: 0,
-      maintainAspectRatio: true,
-      cutout: '80%',
-      circumference: 240,
-      rotation: -120,
-      plugins: plugin,
-    },
-  });
+        options: {
+          layout: {
+            padding: 10
+          },
+          responsive: true,
+          aspectRatio: 0,
+          maintainAspectRatio: true,
+          cutout: '80%',
+          circumference: 240,
+          rotation: -120,
+          plugins: {
+            annotation: {
+              annotations: annotation
+            },
+            legend: {
+              display: false,
+            }
+          }
+        },
+      });
 };
 
 
@@ -106,7 +105,7 @@ onUnmounted(() => {
 
 <style scoped>
 .chart-container {
-    height: 220px;
+  height: 220px;
 }
 
 </style>

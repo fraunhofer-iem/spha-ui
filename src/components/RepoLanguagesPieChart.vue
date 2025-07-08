@@ -40,7 +40,7 @@ const renderChart = () => {
     chartInstance.destroy();
   }
 
-  const annotation = {
+  const annotation: any = {
     dLabel: {
       type: 'doughnutLabel',
       content: '</>',

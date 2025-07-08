@@ -7,7 +7,6 @@ import {
   Chart,
   type ChartData,
   type ChartOptions,
-  type Color,
   LinearScale,
   Title,
   Tooltip,
@@ -33,16 +32,13 @@ let chartInstance: Chart | null = null;
 const createChart = () => {
   if (!chartCanvas.value) return;
 
-  const colors: Array<Color> = [
-    '#007bff', '#28a745', '#ffc107', '#dc3545', '#6610f2',
-  ]
-
   const data: ChartData<'bar'> = {
     labels: props.kpis.map(kpi => kpi.name),
     datasets: [
 
       {
         label: 'KPI Score',
+        barThickness: 60,
         data: props.kpis.map(kpi => kpi.score),
         backgroundColor: blue_chart,
         borderWidth: 0,
@@ -51,6 +47,7 @@ const createChart = () => {
       },
       {
         label: 'Track',
+        barThickness: 60,
         data: props.kpis.map(() => 100),
         backgroundColor: background_grey,
         borderWidth: 0,
@@ -63,7 +60,6 @@ const createChart = () => {
   const options: ChartOptions<'bar'> = {
     responsive: true,
     maintainAspectRatio: false,
-    barThickness: 60,
     scales: {
       y: {
         stacked: false,
@@ -155,7 +151,8 @@ const handleButtonClick = () => {
             </div>
             <div class="mt-auto">
               <div class="d-grid">
-                <button type="button" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg">Details</button>
+                <button type="button" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg">Details
+                </button>
               </div>
             </div>
           </div>
