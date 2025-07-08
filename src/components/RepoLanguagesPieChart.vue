@@ -20,7 +20,7 @@ const legendRef = ref<HTMLDivElement | null>(null);
 let resizeObserver: ResizeObserver | null = null;
 
 const colors = [
-  blue_chart, '#28a745', '#ffc107', '#dc3545', '#6610f2',
+  blue_chart, 'purple', '#28a745', '#ffc107', '#dc3545', '#6610f2',
   '#20c997', '#fd7e14', '#6c757d', '#17a2b8', '#e83e8c'
 ];
 
