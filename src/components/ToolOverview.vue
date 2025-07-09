@@ -2,6 +2,7 @@
 
 import DashboardCard from "./DashboardCard.vue";
 import {computed} from "vue";
+import {background_light_grey} from "../assets/styles/Colors.ts";
 
 interface Tool {
   name: string;

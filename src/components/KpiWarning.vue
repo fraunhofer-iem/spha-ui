@@ -53,7 +53,7 @@ const handleButtonClick = () => {
 
       <footer>
         <div class="d-grid ps-4 pe-4 pt-4">
-          <button type="button" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg">Details</button>
+          <button type="button" @click="handleButtonClick" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg">Details</button>
         </div>
       </footer>
     </div>

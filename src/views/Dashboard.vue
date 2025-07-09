@@ -5,6 +5,9 @@ import HealthScore from "./../components/HealthScore.vue";
 import TopLevelKpiOverview from "./../components/TopLevelKpiOverview.vue";
 import KpiWarning from "./../components/KpiWarning.vue";
 import ToolOverview from "./../components/ToolOverview.vue";
+import truffleHogUrl from './../assets/img/supportedTools/trufflehog.svg';
+import osvUrl from './../assets/img/supportedTools/osv.svg';
+import ghUrl from './../assets/img/supportedTools/github-mark.svg';
 
 const repoLanguages = {
   Java: 40,
@@ -18,12 +21,6 @@ const lastCommitDate = "2022-01-01";
 const projectUrl = "https://github.com/SPHA/SPHA-Dashboard";
 const projectName = "SPHA Dashboard";
 
-const truffleHogUrl = new URL('./assets/img/supportedTools/trufflehog.svg', import.meta.url).href
-const ghUrl = new URL('./assets/img/supportedTools/github-mark.svg', import.meta.url).href
-const glUrl = new URL('./assets/img/supportedTools/gitlab-logo-500.svg', import.meta.url).href
-const trivyUrl = new URL('./assets/img/supportedTools/trivy.svg', import.meta.url).href
-const osvUrl = new URL('./assets/img/supportedTools/osv.svg', import.meta.url).href
-const ortUrl = new URL('./assets/img/supportedTools/ort.svg', import.meta.url).href
 
 </script>
 
