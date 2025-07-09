@@ -15,9 +15,9 @@ const props = withDefaults(defineProps<DashboardCardProps>(), {
   buttonText: '',
 })
 
-const emit = defineEmits<{
-  (e: 'button-click'): void
-}>();
+const emit = defineEmits<
+    (e: 'button-click') => void
+>();
 
 const titleCentering = computed(() => {
   if (props.showButton) {
@@ -39,13 +39,15 @@ const handleButtonClick = () => {
       <h5 class="card-title pt-4 fw-bold">
         {{ title }}
       </h5>
-      <button
-          v-if="showButton"
-          class="btn btn-outline-primary"
-          @click="handleButtonClick"
-      >
-        {{ buttonText }}
-      </button>
+      <div class="align-self-center ps-4 pe-4 pt-4">
+        <button
+            v-if="showButton"
+            class="btn btn-outline-primary"
+            @click="handleButtonClick"
+        >
+          {{ buttonText }}
+        </button>
+      </div>
     </div>
     <!-- Card Body -->
     <div class="card-body">
@@ -58,6 +60,3 @@ const handleButtonClick = () => {
     </div>
   </div>
 </template>
-
-<style scoped>
-</style>
