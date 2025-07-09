@@ -129,10 +129,6 @@ const handleButtonClick = () => {
 <template>
   <DashboardCard
       title="Top-Level KPI Overview"
-      icon="bar-chart-line"
-      :showButton="true"
-      buttonText="Details"
-      @button-click="handleButtonClick"
   >
     <div class="container">
       <div class="row">
@@ -151,7 +147,8 @@ const handleButtonClick = () => {
             </div>
             <div class="mt-auto">
               <div class="d-grid mb-2">
-                <button type="button" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg">Details
+                <button type="button" @click="handleButtonClick"
+                        class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg">Details
                 </button>
               </div>
             </div>

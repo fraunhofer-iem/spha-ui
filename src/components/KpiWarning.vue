@@ -32,11 +32,6 @@ const handleButtonClick = () => {
 <template>
   <DashboardCard
       title="Critical KPIs"
-      icon="cloud-lightning-rain"
-      :showButton="true"
-      buttonText="Details"
-      flexColumn
-      @button-click="handleButtonClick"
   >
     <div v-if="warnings">
       <div class="align-items-start text-start">

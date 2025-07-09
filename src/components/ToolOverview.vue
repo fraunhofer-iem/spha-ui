@@ -42,7 +42,7 @@ const handleButtonClick = () => {
 </script>
 
 <template>
-  <DashboardCard title="Scan Results" icon="tools" :showButton="true"
+  <DashboardCard title-style="start" title="Tool Results" icon="tools" :showButton="true"
                  buttonText="Download All"
                  @button-click="handleButtonClick">
     <div class="table-responsive">
