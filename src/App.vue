@@ -93,7 +93,7 @@ onUnmounted(() => {
         />
       </div>
       <div class="col-md-3 mb-3">
-        <KpiWarning/>
+        <KpiWarning :kpis="[]"/>
       </div>
     </div>
     <div class="row">
