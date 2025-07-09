@@ -84,7 +84,7 @@ onUnmounted(() => {
       <div class="col-md-9 mb-3">
         <TopLevelKpiOverview
             :kpis="[
-            { name: 'Security', score: 85, description: 'Based on CVE scan and secrets detection.' },
+            { name: 'Security', score: 85,description: 'Based on CVE scan and secrets detection.' },
             { name: 'Quality', score: 72, description: 'Includes linting and test coverage.' },
             { name: 'Compliance', score: 90, description: 'Assessed via SPDX and license checks.' },
             { name: 'Traceability', score: 65, description: 'Based on issue-commit linkage.' },
@@ -99,7 +99,7 @@ onUnmounted(() => {
     <div class="row">
       <div class="col-md-12 mb-3">
         <ToolOverview :tools="[
-            { name: 'Trufflehog',scanDate: '2025-06-10', findings: 10, downloadLink: '', icon: ''},
+            { name: 'Trufflehog',scanDate: '2025-06-10', findings: 10, downloadLink: '', icon: './../assets/img/supportedTools/trufflehog.svg'},
             { name: 'OSV',scanDate: '2025-06-10', findings: 2, downloadLink: '', icon: ''},
             { name: 'GitHub',scanDate: '2025-06-10', findings: 20, downloadLink: '', icon: ''},
             ]"/>
