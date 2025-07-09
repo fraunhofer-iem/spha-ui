@@ -1,0 +1,75 @@
+<script setup lang="ts">
+import ProjectOverview from "./../components/ProjectOverview.vue";
+import RepoLanguagesPieChart from "./../components/RepoLanguagesPieChart.vue";
+import HealthScore from "./../components/HealthScore.vue";
+import TopLevelKpiOverview from "./../components/TopLevelKpiOverview.vue";
+import KpiWarning from "./../components/KpiWarning.vue";
+import ToolOverview from "./../components/ToolOverview.vue";
+
+const repoLanguages = {
+  Java: 40,
+  Kotlin: 60,
+}
+
+const score = 80;
+const stars = 1000;
+const contributors = 100;
+const lastCommitDate = "2022-01-01";
+const projectUrl = "https://github.com/SPHA/SPHA-Dashboard";
+const projectName = "SPHA Dashboard";
+
+const truffleHogUrl = new URL('./assets/img/supportedTools/trufflehog.svg', import.meta.url).href
+const ghUrl = new URL('./assets/img/supportedTools/github-mark.svg', import.meta.url).href
+const glUrl = new URL('./assets/img/supportedTools/gitlab-logo-500.svg', import.meta.url).href
+const trivyUrl = new URL('./assets/img/supportedTools/trivy.svg', import.meta.url).href
+const osvUrl = new URL('./assets/img/supportedTools/osv.svg', import.meta.url).href
+const ortUrl = new URL('./assets/img/supportedTools/ort.svg', import.meta.url).href
+
+</script>
+
+<template>
+  <div class="row">
+    <div class="col-md-3 mb-3">
+      <HealthScore :score="score"/>
+    </div>
+    <div class="col-md-6 mb-3">
+      <ProjectOverview
+          :stars="stars"
+          :last-commit-date="lastCommitDate"
+          :project-name="projectName"
+          :project-url="projectUrl"
+          :contributors="contributors"
+
+      />
+    </div>
+    <div class="col-md-3 mb-3">
+      <RepoLanguagesPieChart :languages="repoLanguages"/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-9 mb-3">
+      <TopLevelKpiOverview
+          :kpis="[
+            { name: 'Security', score: 85,description: 'Based on CVE scan and secrets detection.' },
+            { name: 'Quality', score: 72, description: 'Includes linting and test coverage.' },
+            { name: 'Compliance', score: 90, description: 'Assessed via SPDX and license checks.' },
+            { name: 'Traceability', score: 65, description: 'Based on issue-commit linkage.' },
+            { name: 'Sustainability', score: 78, description: 'Considers activity over time and contributor bus factor.' }
+          ]"
+      />
+    </div>
+    <div class="col-md-3 mb-3">
+      <KpiWarning :kpis="[]"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <ToolOverview :tools="[
+            { name: 'Trufflehog',scanDate: '2025-06-10', findings: 10, downloadLink: '', icon: truffleHogUrl},
+            { name: 'OSV',scanDate: '2025-06-10', findings: 2, downloadLink: '', icon: osvUrl},
+            { name: 'GitHub',scanDate: '2025-06-10', findings: 20, downloadLink: '', icon: ghUrl},
+            ]"/>
+    </div>
+  </div>
+</template>
