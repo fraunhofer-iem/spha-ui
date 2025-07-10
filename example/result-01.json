@@ -1,0 +1,1997 @@
+{
+  "resultHierarchy": {
+    "root": {
+      "typeId": "ROOT",
+      "result": {
+        "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Incomplete",
+        "score": 32,
+        "thresholds": [
+          80,
+          60
+        ],
+        "reason": "Incomplete results."
+      },
+      "strategy": "WEIGHTED_AVERAGE_STRATEGY",
+      "edges": [
+        {
+          "target": {
+            "typeId": "PROCESS_TRANSPARENCY",
+            "result": {
+              "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+            },
+            "strategy": "WEIGHTED_AVERAGE_STRATEGY",
+            "edges": [
+              {
+                "target": {
+                  "typeId": "SIGNED_COMMITS_RATIO",
+                  "result": {
+                    "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                  },
+                  "strategy": "WEIGHTED_RATIO_STRATEGY",
+                  "edges": [
+                    {
+                      "target": {
+                        "typeId": "NUMBER_OF_COMMITS",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "id": "f44aa8b9-3503-425d-ac37-8abeef65af6a"
+                      },
+                      "plannedWeight": 1.0,
+                      "actualWeight": 0.0
+                    },
+                    {
+                      "target": {
+                        "typeId": "NUMBER_OF_SIGNED_COMMITS",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "id": "a417379b-bb58-4bc4-8af2-e1e3897c4071"
+                      },
+                      "plannedWeight": 1.0,
+                      "actualWeight": 0.0
+                    }
+                  ],
+                  "id": "2cdd37b8-ed6e-4693-87ff-1e884967e9a6"
+                },
+                "plannedWeight": 1.0,
+                "actualWeight": 0.0
+              }
+            ],
+            "id": "f1944827-69c3-49e2-a707-4e220c22437e"
+          },
+          "plannedWeight": 0.1,
+          "actualWeight": 0.0
+        },
+        {
+          "target": {
+            "typeId": "PROCESS_COMPLIANCE",
+            "result": {
+              "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+            },
+            "strategy": "WEIGHTED_AVERAGE_STRATEGY",
+            "edges": [
+              {
+                "target": {
+                  "typeId": "CHECKED_IN_BINARIES",
+                  "result": {
+                    "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                  },
+                  "strategy": "RAW_VALUE_STRATEGY",
+                  "edges": [],
+                  "id": "a7c6bbec-4c8b-483e-9ca8-b11d00190ba7"
+                },
+                "plannedWeight": 0.2,
+                "actualWeight": 0.0
+              },
+              {
+                "target": {
+                  "typeId": "SIGNED_COMMITS_RATIO",
+                  "result": {
+                    "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                  },
+                  "strategy": "WEIGHTED_RATIO_STRATEGY",
+                  "edges": [
+                    {
+                      "target": {
+                        "typeId": "NUMBER_OF_COMMITS",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "id": "d640c36e-d6de-486e-b4af-79867881b649"
+                      },
+                      "plannedWeight": 1.0,
+                      "actualWeight": 0.0
+                    },
+                    {
+                      "target": {
+                        "typeId": "NUMBER_OF_SIGNED_COMMITS",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "id": "e4f47066-2498-490d-ac90-48bd1ef30ec3"
+                      },
+                      "plannedWeight": 1.0,
+                      "actualWeight": 0.0
+                    }
+                  ],
+                  "id": "6e900a40-c752-42d5-a74a-ac58935036a6"
+                },
+                "plannedWeight": 0.2,
+                "actualWeight": 0.0
+              },
+              {
+                "target": {
+                  "typeId": "IS_DEFAULT_BRANCH_PROTECTED",
+                  "result": {
+                    "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                  },
+                  "strategy": "RAW_VALUE_STRATEGY",
+                  "edges": [],
+                  "id": "ba26c894-34a2-434f-93d5-180cc7249027"
+                },
+                "plannedWeight": 0.3,
+                "actualWeight": 0.0
+              },
+              {
+                "target": {
+                  "typeId": "DOCUMENTATION",
+                  "result": {
+                    "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                  },
+                  "strategy": "WEIGHTED_AVERAGE_STRATEGY",
+                  "edges": [
+                    {
+                      "target": {
+                        "typeId": "DOCUMENTATION_INFRASTRUCTURE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "id": "dfa311e8-794c-4978-b4bf-16be089fc448"
+                      },
+                      "plannedWeight": 0.6,
+                      "actualWeight": 0.0
+                    },
+                    {
+                      "target": {
+                        "typeId": "COMMENTS_IN_CODE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "id": "6b694cfc-fc3a-49e4-b082-73edf8f78197"
+                      },
+                      "plannedWeight": 0.4,
+                      "actualWeight": 0.0
+                    }
+                  ],
+                  "id": "1b28ab3a-381d-4335-bbf8-7d29a3d06dd7"
+                },
+                "plannedWeight": 0.3,
+                "actualWeight": 0.0
+              }
+            ],
+            "id": "0f4788cd-1e95-4790-8d6f-28db1485809a"
+          },
+          "plannedWeight": 0.1,
+          "actualWeight": 0.0
+        },
+        {
+          "target": {
+            "typeId": "SECURITY",
+            "result": {
+              "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Incomplete",
+              "score": 32,
+              "reason": "Incomplete results."
+            },
+            "strategy": "WEIGHTED_AVERAGE_STRATEGY",
+            "edges": [
+              {
+                "target": {
+                  "typeId": "SECRETS",
+                  "result": {
+                    "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                    "score": 0
+                  },
+                  "strategy": "RAW_VALUE_STRATEGY",
+                  "edges": [],
+                  "id": "ddcb633a-a58d-488e-9bc1-ef8b907f0b0f"
+                },
+                "plannedWeight": 0.2,
+                "actualWeight": 0.425
+              },
+              {
+                "target": {
+                  "typeId": "MAXIMAL_VULNERABILITY",
+                  "result": {
+                    "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                  },
+                  "strategy": "MINIMUM_STRATEGY",
+                  "edges": [
+                    {
+                      "target": {
+                        "typeId": "CODE_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "id": "143a0d56-49a9-4d03-8468-9a07e758c5ee"
+                      },
+                      "plannedWeight": 1.0,
+                      "actualWeight": 0.0
+                    }
+                  ],
+                  "id": "e8ea5e36-8333-4e3b-8334-4021f77c7c30"
+                },
+                "plannedWeight": 0.35,
+                "actualWeight": 0.0
+              },
+              {
+                "target": {
+                  "typeId": "MAXIMAL_VULNERABILITY",
+                  "result": {
+                    "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                    "score": 57
+                  },
+                  "strategy": "MAXIMUM_STRATEGY",
+                  "edges": [
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 22
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "97de17fe-25d0-4f90-ada9-00e6685bfe16",
+                        "id": "03270f46-81f6-48b3-bde4-8347408800dc"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 25
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "8d5a6f41-5f12-4f94-b42a-b7190c0e8bfa",
+                        "id": "2cb904b4-0a86-4467-a3d3-db1ce3dce855"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 2
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "1ad9b460-f099-41ce-9d07-4de1f8ce68da",
+                        "id": "89ffc28a-1bc9-410b-9fa6-33c1a43bb24e"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 26
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "8efa1966-d726-48a9-942c-5110bb912b12",
+                        "id": "1b3d0353-c720-46d1-9a36-99b38be36adf"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 25
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "884c944f-8372-4828-a9b2-4eee3f90f740",
+                        "id": "2258bc6c-813d-4370-986b-61495ce60bba"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 25
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "7f9e4204-8ba4-458c-b4ae-b376e84834b1",
+                        "id": "c5beaf24-f6c1-4fe4-a454-105fe1c54db9"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 26
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "f326523f-fdd5-47fb-bff5-361b21f8aef4",
+                        "id": "0799b48e-7f40-49c0-9d7c-82945ed449e6"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 45
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "98227f83-5150-4362-9e52-3b187b90e84d",
+                        "id": "d5a0d7d2-f53a-4b2e-bf1e-c879daa51604"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 47
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "3d243f29-c306-4183-ac09-3a96a4db9e4c",
+                        "id": "4b473e5a-554d-465e-9e3d-c07385c364d7"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 47
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "22097333-a504-4613-a3eb-0f9387330c4b",
+                        "id": "98129757-36c7-4a8a-b3f8-b7b0abb054d7"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 41
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "ab67d57e-e9be-4cbd-a8c6-66fd43e43298",
+                        "id": "31e98106-83b5-4da2-bed5-76ac479f8d8a"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 41
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "f46e9925-7822-4f22-b28d-9b762ab12dba",
+                        "id": "3c091f6e-f447-4a34-b898-6b0e57d67493"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 41
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "2caf3dae-9454-403a-a65e-1d2213b1790a",
+                        "id": "d9e6fbda-9741-4820-b615-c86d6efb2fba"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 57
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "d9d3d228-1290-4266-9e46-0cc1834a9c61",
+                        "id": "4a94322a-2ca4-4ed8-b220-108592aa31aa"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 57
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "85c9ecf8-67ef-4954-ba53-1d8de9ca50d4",
+                        "id": "3eeb1fea-383d-4200-9fda-c4a55241da5f"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 26
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "8ab759f6-b3e3-4f44-9493-a97c2131ea4e",
+                        "id": "607fd688-60c1-4bbd-9aca-c16da451a213"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 25
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "637aa297-a790-4a9c-83a9-34d3586e28bd",
+                        "id": "625e75cb-e63e-4cf3-8c7f-0e36ee7b6625"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 25
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "e446d867-3b10-412f-b729-934410a51055",
+                        "id": "f7916955-990d-4113-967c-ad430aff976c"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 26
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "693e0f4e-fadb-4000-921d-491de340a660",
+                        "id": "92bc2484-3ad7-43ce-a37d-2ff68c32b6a3"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 45
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "d89d8231-0357-481d-97b4-32e104a2274d",
+                        "id": "2c084470-7138-43e9-bdde-38425d4bb9b3"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 47
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "e0046497-0ed1-4d47-9bf7-a53f03094242",
+                        "id": "e9275875-861e-4711-98ce-c8d328b639e1"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 47
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "57a679e0-b2ec-43ec-8f2d-81e86e9e4ca1",
+                        "id": "901fdbe4-0d4e-41f1-9a2e-3e1dfd99a635"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 41
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "7a2a223d-4415-41db-946d-1b173616a917",
+                        "id": "1ab528cf-873c-4f2b-aa86-0398cc39b48c"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 41
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "e1900e09-9df8-4174-9d69-e5a614ababcc",
+                        "id": "a592b20b-4061-4491-a387-92366335a095"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 41
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "3ac2f02a-5b09-4c3f-8e15-bd85c389e59d",
+                        "id": "2703ba96-4b4c-4e2f-b01f-51018a68410e"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 57
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "4bd52517-3a4e-4181-95ec-eb84feaf5d2b",
+                        "id": "3aa604d0-50fc-45c2-b3ff-a02ee035ad9c"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 57
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "94b56e7e-7644-4786-bfae-97df373bcf73",
+                        "id": "4f9da5a1-bceb-4248-b709-19cd55538b11"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 2
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "174070a9-e94b-4c66-ac11-33407c1b5226",
+                        "id": "29cade6c-b198-4a35-899a-458174f0b3e7"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 45
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "f4cd478f-1acb-467f-9743-6d0f2c9eca0e",
+                        "id": "23642ad9-a03a-446f-bb05-439d4c830b27"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 2
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "44c4de4c-95f2-483c-be47-4c49029c2dfd",
+                        "id": "25c03c19-d527-4ca1-a394-c434150df852"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 45
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "825e01f8-f2a1-4a36-b6ab-ff47ed5921b0",
+                        "id": "569fdb18-1a4d-436b-9817-7c2abf962dcd"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 2
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "40eb01d2-9e4d-4ad9-a83c-212b9e7c063b",
+                        "id": "2640d533-f684-4f9f-b587-329a96ece9ad"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 25
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "6ea4d0e7-7680-41ad-b19c-bc40b8d3b056",
+                        "id": "5decabf1-77a4-4168-8faf-b0a28933c6ef"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 19
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "30dc525d-5a26-4988-8049-f585c82948b5",
+                        "id": "8ef89a56-bc24-450b-9270-74e79cfe1c44"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 25
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "0ce8b208-14a2-442c-bc77-4fb99f0a0fee",
+                        "id": "d2f81bdb-006a-4e33-bfc4-ef0ac838ce0f"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 35
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "c9f25bd8-ed65-4337-b445-ceedb59e1ab0",
+                        "id": "5ac49663-c75d-4b29-8c56-1d6a23966a28"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 41
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "e990a0d7-d7b3-4270-b62b-2a22990c301a",
+                        "id": "12990db7-b6e0-46cc-8a42-36524553ab18"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 20
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "e76c5274-c701-4bf9-b46a-e79544012af8",
+                        "id": "e60dd0b5-8f98-4df6-b33d-922615452e13"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 43
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "7f1f8c0a-ef45-4036-8912-b4cff2536969",
+                        "id": "638baf42-f1f1-4559-b78e-68d6160eb949"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 45
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "be539215-b189-41f3-a401-ad11e51be76a",
+                        "id": "33847c92-6d6e-4afa-bb55-4ea2d6612728"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 25
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "37586ce5-222d-49e3-9eba-c258ebf12852",
+                        "id": "99cc7642-c75c-4cd1-a554-e7ee34a95200"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 12
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "f0b9ffab-e9e5-46e4-970c-4d98708364bb",
+                        "id": "05ba24db-07be-40ce-8daa-405bbae4ae05"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 12
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "430804c0-b0fb-427c-8788-05fb7efbf48a",
+                        "id": "76e60f73-9132-4bd7-991c-561e4d538f97"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    },
+                    {
+                      "target": {
+                        "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
+                          "score": 25
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "originId": "eee86e4e-bf4c-4ec8-8493-686fdbe057ec",
+                        "id": "ccc44fc5-2b1d-4930-b732-f958eb1e9c78"
+                      },
+                      "plannedWeight": 0.022727272727272728,
+                      "actualWeight": 0.022727272727272728
+                    }
+                  ],
+                  "id": "9e785b3b-48d5-4434-a193-bcfb50aadabf"
+                },
+                "plannedWeight": 0.35,
+                "actualWeight": 0.575
+              },
+              {
+                "target": {
+                  "typeId": "CHECKED_IN_BINARIES",
+                  "result": {
+                    "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                  },
+                  "strategy": "RAW_VALUE_STRATEGY",
+                  "edges": [],
+                  "id": "9f49139d-26f9-454e-8237-b6141baa09cd"
+                },
+                "plannedWeight": 0.1,
+                "actualWeight": 0.0
+              }
+            ],
+            "id": "6102e489-c11e-4b28-8d97-cfc517dcbc33"
+          },
+          "plannedWeight": 0.4,
+          "actualWeight": 1.0
+        },
+        {
+          "target": {
+            "typeId": "INTERNAL_QUALITY",
+            "result": {
+              "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+            },
+            "strategy": "WEIGHTED_AVERAGE_STRATEGY",
+            "edges": [
+              {
+                "target": {
+                  "typeId": "DOCUMENTATION",
+                  "result": {
+                    "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                  },
+                  "strategy": "WEIGHTED_AVERAGE_STRATEGY",
+                  "edges": [
+                    {
+                      "target": {
+                        "typeId": "DOCUMENTATION_INFRASTRUCTURE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "id": "78935879-da6d-4e77-a001-e0f0381dee24"
+                      },
+                      "plannedWeight": 0.6,
+                      "actualWeight": 0.0
+                    },
+                    {
+                      "target": {
+                        "typeId": "COMMENTS_IN_CODE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "id": "1f3145b4-1dbe-434c-aecb-327bf4b0ccd6"
+                      },
+                      "plannedWeight": 0.4,
+                      "actualWeight": 0.0
+                    }
+                  ],
+                  "id": "837841c0-d622-4280-9ba3-e8fa2098adf6"
+                },
+                "plannedWeight": 1.0,
+                "actualWeight": 0.0
+              }
+            ],
+            "id": "235071bf-0499-45ea-8eb3-9a06a92e68df"
+          },
+          "plannedWeight": 0.15,
+          "actualWeight": 0.0
+        },
+        {
+          "target": {
+            "typeId": "EXTERNAL_QUALITY",
+            "result": {
+              "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+            },
+            "strategy": "WEIGHTED_AVERAGE_STRATEGY",
+            "edges": [
+              {
+                "target": {
+                  "typeId": "DOCUMENTATION",
+                  "result": {
+                    "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                  },
+                  "strategy": "WEIGHTED_AVERAGE_STRATEGY",
+                  "edges": [
+                    {
+                      "target": {
+                        "typeId": "DOCUMENTATION_INFRASTRUCTURE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "id": "ede3fc56-6a2d-48e5-8148-0e3444140627"
+                      },
+                      "plannedWeight": 0.6,
+                      "actualWeight": 0.0
+                    },
+                    {
+                      "target": {
+                        "typeId": "COMMENTS_IN_CODE",
+                        "result": {
+                          "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+                        },
+                        "strategy": "RAW_VALUE_STRATEGY",
+                        "edges": [],
+                        "id": "1707b25a-0b85-41b0-8318-4bef20925bf3"
+                      },
+                      "plannedWeight": 0.4,
+                      "actualWeight": 0.0
+                    }
+                  ],
+                  "id": "3d58f403-45d2-43a6-9499-d4a03eeffd79"
+                },
+                "plannedWeight": 1.0,
+                "actualWeight": 0.0
+              }
+            ],
+            "id": "8b8be72c-246a-4af3-a802-06f70dc286eb"
+          },
+          "plannedWeight": 0.25,
+          "actualWeight": 0.0
+        }
+      ],
+      "id": "110d0f8b-5709-4cca-bb11-22bc208faaed"
+    },
+    "schemaVersion": "1.1.0",
+    "timestamp": "2025-07-10T11:24:35.419538Z"
+  },
+  "origins": {
+    "Trivy Vulnerability Scanner": [
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:C",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 7.8,
+            "V3Score": 7.5
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          }
+        },
+        "VulnerabilityID": "CVE-2018-20843",
+        "InstalledVersion": "2.2.6-r0",
+        "PkgName": "expat",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 5,
+            "V3Score": 7.5
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          }
+        },
+        "VulnerabilityID": "CVE-2019-15903",
+        "InstalledVersion": "2.2.6-r0",
+        "PkgName": "expat",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+            "V2Score": 7.5,
+            "V3Score": 9.8
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:L",
+            "V3Score": 4.4
+          }
+        },
+        "VulnerabilityID": "CVE-2019-12900",
+        "InstalledVersion": "1.0.6-r6",
+        "PkgName": "libbz2",
+        "Severity": "CRITICAL"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:N",
+            "V3Vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+            "V2Score": 5.8,
+            "V3Score": 7.4
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.0/AV:L/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N",
+            "V3Score": 2.9
+          }
+        },
+        "VulnerabilityID": "CVE-2019-1543",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libcrypto1.1",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          },
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 5,
+            "V3Score": 7.5
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          }
+        },
+        "VulnerabilityID": "CVE-2020-1967",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libcrypto1.1",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "bitnami": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          },
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          },
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 5,
+            "V3Score": 7.5
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          }
+        },
+        "VulnerabilityID": "CVE-2021-23840",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libcrypto1.1",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "bitnami": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+            "V3Score": 7.4
+          },
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+            "V3Score": 7.4
+          },
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:N",
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+            "V2Score": 5.8,
+            "V3Score": 7.4
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+            "V3Score": 7.4
+          }
+        },
+        "VulnerabilityID": "CVE-2021-3450",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libcrypto1.1",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:L/AC:M/Au:N/C:P/I:N/A:N",
+            "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N",
+            "V2Score": 1.9,
+            "V3Score": 4.7
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+            "V3Score": 5.5
+          }
+        },
+        "VulnerabilityID": "CVE-2019-1547",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libcrypto1.1",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:P/I:N/A:N",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+            "V2Score": 5,
+            "V3Score": 5.3
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N",
+            "V3Score": 4.8
+          }
+        },
+        "VulnerabilityID": "CVE-2019-1549",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libcrypto1.1",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:P/I:N/A:N",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+            "V2Score": 5,
+            "V3Score": 5.3
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N",
+            "V3Score": 4.8
+          }
+        },
+        "VulnerabilityID": "CVE-2019-1551",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libcrypto1.1",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "bitnami": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          },
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 4.3,
+            "V3Score": 5.9
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          }
+        },
+        "VulnerabilityID": "CVE-2020-1971",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libcrypto1.1",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          },
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 4.3,
+            "V3Score": 5.9
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          }
+        },
+        "VulnerabilityID": "CVE-2021-23841",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libcrypto1.1",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "bitnami": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          },
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          },
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 4.3,
+            "V3Score": 5.9
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          }
+        },
+        "VulnerabilityID": "CVE-2021-3449",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libcrypto1.1",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:P/I:N/A:N",
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
+            "V2Score": 4.3,
+            "V3Score": 3.7
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
+            "V3Score": 3.7
+          }
+        },
+        "VulnerabilityID": "CVE-2019-1563",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libcrypto1.1",
+        "Severity": "LOW"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:N/I:P/A:N",
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N",
+            "V2Score": 4.3,
+            "V3Score": 3.7
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N",
+            "V3Score": 3.7
+          }
+        },
+        "VulnerabilityID": "CVE-2021-23839",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libcrypto1.1",
+        "Severity": "LOW"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:N",
+            "V3Vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+            "V2Score": 5.8,
+            "V3Score": 7.4
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.0/AV:L/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N",
+            "V3Score": 2.9
+          }
+        },
+        "VulnerabilityID": "CVE-2019-1543",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libssl1.1",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          },
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 5,
+            "V3Score": 7.5
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          }
+        },
+        "VulnerabilityID": "CVE-2020-1967",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libssl1.1",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "bitnami": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          },
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          },
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 5,
+            "V3Score": 7.5
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          }
+        },
+        "VulnerabilityID": "CVE-2021-23840",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libssl1.1",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "bitnami": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+            "V3Score": 7.4
+          },
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+            "V3Score": 7.4
+          },
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:N",
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+            "V2Score": 5.8,
+            "V3Score": 7.4
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+            "V3Score": 7.4
+          }
+        },
+        "VulnerabilityID": "CVE-2021-3450",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libssl1.1",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:L/AC:M/Au:N/C:P/I:N/A:N",
+            "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N",
+            "V2Score": 1.9,
+            "V3Score": 4.7
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+            "V3Score": 5.5
+          }
+        },
+        "VulnerabilityID": "CVE-2019-1547",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libssl1.1",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:P/I:N/A:N",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+            "V2Score": 5,
+            "V3Score": 5.3
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N",
+            "V3Score": 4.8
+          }
+        },
+        "VulnerabilityID": "CVE-2019-1549",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libssl1.1",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:P/I:N/A:N",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+            "V2Score": 5,
+            "V3Score": 5.3
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N",
+            "V3Score": 4.8
+          }
+        },
+        "VulnerabilityID": "CVE-2019-1551",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libssl1.1",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "bitnami": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          },
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 4.3,
+            "V3Score": 5.9
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          }
+        },
+        "VulnerabilityID": "CVE-2020-1971",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libssl1.1",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          },
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 4.3,
+            "V3Score": 5.9
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          }
+        },
+        "VulnerabilityID": "CVE-2021-23841",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libssl1.1",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "bitnami": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          },
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          },
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 4.3,
+            "V3Score": 5.9
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          }
+        },
+        "VulnerabilityID": "CVE-2021-3449",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libssl1.1",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:P/I:N/A:N",
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
+            "V2Score": 4.3,
+            "V3Score": 3.7
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
+            "V3Score": 3.7
+          }
+        },
+        "VulnerabilityID": "CVE-2019-1563",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libssl1.1",
+        "Severity": "LOW"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:N/I:P/A:N",
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N",
+            "V2Score": 4.3,
+            "V3Score": 3.7
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N",
+            "V3Score": 3.7
+          }
+        },
+        "VulnerabilityID": "CVE-2021-23839",
+        "InstalledVersion": "1.1.1a-r1",
+        "PkgName": "libssl1.1",
+        "Severity": "LOW"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+            "V2Score": 7.5,
+            "V3Score": 9.8
+          }
+        },
+        "VulnerabilityID": "CVE-2019-14697",
+        "InstalledVersion": "1.1.20-r4",
+        "PkgName": "musl",
+        "Severity": "CRITICAL"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:L/AC:L/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 2.1,
+            "V3Score": 5.5
+          }
+        },
+        "VulnerabilityID": "CVE-2020-28928",
+        "InstalledVersion": "1.1.20-r4",
+        "PkgName": "musl",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+            "V2Score": 7.5,
+            "V3Score": 9.8
+          }
+        },
+        "VulnerabilityID": "CVE-2019-14697",
+        "InstalledVersion": "1.1.20-r4",
+        "PkgName": "musl-utils",
+        "Severity": "CRITICAL"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:L/AC:L/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 2.1,
+            "V3Score": 5.5
+          }
+        },
+        "VulnerabilityID": "CVE-2020-28928",
+        "InstalledVersion": "1.1.20-r4",
+        "PkgName": "musl-utils",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+            "V2Score": 7.5,
+            "V3Score": 9.8
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          }
+        },
+        "VulnerabilityID": "CVE-2019-8457",
+        "InstalledVersion": "3.26.0-r3",
+        "PkgName": "sqlite-libs",
+        "Severity": "CRITICAL"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 5,
+            "V3Score": 7.5
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          }
+        },
+        "VulnerabilityID": "CVE-2019-19244",
+        "InstalledVersion": "3.26.0-r3",
+        "PkgName": "sqlite-libs",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+            "V2Score": 6.8,
+            "V3Score": 8.1
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+            "V3Score": 8.1
+          }
+        },
+        "VulnerabilityID": "CVE-2019-5018",
+        "InstalledVersion": "3.26.0-r3",
+        "PkgName": "sqlite-libs",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "bitnami": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          },
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 5,
+            "V3Score": 7.5
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          }
+        },
+        "VulnerabilityID": "CVE-2020-11655",
+        "InstalledVersion": "3.26.0-r3",
+        "PkgName": "sqlite-libs",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+            "V2Score": 4.3,
+            "V3Score": 6.5
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+            "V3Score": 6.5
+          }
+        },
+        "VulnerabilityID": "CVE-2019-16168",
+        "InstalledVersion": "3.26.0-r3",
+        "PkgName": "sqlite-libs",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:N/C:N/I:N/A:P",
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V2Score": 4.3,
+            "V3Score": 5.9
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          }
+        },
+        "VulnerabilityID": "CVE-2019-19242",
+        "InstalledVersion": "3.26.0-r3",
+        "PkgName": "sqlite-libs",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+            "V3Score": 7.5
+          },
+          "nvd": {
+            "V2Vector": "AV:N/AC:L/Au:N/C:N/I:P/A:N",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+            "V2Score": 5,
+            "V3Score": 7.5
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H",
+            "V3Score": 8
+          }
+        },
+        "VulnerabilityID": "CVE-2019-20916",
+        "InstalledVersion": "19.0.3",
+        "PkgName": "pip",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "bitnami": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:N/I:H/A:N",
+            "V3Score": 5.7
+          },
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:N/I:H/A:N",
+            "V3Score": 5.7
+          },
+          "nvd": {
+            "V2Vector": "AV:N/AC:M/Au:S/C:N/I:P/A:N",
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:N/I:H/A:N",
+            "V2Score": 3.5,
+            "V3Score": 5.7
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:R/S:U/C:N/I:H/A:N",
+            "V3Score": 4.5
+          }
+        },
+        "VulnerabilityID": "CVE-2021-3572",
+        "InstalledVersion": "19.0.3",
+        "PkgName": "pip",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "bitnami": {
+            "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+            "V3Score": 3.3
+          },
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:N",
+            "V3Score": 5.5
+          },
+          "nvd": {
+            "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+            "V3Score": 3.3
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+            "V3Score": 3.3
+          }
+        },
+        "VulnerabilityID": "CVE-2023-5752",
+        "InstalledVersion": "19.0.3",
+        "PkgName": "pip",
+        "Severity": "MEDIUM"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "bitnami": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          },
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          },
+          "nvd": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 5.9
+          }
+        },
+        "VulnerabilityID": "CVE-2022-40897",
+        "InstalledVersion": "40.8.0",
+        "PkgName": "setuptools",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "bitnami": {
+            "V3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+            "V3Score": 8.8
+          },
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+            "V3Score": 8.8
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+            "V3Score": 8.8
+          }
+        },
+        "VulnerabilityID": "CVE-2024-6345",
+        "InstalledVersion": "40.8.0",
+        "PkgName": "setuptools",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "nvd": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+            "V3Score": 8.8
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:L",
+            "V3Score": 7.1
+          }
+        },
+        "VulnerabilityID": "CVE-2025-47273",
+        "InstalledVersion": "40.8.0",
+        "PkgName": "setuptools",
+        "Severity": "HIGH"
+      },
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrivyVulnerabilityDto",
+        "CVSS": {
+          "ghsa": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          },
+          "nvd": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          },
+          "redhat": {
+            "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "V3Score": 7.5
+          }
+        },
+        "VulnerabilityID": "CVE-2022-40898",
+        "InstalledVersion": "0.33.1",
+        "PkgName": "wheel",
+        "Severity": "HIGH"
+      }
+    ],
+    "Trufflehog Secret Scanner": [
+      {
+        "type": "de.fraunhofer.iem.spha.model.adapter.TrufflehogReportDto",
+        "chunks": 14,
+        "bytes": 6959,
+        "verified_secrets": 4,
+        "unverified_secrets": 0,
+        "scan_duration": "1.802821959s",
+        "trufflehog_version": "3.89.2"
+      }
+    ]
+  },
+  "projectInfo": {
+    "name": "spha",
+    "usedLanguages": {
+      "Kotlin": 298208
+    },
+    "url": "https://github.com/fraunhofer-iem/spha",
+    "stars": 5,
+    "numberOfContributors": 9,
+    "numberOfCommits": 206,
+    "lastCommitDate": "2025-07-10T07:20:48Z"
+  }
+}
