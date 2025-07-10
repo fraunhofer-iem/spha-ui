@@ -4,19 +4,16 @@ import {ArcElement, Chart, DoughnutController, Legend, Tooltip} from 'chart.js';
 import DashboardCard from './DashboardCard.vue';
 import annotationPlugin from "chartjs-plugin-annotation";
 import {blue_chart} from "../assets/styles/Colors.ts";
+import type {Language} from "../model/Result.ts";
 
 Chart.register(DoughnutController, ArcElement, Tooltip, Legend, annotationPlugin);
 
-const props = defineProps<{
-  languages: Record<string, number>;
-}>();
+const languages = defineProps<Language[]>()
 
 const chartCanvas = ref<HTMLCanvasElement | null>(null);
 let chartInstance: Chart<'doughnut'> | null = null;
 const legendRef = ref<HTMLDivElement | null>(null);
-// Using Bootstrap grid system for layout
 
-// Update grid layout when container size changes
 let resizeObserver: ResizeObserver | null = null;
 
 const colors = [
@@ -33,8 +30,8 @@ const getColorForLanguage = (language: string) => {
 const renderChart = () => {
   if (!chartCanvas.value) return;
 
-  const labels = Object.keys(props.languages);
-  const data = Object.values(props.languages);
+  const labels = languages.map((lang) => lang.name);
+  const data = languages.map((lang) => lang.size);
 
   if (chartInstance) {
     chartInstance.destroy();

@@ -28,7 +28,7 @@ const onJsonData = (data: Result | null) => {
   <Navbar :title="projectName"></Navbar>
   <div class="container mt-4">
     <div v-if="hasResults">
-      <Dashboard/>
+      <Dashboard v-if="result" v-bind="result"/>
     </div>
 
     <div v-else>

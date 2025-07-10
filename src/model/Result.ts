@@ -11,10 +11,12 @@ export interface RepoInfo {
     contributors: number;
     projectUrl: string;
     projectName: string;
-    repoLanguages: {
-        name: string;
-        percentage: number;
-    };
+    repoLanguages: Language[];
+}
+
+export interface Language {
+    name: string;
+    size: number;
 }
 
 export interface Tool {

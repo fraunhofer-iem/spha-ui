@@ -8,13 +8,14 @@ import ToolOverview from "./../components/ToolOverview.vue";
 import truffleHogUrl from './../assets/img/supportedTools/trufflehog.svg';
 import osvUrl from './../assets/img/supportedTools/osv.svg';
 import ghUrl from './../assets/img/supportedTools/github-mark.svg';
+import type {Result} from "../model/Result.ts";
 
+const props = defineProps<Result>()
 const repoLanguages = {
   Java: 40,
   Kotlin: 60,
 }
 
-const score = 80;
 const stars = 1000;
 const contributors = 100;
 const lastCommitDate = "2022-01-01";
@@ -40,7 +41,7 @@ const tools = [
 <template>
   <div class="row">
     <div class="col-md-3 mb-3">
-      <HealthScore :score="score"/>
+      <HealthScore :score="props.healthScore"/>
     </div>
     <div class="col-md-6 mb-3">
       <ProjectOverview
@@ -53,7 +54,7 @@ const tools = [
       />
     </div>
     <div class="col-md-3 mb-3">
-      <RepoLanguagesPieChart :languages="repoLanguages"/>
+      <RepoLanguagesPieChart :languages="props.repoInfo.repoLanguages"/>
     </div>
   </div>
 
