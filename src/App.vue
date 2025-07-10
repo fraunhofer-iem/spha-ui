@@ -3,17 +3,22 @@ import {ref} from 'vue';
 import Dashboard from "./views/Dashboard.vue";
 import ResultSelection from "./views/ResultSelection.vue";
 import Navbar from "./components/Navbar.vue";
+import type {Result} from "./model/Result.ts";
 
 
 // TODO: set default name and read actual name after file upload
 const projectName: string | undefined = undefined
 
 const hasResults = ref(false)
-const result = ref(null);
+const result = ref<Result | null>(null);
 
-const onJsonData = (data: any) => {
+const onJsonData = (data: Result | null) => {
+  if (data === null) {
+    return;
+  }
   result.value = data;
   hasResults.value = true;
+  console.log(result.value);
 };
 
 </script>

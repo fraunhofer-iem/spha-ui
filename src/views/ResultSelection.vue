@@ -39,10 +39,13 @@ const triggerFileInput = () => {
   fileInput.value?.click();
 }
 
-const onFileSelect = (event: InputEvent) => {
-  const files = event.target?.files;
+const onFileSelect = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  const files = target?.files ?? undefined;
   handleFile(files);
-  event.target.value = '';
+  if (target) {
+    target.value = '';
+  }
 }
 
 const handleFile = (files: FileList | undefined) => {
@@ -88,8 +91,9 @@ const handleFile = (files: FileList | undefined) => {
       successMessage.value = 'JSON file processed successfully!';
       // 5. Emit data to parent component
       emit('fileDropped', result);
-    } catch {
-      error.value = 'Failed to parse JSON. Please ensure the file is valid.';
+    } catch (err) {
+      console.error(err);
+      error.value = `Failed to parse JSON. Please ensure the file is valid.`;
       emit('fileDropped', null); // Emit null on error
     }
   };
