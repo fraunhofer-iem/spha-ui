@@ -8,7 +8,11 @@ import type {Language} from "../model/Result.ts";
 
 Chart.register(DoughnutController, ArcElement, Tooltip, Legend, annotationPlugin);
 
-const languages = defineProps<Language[]>()
+interface LanguageProp {
+  languages: Array<Language>
+}
+
+const props = defineProps<LanguageProp>()
 
 const chartCanvas = ref<HTMLCanvasElement | null>(null);
 let chartInstance: Chart<'doughnut'> | null = null;
@@ -22,16 +26,15 @@ const colors = [
 ];
 
 // Get color for a language based on its index
-const getColorForLanguage = (language: string) => {
-  const index = Object.keys(props.languages).indexOf(language);
-  return colors[index % colors.length];
+const getColorForLanguage = (idx: number) => {
+  return colors[idx % colors.length];
 };
 
 const renderChart = () => {
   if (!chartCanvas.value) return;
 
-  const labels = languages.map((lang) => lang.name);
-  const data = languages.map((lang) => lang.size);
+  const labels = props.languages.map((lang) => lang.name);
+  const data = props.languages.map((lang) => lang.size);
 
   if (chartInstance) {
     chartInstance.destroy();
@@ -120,10 +123,10 @@ onUnmounted(() => {
     </div>
     <hr class="my-3"/>
     <div ref="legendRef" class="legend-container d-flex flex-wrap flex-column text-start align-content-start">
-      <div v-for="language in Object.keys(props.languages)" :key="language" class="ps-2 pe-2">
+      <div v-for="(language, idx) in languages" :key="language.name" class="ps-2 pe-2">
         <div>
-          <span class="legend-color" :style="{ backgroundColor: getColorForLanguage(language) }"></span>
-          <span class="legend-label">{{ language }}</span>
+          <span class="legend-color" :style="{ backgroundColor: getColorForLanguage(idx) }"></span>
+          <span class="legend-label">{{ language.name }}</span>
         </div>
       </div>
     </div>

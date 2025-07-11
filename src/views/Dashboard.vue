@@ -11,16 +11,8 @@ import ghUrl from './../assets/img/supportedTools/github-mark.svg';
 import type {Result} from "../model/Result.ts";
 
 const props = defineProps<Result>()
-const repoLanguages = {
-  Java: 40,
-  Kotlin: 60,
-}
 
-const stars = 1000;
-const contributors = 100;
-const lastCommitDate = "2022-01-01";
-const projectUrl = "https://github.com/SPHA/SPHA-Dashboard";
-const projectName = "SPHA Dashboard";
+
 const topLevelKpis = [
   {name: 'Security', score: 85, description: 'Based on CVE scan and secrets detection.'},
   {name: 'Quality', score: 72, description: 'Includes linting and test coverage.'},
@@ -45,12 +37,7 @@ const tools = [
     </div>
     <div class="col-md-6 mb-3">
       <ProjectOverview
-          :stars="stars"
-          :last-commit-date="lastCommitDate"
-          :project-name="projectName"
-          :project-url="projectUrl"
-          :contributors="contributors"
-
+          v-bind="props.repoInfo"
       />
     </div>
     <div class="col-md-3 mb-3">

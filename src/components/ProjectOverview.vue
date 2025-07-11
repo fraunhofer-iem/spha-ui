@@ -1,16 +1,10 @@
 <script setup lang="ts">
 import {computed} from "vue";
 import DashboardCard from "./DashboardCard.vue";
+import type {RepoInfo} from "../model/Result.ts";
 
-interface ProjectOverviewProps {
-  projectUrl?: string
-  projectName?: string
-  contributors?: number
-  lastCommitDate?: string
-  stars?: number
-}
 
-const props = withDefaults(defineProps<ProjectOverviewProps>(), {
+const props = withDefaults(defineProps<RepoInfo>(), {
   projectUrl: 'Project URL not found',
   projectName: 'Project Name not found',
 })
@@ -120,7 +114,7 @@ const formattedLastCommitDate = computed(() => {
   justify-content: center;
   background-color: #E9ECF1;
   color: #3D4BF6;
-  width: 4rem;      /* Adjust size */
+  width: 4rem; /* Adjust size */
   height: 4rem;
   border-radius: 50%; /* Makes it circular */
   font-size: 2.0rem; /* Adjust icon size */

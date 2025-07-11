@@ -6,11 +6,11 @@ export interface Kpi {
 }
 
 export interface RepoInfo {
-    stars: number;
-    lastCommitDate: string;
-    contributors: number;
-    projectUrl: string;
-    projectName: string;
+    stars?: number;
+    lastCommitDate?: string;
+    contributors?: number;
+    projectUrl?: string;
+    projectName?: string;
     repoLanguages: Language[];
 }
 
