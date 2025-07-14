@@ -41,9 +41,9 @@ export function parse(raw: any): Result | undefined {
 
 function nodeToKpi(node: any): Kpi {
     return {
-        name: node.typeId ?? "N/a", // TODO: derive name from typeId
+        displayName: node.displayName ?? "N/a", // TODO: derive name from typeId
         score: node.result.score ?? -1,
         id: node.id ?? "N/A",
-        children: node.children?.map(nodeToKpi) ?? []
+        children: node.edges?.map((edge: any) => nodeToKpi(edge.target)) ?? []
     }
 }

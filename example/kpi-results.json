@@ -2,6 +2,7 @@
   "resultHierarchy": {
     "root": {
       "typeId": "ROOT",
+      "displayName": "Software Product Health Score",
       "result": {
         "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Incomplete",
         "score": 32,
@@ -12,6 +13,7 @@
         {
           "target": {
             "typeId": "PROCESS_TRANSPARENCY",
+            "displayName": "Process Transparency",
             "result": {
               "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
             },
@@ -20,6 +22,7 @@
               {
                 "target": {
                   "typeId": "SIGNED_COMMITS_RATIO",
+                  "displayName": "Signed Commits Ratio",
                   "result": {
                     "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                   },
@@ -28,12 +31,13 @@
                     {
                       "target": {
                         "typeId": "NUMBER_OF_COMMITS",
+                        "displayName": "Number of Commits",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "id": "ceb4c187-afb2-42c0-a76f-2545e602bbad"
+                        "id": "28f8a484-5146-4bf1-924d-8c3d9c229195"
                       },
                       "plannedWeight": 1.0,
                       "actualWeight": 0.0
@@ -41,24 +45,25 @@
                     {
                       "target": {
                         "typeId": "NUMBER_OF_SIGNED_COMMITS",
+                        "displayName": "Number of Signed Commits",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "id": "dee7de5b-4606-4644-8ef7-356a933d5ac5"
+                        "id": "52412557-99a5-4702-b323-94232fa67336"
                       },
                       "plannedWeight": 1.0,
                       "actualWeight": 0.0
                     }
                   ],
-                  "id": "e364107c-e82f-444f-a4e7-f5488952a58e"
+                  "id": "6f88a044-0ebd-4c99-b231-44be7ebce68d"
                 },
                 "plannedWeight": 1.0,
                 "actualWeight": 0.0
               }
             ],
-            "id": "190e75a1-c293-4271-a83b-d2cb1c76ae97"
+            "id": "37436125-0826-43a3-a7c2-ea91b5611b5a"
           },
           "plannedWeight": 0.1,
           "actualWeight": 0.0
@@ -66,6 +71,7 @@
         {
           "target": {
             "typeId": "PROCESS_COMPLIANCE",
+            "displayName": "Process Compliance",
             "result": {
               "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
             },
@@ -74,12 +80,13 @@
               {
                 "target": {
                   "typeId": "CHECKED_IN_BINARIES",
+                  "displayName": "Checked In Binaries",
                   "result": {
                     "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                   },
                   "strategy": "RAW_VALUE_STRATEGY",
                   "edges": [],
-                  "id": "423af77e-0c53-48e9-8e37-e2d2103a026b"
+                  "id": "e6bf8ff9-e790-45f2-870a-4167efab5d2b"
                 },
                 "plannedWeight": 0.2,
                 "actualWeight": 0.0
@@ -87,6 +94,7 @@
               {
                 "target": {
                   "typeId": "SIGNED_COMMITS_RATIO",
+                  "displayName": "Signed Commits Ratio",
                   "result": {
                     "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                   },
@@ -95,12 +103,13 @@
                     {
                       "target": {
                         "typeId": "NUMBER_OF_COMMITS",
+                        "displayName": "Number of Commits",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "id": "4af741e3-062f-4a1b-aa6b-43d708e5568d"
+                        "id": "87300167-f36b-4d0a-ab56-d7aacbf24c25"
                       },
                       "plannedWeight": 1.0,
                       "actualWeight": 0.0
@@ -108,18 +117,19 @@
                     {
                       "target": {
                         "typeId": "NUMBER_OF_SIGNED_COMMITS",
+                        "displayName": "Number of Signed Commits",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "id": "937bbbac-2ce9-4a76-880d-ebd215b0cdb0"
+                        "id": "e2fe6819-6d2b-4a36-9ea4-6d734538f983"
                       },
                       "plannedWeight": 1.0,
                       "actualWeight": 0.0
                     }
                   ],
-                  "id": "fd4b5eae-78a9-460c-8426-0bbe459ba07f"
+                  "id": "00a5b673-abc9-4a1b-8bf1-05ad34c9cb5f"
                 },
                 "plannedWeight": 0.2,
                 "actualWeight": 0.0
@@ -127,12 +137,13 @@
               {
                 "target": {
                   "typeId": "IS_DEFAULT_BRANCH_PROTECTED",
+                  "displayName": "Is Default Branch Protected?",
                   "result": {
                     "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                   },
                   "strategy": "RAW_VALUE_STRATEGY",
                   "edges": [],
-                  "id": "81e7a0cd-dea1-4941-bc30-800699b2392f"
+                  "id": "316121ac-cd05-4e45-ba59-25ee78b991ed"
                 },
                 "plannedWeight": 0.3,
                 "actualWeight": 0.0
@@ -140,6 +151,7 @@
               {
                 "target": {
                   "typeId": "DOCUMENTATION",
+                  "displayName": "Documentation",
                   "result": {
                     "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                   },
@@ -148,12 +160,13 @@
                     {
                       "target": {
                         "typeId": "DOCUMENTATION_INFRASTRUCTURE",
+                        "displayName": "Documentation Infrastructure",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "id": "8a71e99c-f895-4dbc-82e9-b58390764838"
+                        "id": "78b3fbe4-0c1c-4036-8e87-ecdcae545ab2"
                       },
                       "plannedWeight": 0.6,
                       "actualWeight": 0.0
@@ -161,24 +174,25 @@
                     {
                       "target": {
                         "typeId": "COMMENTS_IN_CODE",
+                        "displayName": "Comments in Code",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "id": "328d4dae-ce4c-4c77-aed6-7c0be9ea0925"
+                        "id": "3690a51c-fb19-4e6c-bdef-b85ba060527b"
                       },
                       "plannedWeight": 0.4,
                       "actualWeight": 0.0
                     }
                   ],
-                  "id": "e9c815d2-7b44-4d70-9bd2-ea61884dfe2b"
+                  "id": "9f0812c3-866a-4f43-8950-e89939f8f07d"
                 },
                 "plannedWeight": 0.3,
                 "actualWeight": 0.0
               }
             ],
-            "id": "8bcfa43f-aae4-4ba0-a14d-c96ba64a8904"
+            "id": "ac78d07b-689b-4c38-9d14-7f7b2c0804d9"
           },
           "plannedWeight": 0.1,
           "actualWeight": 0.0
@@ -186,6 +200,7 @@
         {
           "target": {
             "typeId": "SECURITY",
+            "displayName": "Security",
             "result": {
               "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Incomplete",
               "score": 32,
@@ -196,13 +211,14 @@
               {
                 "target": {
                   "typeId": "SECRETS",
+                  "displayName": "Secrets",
                   "result": {
                     "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                     "score": 0
                   },
                   "strategy": "RAW_VALUE_STRATEGY",
                   "edges": [],
-                  "id": "7feb08e9-cbf5-494d-8d6f-7680b7d30fd3"
+                  "id": "3130dce3-a624-43c6-8999-300d7a2c00fd"
                 },
                 "plannedWeight": 0.2,
                 "actualWeight": 0.425
@@ -210,6 +226,7 @@
               {
                 "target": {
                   "typeId": "MAXIMAL_VULNERABILITY",
+                  "displayName": "Maximal Dependency Vulnerability",
                   "result": {
                     "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                   },
@@ -218,18 +235,19 @@
                     {
                       "target": {
                         "typeId": "CODE_VULNERABILITY_SCORE",
+                        "displayName": "Code Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "id": "372dcdf1-6d83-45c8-b36c-ac93a27d4e28"
+                        "id": "6b06f0b8-1843-4320-a324-c182b2889b1d"
                       },
                       "plannedWeight": 1.0,
                       "actualWeight": 0.0
                     }
                   ],
-                  "id": "a73ab247-0bd5-401a-ad3d-3d658535a3a0"
+                  "id": "ca0e54a0-6915-4922-add5-34d3ebd99e1f"
                 },
                 "plannedWeight": 0.35,
                 "actualWeight": 0.0
@@ -237,6 +255,7 @@
               {
                 "target": {
                   "typeId": "MAXIMAL_VULNERABILITY",
+                  "displayName": "Maximal Container Vulnerability",
                   "result": {
                     "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                     "score": 57
@@ -246,14 +265,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 22
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "16ea1afa-c02a-445a-b5e8-c3aec4d910c4",
-                        "id": "754526f7-a1e4-4856-a745-11d85a364027"
+                        "originId": "4ef9af69-fef5-4a78-b275-57ed48508b61",
+                        "id": "1a924d76-0416-4778-891f-3b1bb18d5896"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -261,14 +281,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 25
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "840e6b49-9517-4ded-a692-96e18ec95a0e",
-                        "id": "2d675c89-f319-45c3-8e60-ff39c1817baa"
+                        "originId": "319887a6-ee5d-4fe5-8a97-7832fcb33ca1",
+                        "id": "030c87b6-b144-4dd1-88c6-711df1eb6faf"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -276,14 +297,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 2
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "235f2e74-0497-4d7b-a19d-e731ec073c0a",
-                        "id": "e66b2368-10cb-45af-a0c7-27588e601aa5"
+                        "originId": "02a2bf1a-b932-4ca8-b691-fc64f278b705",
+                        "id": "77bad8b4-620f-40ee-8487-71d1d17f3229"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -291,14 +313,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 26
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "a9d651d9-4684-4096-89d5-07c7a23a39ff",
-                        "id": "8ba3c068-0e0e-4716-9127-6c897886f09a"
+                        "originId": "062eac3a-0f04-4890-8f68-208f2eddb212",
+                        "id": "a662b452-9d39-4435-8495-0ca83da8e036"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -306,14 +329,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 25
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "de30ce24-4568-4a45-b49c-cf34a78c057e",
-                        "id": "2f67ae4f-7122-4984-8928-c0505ccf561f"
+                        "originId": "288acd27-da0d-41d1-b8e0-c915e22c0dbc",
+                        "id": "dae08298-f8d4-4917-8782-b03ece3b8e1a"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -321,14 +345,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 25
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "676f3fb6-8187-4d71-9b62-968c080a8ba0",
-                        "id": "00e37c0d-b6c4-4974-90d9-f8589cfdc348"
+                        "originId": "200a00a5-2a38-483c-9a85-79df9251c50d",
+                        "id": "c0acf9c5-dcf7-4b69-99d2-3483408fdc9f"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -336,14 +361,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 26
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "5fbfa2f8-b190-4dfb-a441-5280bdb66487",
-                        "id": "19f5e840-dca7-4026-b51a-019544410530"
+                        "originId": "5068c596-3b1f-445c-b001-3023ebfb0a8b",
+                        "id": "5ad944a3-8136-4026-8af4-317e0f439b90"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -351,14 +377,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 45
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "9b064755-6c38-4e13-ae4f-981e20b29c60",
-                        "id": "6bfc7cc2-54d8-403d-be0f-f360dac436fa"
+                        "originId": "80c807e4-16ac-4d58-89bb-e4c578232b5f",
+                        "id": "44170061-3286-4650-ab81-86d53432de43"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -366,14 +393,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 47
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "ff409658-637e-485c-a88c-cef54d2286fc",
-                        "id": "89dd8cbe-127d-4440-a46a-ff4429d76c98"
+                        "originId": "fa623be8-e860-4020-9fc6-af72d5121616",
+                        "id": "bc73104f-b5fe-4a7b-a3bd-a35c13e72a68"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -381,14 +409,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 47
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "3e7ed180-c37d-4805-9791-b2c3df6340da",
-                        "id": "88f93c70-7a64-4698-a776-390c37893e9d"
+                        "originId": "a6d2f3bf-46d4-4842-91bd-33894f0e4fe4",
+                        "id": "94a33843-141b-4eee-8b7e-ef02d4d2e3c6"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -396,14 +425,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 41
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "fcec9a1a-fb1c-4718-821f-7119aa372de6",
-                        "id": "92f47e98-04ce-46f9-8514-5c8a5a79b6a6"
+                        "originId": "6be27ceb-355b-4c39-9eb2-8bf936c88693",
+                        "id": "1d602203-3405-4cbd-a634-acb68bda041e"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -411,14 +441,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 41
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "a39f2701-11b5-4909-9796-88f3599c41a5",
-                        "id": "d0b708df-3758-429c-b228-45579e86df9d"
+                        "originId": "c14a9551-3811-4638-81d5-7bb808879af6",
+                        "id": "711e402f-13f5-4ac1-9677-f1e528c82c10"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -426,14 +457,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 41
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "3dc1d221-936c-45bd-ad0d-68179d5e2fe5",
-                        "id": "66fc1277-69cb-4766-bdf4-9375dea11a0d"
+                        "originId": "7f3b2e2a-905a-465b-841e-dcb54067b2e6",
+                        "id": "d40478e4-cd52-4bca-b3ea-74cb84f89b00"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -441,14 +473,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 57
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "43400908-04a7-489d-94ad-3ac9f63130b7",
-                        "id": "6848353b-57aa-439a-bafd-484a49ca4870"
+                        "originId": "469b2385-a956-431b-9c6b-116889a5f67e",
+                        "id": "88173b8b-ab05-4d50-b8b6-28338cf2c847"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -456,14 +489,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 57
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "73994267-d1a5-4642-adab-33496b5327ff",
-                        "id": "e384b72b-9570-4e30-958b-b9f7bc37fe87"
+                        "originId": "1a80a055-8abe-4c44-aa0c-38989f3c9a44",
+                        "id": "2f1eda41-33c8-4243-9e2d-c90d14c99f64"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -471,14 +505,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 26
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "a73777f9-6ae3-4b09-a4ec-a1e0b3f2863f",
-                        "id": "f20dfba0-16e8-47df-a3d3-81f11d9bd775"
+                        "originId": "74f4e651-545c-49f0-b6ce-60c166834c2a",
+                        "id": "ebd8dd80-1baf-42fc-9ce2-13ffe47b2c9b"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -486,14 +521,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 25
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "1558d249-dcf2-4faa-ac24-0af18e32c6f5",
-                        "id": "48765a0c-206f-403b-b0da-993dc43000f8"
+                        "originId": "4b8bca6c-c6c8-40df-b265-bf7fea6da0d1",
+                        "id": "caf9aafc-042f-4209-99c0-e1a74e0b9ba5"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -501,14 +537,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 25
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "865bf6de-f3ce-49d1-8949-19210d897285",
-                        "id": "9e5e573f-a33b-4bdd-b647-d61f70ade62a"
+                        "originId": "d10b8122-7088-4c6a-bbd9-7796cb597d4e",
+                        "id": "a2540379-7ccb-43bb-aeee-93056da48403"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -516,14 +553,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 26
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "30c0ce95-5f54-487f-bda1-ed3e77492cd7",
-                        "id": "90489bc3-c9a1-499e-b160-f71517396646"
+                        "originId": "cf58d8bf-de0e-4dca-8dc5-38496f341156",
+                        "id": "6b5c984b-280e-4638-9bb2-e4ef16983d2a"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -531,14 +569,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 45
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "e766b2db-47cc-41c8-8988-2fc9d174fa2a",
-                        "id": "0837b2e3-412e-4a8f-8c19-7dadbff2e56a"
+                        "originId": "f8cf942d-5a71-40eb-a5b5-67e6ddc65890",
+                        "id": "a9395296-4164-4075-8ce0-23833b47bc4a"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -546,14 +585,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 47
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "22bda21e-1fa3-4222-b719-38090dcef284",
-                        "id": "b83f6943-c619-4d7c-83f8-1c8ddef22113"
+                        "originId": "4255a319-ca8a-4ce0-af31-76ecca9aba4d",
+                        "id": "1d850ff0-ad66-486d-b821-4d7b14fd2d28"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -561,14 +601,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 47
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "0efb3d0d-ebbd-4f72-9f45-36c9643609d0",
-                        "id": "0c128bb6-7e18-424c-8ca9-d7986fa92ff3"
+                        "originId": "edc3424d-26d6-4eb5-9bb2-a10d784e43e2",
+                        "id": "b65dc07b-8782-43b5-a583-79ac7920795c"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -576,14 +617,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 41
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "b6483785-0808-4af8-b66b-a7d8ca99a7db",
-                        "id": "01d215c4-ed6f-4ea5-b7ca-8c65fd58875d"
+                        "originId": "bfbebb93-db9a-41f7-ac9f-100d0fd8163a",
+                        "id": "731be73d-70af-4d41-a8bc-2bf4a60f50ac"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -591,14 +633,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 41
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "2d86cda1-21c3-4796-b6b9-b63bc62bf73a",
-                        "id": "5899a693-2852-4e44-b8f9-76e98495c7fe"
+                        "originId": "c21c9c35-9a47-408a-b3bd-7ce8fa8d44ad",
+                        "id": "66fd626b-79ca-4c55-ad25-4d4f26f2cd72"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -606,14 +649,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 41
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "8b5536a7-aa8a-472f-8679-e91b848cae58",
-                        "id": "39f66aac-59cb-4ba6-8eec-95ccfdfddb56"
+                        "originId": "bb36f31d-28f8-46a2-8fab-552544bd1769",
+                        "id": "5c705738-387a-4954-8f31-49d07f93e7c7"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -621,14 +665,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 57
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "47f6f2cf-0c39-4531-9fb5-a9942d0b4f36",
-                        "id": "0bd9b94e-301e-4db3-a544-e050c19687b3"
+                        "originId": "b83ee312-5009-4a6f-9d0b-43233973fd85",
+                        "id": "8aa3311a-bbcc-41f9-88fc-399176723a60"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -636,14 +681,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 57
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "1b6764c1-d80f-4270-acde-0ec5358210c6",
-                        "id": "cae2898b-3d3f-4b96-b9aa-16f9d6a31390"
+                        "originId": "ea7a1484-5e18-4785-89d8-af90cf84a56f",
+                        "id": "b76f0c33-6ca8-42a6-b147-dae1035bfd20"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -651,14 +697,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 2
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "2bbdd402-a83c-4e58-a53f-18d501d15750",
-                        "id": "8916644e-1fa0-4189-bddb-55daf0d96539"
+                        "originId": "b2660991-54dc-4292-b42a-03fac005e9d4",
+                        "id": "f2fb59c7-27b9-44a7-af99-d7bf8e88e2c8"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -666,14 +713,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 45
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "6ee853ef-5d2e-4916-a638-f2ce07844e1e",
-                        "id": "42760758-f740-4584-bba6-2dd99359295f"
+                        "originId": "7f3367c5-b619-4267-8285-f2666d7caba8",
+                        "id": "b53664d2-4423-403c-82c3-f04197659572"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -681,14 +729,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 2
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "381d9772-879a-46cb-a79f-aceea17e1359",
-                        "id": "ff438272-0bc2-4f0b-804a-13cc99718826"
+                        "originId": "c0439334-76df-4138-8cb2-8a7dbed38faa",
+                        "id": "23501698-2441-499d-a91a-e1b11821d3e5"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -696,14 +745,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 45
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "fe9f6886-e521-4683-897b-c1b2ad04c816",
-                        "id": "669dbddf-f239-4348-af9f-854efb9ae748"
+                        "originId": "e845c5d8-4bb3-4962-a74c-bfa34f7bf9eb",
+                        "id": "ca9d9fa1-00a6-4eac-b9c4-9111f366de7d"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -711,14 +761,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 2
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "628d5c8b-d66a-458f-985e-0fe28342c3b1",
-                        "id": "1cc043d0-3e86-4142-9df3-9102f926c4da"
+                        "originId": "55bc7781-a9b1-4f82-a7be-524061bcf0ef",
+                        "id": "9247de9b-4855-486c-b136-75b711659c68"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -726,14 +777,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 25
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "56b39ed5-b16a-419d-acea-08b066cf0323",
-                        "id": "8d4ed26d-5e2d-497f-8fcf-3d743c258abe"
+                        "originId": "c4b14301-e74e-4c8e-bc94-a123b6ad3aa8",
+                        "id": "396d768f-1503-4553-a2d6-3237bf720f4c"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -741,14 +793,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 19
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "70de40cb-d0e5-4576-b57d-bbd7e38ce8db",
-                        "id": "d0bfec61-7218-4d4b-bf4b-a1c987abe4c1"
+                        "originId": "960e872a-b867-4478-8dd3-6103882cce3a",
+                        "id": "a823ae53-f297-407f-a219-9a064b687eac"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -756,14 +809,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 25
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "ec4da951-ed16-42ba-bad0-8d09ada35c68",
-                        "id": "1fbd7c05-02e0-4352-bb31-2cf67fff1b9e"
+                        "originId": "8d0349e6-ecc8-4c4b-b1bb-20d517eec445",
+                        "id": "55c5f68d-5105-47eb-a620-82dea2adbfd5"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -771,14 +825,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 35
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "7c9c81bf-5bc0-498c-9036-29ff484b6947",
-                        "id": "c5ddfc17-a13f-4f2b-aa25-6fa02cf51264"
+                        "originId": "2b37d4c5-427d-4f1c-8e4f-6c31871a1547",
+                        "id": "ff7d4e12-b56f-44b0-8af0-3cba5fff05e4"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -786,14 +841,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 41
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "5148ccb9-cb30-4d88-8ced-b61b2c09de08",
-                        "id": "ecf33e9b-4594-4c0e-b5e1-265e96b7029a"
+                        "originId": "b939efd7-d567-41c3-9aae-caee1f7b6967",
+                        "id": "d2e6a90a-c38b-4050-a277-a258a251d8a6"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -801,14 +857,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 20
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "dc483310-efbe-49f0-9c5d-126ab7c7c7e6",
-                        "id": "cc68383e-d171-42b5-b4eb-b04594bce141"
+                        "originId": "f5525c28-5552-4c6f-8842-5e9fb0498ab8",
+                        "id": "4b8a7b5e-0e31-4ce8-ad59-cb57eee0d9eb"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -816,14 +873,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 43
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "4b67d9c2-8974-41e5-a64e-3815650308f4",
-                        "id": "8c28a349-2d3f-4028-971c-ab9854bc5969"
+                        "originId": "e585a463-a07b-4973-846c-43842e05646c",
+                        "id": "b8ccd340-92e5-4ff7-a3be-e0f7f1036acf"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -831,14 +889,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 45
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "a4eec70b-3326-497a-a801-c52f7ca06303",
-                        "id": "c975c1fc-4607-4e07-8ed1-173f19fb8cb8"
+                        "originId": "efad5e8c-d9ac-46bd-bdc6-e9727e96d85d",
+                        "id": "d8a18c95-6be8-44ae-86f1-130dd21561ac"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -846,14 +905,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 25
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "f59b04f7-c1b4-4e64-bdf7-c42f7c6fc0e5",
-                        "id": "652f0e10-2c8f-40e6-b57b-fbcc000e63fd"
+                        "originId": "9ea32c9f-97ff-41aa-b0c6-7481fe2bc442",
+                        "id": "5e55026d-c927-464b-8e26-99c4ce7e2aeb"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -861,14 +921,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 12
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "787e636c-2e4d-40aa-bcb8-9e05f85daac1",
-                        "id": "55f73d4a-7cb8-48fa-8c7b-be41640cb833"
+                        "originId": "5e447c97-faf0-4b94-a1f6-3224f0506a9b",
+                        "id": "de22e035-545b-4a38-9377-542f361fc787"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -876,14 +937,15 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 12
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "4215f2eb-6ad0-464f-8d07-aee21f024e79",
-                        "id": "d05a0ee1-c455-4690-8ec4-dc4c4fa3af78"
+                        "originId": "44984703-29a4-492f-9f57-d28e5cfb447b",
+                        "id": "0307c42d-8ea7-42f9-8f10-36fb5c20da5d"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
@@ -891,20 +953,21 @@
                     {
                       "target": {
                         "typeId": "CONTAINER_VULNERABILITY_SCORE",
+                        "displayName": "Container Vulnerabilities",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Success",
                           "score": 25
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "originId": "624e6e3c-f152-47d1-8911-284f25905b3f",
-                        "id": "4d728a48-670a-44dd-91ef-73f7007d405a"
+                        "originId": "52c67422-9645-4bad-a761-c5f567bc12c7",
+                        "id": "236a2e4b-95f2-4750-aeea-856d9a310c1b"
                       },
                       "plannedWeight": 0.022727272727272728,
                       "actualWeight": 0.022727272727272728
                     }
                   ],
-                  "id": "10265a26-6c84-4d9e-93c9-2539b912ec77"
+                  "id": "f0ea170c-1397-4df8-be18-0802a1643f5e"
                 },
                 "plannedWeight": 0.35,
                 "actualWeight": 0.575
@@ -912,18 +975,19 @@
               {
                 "target": {
                   "typeId": "CHECKED_IN_BINARIES",
+                  "displayName": "Checked In Binaries",
                   "result": {
                     "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                   },
                   "strategy": "RAW_VALUE_STRATEGY",
                   "edges": [],
-                  "id": "5c4e83ff-02d5-42e4-a2eb-483dc21f0eba"
+                  "id": "6e132cc5-9734-45de-bc52-53f4df29e85f"
                 },
                 "plannedWeight": 0.1,
                 "actualWeight": 0.0
               }
             ],
-            "id": "7cfca31c-2a17-4840-868b-fb1722ae44f2"
+            "id": "e209f3e0-f5cf-4d04-8c8e-9c856a7868c6"
           },
           "plannedWeight": 0.4,
           "actualWeight": 1.0
@@ -931,6 +995,7 @@
         {
           "target": {
             "typeId": "INTERNAL_QUALITY",
+            "displayName": "Internal Quality",
             "result": {
               "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
             },
@@ -939,6 +1004,7 @@
               {
                 "target": {
                   "typeId": "DOCUMENTATION",
+                  "displayName": "Documentation",
                   "result": {
                     "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                   },
@@ -947,12 +1013,13 @@
                     {
                       "target": {
                         "typeId": "DOCUMENTATION_INFRASTRUCTURE",
+                        "displayName": "Documentation Infrastructure",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "id": "8edfe3f1-4272-4b5d-b6d7-2c330dbae807"
+                        "id": "c4e051c5-b2d6-4d22-bc9a-109e4f2dfd83"
                       },
                       "plannedWeight": 0.6,
                       "actualWeight": 0.0
@@ -960,24 +1027,25 @@
                     {
                       "target": {
                         "typeId": "COMMENTS_IN_CODE",
+                        "displayName": "Comments in Code",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "id": "912ebbeb-922f-404f-a425-1c7cee6f4997"
+                        "id": "98f3087a-9660-4a9a-9b5d-4979d41c5577"
                       },
                       "plannedWeight": 0.4,
                       "actualWeight": 0.0
                     }
                   ],
-                  "id": "e679da9b-c19d-4214-9078-4593f42d732f"
+                  "id": "44bef8fd-270a-445c-bcfe-db7504b8794f"
                 },
                 "plannedWeight": 1.0,
                 "actualWeight": 0.0
               }
             ],
-            "id": "a8f44f6f-5fcf-4748-b277-c336f2538703"
+            "id": "71fe8905-f068-468e-b31c-fc8679554a31"
           },
           "plannedWeight": 0.15,
           "actualWeight": 0.0
@@ -985,6 +1053,7 @@
         {
           "target": {
             "typeId": "EXTERNAL_QUALITY",
+            "displayName": "External Quality",
             "result": {
               "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
             },
@@ -993,6 +1062,7 @@
               {
                 "target": {
                   "typeId": "DOCUMENTATION",
+                  "displayName": "Documentation",
                   "result": {
                     "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                   },
@@ -1001,12 +1071,13 @@
                     {
                       "target": {
                         "typeId": "DOCUMENTATION_INFRASTRUCTURE",
+                        "displayName": "Documentation Infrastructure",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "id": "99c13897-5a4c-4444-919d-22d004953901"
+                        "id": "13784efa-bbdc-4f9a-99e5-ad6501d7ff11"
                       },
                       "plannedWeight": 0.6,
                       "actualWeight": 0.0
@@ -1014,33 +1085,34 @@
                     {
                       "target": {
                         "typeId": "COMMENTS_IN_CODE",
+                        "displayName": "Comments in Code",
                         "result": {
                           "type": "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
                         },
                         "strategy": "RAW_VALUE_STRATEGY",
                         "edges": [],
-                        "id": "d20c2951-1e70-4f68-8bd4-f1660020f9c1"
+                        "id": "e2630c76-2c7a-4f95-9190-a09c513827d2"
                       },
                       "plannedWeight": 0.4,
                       "actualWeight": 0.0
                     }
                   ],
-                  "id": "e0c3592e-9b8a-49cd-9a28-e37a466505a9"
+                  "id": "5717cd84-b917-485d-bc35-74655d908021"
                 },
                 "plannedWeight": 1.0,
                 "actualWeight": 0.0
               }
             ],
-            "id": "7ec77094-9d07-446b-882a-713fd4cab7ba"
+            "id": "404e2199-91c2-4579-8a5f-1543077184db"
           },
           "plannedWeight": 0.25,
           "actualWeight": 0.0
         }
       ],
-      "id": "7c91f557-e9e5-497f-b4d9-c6c793cb6760"
+      "id": "edfa496e-0ace-42a0-a917-e1e3be9ae5fa"
     },
     "schemaVersion": "1.1.0",
-    "timestamp": "2025-07-11T09:12:33.996686417Z"
+    "timestamp": "2025-07-11T12:36:42.986221315Z"
   },
   "origins": [
     {
@@ -1990,17 +2062,13 @@
     "usedLanguages": [
       {
         "name": "Kotlin",
-        "size": 300945
-      },
-      {
-        "name": "Java",
-        "size": 500945
+        "size": 300922
       }
     ],
     "url": "https://github.com/fraunhofer-iem/spha",
     "stars": 5,
     "numberOfContributors": 9,
-    "numberOfCommits": 207,
-    "lastCommitDate": "2025-07-11T07:08:36Z"
+    "numberOfCommits": 208,
+    "lastCommitDate": "2025-07-11T11:14:27Z"
   }
 }

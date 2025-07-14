@@ -1,5 +1,5 @@
 export interface Kpi {
-    name: string;
+    displayName: string;
     score: number;
     id: string;
     children: Kpi[]

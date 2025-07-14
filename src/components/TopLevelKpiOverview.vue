@@ -13,18 +13,24 @@ import {
 } from 'chart.js';
 import DashboardCard from './DashboardCard.vue';
 import {background_grey, blue_chart} from "../assets/styles/Colors.ts";
+import type {Kpi} from "../model/Result.ts";
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip, Title);
 
-interface Kpi {
+interface KpiView {
   name: string;
   score: number; // 0-100
   description: string; // Tooltip content
 }
 
-const props = defineProps<{
-  kpis: Kpi[];
-}>();
+const root = defineProps<Kpi>();
+const kpis: KpiView[] = root.children.map((child) => {
+  return {
+    name: child.displayName,
+    score: child.score,
+    description: ' '
+  }
+})
 
 const chartCanvas = ref<HTMLCanvasElement | null>(null);
 let chartInstance: Chart | null = null;
@@ -33,13 +39,12 @@ const createChart = () => {
   if (!chartCanvas.value) return;
 
   const data: ChartData<'bar'> = {
-    labels: props.kpis.map(kpi => kpi.name),
+    labels: kpis.map(kpi => kpi.name),
     datasets: [
-
       {
         label: 'KPI Score',
         barThickness: 60,
-        data: props.kpis.map(kpi => kpi.score),
+        data: kpis.map(kpi => kpi.score),
         backgroundColor: blue_chart,
         borderWidth: 0,
         stack: 'stack1',
@@ -48,7 +53,7 @@ const createChart = () => {
       {
         label: 'Track',
         barThickness: 60,
-        data: props.kpis.map(() => 100),
+        data: kpis.map(() => 100),
         backgroundColor: background_grey,
         borderWidth: 0,
         stack: 'stack1',
@@ -89,7 +94,7 @@ const createChart = () => {
       tooltip: {
         callbacks: {
           label: (context) => {
-            return props.kpis[context.dataIndex]?.description || '';
+            return kpis[context.dataIndex]?.description || '';
           }
         }
       },
@@ -115,7 +120,7 @@ onUnmounted(() => {
 });
 
 // Redraw if props change
-watch(() => props.kpis, () => {
+watch(() => root, () => {
   chartInstance?.destroy();
   createChart();
 }, {deep: true});

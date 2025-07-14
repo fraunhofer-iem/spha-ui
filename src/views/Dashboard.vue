@@ -13,14 +13,6 @@ import type {Result} from "../model/Result.ts";
 const props = defineProps<Result>()
 
 
-const topLevelKpis = [
-  {name: 'Security', score: 85, description: 'Based on CVE scan and secrets detection.'},
-  {name: 'Quality', score: 72, description: 'Includes linting and test coverage.'},
-  {name: 'Compliance', score: 90, description: 'Assessed via SPDX and license checks.'},
-  {name: 'Traceability', score: 65, description: 'Based on issue-commit linkage.'},
-  {name: 'Sustainability', score: 78, description: 'Considers activity over time and contributor bus factor.'}
-]
-
 const tools = [
   {name: 'Trufflehog', scanDate: '2025-06-10', findings: 10, downloadLink: '', icon: truffleHogUrl},
   {name: 'OSV', scanDate: '2025-06-10', findings: 2, downloadLink: '', icon: osvUrl},
@@ -48,7 +40,7 @@ const tools = [
   <div class="row">
     <div class="col-md-9 mb-3">
       <TopLevelKpiOverview
-          :kpis="topLevelKpis"
+          v-bind="props.root"
       />
     </div>
     <div class="col-md-3 mb-3">
