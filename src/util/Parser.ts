@@ -23,11 +23,11 @@ export function parse(raw: any): Result | undefined {
     },
   };
 
-  const healthScore = raw.resultHierarchy.root?.result?.score ?? -1;
+  const healthScore = extractScore(raw.resultHierarchy.root?.result) ?? -1;
   const tools: Tool[] = raw.origins.map((origin: any) => {
     return {
       name: origin.name ?? "N/A",
-      findings: origin.origin.size ?? 0,
+      findings: origin.origin?.length ?? 0,
       downloadLink: "N/A", //TODO: derive from name / store findings and make them downloadable
       icon: "", // TODO: derive icon from name
       description: "", // TODO: derive description from tool name
@@ -54,9 +54,25 @@ function nodeToKpi(node: any): Kpi {
 
   return {
     displayName: node.metaInfo.displayName ?? "N/a", // TODO: derive name from typeId
-    score: node.result.score ?? -1,
-    id: node.id ?? "N/A",
+    score: extractScore(node.result) ?? -1,
+    id: node.typeId ?? "N/A",
     children: node.edges?.map((edge: any) => nodeToKpi(edge.target)) ?? [],
     thresholds: thresholds?.length ? thresholds : undefined,
   };
+}
+
+function extractScore(result: any): number | undefined {
+  if (!result) return undefined;
+
+  // Handle direct score (legacy format)
+  if (typeof result.score === "number") {
+    return result.score;
+  }
+
+  // Handle Kotlin sealed class format
+  if (result.type && result.score !== undefined) {
+    return result.score;
+  }
+
+  return undefined;
 }
