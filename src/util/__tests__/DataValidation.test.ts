@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import type {
   Result,
   Kpi,
@@ -6,7 +6,7 @@ import type {
   Tool,
   Language,
   Threshold,
-} from "../model/Result";
+} from "../../model/Result";
 
 // Data validation utilities for testing edge cases and data integrity
 describe("Data Validation Utilities", () => {
@@ -59,7 +59,6 @@ describe("Data Validation Utilities", () => {
       ];
 
       testCases.forEach(({ healthScore, description }) => {
-        const result = { ...createValidResult(), healthScore };
         expect(isValidHealthScore(healthScore), description).toBe(false);
       });
     });
@@ -724,8 +723,21 @@ function isValidDate(date: any): boolean {
 
   // Validate actual date values
   const dateOnly = date.split("T")[0]; // Get just the date part
+  if (!dateOnly) return false;
+
   const testDate = new Date(dateOnly + "T00:00:00.000Z");
-  const [year, month, day] = dateOnly.split("-").map(Number);
+  const dateParts = dateOnly.split("-").map(Number);
+  if (dateParts.length !== 3) return false;
+  if (dateParts.some((part) => isNaN(part))) return false;
+
+  const year = dateParts[0];
+  const month = dateParts[1];
+  const day = dateParts[2];
+
+  // Ensure all parts are defined
+  if (year === undefined || month === undefined || day === undefined) {
+    return false;
+  }
 
   // Check if the parsed date matches the input (catches invalid dates like 2024-13-01)
   return (

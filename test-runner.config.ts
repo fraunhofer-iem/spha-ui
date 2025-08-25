@@ -1,58 +1,55 @@
-import { defineConfig } from 'vitest/config'
-import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
+import { defineConfig } from "vitest/config";
+import vue from "@vitejs/plugin-vue";
+import { resolve } from "path";
 
 export default defineConfig({
   plugins: [vue()],
   test: {
     globals: true,
-    environment: 'jsdom',
+    environment: "jsdom",
 
     // Test file patterns
     include: [
-      'src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
-      'src/**/__tests__/**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'
+      "src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}",
+      "src/**/__tests__/**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}",
     ],
     exclude: [
-      'node_modules',
-      'dist',
-      '.idea',
-      '.git',
-      '.cache',
-      'coverage',
-      'src/**/*.large.test.{js,ts}' // Exclude large/slow tests by default
+      "node_modules",
+      "dist",
+      ".idea",
+      ".git",
+      ".cache",
+      "coverage",
+      "src/**/*.large.test.{js,ts}", // Exclude large/slow tests by default
     ],
 
     // Test execution settings
     testTimeout: 10000, // 10 second timeout for individual tests
     hookTimeout: 10000, // 10 second timeout for hooks
-    threads: true, // Enable parallel execution
-    maxThreads: 4, // Limit concurrent threads
-    minThreads: 1,
 
     // Coverage configuration
     coverage: {
-      provider: 'v8',
-      reporter: ['text', 'json', 'html', 'lcov'],
-      reportsDirectory: './coverage',
+      provider: "v8",
+      reporter: ["text", "json", "html", "lcov"],
+      reportsDirectory: "./coverage",
       exclude: [
-        'node_modules/**',
-        'dist/**',
-        'coverage/**',
-        '**/*.d.ts',
-        '**/*.config.{js,ts}',
-        '**/vite.config.{js,ts}',
-        '**/vitest.config.{js,ts}',
-        'src/main.ts',
-        'src/vite-env.d.ts',
-        'src/assets/**',
-        '**/*.large.test.{js,ts}',
-        'src/example/**'
+        "node_modules/**",
+        "dist/**",
+        "coverage/**",
+        "**/*.d.ts",
+        "**/*.config.{js,ts}",
+        "**/vite.config.{js,ts}",
+        "**/vitest.config.{js,ts}",
+        "src/main.ts",
+        "src/vite-env.d.ts",
+        "src/assets/**",
+        "**/*.large.test.{js,ts}",
+        "src/example/**",
       ],
       include: [
-        'src/**/*.{js,ts,vue}',
-        '!src/**/*.{test,spec}.{js,ts}',
-        '!src/**/__tests__/**'
+        "src/**/*.{js,ts,vue}",
+        "!src/**/*.{test,spec}.{js,ts}",
+        "!src/**/__tests__/**",
       ],
       // Coverage thresholds
       thresholds: {
@@ -60,50 +57,45 @@ export default defineConfig({
           branches: 80,
           functions: 85,
           lines: 85,
-          statements: 85
+          statements: 85,
         },
         // Specific thresholds for critical files
-        'src/util/Parser.ts': {
+        "src/util/Parser.ts": {
           branches: 90,
           functions: 95,
           lines: 95,
-          statements: 95
+          statements: 95,
         },
-        'src/util/KpiService.ts': {
+        "src/util/KpiService.ts": {
           branches: 90,
           functions: 95,
           lines: 95,
-          statements: 95
-        }
+          statements: 95,
+        },
       },
       all: true, // Include all files in coverage report
-      skipFull: false // Don't skip files with 100% coverage
+      skipFull: false, // Don't skip files with 100% coverage
     },
 
     // Reporting
-    reporter: [
-      'default',
-      'json',
-      'html',
-      'junit'
-    ],
+    reporters: ["default", "json", "html", "junit"],
     outputFile: {
-      json: './test-results/results.json',
-      html: './test-results/index.html',
-      junit: './test-results/junit.xml'
+      json: "./test-results/results.json",
+      html: "./test-results/index.html",
+      junit: "./test-results/junit.xml",
     },
 
     // Setup files
-    setupFiles: ['./src/test/setup.ts'],
+    setupFiles: ["./src/test/setup.ts"],
 
     // Test environment configuration
     env: {
-      NODE_ENV: 'test'
+      NODE_ENV: "test",
     },
 
     // Browser-like environment settings
     deps: {
-      inline: ['vue']
+      inline: ["vue"],
     },
 
     // Mock configuration
@@ -119,57 +111,56 @@ export default defineConfig({
       {
         extends: true,
         test: {
-          name: 'unit',
+          name: "unit",
           include: [
-            'src/util/**/*.test.ts',
-            'src/model/**/*.test.ts',
-            'src/components/**/*.test.ts'
+            "src/util/**/*.test.ts",
+            "src/model/**/*.test.ts",
+            "src/components/**/*.test.ts",
           ],
-          testTimeout: 5000
-        }
+          testTimeout: 5000,
+        },
       },
       {
         extends: true,
         test: {
-          name: 'integration',
+          name: "integration",
           include: [
-            'src/**/*integration*.test.ts',
-            'src/__tests__/integration.test.ts'
+            "src/**/*integration*.test.ts",
+            "src/__tests__/integration.test.ts",
           ],
-          testTimeout: 15000
-        }
+          testTimeout: 15000,
+        },
       },
       {
         extends: true,
         test: {
-          name: 'large',
-          include: ['src/**/*.large.test.ts'],
+          name: "large",
+          include: ["src/**/*.large.test.ts"],
           testTimeout: 30000,
-          threads: false // Run large tests sequentially
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
 
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'),
-      '~': resolve(__dirname)
-    }
+      "@": resolve(__dirname, "src"),
+      "~": resolve(__dirname),
+    },
   },
 
   // Build configuration for tests
   esbuild: {
-    target: 'es2020'
+    target: "es2020",
   },
 
   // Define custom test commands and configurations
   define: {
     __TEST__: true,
-    __VERSION__: JSON.stringify(process.env.npm_package_version || '1.0.0'),
-    __BUILD_TIME__: JSON.stringify(new Date().toISOString())
-  }
-})
+    __VERSION__: JSON.stringify(process.env.npm_package_version || "1.0.0"),
+    __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
+  },
+});
 
 // Custom test runner commands that can be added to package.json:
 /*
@@ -204,77 +195,77 @@ export const performanceConfig = {
 
   // Custom reporters for performance data
   customReporters: {
-    performance: './src/test/reporters/performance-reporter.ts',
-    memory: './src/test/reporters/memory-reporter.ts'
-  }
-}
+    performance: "./src/test/reporters/performance-reporter.ts",
+    memory: "./src/test/reporters/memory-reporter.ts",
+  },
+};
 
 // Test categories and tagging system
 export const testCategories = {
   unit: {
-    pattern: 'src/{util,model,components}/**/*.test.ts',
+    pattern: "src/{util,model,components}/**/*.test.ts",
     timeout: 5000,
-    coverage: { threshold: 90 }
+    coverage: { threshold: 90 },
   },
 
   integration: {
-    pattern: 'src/**/*integration*.test.ts',
+    pattern: "src/**/*integration*.test.ts",
     timeout: 15000,
-    coverage: { threshold: 80 }
+    coverage: { threshold: 80 },
   },
 
   component: {
-    pattern: 'src/components/**/*.test.ts',
+    pattern: "src/components/**/*.test.ts",
     timeout: 10000,
-    coverage: { threshold: 85 }
+    coverage: { threshold: 85 },
   },
 
   e2e: {
-    pattern: 'src/**/*e2e*.test.ts',
+    pattern: "src/**/*e2e*.test.ts",
     timeout: 30000,
-    coverage: { threshold: 70 }
+    coverage: { threshold: 70 },
   },
 
   performance: {
-    pattern: 'src/**/*performance*.test.ts',
+    pattern: "src/**/*performance*.test.ts",
     timeout: 60000,
-    coverage: { threshold: 60 }
-  }
-}
+    coverage: { threshold: 60 },
+  },
+};
 
 // Quality gates configuration
 export const qualityGates = {
   coverage: {
     minimum: 85,
-    target: 95
+    target: 95,
   },
 
   performance: {
     maxTestDuration: 30000, // 30 seconds
     maxMemoryUsage: 100 * 1024 * 1024, // 100MB
-    maxSlowTests: 5 // Maximum number of slow tests allowed
+    maxSlowTests: 5, // Maximum number of slow tests allowed
   },
 
   reliability: {
     maxFlakeRate: 0.1, // 10% flake rate maximum
-    requiredPassRate: 0.99 // 99% pass rate required
-  }
-}
+    requiredPassRate: 0.99, // 99% pass rate required
+  },
+};
 
 // Test data management
 export const testDataConfig = {
   fixtures: {
-    baseDir: './src/test/fixtures',
-    autoLoad: true
+    baseDir: "./src/test/fixtures",
+    autoLoad: true,
   },
 
   mocks: {
-    baseDir: './src/test/mocks',
-    autoMock: ['chart.js', 'chartjs-plugin-annotation']
+    baseDir: "./src/test/mocks",
+    autoMock: ["chart.js", "chartjs-plugin-annotation"],
   },
 
   snapshots: {
     updateOnFail: false,
-    threshold: 0.1 // 10% pixel difference threshold
-  }
-}
+    threshold: 0.1, // 10% pixel difference threshold
+  },
+};

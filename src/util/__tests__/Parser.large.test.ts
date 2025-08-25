@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll } from "vitest";
-import { parse } from "./Parser";
-import type { Result, Kpi } from "../model/Result";
-import kpiResultsLarge from "../../example/kpi-results.json";
+import { parse } from "../Parser";
+import type { Result, Kpi } from "../../model/Result";
+import kpiResultsLarge from "../../../example/kpi-results.json";
 
 describe("Parser with large kpi-results.json", () => {
   let result: Result;

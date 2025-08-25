@@ -6,10 +6,10 @@ import {
   getKpiStatusColor,
   getKpiThresholdDebugInfo,
   type KpiThresholdAnalysis,
-} from "./KpiService";
-import { parse } from "./Parser";
-import type { Result, Kpi } from "../model/Result";
-import kpiResultsLarge from "../../example/kpi-results.json";
+} from "../KpiService";
+import { parse } from "../Parser";
+import type { Result, Kpi } from "../../model/Result";
+import kpiResultsLarge from "../../../example/kpi-results.json";
 
 describe("KpiService with large kpi-results.json", () => {
   let result: Result;
