@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from "vue";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import {
     BarController,
     BarElement,
@@ -14,6 +14,11 @@ import {
 import DashboardCard from "./DashboardCard.vue";
 import { background_grey, blue_chart } from "../assets/styles/Colors.ts";
 import type { Kpi } from "../model/Result.ts";
+import {
+    getKpisOverThreshold,
+    generateKpiSummaryText,
+    getKpiStatusColor,
+} from "../util/KpiService.ts";
 
 Chart.register(
     BarController,
@@ -30,7 +35,9 @@ interface KpiView {
     description: string; // Tooltip content
 }
 
-const root = defineProps<Kpi>();
+interface Props extends Kpi {}
+
+const root = defineProps<Props>();
 const kpis: KpiView[] = root.children.map((child) => {
     return {
         name: child.displayName,
@@ -41,6 +48,13 @@ const kpis: KpiView[] = root.children.map((child) => {
 
 const chartCanvas = ref<HTMLCanvasElement | null>(null);
 let chartInstance: Chart | null = null;
+
+// KPI analysis computed properties
+const kpiAnalysis = computed(() => getKpisOverThreshold(root, 60));
+const summaryText = computed(() => generateKpiSummaryText(kpiAnalysis.value));
+const statusColor = computed(() =>
+    getKpiStatusColor(kpiAnalysis.value.percentage),
+);
 
 const createChart = () => {
     if (!chartCanvas.value) return;
@@ -166,10 +180,8 @@ const handleButtonClick = () => {
                         class="d-flex flex-column justify-content-between h-100"
                     >
                         <div>
-                            <p class="text-start text-muted">
-                                Three out of five KPIs are above the threshold.
-                                The project is in good shape. Click Details
-                                below to see more.
+                            <p class="text-start" :class="statusColor">
+                                {{ summaryText }}
                             </p>
                         </div>
                         <div class="mt-auto">
