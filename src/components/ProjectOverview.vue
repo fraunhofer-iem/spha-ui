@@ -5,7 +5,6 @@ import type { RepoInfo } from "../model/Result.ts";
 
 const props = withDefaults(defineProps<RepoInfo>(), {
     projectUrl: "Project URL not found",
-    projectName: "Project Name not found",
 });
 
 const formattedContributors = computed(() => {
@@ -44,12 +43,6 @@ const formattedLastCommitDate = computed(() => {
 <template>
     <DashboardCard title="Project Overview">
         <div class="container text-center align-content-center h-100">
-            <!-- Project Name Display -->
-            <div class="row mb-3">
-                <div class="col">
-                    <h4 class="fw-bold text-primary">{{ projectName }}</h4>
-                </div>
-            </div>
             <div class="row border-bottom">
                 <!-- Stars -->
                 <div

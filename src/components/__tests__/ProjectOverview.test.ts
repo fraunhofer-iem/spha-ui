@@ -17,7 +17,6 @@ describe("ProjectOverview", () => {
   let wrapper: VueWrapper<any>;
 
   const createMockRepoInfo = (overrides: Partial<RepoInfo> = {}): RepoInfo => ({
-    projectName: "Awesome Project",
     stars: 127,
     contributors: 8,
     lastCommitDate: "2024-01-15T10:30:00Z",
@@ -70,57 +69,6 @@ describe("ProjectOverview", () => {
       });
 
       expect(wrapper.exists()).toBe(true);
-    });
-  });
-
-  describe("Project Name Display", () => {
-    it("should display project name when provided", () => {
-      const repoInfo = createMockRepoInfo({
-        projectName: "My Awesome Project",
-      });
-
-      wrapper = mount(ProjectOverview, {
-        props: repoInfo,
-      });
-
-      expect(wrapper.text()).toContain("My Awesome Project");
-    });
-
-    it("should handle missing project name gracefully", () => {
-      const repoInfo = createMockRepoInfo({
-        projectName: undefined,
-      });
-
-      wrapper = mount(ProjectOverview, {
-        props: repoInfo,
-      });
-
-      // Should show fallback text or not crash
-      expect(wrapper.exists()).toBe(true);
-    });
-
-    it("should handle empty project name", () => {
-      const repoInfo = createMockRepoInfo({
-        projectName: "",
-      });
-
-      wrapper = mount(ProjectOverview, {
-        props: repoInfo,
-      });
-
-      expect(wrapper.exists()).toBe(true);
-    });
-
-    it("should handle N/A project name", () => {
-      const repoInfo = createMockRepoInfo({
-        projectName: "N/A",
-      });
-
-      wrapper = mount(ProjectOverview, {
-        props: repoInfo,
-      });
-
-      expect(wrapper.text()).toContain("N/A");
     });
   });
 
@@ -518,7 +466,6 @@ describe("ProjectOverview", () => {
   describe("Data Formatting and Display Logic", () => {
     it("should handle all valid data together", () => {
       const repoInfo = createMockRepoInfo({
-        projectName: "Complete Project",
         stars: 500,
         contributors: 25,
         lastCommitDate: "2024-01-15T10:30:00Z",
@@ -533,7 +480,6 @@ describe("ProjectOverview", () => {
         props: repoInfo,
       });
 
-      expect(wrapper.text()).toContain("Complete Project");
       expect(wrapper.text()).toContain("500");
       expect(wrapper.text()).toContain("25");
       expect(wrapper.text()).toContain("2024");
@@ -541,7 +487,6 @@ describe("ProjectOverview", () => {
 
     it("should handle mixed valid and invalid data", () => {
       const repoInfo = createMockRepoInfo({
-        projectName: "Mixed Project",
         stars: -1, // Invalid
         contributors: 5, // Valid
         lastCommitDate: "N/A", // Fallback
@@ -553,7 +498,6 @@ describe("ProjectOverview", () => {
         props: repoInfo,
       });
 
-      expect(wrapper.text()).toContain("Mixed Project");
       expect(wrapper.text()).toContain("5");
       expect(wrapper.text()).toContain("Invalid date");
     });
@@ -588,19 +532,6 @@ describe("ProjectOverview", () => {
       expect(hasBootstrapClasses || wrapper.exists()).toBe(true);
     });
 
-    it("should handle long project names gracefully", () => {
-      const repoInfo = createMockRepoInfo({
-        projectName:
-          "This is a very long project name that might cause layout issues in the user interface",
-      });
-
-      wrapper = mount(ProjectOverview, {
-        props: repoInfo,
-      });
-
-      expect(wrapper.exists()).toBe(true);
-    });
-
     it("should handle very large numbers", () => {
       const repoInfo = createMockRepoInfo({
         stars: 999999,
@@ -617,26 +548,6 @@ describe("ProjectOverview", () => {
   });
 
   describe("Reactivity and Prop Changes", () => {
-    it("should update when project name changes", async () => {
-      const repoInfo = createMockRepoInfo({
-        projectName: "Initial Name",
-      });
-
-      wrapper = mount(ProjectOverview, {
-        props: repoInfo,
-      });
-
-      expect(wrapper.text()).toContain("Initial Name");
-
-      await wrapper.setProps({
-        ...repoInfo,
-        projectName: "Updated Name",
-      });
-
-      expect(wrapper.text()).toContain("Updated Name");
-      expect(wrapper.text()).not.toContain("Initial Name");
-    });
-
     it("should update when stars change", async () => {
       const repoInfo = createMockRepoInfo({
         stars: 100,
@@ -681,7 +592,6 @@ describe("ProjectOverview", () => {
     it("should handle prop changes from valid to invalid values", async () => {
       const repoInfo = createMockRepoInfo({
         stars: 500,
-        projectName: "Valid Project",
       });
 
       wrapper = mount(ProjectOverview, {
@@ -691,7 +601,6 @@ describe("ProjectOverview", () => {
       await wrapper.setProps({
         ...repoInfo,
         stars: undefined,
-        projectName: undefined,
       });
 
       expect(wrapper.exists()).toBe(true);
@@ -701,7 +610,6 @@ describe("ProjectOverview", () => {
   describe("Edge Cases and Error Handling", () => {
     it("should handle all undefined optional fields", () => {
       const repoInfo: RepoInfo = {
-        projectName: undefined,
         stars: undefined,
         contributors: undefined,
         lastCommitDate: undefined,
@@ -720,7 +628,6 @@ describe("ProjectOverview", () => {
       const repoInfo = createMockRepoInfo({
         stars: Number.MAX_SAFE_INTEGER,
         contributors: 0,
-        projectName: "",
         projectUrl: "",
       });
 
@@ -746,22 +653,8 @@ describe("ProjectOverview", () => {
       expect(wrapper.exists()).toBe(true);
     });
 
-    it("should handle special characters in project name", () => {
-      const repoInfo = createMockRepoInfo({
-        projectName: "Project with Special Characters: @#$%^&*(){}[]",
-      });
-
-      wrapper = mount(ProjectOverview, {
-        props: repoInfo,
-      });
-
-      expect(wrapper.exists()).toBe(true);
-    });
-
     it("should handle unicode characters", () => {
-      const repoInfo = createMockRepoInfo({
-        projectName: "项目名称 プロジェクト Проект 🚀⭐",
-      });
+      const repoInfo = createMockRepoInfo({});
 
       wrapper = mount(ProjectOverview, {
         props: repoInfo,
