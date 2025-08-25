@@ -137,12 +137,12 @@ const handleButtonClick = () => {
   >
     <div class="container">
       <div class="row">
-        <div class="col col-md-9 h-100">
+        <div class="col col-md-10 h-100">
           <div class="chart-container" style="position: relative; height: 300px;">
             <canvas ref="chartCanvas"></canvas>
           </div>
         </div>
-        <div class="col col-md-3">
+        <div class="col col-md-2">
           <div class="d-flex flex-column justify-content-between h-100">
             <div>
               <p class="text-start text-muted">
