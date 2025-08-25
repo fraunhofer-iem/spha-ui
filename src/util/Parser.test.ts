@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { parse } from "./Parser";
-import type { Result, Kpi, RepoInfo, Tool } from "../model/Result";
+import type { Result, Kpi, RepoInfo } from "../model/Result";
 import kpiResultsSmall from "../../example/kpi-results-small.json";
 
 describe("Parser", () => {
