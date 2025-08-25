@@ -1,6 +1,5 @@
-import { vi, beforeEach, afterEach, beforeAll, afterAll } from 'vitest'
-import { config } from '@vue/test-utils'
-import { createApp } from 'vue'
+import { vi, beforeEach, afterEach, beforeAll, afterAll } from "vitest";
+import { config } from "@vue/test-utils";
 
 // Global test setup for SPHA Visualization
 
@@ -9,7 +8,7 @@ import { createApp } from 'vue'
 // =============================================================================
 
 // Mock Chart.js completely to avoid canvas rendering issues in tests
-vi.mock('chart.js', () => {
+vi.mock("chart.js", () => {
   const mockChart = {
     destroy: vi.fn(),
     update: vi.fn(),
@@ -18,8 +17,8 @@ vi.mock('chart.js', () => {
     clear: vi.fn(),
     stop: vi.fn(),
     reset: vi.fn(),
-    toBase64Image: vi.fn(() => 'data:image/png;base64,mock'),
-    generateLegend: vi.fn(() => '<div>Mock Legend</div>'),
+    toBase64Image: vi.fn(() => "data:image/png;base64,mock"),
+    generateLegend: vi.fn(() => "<div>Mock Legend</div>"),
     canvas: {
       width: 400,
       height: 300,
@@ -31,9 +30,9 @@ vi.mock('chart.js', () => {
         lineTo: vi.fn(),
         stroke: vi.fn(),
         fill: vi.fn(),
-      }))
-    }
-  }
+      })),
+    },
+  };
 
   return {
     Chart: vi.fn(() => mockChart),
@@ -49,46 +48,52 @@ vi.mock('chart.js', () => {
     register: vi.fn(),
     defaults: {
       font: {
-        family: 'Arial',
-        size: 12
-      }
-    }
-  }
-})
+        family: "Arial",
+        size: 12,
+      },
+    },
+  };
+});
 
 // Mock Chart.js annotation plugin
-vi.mock('chartjs-plugin-annotation', () => ({
+vi.mock("chartjs-plugin-annotation", () => ({
   default: {
-    id: 'annotation',
+    id: "annotation",
     afterDraw: vi.fn(),
     beforeDraw: vi.fn(),
-  }
-}))
+  },
+}));
 
 // Mock Bootstrap JavaScript
-vi.mock('bootstrap/dist/js/bootstrap.bundle.min.js', () => ({}))
+vi.mock("bootstrap/dist/js/bootstrap.bundle.min.js", () => ({}));
 
 // Mock CSS imports
-vi.mock('bootstrap/dist/css/bootstrap.min.css', () => ({}))
-vi.mock('bootstrap-icons/font/bootstrap-icons.css', () => ({}))
+vi.mock("bootstrap/dist/css/bootstrap.min.css", () => ({}));
+vi.mock("bootstrap-icons/font/bootstrap-icons.css", () => ({}));
 
 // Mock SCSS imports
-vi.mock('../assets/styles/dashboard-card.scss', () => ({}))
+vi.mock("../assets/styles/dashboard-card.scss", () => ({}));
 
 // Mock image imports
-vi.mock('../assets/img/supportedTools/trufflehog.svg', () => '/mock/trufflehog.svg')
-vi.mock('../assets/img/supportedTools/osv.svg', () => '/mock/osv.svg')
-vi.mock('../assets/img/supportedTools/github-mark.svg', () => '/mock/github.svg')
+vi.mock(
+  "../assets/img/supportedTools/trufflehog.svg",
+  () => "/mock/trufflehog.svg",
+);
+vi.mock("../assets/img/supportedTools/osv.svg", () => "/mock/osv.svg");
+vi.mock(
+  "../assets/img/supportedTools/github-mark.svg",
+  () => "/mock/github.svg",
+);
 
 // Mock colors
-vi.mock('../assets/styles/Colors.ts', () => ({
-  background_grey: '#e6e6e6',
-  blue_chart: '#007bff',
-  primary_color: '#0d6efd',
-  success_color: '#198754',
-  warning_color: '#ffc107',
-  danger_color: '#dc3545'
-}))
+vi.mock("../assets/styles/Colors.ts", () => ({
+  background_grey: "#e6e6e6",
+  blue_chart: "#007bff",
+  primary_color: "#0d6efd",
+  success_color: "#198754",
+  warning_color: "#ffc107",
+  danger_color: "#dc3545",
+}));
 
 // =============================================================================
 // Global DOM Setup
@@ -100,13 +105,13 @@ global.FileReader = vi.fn(() => ({
   onerror: null,
   onabort: null,
   onprogress: null,
-  readAsText: vi.fn(function(this: any) {
+  readAsText: vi.fn(function (this: any) {
     // Simulate async file reading
     setTimeout(() => {
       if (this.onload) {
-        this.onload({ target: { result: '{"mock": "data"}' } })
+        this.onload({ target: { result: '{"mock": "data"}' } });
       }
-    }, 0)
+    }, 0);
   }),
   readAsDataURL: vi.fn(),
   readAsArrayBuffer: vi.fn(),
@@ -114,24 +119,28 @@ global.FileReader = vi.fn(() => ({
   abort: vi.fn(),
   result: null,
   error: null,
-  readyState: 0
-})) as any
+  readyState: 0,
+})) as any;
 
 // Mock URL constructor for validation tests
-global.URL = global.URL || class URL {
-  constructor(public href: string, base?: string) {
-    if (!href || typeof href !== 'string') {
-      throw new TypeError('Invalid URL')
+global.URL =
+  global.URL ||
+  class URL {
+    href: string;
+
+    constructor(href: string, _base?: string) {
+      if (!href || typeof href !== "string") {
+        throw new TypeError("Invalid URL");
+      }
+      this.href = href;
     }
-    this.href = href
-  }
-  toString() {
-    return this.href
-  }
-}
+    toString() {
+      return this.href;
+    }
+  };
 
 // Mock performance API if not available
-if (typeof global.performance === 'undefined') {
+if (typeof global.performance === "undefined") {
   global.performance = {
     now: vi.fn(() => Date.now()),
     mark: vi.fn(),
@@ -140,12 +149,14 @@ if (typeof global.performance === 'undefined') {
     getEntriesByType: vi.fn(() => []),
     clearMarks: vi.fn(),
     clearMeasures: vi.fn(),
-    memory: {
-      usedJSHeapSize: 1000000,
-      totalJSHeapSize: 2000000,
-      jsHeapSizeLimit: 4000000
-    }
-  } as any
+  } as any;
+
+  // Add memory property separately to avoid TypeScript issues
+  (global.performance as any).memory = {
+    usedJSHeapSize: 1000000,
+    totalJSHeapSize: 2000000,
+    jsHeapSizeLimit: 4000000,
+  };
 }
 
 // =============================================================================
@@ -157,32 +168,32 @@ config.global.mocks = {
   $route: {
     params: {},
     query: {},
-    path: '/',
-    name: 'test'
+    path: "/",
+    name: "test",
   },
   $router: {
     push: vi.fn(),
     replace: vi.fn(),
     go: vi.fn(),
     back: vi.fn(),
-    forward: vi.fn()
-  }
-}
+    forward: vi.fn(),
+  },
+};
 
 config.global.stubs = {
   // Stub transition components to avoid animation issues in tests
   transition: false,
-  'transition-group': false,
+  "transition-group": false,
 
   // Stub router components if needed
-  'router-link': {
-    template: '<a><slot /></a>',
-    props: ['to']
+  "router-link": {
+    template: "<a><slot /></a>",
+    props: ["to"],
   },
-  'router-view': {
-    template: '<div><slot /></div>'
-  }
-}
+  "router-view": {
+    template: "<div><slot /></div>",
+  },
+};
 
 // =============================================================================
 // Test Data Factories
@@ -191,83 +202,88 @@ config.global.stubs = {
 export const createMockResult = (overrides = {}) => ({
   healthScore: 75,
   repoInfo: {
-    projectName: 'Test Project',
+    projectName: "Test Project",
     stars: 100,
     contributors: 5,
-    lastCommitDate: '2024-01-15T10:30:00Z',
-    projectUrl: 'https://github.com/test/repo',
+    lastCommitDate: "2024-01-15T10:30:00Z",
+    projectUrl: "https://github.com/test/repo",
     repoLanguages: [
-      { name: 'TypeScript', size: 65.2 },
-      { name: 'JavaScript', size: 34.8 }
-    ]
+      { name: "TypeScript", size: 65.2 },
+      { name: "JavaScript", size: 34.8 },
+    ],
   },
   root: {
-    displayName: 'Software Quality',
+    displayName: "Software Quality",
     score: 75,
-    id: 'root',
+    id: "root",
     children: [
       {
-        displayName: 'Code Quality',
+        displayName: "Code Quality",
         score: 80,
-        id: 'code-quality',
-        children: []
-      }
-    ]
+        id: "code-quality",
+        children: [],
+      },
+    ],
   },
   tools: [
     {
-      name: 'ESLint',
+      name: "ESLint",
       findings: 3,
-      downloadLink: 'https://example.com/eslint',
-      scanDate: '2024-01-15'
-    }
+      downloadLink: "https://example.com/eslint",
+      scanDate: "2024-01-15",
+    },
   ],
-  ...overrides
-})
+  ...overrides,
+});
 
 export const createMockKpi = (overrides = {}) => ({
-  displayName: 'Test KPI',
+  displayName: "Test KPI",
   score: 80,
-  id: 'test-kpi',
+  id: "test-kpi",
   children: [],
-  ...overrides
-})
+  ...overrides,
+});
 
 export const createMockRepoInfo = (overrides = {}) => ({
-  projectName: 'Test Project',
+  projectName: "Test Project",
   stars: 100,
   contributors: 5,
-  lastCommitDate: '2024-01-15T10:30:00Z',
-  projectUrl: 'https://github.com/test/repo',
+  lastCommitDate: "2024-01-15T10:30:00Z",
+  projectUrl: "https://github.com/test/repo",
   repoLanguages: [],
-  ...overrides
-})
+  ...overrides,
+});
 
 // =============================================================================
 // Test Utilities
 // =============================================================================
 
-export const waitForNextTick = () => new Promise(resolve => setTimeout(resolve, 0))
+export const waitForNextTick = () =>
+  new Promise((resolve) => setTimeout(resolve, 0));
 
 export const waitFor = (condition: () => boolean, timeout = 1000) => {
   return new Promise((resolve, reject) => {
-    const startTime = Date.now()
+    const startTime = Date.now();
     const check = () => {
       if (condition()) {
-        resolve(true)
+        resolve(true);
       } else if (Date.now() - startTime > timeout) {
-        reject(new Error(`Condition not met within ${timeout}ms`))
+        reject(new Error(`Condition not met within ${timeout}ms`));
       } else {
-        setTimeout(check, 10)
+        setTimeout(check, 10);
       }
-    }
-    check()
-  })
-}
+    };
+    check();
+  });
+};
 
-export const createMockFile = (content: string, filename = 'test.json', type = 'application/json') => {
-  return new File([content], filename, { type })
-}
+export const createMockFile = (
+  content: string,
+  filename = "test.json",
+  type = "application/json",
+) => {
+  return new File([content], filename, { type });
+};
 
 export const createMockFileList = (files: File[]): FileList => {
   const fileList = {
@@ -275,82 +291,87 @@ export const createMockFileList = (files: File[]): FileList => {
     item: (index: number) => files[index] || null,
     [Symbol.iterator]: function* () {
       for (let i = 0; i < files.length; i++) {
-        yield files[i]
+        yield files[i];
       }
-    }
-  }
+    },
+  };
 
   // Add files as indexed properties
   files.forEach((file, index) => {
-    (fileList as any)[index] = file
-  })
+    (fileList as any)[index] = file;
+  });
 
-  return fileList as FileList
-}
+  return fileList as FileList;
+};
 
 // =============================================================================
 // Performance Monitoring
 // =============================================================================
 
 interface TestMetrics {
-  startTime: number
-  memoryStart: number
-  testName: string
+  startTime: number;
+  memoryStart: number;
+  testName: string;
 }
 
-const testMetrics = new Map<string, TestMetrics>()
+const testMetrics = new Map<string, TestMetrics>();
 
 export const startPerformanceMonitoring = (testName: string) => {
-  const startTime = performance.now()
-  const memoryStart = performance.memory?.usedJSHeapSize || 0
+  const startTime = performance.now();
+  const memoryStart = (performance as any).memory?.usedJSHeapSize || 0;
 
   testMetrics.set(testName, {
     startTime,
     memoryStart,
-    testName
-  })
-}
+    testName,
+  });
+};
 
 export const endPerformanceMonitoring = (testName: string) => {
-  const metrics = testMetrics.get(testName)
-  if (!metrics) return
+  const metrics = testMetrics.get(testName);
+  if (!metrics) return;
 
-  const duration = performance.now() - metrics.startTime
-  const memoryEnd = performance.memory?.usedJSHeapSize || 0
-  const memoryDelta = memoryEnd - metrics.memoryStart
+  const duration = performance.now() - metrics.startTime;
+  const memoryEnd = (performance as any).memory?.usedJSHeapSize || 0;
+  const memoryDelta = memoryEnd - metrics.memoryStart;
 
   // Log performance warnings
   if (duration > 1000) {
-    console.warn(`Slow test detected: ${testName} took ${duration.toFixed(2)}ms`)
+    console.warn(
+      `Slow test detected: ${testName} took ${duration.toFixed(2)}ms`,
+    );
   }
 
-  if (memoryDelta > 10 * 1024 * 1024) { // 10MB
-    console.warn(`Memory leak potential: ${testName} used ${(memoryDelta / 1024 / 1024).toFixed(2)}MB`)
+  if (memoryDelta > 10 * 1024 * 1024) {
+    // 10MB
+    console.warn(
+      `Memory leak potential: ${testName} used ${(memoryDelta / 1024 / 1024).toFixed(2)}MB`,
+    );
   }
 
-  testMetrics.delete(testName)
-  return { duration, memoryDelta }
-}
+  testMetrics.delete(testName);
+  return { duration, memoryDelta };
+};
 
 // =============================================================================
 // Console Utilities
 // =============================================================================
 
 export const suppressConsoleErrors = () => {
-  const originalError = console.error
-  console.error = vi.fn()
+  const originalError = console.error;
+  console.error = vi.fn();
   return () => {
-    console.error = originalError
-  }
-}
+    console.error = originalError;
+  };
+};
 
 export const suppressConsoleWarnings = () => {
-  const originalWarn = console.warn
-  console.warn = vi.fn()
+  const originalWarn = console.warn;
+  console.warn = vi.fn();
   return () => {
-    console.warn = originalWarn
-  }
-}
+    console.warn = originalWarn;
+  };
+};
 
 // =============================================================================
 // Global Test Hooks
@@ -358,68 +379,75 @@ export const suppressConsoleWarnings = () => {
 
 beforeAll(() => {
   // Global setup before all tests
-  vi.clearAllTimers()
+  vi.clearAllTimers();
 
   // Set up global error handler
-  const originalError = console.error
+  const originalError = console.error;
   console.error = (...args: any[]) => {
     // Suppress known test-only warnings
-    const message = args[0]
-    if (typeof message === 'string') {
+    const message = args[0];
+    if (typeof message === "string") {
       const suppressedMessages = [
-        'Warning: ReactDOM.render is no longer supported',
-        'Failed to resolve component',
-        'Canvas is not supported',
-        'ResizeObserver loop limit exceeded'
-      ]
+        "Warning: ReactDOM.render is no longer supported",
+        "Failed to resolve component",
+        "Canvas is not supported",
+        "ResizeObserver loop limit exceeded",
+      ];
 
-      if (suppressedMessages.some(msg => message.includes(msg))) {
-        return
+      if (suppressedMessages.some((msg) => message.includes(msg))) {
+        return;
       }
     }
-    originalError(...args)
-  }
-})
+    originalError(...args);
+  };
+});
 
 beforeEach(() => {
   // Clear all mocks before each test
-  vi.clearAllMocks()
-  vi.clearAllTimers()
+  vi.clearAllMocks();
+  vi.clearAllTimers();
 
   // Reset DOM
-  document.body.innerHTML = ''
+  document.body.innerHTML = "";
 
   // Clear any global state
-  if (typeof window !== 'undefined') {
-    window.localStorage?.clear()
-    window.sessionStorage?.clear()
+  if (typeof window !== "undefined") {
+    window.localStorage?.clear();
+    window.sessionStorage?.clear();
   }
-})
+});
 
 afterEach(() => {
   // Cleanup after each test
-  vi.restoreAllMocks()
+  vi.restoreAllMocks();
 
   // Check for memory leaks in test environment
   if (testMetrics.size > 0) {
-    console.warn('Unfinished performance monitoring:', Array.from(testMetrics.keys()))
-    testMetrics.clear()
+    console.warn(
+      "Unfinished performance monitoring:",
+      Array.from(testMetrics.keys()),
+    );
+    testMetrics.clear();
   }
-})
+});
 
 afterAll(() => {
   // Global cleanup after all tests
-  vi.clearAllMocks()
-  vi.clearAllTimers()
+  vi.clearAllMocks();
+  vi.clearAllTimers();
 
   // Final memory check
-  if (performance.memory) {
-    const memoryUsage = performance.memory.usedJSHeapSize / 1024 / 1024
-    if (memoryUsage > 100) { // 100MB
-      console.warn(`High memory usage after tests: ${memoryUsage.toFixed(2)}MB`)
+  if ((performance as any).memory) {
+    const memoryUsage =
+      (performance as any).memory.usedJSHeapSize / 1024 / 1024;
+    if (memoryUsage > 100) {
+      // 100MB
+      console.warn(
+        `High memory usage after tests: ${memoryUsage.toFixed(2)}MB`,
+      );
     }
   }
-})
+});
 
 // =============================================================================
 // Error Boundary for Tests
@@ -428,17 +456,17 @@ afterAll(() => {
 export const withErrorBoundary = (testFn: () => void | Promise<void>) => {
   return async () => {
     try {
-      await testFn()
+      await testFn();
     } catch (error) {
       // Enhanced error reporting for test failures
-      console.error('Test failed with error:', error)
+      console.error("Test failed with error:", error);
       if (error instanceof Error && error.stack) {
-        console.error('Stack trace:', error.stack)
+        console.error("Stack trace:", error.stack);
       }
-      throw error
+      throw error;
     }
-  }
-}
+  };
+};
 
 // =============================================================================
 // Export for External Use
@@ -450,13 +478,13 @@ export {
   afterEach,
   beforeAll,
   afterAll,
-  config as vueTestConfig
-}
+  config as vueTestConfig,
+};
 
 // Type augmentations for better TypeScript support
 declare global {
   interface Window {
-    __TEST_ENV__: boolean
+    __TEST_ENV__: boolean;
   }
 
   namespace Vi {
@@ -467,6 +495,6 @@ declare global {
 }
 
 // Mark as test environment
-if (typeof window !== 'undefined') {
-  window.__TEST_ENV__ = true
+if (typeof window !== "undefined") {
+  window.__TEST_ENV__ = true;
 }
