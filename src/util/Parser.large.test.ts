@@ -61,8 +61,8 @@ describe("Parser with large kpi-results.json", () => {
         const firstLanguage = result.repoInfo.repoLanguages[0];
         expect(firstLanguage).toHaveProperty("name");
         expect(firstLanguage).toHaveProperty("size");
-        expect(typeof firstLanguage.name).toBe("string");
-        expect(typeof firstLanguage.size).toBe("number");
+        expect(typeof firstLanguage?.name).toBe("string");
+        expect(typeof firstLanguage?.size).toBe("number");
       }
     });
   });
@@ -81,11 +81,11 @@ describe("Parser with large kpi-results.json", () => {
         expect(firstTool).toHaveProperty("icon");
         expect(firstTool).toHaveProperty("description");
 
-        expect(typeof firstTool.name).toBe("string");
-        expect(typeof firstTool.findings).toBe("number");
-        expect(typeof firstTool.downloadLink).toBe("string");
-        expect(typeof firstTool.icon).toBe("string");
-        expect(typeof firstTool.description).toBe("string");
+        expect(typeof firstTool?.name).toBe("string");
+        expect(typeof firstTool?.findings).toBe("number");
+        expect(typeof firstTool?.downloadLink).toBe("string");
+        expect(typeof firstTool?.icon).toBe("string");
+        expect(typeof firstTool?.description).toBe("string");
       }
     });
 

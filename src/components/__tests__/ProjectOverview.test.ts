@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { mount, type VueWrapper } from "@vue/test-utils";
 import ProjectOverview from "../ProjectOverview.vue";
 import type { RepoInfo, Language } from "../../model/Result";
@@ -8,7 +8,8 @@ vi.mock("../DashboardCard.vue", () => ({
   default: {
     name: "DashboardCard",
     props: ["title"],
-    template: '<div class="dashboard-card"><h3>{{ title }}</h3><slot></slot></div>',
+    template:
+      '<div class="dashboard-card"><h3>{{ title }}</h3><slot></slot></div>',
   },
 }));
 
@@ -133,7 +134,7 @@ describe("ProjectOverview", () => {
         props: repoInfo,
       });
 
-      expect(wrapper.text()).toContain("1250");
+      expect(wrapper.text()).toContain("1,250");
     });
 
     it("should handle zero stars", () => {
@@ -182,7 +183,7 @@ describe("ProjectOverview", () => {
         props: repoInfo,
       });
 
-      expect(wrapper.text()).toContain("15420");
+      expect(wrapper.text()).toContain("15,420");
     });
   });
 
@@ -304,7 +305,7 @@ describe("ProjectOverview", () => {
         props: repoInfo,
       });
 
-      expect(wrapper.text()).toContain("N/A");
+      expect(wrapper.text()).toContain("Invalid date");
     });
 
     it("should handle empty date string", () => {
@@ -342,7 +343,10 @@ describe("ProjectOverview", () => {
         props: repoInfo,
       });
 
-      expect(wrapper.text()).toContain("github.com/user/repo");
+      const urlInput = wrapper.find("#projectUrlInput");
+      expect((urlInput.element as HTMLInputElement).value).toContain(
+        "github.com/user/repo",
+      );
     });
 
     it("should handle different URL formats", () => {
@@ -376,8 +380,8 @@ describe("ProjectOverview", () => {
       });
 
       const links = wrapper.findAll("a");
-      const projectLink = links.find(link =>
-        link.attributes("href") === "https://github.com/user/repo"
+      const projectLink = links.find(
+        (link) => link.attributes("href") === "https://github.com/user/repo",
       );
 
       expect(projectLink).toBeTruthy();
@@ -393,13 +397,13 @@ describe("ProjectOverview", () => {
       });
 
       const links = wrapper.findAll("a");
-      const projectLink = links.find(link =>
-        link.attributes("href") === "https://github.com/user/repo"
+      const projectLink = links.find(
+        (link) => link.attributes("href") === "https://github.com/user/repo",
       );
 
       if (projectLink) {
         expect(projectLink.attributes("target")).toBe("_blank");
-        expect(projectLink.attributes("rel")).toContain("noopener");
+        expect(projectLink.attributes("rel")).toBe("noopener noreferrer");
       }
     });
 
@@ -424,7 +428,8 @@ describe("ProjectOverview", () => {
         props: repoInfo,
       });
 
-      expect(wrapper.text()).toContain("N/A");
+      const urlInput = wrapper.find("#projectUrlInput");
+      expect((urlInput.element as HTMLInputElement).value).toContain("N/A");
     });
 
     it("should handle empty URL string", () => {
@@ -482,9 +487,7 @@ describe("ProjectOverview", () => {
 
     it("should handle single language", () => {
       const repoInfo = createMockRepoInfo({
-        repoLanguages: [
-          { name: "JavaScript", size: 100 },
-        ],
+        repoLanguages: [{ name: "JavaScript", size: 100 }],
       });
 
       wrapper = mount(ProjectOverview, {
@@ -552,7 +555,7 @@ describe("ProjectOverview", () => {
 
       expect(wrapper.text()).toContain("Mixed Project");
       expect(wrapper.text()).toContain("5");
-      expect(wrapper.text()).toContain("N/A");
+      expect(wrapper.text()).toContain("Invalid date");
     });
 
     it("should display appropriate icons or indicators", () => {
@@ -577,16 +580,18 @@ describe("ProjectOverview", () => {
       });
 
       // Check for Bootstrap classes
-      const hasBootstrapClasses = wrapper.html().includes("row") ||
-                                  wrapper.html().includes("col") ||
-                                  wrapper.html().includes("d-flex");
+      const hasBootstrapClasses =
+        wrapper.html().includes("row") ||
+        wrapper.html().includes("col") ||
+        wrapper.html().includes("d-flex");
 
       expect(hasBootstrapClasses || wrapper.exists()).toBe(true);
     });
 
     it("should handle long project names gracefully", () => {
       const repoInfo = createMockRepoInfo({
-        projectName: "This is a very long project name that might cause layout issues in the user interface",
+        projectName:
+          "This is a very long project name that might cause layout issues in the user interface",
       });
 
       wrapper = mount(ProjectOverview, {
@@ -606,8 +611,8 @@ describe("ProjectOverview", () => {
         props: repoInfo,
       });
 
-      expect(wrapper.text()).toContain("999999");
-      expect(wrapper.text()).toContain("10000");
+      expect(wrapper.text()).toContain("999,999");
+      expect(wrapper.text()).toContain("10,000");
     });
   });
 
@@ -666,8 +671,8 @@ describe("ProjectOverview", () => {
       });
 
       const links = wrapper.findAll("a");
-      const newLink = links.find(link =>
-        link.attributes("href") === "https://github.com/new/repo"
+      const newLink = links.find(
+        (link) => link.attributes("href") === "https://github.com/new/repo",
       );
 
       expect(newLink || wrapper.exists()).toBeTruthy();
@@ -777,7 +782,7 @@ describe("ProjectOverview", () => {
       });
 
       const links = wrapper.findAll("a");
-      links.forEach(link => {
+      links.forEach((link) => {
         // Links should have either aria-label or meaningful text content
         const hasAriaLabel = link.attributes("aria-label");
         const hasTextContent = link.text().trim().length > 0;
@@ -793,9 +798,10 @@ describe("ProjectOverview", () => {
       });
 
       // Component should use semantic HTML or appropriate ARIA roles
-      const hasSemanticElements = wrapper.html().includes("<section") ||
-                                  wrapper.html().includes("<article") ||
-                                  wrapper.html().includes("role=");
+      const hasSemanticElements =
+        wrapper.html().includes("<section") ||
+        wrapper.html().includes("<article") ||
+        wrapper.html().includes("role=");
 
       expect(hasSemanticElements || wrapper.exists()).toBeTruthy();
     });

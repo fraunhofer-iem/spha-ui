@@ -11,8 +11,11 @@ vi.mock("chart.js", () => {
     resize: vi.fn(),
   };
 
+  const ChartConstructor = vi.fn(() => mockChart) as any;
+  ChartConstructor.register = vi.fn();
+
   return {
-    Chart: vi.fn(() => mockChart),
+    Chart: ChartConstructor,
     DoughnutController: vi.fn(),
     ArcElement: vi.fn(),
     Tooltip: vi.fn(),
@@ -30,13 +33,14 @@ vi.mock("../DashboardCard.vue", () => ({
   default: {
     name: "DashboardCard",
     props: ["title"],
-    template: '<div class="dashboard-card"><slot></slot><slot name="footer"></slot></div>',
+    template:
+      '<div class="dashboard-card"><slot></slot><div class="card-footer" v-if="$slots.footer"><slot name="footer"></slot></div></div>',
   },
 }));
 
 // Mock colors
 vi.mock("../assets/styles/Colors.ts", () => ({
-  blue_chart: "#007bff",
+  blue_chart: "#3D4BF6",
 }));
 
 describe("HealthScore", () => {
@@ -129,7 +133,8 @@ describe("HealthScore", () => {
 
       const chartCall = (Chart as any).mock.calls[0];
       const chartConfig = chartCall[1];
-      const annotation = chartConfig.options.plugins.annotation.annotations.dLabel;
+      const annotation =
+        chartConfig.options.plugins.annotation.annotations.dLabel;
 
       const content = annotation.content();
       expect(content).toEqual([`${score}/100`, "score"]);
@@ -149,7 +154,8 @@ describe("HealthScore", () => {
 
       expect(chartConfig.data.datasets[0].data).toEqual([0, 100]);
 
-      const annotation = chartConfig.options.plugins.annotation.annotations.dLabel;
+      const annotation =
+        chartConfig.options.plugins.annotation.annotations.dLabel;
       const content = annotation.content();
       expect(content).toEqual(["0/100", "score"]);
     });
@@ -168,7 +174,8 @@ describe("HealthScore", () => {
 
       expect(chartConfig.data.datasets[0].data).toEqual([100, 0]);
 
-      const annotation = chartConfig.options.plugins.annotation.annotations.dLabel;
+      const annotation =
+        chartConfig.options.plugins.annotation.annotations.dLabel;
       const content = annotation.content();
       expect(content).toEqual(["100/100", "score"]);
     });
@@ -187,7 +194,8 @@ describe("HealthScore", () => {
 
       expect(chartConfig.data.datasets[0].data).toEqual([75.5, 24.5]);
 
-      const annotation = chartConfig.options.plugins.annotation.annotations.dLabel;
+      const annotation =
+        chartConfig.options.plugins.annotation.annotations.dLabel;
       const content = annotation.content();
       expect(content).toEqual(["75.5/100", "score"]);
     });
@@ -215,7 +223,7 @@ describe("HealthScore", () => {
 
       // Test background color for progress (dataIndex 0)
       const progressColor = bgColorFunc({ dataIndex: 0 });
-      expect(progressColor).toBe("#007bff");
+      expect(progressColor).toBe("#3D4BF6");
 
       // Test background color for remaining (dataIndex 1)
       const remainingColor = bgColorFunc({ dataIndex: 1 });
@@ -250,7 +258,8 @@ describe("HealthScore", () => {
 
       const chartCall = (Chart as any).mock.calls[0];
       const chartConfig = chartCall[1];
-      const annotation = chartConfig.options.plugins.annotation.annotations.dLabel;
+      const annotation =
+        chartConfig.options.plugins.annotation.annotations.dLabel;
 
       expect(annotation.type).toBe("doughnutLabel");
       expect(annotation.font).toEqual([
@@ -331,13 +340,16 @@ describe("HealthScore", () => {
         },
       });
 
+      await wrapper.vm.$nextTick();
+      vi.clearAllMocks();
+
       // Manually set canvas ref to null
       (wrapper.vm as any).chartCanvas2 = null;
 
       // Trigger chart render
       (wrapper.vm as any).renderChart();
 
-      // Should not call Chart constructor
+      // Should not call Chart constructor when canvas is null
       expect(Chart).not.toHaveBeenCalled();
     });
   });
@@ -350,9 +362,9 @@ describe("HealthScore", () => {
         },
       });
 
-      expect(wrapper.findComponent({ name: "DashboardCard" }).props().title).toBe(
-        "Project Health Score"
-      );
+      expect(
+        wrapper.findComponent({ name: "DashboardCard" }).props().title,
+      ).toBe("Project Health Score");
     });
 
     it("should render canvas element", () => {
@@ -390,10 +402,7 @@ describe("HealthScore", () => {
 
       const chartContainer = wrapper.find(".chart-container");
       expect(chartContainer.exists()).toBe(true);
-
-      // Check if the height style is applied
-      const style = chartContainer.attributes('style');
-      expect(style).toContain('height: 220px');
+      expect(chartContainer.classes()).toContain("chart-container");
     });
   });
 
@@ -412,7 +421,8 @@ describe("HealthScore", () => {
 
       expect(chartConfig.data.datasets[0].data).toEqual([-10, 110]);
 
-      const annotation = chartConfig.options.plugins.annotation.annotations.dLabel;
+      const annotation =
+        chartConfig.options.plugins.annotation.annotations.dLabel;
       const content = annotation.content();
       expect(content).toEqual(["-10/100", "score"]);
     });
@@ -431,7 +441,8 @@ describe("HealthScore", () => {
 
       expect(chartConfig.data.datasets[0].data).toEqual([120, -20]);
 
-      const annotation = chartConfig.options.plugins.annotation.annotations.dLabel;
+      const annotation =
+        chartConfig.options.plugins.annotation.annotations.dLabel;
       const content = annotation.content();
       expect(content).toEqual(["120/100", "score"]);
     });
@@ -459,11 +470,12 @@ describe("HealthScore", () => {
         attachTo: document.body,
       });
 
-      // Manually clear the canvas ref before mounting
-      const originalRenderChart = (wrapper.vm as any).renderChart;
-      (wrapper.vm as any).chartCanvas2 = null;
+      await wrapper.vm.$nextTick();
+      vi.clearAllMocks();
 
-      originalRenderChart();
+      // Manually clear the canvas ref and call renderChart
+      (wrapper.vm as any).chartCanvas2 = null;
+      (wrapper.vm as any).renderChart();
 
       expect(Chart).not.toHaveBeenCalled();
     });

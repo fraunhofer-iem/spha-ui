@@ -342,12 +342,12 @@ describe("Parser", () => {
       expect(result!.tools).toHaveLength(2);
 
       const firstTool = result!.tools[0];
-      expect(firstTool.name).toBe("N/A");
-      expect(firstTool.findings).toBe(0);
+      expect(firstTool?.name).toBe("N/A");
+      expect(firstTool?.findings).toBe(0);
 
       const secondTool = result!.tools[1];
-      expect(secondTool.name).toBe("TestTool");
-      expect(secondTool.findings).toBe(0);
+      expect(secondTool?.name).toBe("TestTool");
+      expect(secondTool?.findings).toBe(0);
     });
   });
 });
