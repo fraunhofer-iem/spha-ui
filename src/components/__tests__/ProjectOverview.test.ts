@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { mount, type VueWrapper } from "@vue/test-utils";
 import ProjectOverview from "../ProjectOverview.vue";
-import type { RepoInfo } from "../../model/Result";
+import type { RepoInfo, Language } from "../../model/Result";
 import { createMockRepoInfo } from "../../__test__/setup";
 
 // Mock DashboardCard component
