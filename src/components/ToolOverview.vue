@@ -28,8 +28,37 @@ const formattedScanDates = computed(() => {
 });
 
 const downloadAll = () => {
-    // Handle button click event
-    console.log("Details button clicked");
+    // Collect all findings from all tools
+    const allFindings = props.tools.reduce(
+        (acc, tool) => {
+            if (tool.findings && tool.findings.length > 0) {
+                acc[tool.name] = {
+                    scanDate: tool.scanDate,
+                    findings: tool.findings,
+                    findingsCount: tool.findings.length,
+                };
+            }
+            return acc;
+        },
+        {} as Record<string, any>,
+    );
+
+    if (Object.keys(allFindings).length === 0) {
+        console.log("No findings to download from any tools");
+        return;
+    }
+
+    const jsonData = JSON.stringify(allFindings, null, 2);
+    const blob = new Blob([jsonData], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "all-tool-findings.json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
 };
 
 const downloadToolFindings = (tool: Tool) => {
