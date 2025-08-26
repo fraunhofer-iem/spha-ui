@@ -127,7 +127,7 @@ describe("ToolOverview", () => {
       });
 
       const toolNames = wrapper.findAll(".text-muted");
-      expect(toolNames[0].text()).toBe("ESLint");
+      expect(toolNames[0]?.text()).toBe("ESLint");
     });
 
     it("should display findings count", () => {
@@ -138,10 +138,10 @@ describe("ToolOverview", () => {
       });
 
       const findingsElements = wrapper.findAll(".fw-bold.fs-5");
-      expect(findingsElements[0].text()).toBe("2 Findings");
-      expect(findingsElements[1].text()).toBe("1 Findings");
-      expect(findingsElements[2].text()).toBe("0 Findings");
-      expect(findingsElements[3].text()).toBe("1 Findings");
+      expect(findingsElements[0]?.text()).toBe("2 Findings");
+      expect(findingsElements[1]?.text()).toBe("1 Findings");
+      expect(findingsElements[2]?.text()).toBe("0 Findings");
+      expect(findingsElements[3]?.text()).toBe("1 Findings");
     });
 
     it("should render tool icons when available", () => {
@@ -153,7 +153,7 @@ describe("ToolOverview", () => {
 
       const images = wrapper.findAll("img");
       expect(images.length).toBeGreaterThan(0);
-      expect(images[0].attributes("src")).toBe(
+      expect(images[0]?.attributes("src")).toBe(
         "https://example.com/eslint-icon.png",
       );
     });
@@ -202,7 +202,7 @@ describe("ToolOverview", () => {
       const dateTexts = dateElements.filter((el) =>
         el.text().includes("Last Updated"),
       );
-      expect(dateTexts[0].text()).toBe("Last Updated: Jan 15, 2024");
+      expect(dateTexts[0]?.text()).toBe("Last Updated: Jan 15, 2024");
     });
 
     it("should handle invalid dates", () => {
@@ -216,7 +216,7 @@ describe("ToolOverview", () => {
       const dateTexts = dateElements.filter((el) =>
         el.text().includes("Last Updated"),
       );
-      expect(dateTexts[2].text()).toBe("Last Updated: Invalid date");
+      expect(dateTexts[2]?.text()).toBe("Last Updated: Invalid date");
     });
 
     it("should handle missing dates", () => {
@@ -230,7 +230,7 @@ describe("ToolOverview", () => {
       const dateTexts = dateElements.filter((el) =>
         el.text().includes("Last Updated"),
       );
-      expect(dateTexts[3].text()).toBe(
+      expect(dateTexts[3]?.text()).toBe(
         "Last Updated: Last scan date not found",
       );
     });
@@ -255,7 +255,7 @@ describe("ToolOverview", () => {
       const dateTexts = dateElements.filter((el) =>
         el.text().includes("Last Updated"),
       );
-      expect(dateTexts[0].text()).toBe(
+      expect(dateTexts[0]?.text()).toBe(
         "Last Updated: Last scan date not found",
       );
     });
@@ -298,7 +298,7 @@ describe("ToolOverview", () => {
 
       const listItems = wrapper.findAll(".list-group-item");
       if (listItems.length > 0) {
-        expect(listItems[0].attributes("style")).toContain("background-color");
+        expect(listItems[0]?.attributes("style")).toContain("background-color");
       }
     });
   });
@@ -380,9 +380,18 @@ describe("ToolOverview", () => {
       const toolNameElement = toolNameElements.find((el) =>
         el.text().includes("This is a very long tool name"),
       );
-      expect(toolNameElement?.text()).toBe(
-        "This is a very long tool name that might cause layout issues in the user interface",
-      );
+      if (toolNameElement) {
+        expect(toolNameElement.text()).toBe(
+          "This is a very long tool name that might cause layout issues in the user interface",
+        );
+      } else {
+        // Fallback assertion to ensure the test doesn't silently pass
+        expect(
+          toolNameElements.some((el) =>
+            el.text().includes("This is a very long tool name"),
+          ),
+        ).toBe(true);
+      }
     });
   });
 
@@ -466,9 +475,9 @@ describe("ToolOverview", () => {
 
       // Check findings count handling
       const findingsElements = wrapper.findAll(".fw-bold.fs-5");
-      expect(findingsElements[0].text()).toBe("1 Findings");
-      expect(findingsElements[1].text()).toBe("0 Findings");
-      expect(findingsElements[2].text()).toBe("0 Findings");
+      expect(findingsElements[0]?.text()).toBe("1 Findings");
+      expect(findingsElements[1]?.text()).toBe("0 Findings");
+      expect(findingsElements[2]?.text()).toBe("0 Findings");
     });
 
     it("should handle empty props gracefully", () => {
@@ -565,9 +574,14 @@ describe("ToolOverview", () => {
     });
 
     it("should handle tools prop changes", async () => {
+      const firstTool = mockTools[0];
+      if (!firstTool) {
+        throw new Error("First mock tool is undefined");
+      }
+
       wrapper = mount(ToolOverview, {
         props: {
-          tools: [mockTools[0]],
+          tools: [firstTool],
         },
       });
 
