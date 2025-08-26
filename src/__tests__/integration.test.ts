@@ -3,68 +3,19 @@ import { mount, type VueWrapper } from "@vue/test-utils";
 import App from "../App.vue";
 import { parse } from "../util/Parser";
 import type { Kpi } from "../model/Result";
+import {
+  createMockFile,
+  createMockFileList,
+  waitForNextTick,
+} from "../__test__/setup";
 
 // Import test data
 import kpiResultsSmall from "../../example/kpi-results-small.json";
-
-// Mock Chart.js to avoid canvas issues in tests
-vi.mock("chart.js", () => {
-  const mockChart = {
-    destroy: vi.fn(),
-    update: vi.fn(),
-    resize: vi.fn(),
-  };
-
-  const MockChart = vi.fn(() => mockChart) as any;
-  MockChart.register = vi.fn();
-
-  return {
-    Chart: MockChart,
-    DoughnutController: vi.fn(),
-    BarController: vi.fn(),
-    BarElement: vi.fn(),
-    ArcElement: vi.fn(),
-    CategoryScale: vi.fn(),
-    LinearScale: vi.fn(),
-    Tooltip: vi.fn(),
-    Legend: vi.fn(),
-    Title: vi.fn(),
-  };
-});
-
-// Mock annotation plugin
-vi.mock("chartjs-plugin-annotation", () => ({
-  default: {},
-}));
-
-// Mock colors
-vi.mock("../assets/styles/Colors.ts", () => ({
-  blue_chart: "#3D4BF6",
-  light_blue_button: "#D5E5FF",
-  background_grey: "#E9ECF1",
-  background_light_grey: "#F7F9FB",
-}));
 
 describe("Integration Tests - Complete Application Flow", () => {
   let wrapper: VueWrapper<any>;
   let consoleSpy: any;
   let consoleErrorSpy: any;
-
-  const createMockFile = (content: string, filename: string = "test.json") => {
-    return new File([content], filename, { type: "application/json" });
-  };
-
-  const createMockFileList = (files: File[]): FileList => {
-    const fileList = {
-      item: (index: number) => files[index] || null,
-      ...files,
-    } as FileList;
-    Object.defineProperty(fileList, "length", {
-      value: files.length,
-      writable: false,
-    });
-    return fileList;
-  };
 
   beforeEach(() => {
     consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});

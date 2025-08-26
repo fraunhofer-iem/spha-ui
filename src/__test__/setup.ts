@@ -1,7 +1,29 @@
 import { vi, beforeEach, afterEach, beforeAll, afterAll } from "vitest";
 import { config } from "@vue/test-utils";
 
-// Global test setup for SPHA Visualization
+// =============================================================================
+// GLOBAL TEST SETUP FOR SPHA VISUALIZATION
+// =============================================================================
+//
+// This file provides global test configuration and utilities for the entire test suite.
+// It is automatically loaded by Vitest before running any tests.
+//
+// KEY FEATURES:
+// 1. Global mocks for Chart.js, Bootstrap, CSS imports, and DOM APIs
+// 2. Mock utilities: createMockResult, createMockKpi, createMockRepoInfo
+// 3. File utilities: createMockFile, createMockFileList
+// 4. Performance monitoring: startPerformanceMonitoring, endPerformanceMonitoring
+// 5. Console utilities: suppressConsoleErrors, suppressConsoleWarnings
+// 6. Test utilities: waitForNextTick, waitFor, withErrorBoundary
+// 7. Vue Test Utils configuration with router and i18n mocks
+//
+// USAGE:
+// - Global mocks are applied automatically
+// - Import utilities in your test files:
+//   import { createMockResult, waitForNextTick } from '../__test__/setup'
+// - Or use them directly since they're globally available in some cases
+//
+// =============================================================================
 
 // =============================================================================
 // Global Mocks
@@ -200,39 +222,22 @@ config.global.stubs = {
 // =============================================================================
 
 export const createMockResult = (overrides = {}) => ({
-  healthScore: 75,
+  healthScore: 80,
   repoInfo: {
     projectName: "Test Project",
+    repoLanguages: [{ name: "TypeScript", percentage: 100 }],
     stars: 100,
+    lastCommitDate: "2023-01-01",
     contributors: 5,
-    lastCommitDate: "2024-01-15T10:30:00Z",
-    projectUrl: "https://github.com/test/repo",
-    repoLanguages: [
-      { name: "TypeScript", size: 65.2 },
-      { name: "JavaScript", size: 34.8 },
-    ],
+    projectUrl: "https://github.com/test/test",
   },
   root: {
-    displayName: "Software Quality",
-    score: 75,
+    displayName: "Root",
+    score: 80,
     id: "root",
-    children: [
-      {
-        displayName: "Code Quality",
-        score: 80,
-        id: "code-quality",
-        children: [],
-      },
-    ],
+    children: [],
   },
-  tools: [
-    {
-      name: "ESLint",
-      findings: 3,
-      downloadLink: "https://example.com/eslint",
-      scanDate: "2024-01-15",
-    },
-  ],
+  tools: [],
   ...overrides,
 });
 
@@ -241,16 +246,22 @@ export const createMockKpi = (overrides = {}) => ({
   score: 80,
   id: "test-kpi",
   children: [],
+  thresholds: [],
   ...overrides,
 });
 
 export const createMockRepoInfo = (overrides = {}) => ({
   projectName: "Test Project",
-  stars: 100,
-  contributors: 5,
+  stars: 127,
+  contributors: 8,
   lastCommitDate: "2024-01-15T10:30:00Z",
-  projectUrl: "https://github.com/test/repo",
-  repoLanguages: [],
+  projectUrl: "https://github.com/example/awesome-project",
+  repoLanguages: [
+    { name: "TypeScript", size: 65.2 },
+    { name: "JavaScript", size: 20.8 },
+    { name: "CSS", size: 10.5 },
+    { name: "HTML", size: 3.5 },
+  ],
   ...overrides,
 });
 

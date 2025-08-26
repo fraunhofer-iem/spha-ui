@@ -1,13 +1,14 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { mount, type VueWrapper } from "@vue/test-utils";
 import TopLevelKpiOverview from "../TopLevelKpiOverview.vue";
-import { Chart } from "chart.js";
 import type { Kpi } from "../../model/Result";
+import { createMockKpi } from "../../__test__/setup";
 import {
   getKpisOverThreshold,
   generateKpiSummaryText,
   getKpiStatusColor,
 } from "../../util/KpiService";
+import { Chart } from "chart.js";
 
 // Mock Chart.js
 vi.mock("chart.js", () => {
@@ -66,19 +67,22 @@ describe("TopLevelKpiOverview", () => {
   let mockGenerateKpiSummaryText: any;
   let mockGetKpiStatusColor: any;
 
-  const createMockKpiProps = (children: Partial<Kpi>[] = []): Kpi => ({
-    displayName: "Root KPI",
-    score: 75,
-    id: "root",
-    children: children.map((child, index) => ({
-      displayName: child.displayName || `KPI ${index + 1}`,
-      score: child.score || 60,
-      id: child.id || `kpi-${index + 1}`,
-      children: child.children || [],
-      thresholds: child.thresholds,
-    })),
-    thresholds: [],
-  });
+  const createMockKpiProps = (children: Partial<Kpi>[] = []): Kpi =>
+    createMockKpi({
+      displayName: "Root KPI",
+      score: 75,
+      id: "root",
+      children: children.map((child, index) =>
+        createMockKpi({
+          displayName: child.displayName || `KPI ${index + 1}`,
+          score: child.score || 60,
+          id: child.id || `kpi-${index + 1}`,
+          children: child.children || [],
+          thresholds: child.thresholds,
+        }),
+      ),
+      thresholds: [],
+    });
 
   beforeEach(() => {
     mockChartInstance = {
@@ -86,8 +90,6 @@ describe("TopLevelKpiOverview", () => {
       update: vi.fn(),
       resize: vi.fn(),
     };
-
-    (Chart as any).mockReturnValue(mockChartInstance);
 
     mockGetKpisOverThreshold = vi.mocked(getKpisOverThreshold);
     mockGenerateKpiSummaryText = vi.mocked(generateKpiSummaryText);

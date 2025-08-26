@@ -86,7 +86,7 @@ export default defineConfig({
     },
 
     // Setup files
-    setupFiles: ["./src/test/setup.ts"],
+    setupFiles: ["./src/__test__/setup.ts"],
 
     // Test environment configuration
     env: {

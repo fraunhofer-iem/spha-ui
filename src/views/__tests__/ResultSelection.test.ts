@@ -3,54 +3,12 @@ import { mount, type VueWrapper } from "@vue/test-utils";
 import ResultSelection from "../ResultSelection.vue";
 import { parse } from "../../util/Parser";
 import type { Result } from "../../model/Result";
+import { createMockResult, createMockFileList } from "../../__test__/setup";
 
 // Mock the Parser module
 vi.mock("../../util/Parser", () => ({
   parse: vi.fn(),
 }));
-
-// Helper function to create a proper FileList mock
-function createMockFileList(files: File[]): FileList {
-  const fileList = {
-    length: files.length,
-    item: (index: number) => files[index] || null,
-    [Symbol.iterator]: function* () {
-      for (let i = 0; i < files.length; i++) {
-        yield files[i];
-      }
-    },
-  };
-
-  // Add indexed properties
-  files.forEach((file, index) => {
-    (fileList as any)[index] = file;
-  });
-
-  return fileList as FileList;
-}
-
-// Helper function to create a valid Result mock
-function createMockResult(overrides: Partial<Result> = {}): Result {
-  return {
-    healthScore: 80,
-    repoInfo: {
-      projectName: "Test Project",
-      repoLanguages: [{ name: "TypeScript", percentage: 100 }],
-      stars: 100,
-      lastCommitDate: "2023-01-01",
-      contributors: 5,
-      projectUrl: "https://github.com/test/test",
-    },
-    root: {
-      displayName: "Root",
-      score: 80,
-      id: "root",
-      children: [],
-    },
-    tools: [],
-    ...overrides,
-  } as Result;
-}
 
 describe("ResultSelection", () => {
   let wrapper: VueWrapper<any>;

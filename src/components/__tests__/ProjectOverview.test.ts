@@ -1,7 +1,8 @@
-import { describe, it, expect, afterEach, vi } from "vitest";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { mount, type VueWrapper } from "@vue/test-utils";
 import ProjectOverview from "../ProjectOverview.vue";
-import type { RepoInfo, Language } from "../../model/Result";
+import type { RepoInfo } from "../../model/Result";
+import { createMockRepoInfo } from "../../__test__/setup";
 
 // Mock DashboardCard component
 vi.mock("../DashboardCard.vue", () => ({
@@ -15,20 +16,6 @@ vi.mock("../DashboardCard.vue", () => ({
 
 describe("ProjectOverview", () => {
   let wrapper: VueWrapper<any>;
-
-  const createMockRepoInfo = (overrides: Partial<RepoInfo> = {}): RepoInfo => ({
-    stars: 127,
-    contributors: 8,
-    lastCommitDate: "2024-01-15T10:30:00Z",
-    projectUrl: "https://github.com/example/awesome-project",
-    repoLanguages: [
-      { name: "TypeScript", size: 65.2 },
-      { name: "JavaScript", size: 20.8 },
-      { name: "CSS", size: 10.5 },
-      { name: "HTML", size: 3.5 },
-    ],
-    ...overrides,
-  });
 
   afterEach(() => {
     if (wrapper) {
