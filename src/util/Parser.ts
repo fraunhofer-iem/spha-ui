@@ -27,7 +27,7 @@ export function parse(raw: any): Result | undefined {
   const tools: Tool[] = raw.origins.map((origin: any) => {
     return {
       name: origin.name ?? "N/A",
-      findings: origin.origin?.length ?? 0,
+      findings: origin.origin ?? [],
       downloadLink: "N/A", //TODO: derive from name / store findings and make them downloadable
       icon: "", // TODO: derive icon from name
       description: "", // TODO: derive description from tool name

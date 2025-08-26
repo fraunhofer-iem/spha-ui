@@ -1,85 +1,122 @@
 <script setup lang="ts">
-
 import DashboardCard from "./DashboardCard.vue";
-import {computed} from "vue";
-import {background_light_grey} from "../assets/styles/Colors.ts";
-
-interface Tool {
-  name: string;
-  scanDate: string;
-  downloadLink: string;
-  findings: number;
-  icon: string;
-}
+import { computed } from "vue";
+import { background_light_grey } from "../assets/styles/Colors.ts";
+import type { Tool } from "../model/Result.ts";
 
 const props = defineProps<{
-  tools: Array<Tool>
+    tools: Array<Tool>;
 }>();
 
 const formattedScanDates = computed(() => {
-  return props.tools.map((tool) => {
-    if (!tool.scanDate) {
-      return "Last scan date not found"
-    }
+    return props.tools.map((tool) => {
+        if (!tool.scanDate) {
+            return "Last scan date not found";
+        }
 
-    const date = new Date(tool.scanDate);
-    if (isNaN(date.getTime())) {
-      return "Invalid date"
-    }
+        const date = new Date(tool.scanDate);
+        if (isNaN(date.getTime())) {
+            return "Invalid date";
+        }
 
-    return date.toLocaleDateString(undefined, {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
+        return date.toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+        });
     });
-  });
 });
 
-const handleButtonClick = () => {
-  // Handle button click event
-  console.log('Details button clicked');
+const downloadAll = () => {
+    // Handle button click event
+    console.log("Details button clicked");
 };
 
+const downloadToolFindings = (tool: Tool) => {
+    if (!tool.findings || tool.findings.length === 0) {
+        console.log("No findings to download for", tool.name);
+        return;
+    }
+
+    const jsonData = JSON.stringify(tool.findings, null, 2);
+    const blob = new Blob([jsonData], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${tool.name.toLowerCase().replace(/\s+/g, "-")}-findings.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+};
 </script>
 
 <template>
-  <DashboardCard title-style="start" title="Tool Results" icon="tools" :showButton="true"
-                 buttonText="Download All"
-                 @button-click="handleButtonClick">
-    <div class="list-group list-group-flush">
-
-      <template v-for="(tool, idx) in props.tools" :key="tool.name">
-        <div class="list-group-item d-flex justify-content-between w-100"
-             :style="`background-color: ${background_light_grey}`">
-          <div class="row">
-            <div class="col align-items-end d-flex justify-content-center align-self-center">
-              <img
-                  :src="`${tool.icon}`"
-                  alt="Software Product Health Assistant"
-                  width="60">
-            </div>
-            <div class="col">
-              <div class="text-muted">{{ tool.name }}</div>
-              <div class="fw-bold fs-5">{{ tool.findings }} Findings</div>
-              <div class="text-muted">Last Updated: {{ formattedScanDates[idx] }}</div>
-            </div>
-          </div>
-          <div class="align-self-center">
-            <button type="button" class="text-primary-emphasis bg-primary-subtle btn"><i
-                class="bi bi-download pe-2"></i> Download
-            </button>
-          </div>
-
+    <DashboardCard
+        title-style="start"
+        title="Tool Results"
+        icon="tools"
+        :showButton="true"
+        buttonText="Download All"
+        @button-click="downloadAll"
+    >
+        <div class="list-group list-group-flush">
+            <template v-for="(tool, idx) in props.tools" :key="tool.name">
+                <div
+                    class="list-group-item d-flex justify-content-between w-100"
+                    :style="`background-color: ${background_light_grey}`"
+                >
+                    <div class="row">
+                        <div
+                            class="col align-items-end d-flex justify-content-center align-self-center"
+                        >
+                            <img
+                                v-if="tool.icon"
+                                :src="`${tool.icon}`"
+                                alt="Software Product Health Assistant"
+                                width="60"
+                            />
+                            <div
+                                v-else
+                                class="text-muted d-flex align-items-center justify-content-center"
+                                style="
+                                    width: 60px;
+                                    height: 60px;
+                                    border: 1px solid #dee2e6;
+                                    border-radius: 4px;
+                                "
+                            >
+                                <i class="bi bi-gear-fill"></i>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="text-muted">{{ tool.name }}</div>
+                            <div class="fw-bold fs-5">
+                                {{ tool.findings?.length ?? 0 }} Findings
+                            </div>
+                            <div class="text-muted">
+                                Last Updated: {{ formattedScanDates[idx] }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-self-center">
+                        <button
+                            type="button"
+                            class="text-primary-emphasis bg-primary-subtle btn"
+                            @click="downloadToolFindings(tool)"
+                        >
+                            <i class="bi bi-download pe-2"></i> Download
+                        </button>
+                    </div>
+                </div>
+            </template>
         </div>
-
-      </template>
-
-    </div>
-  </DashboardCard>
+    </DashboardCard>
 </template>
 
 <style scoped>
 .bi {
-  font-size: 1.5rem; /* Make icons larger */
+    font-size: 1.5rem; /* Make icons larger */
 }
 </style>

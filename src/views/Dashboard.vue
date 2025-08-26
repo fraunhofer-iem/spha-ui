@@ -5,36 +5,10 @@ import HealthScore from "./../components/HealthScore.vue";
 import TopLevelKpiOverview from "./../components/TopLevelKpiOverview.vue";
 import KpiWarning from "./../components/KpiWarning.vue";
 import ToolOverview from "./../components/ToolOverview.vue";
-import truffleHogUrl from "./../assets/img/supportedTools/trufflehog.svg";
-import osvUrl from "./../assets/img/supportedTools/osv.svg";
-import ghUrl from "./../assets/img/supportedTools/github-mark.svg";
+
 import type { Result } from "../model/Result.ts";
 
 const props = defineProps<Result>();
-
-const tools = [
-    {
-        name: "Trufflehog",
-        scanDate: "2025-06-10",
-        findings: 10,
-        downloadLink: "",
-        icon: truffleHogUrl,
-    },
-    {
-        name: "OSV",
-        scanDate: "2025-06-10",
-        findings: 2,
-        downloadLink: "",
-        icon: osvUrl,
-    },
-    {
-        name: "GitHub",
-        scanDate: "2025-06-10",
-        findings: 20,
-        downloadLink: "",
-        icon: ghUrl,
-    },
-];
 </script>
 
 <template>
@@ -60,7 +34,7 @@ const tools = [
     </div>
     <div class="row">
         <div class="col-md-12 mb-3">
-            <ToolOverview :tools="tools" />
+            <ToolOverview :tools="props.tools" />
         </div>
     </div>
 </template>

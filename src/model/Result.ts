@@ -28,7 +28,7 @@ export interface Language {
 export interface Tool {
   name: string;
   scanDate?: string;
-  findings?: number;
+  findings?: any[];
   downloadLink: string;
   icon?: string;
   description?: string;
