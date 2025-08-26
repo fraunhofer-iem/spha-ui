@@ -339,7 +339,7 @@ describe("Data Validation Utilities", () => {
   describe("Tool Validation", () => {
     const createValidTool = (): Tool => ({
       name: "ESLint",
-      findings: 5,
+      findings: [{}, {}, {}, {}, {}],
       downloadLink: "https://example.com/download",
       scanDate: "2024-01-15",
       icon: "eslint-icon.svg",
@@ -361,18 +361,22 @@ describe("Data Validation Utilities", () => {
       expect(isValidTool(minimalTool)).toBe(true);
     });
 
-    it("should validate findings count", () => {
-      const validFindings = [0, 1, 100, undefined];
-      const invalidFindings = [-1, NaN, "5" as any];
+    it("should validate findings array", () => {
+      const validFindings = [[], [{}], Array(100).fill({}), undefined];
+      const invalidFindings = [-1, NaN, "5" as any, {}];
 
       validFindings.forEach((findings) => {
         const tool = { ...createValidTool(), findings };
-        expect(isValidTool(tool), `Findings: ${findings}`).toBe(true);
+        expect(isValidTool(tool), `Findings: ${JSON.stringify(findings)}`).toBe(
+          true,
+        );
       });
 
       invalidFindings.forEach((findings) => {
         const tool = { ...createValidTool(), findings };
-        expect(isValidTool(tool), `Findings: ${findings}`).toBe(false);
+        expect(isValidTool(tool), `Findings: ${JSON.stringify(findings)}`).toBe(
+          false,
+        );
       });
     });
 
@@ -528,7 +532,7 @@ describe("Data Validation Utilities", () => {
         tools: [
           {
             name: "ESLint",
-            findings: 3,
+            findings: [{}, {}, {}],
             downloadLink: "https://example.com/eslint",
           },
         ],
@@ -658,7 +662,7 @@ function isValidTool(tool: any): boolean {
   if (typeof tool.name !== "string" || !tool.name) return false;
   if (typeof tool.downloadLink !== "string") return false;
 
-  if (tool.findings !== undefined && !isValidNumber(tool.findings, 0))
+  if (tool.findings !== undefined && !Array.isArray(tool.findings))
     return false;
   if (tool.scanDate !== undefined && typeof tool.scanDate !== "string")
     return false;

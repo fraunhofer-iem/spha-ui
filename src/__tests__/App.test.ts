@@ -78,13 +78,13 @@ describe("App", () => {
     tools: [
       {
         name: "ESLint",
-        findings: 3,
+        findings: [{}, {}, {}],
         downloadLink: "N/A",
         scanDate: "2024-01-15",
       },
       {
         name: "SonarQube",
-        findings: 1,
+        findings: [{}],
         downloadLink: "N/A",
         scanDate: "2024-01-15",
       },

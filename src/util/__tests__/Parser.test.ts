@@ -84,16 +84,16 @@ describe("Parser", () => {
 
       const eslintTool = result.tools.find((tool) => tool.name === "ESLint");
       expect(eslintTool).toBeDefined();
-      expect(eslintTool?.findings).toBe(2);
+      expect(eslintTool?.findings).toHaveLength(2);
       expect(eslintTool?.downloadLink).toBe("N/A");
 
       const sonarTool = result.tools.find((tool) => tool.name === "SonarQube");
       expect(sonarTool).toBeDefined();
-      expect(sonarTool?.findings).toBe(1);
+      expect(sonarTool?.findings).toHaveLength(1);
 
       const jestTool = result.tools.find((tool) => tool.name === "Jest");
       expect(jestTool).toBeDefined();
-      expect(jestTool?.findings).toBe(1);
+      expect(jestTool?.findings).toHaveLength(1);
     });
 
     it("should have correct root KPI structure", () => {
@@ -343,11 +343,11 @@ describe("Parser", () => {
 
       const firstTool = result!.tools[0];
       expect(firstTool?.name).toBe("N/A");
-      expect(firstTool?.findings).toBe(0);
+      expect(firstTool?.findings).toHaveLength(0);
 
       const secondTool = result!.tools[1];
       expect(secondTool?.name).toBe("TestTool");
-      expect(secondTool?.findings).toBe(0);
+      expect(secondTool?.findings).toHaveLength(0);
     });
   });
 });

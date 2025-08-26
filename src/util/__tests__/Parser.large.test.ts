@@ -82,7 +82,7 @@ describe("Parser with large kpi-results.json", () => {
         expect(firstTool).toHaveProperty("description");
 
         expect(typeof firstTool?.name).toBe("string");
-        expect(typeof firstTool?.findings).toBe("number");
+        expect(Array.isArray(firstTool?.findings)).toBe(true);
         expect(typeof firstTool?.downloadLink).toBe("string");
         expect(typeof firstTool?.icon).toBe("string");
         expect(typeof firstTool?.description).toBe("string");
@@ -91,7 +91,10 @@ describe("Parser with large kpi-results.json", () => {
 
     it("should have non-negative findings count", () => {
       result.tools.forEach((tool) => {
-        expect(tool.findings).toBeGreaterThanOrEqual(0);
+        if (tool.findings) {
+          expect(Array.isArray(tool.findings)).toBe(true);
+          expect(tool.findings.length).toBeGreaterThanOrEqual(0);
+        }
       });
     });
   });
