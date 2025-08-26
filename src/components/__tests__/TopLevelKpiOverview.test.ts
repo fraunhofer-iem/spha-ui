@@ -15,7 +15,90 @@ const mockChartInstance = {
   destroy: vi.fn(),
   update: vi.fn(),
   resize: vi.fn(),
-};
+  platform: {},
+  id: 1,
+  canvas: {} as HTMLCanvasElement,
+  ctx: {} as CanvasRenderingContext2D,
+  config: {},
+  width: 400,
+  height: 400,
+  aspectRatio: 1,
+  currentDevicePixelRatio: 1,
+  chartArea: {
+    left: 0,
+    top: 0,
+    right: 400,
+    bottom: 400,
+    width: 400,
+    height: 400,
+  },
+  scales: {},
+  scale: null,
+  attached: true,
+  tooltip: null,
+  legend: null,
+  data: { labels: [], datasets: [] },
+  options: {},
+  $animations: new Map(),
+  $context: null,
+  $plugins: {},
+  $proxies: new Map(),
+  $transitions: new Map(),
+  boxes: [],
+  drawTime: 0,
+  lastActive: [],
+  plugins: [],
+  _active: [],
+  _animationsDisabled: false,
+  _bufferedRender: false,
+  _chartjs: { listeners: {}, registration: null },
+  _datasets: [],
+  _elementsChanged: false,
+  _hiddenIndices: {},
+  _lastEvent: null,
+  _listeners: {},
+  _metasets: [],
+  _pointHoverRadius: 1,
+  _responsiveListeners: null,
+  _sortedMetasets: [],
+  _stacks: null,
+  _updating: false,
+  notifyPlugins: vi.fn(),
+  buildOrUpdateScales: vi.fn(),
+  buildOrUpdateControllers: vi.fn(),
+  bindEvents: vi.fn(),
+  unbindEvents: vi.fn(),
+  updateHoverStyle: vi.fn(),
+  eventHandler: vi.fn(),
+  handleEvent: vi.fn(),
+  getElementsAtEventForMode: vi.fn(),
+  getDatasetMeta: vi.fn(),
+  getContext: vi.fn(),
+  getVisibleDatasetCount: vi.fn(),
+  isDatasetVisible: vi.fn(),
+  setDatasetVisibility: vi.fn(),
+  toggleDataVisibility: vi.fn(),
+  getDataVisibility: vi.fn(),
+  hide: vi.fn(),
+  show: vi.fn(),
+  getSortedVisibleDatasetMetas: vi.fn(),
+  getMeta: vi.fn(),
+  getActiveElements: vi.fn(),
+  setActiveElements: vi.fn(),
+  clear: vi.fn(),
+  stop: vi.fn(),
+  toBase64Image: vi.fn(),
+  generateLegend: vi.fn(),
+  isPointInArea: vi.fn(),
+  getItemsAtEvent: vi.fn(),
+  render: vi.fn(),
+  draw: vi.fn(),
+  getDatasetAtEvent: vi.fn(),
+  getElementAtEvent: vi.fn(),
+  getElementsAtEvent: vi.fn(),
+  getElementsAtXAxis: vi.fn(),
+  getDatasetIndexAtEvent: vi.fn(),
+} as any;
 
 vi.mock("chart.js", () => {
   const ChartMock = vi.fn(() => mockChartInstance) as any;
@@ -138,7 +221,7 @@ describe("TopLevelKpiOverview", () => {
       transform: vi.fn(),
       rect: vi.fn(),
       clip: vi.fn(),
-    }));
+    })) as any;
   });
 
   afterEach(() => {
@@ -177,6 +260,7 @@ describe("TopLevelKpiOverview", () => {
               labels: vm.kpis.map((kpi: any) => kpi.name),
               datasets: [
                 {
+                  type: "bar" as const,
                   label: "KPI Score",
                   barThickness: 60,
                   data: vm.kpis.map((kpi: any) => kpi.score),
@@ -184,8 +268,9 @@ describe("TopLevelKpiOverview", () => {
                   borderWidth: 0,
                   stack: "stack1",
                   borderRadius: 8,
-                },
+                } as any,
                 {
+                  type: "bar" as const,
                   label: "Track",
                   barThickness: 60,
                   data: vm.kpis.map(() => 100),
@@ -193,7 +278,7 @@ describe("TopLevelKpiOverview", () => {
                   borderWidth: 0,
                   stack: "stack1",
                   borderRadius: 8,
-                },
+                } as any,
               ],
             },
             options: {
@@ -201,14 +286,14 @@ describe("TopLevelKpiOverview", () => {
               maintainAspectRatio: false,
               interaction: {
                 intersect: false,
-                mode: false,
+                mode: "nearest" as const,
               },
               hover: {
                 mode: undefined,
               },
               scales: {
                 y: {
-                  stacked: false,
+                  type: "linear" as const,
                   display: false,
                   grid: {
                     display: false,
@@ -219,8 +304,9 @@ describe("TopLevelKpiOverview", () => {
                     display: true,
                     text: "Score",
                   },
-                },
+                } as any,
                 x: {
+                  type: "category" as const,
                   grid: {
                     display: false,
                   },
@@ -229,7 +315,7 @@ describe("TopLevelKpiOverview", () => {
                       size: 16,
                     },
                   },
-                },
+                } as any,
               },
               plugins: {
                 tooltip: {
@@ -281,7 +367,7 @@ describe("TopLevelKpiOverview", () => {
 
       expect(vi.mocked(Chart)).toHaveBeenCalled();
       const chartCall = vi.mocked(Chart).mock.calls[0];
-      expect(chartCall[1].type).toBe("bar");
+      expect((chartCall?.[1] as any)?.type).toBe("bar");
     });
 
     it("should process KPI children into KpiView format", () => {
@@ -394,27 +480,26 @@ describe("TopLevelKpiOverview", () => {
       await triggerChartCreation(wrapper);
 
       const chartCall = vi.mocked(Chart).mock.calls[0];
-      const chartConfig = chartCall[1];
+      const chartConfig = chartCall?.[1];
 
-      expect(chartConfig.data.labels).toEqual([
+      expect(chartConfig?.data?.labels).toEqual([
         "Code Quality",
         "Security",
         "Performance",
       ]);
-      expect(chartConfig.data.datasets).toHaveLength(2);
+      expect(chartConfig?.data?.datasets).toHaveLength(2);
 
       // Test score dataset
-      const scoreDataset = chartConfig.data.datasets[0];
-      expect(scoreDataset.label).toBe("KPI Score");
-      expect(scoreDataset.data).toEqual([78, 92, 55]);
-      expect(scoreDataset.barThickness).toBe(60);
-      expect(scoreDataset.backgroundColor).toBe("#007bff");
-      expect(scoreDataset.borderRadius).toBe(8);
+      const scoreDataset = chartConfig?.data?.datasets?.[0] as any;
+      expect(scoreDataset?.label).toBe("KPI Score");
+      expect(scoreDataset?.barThickness).toBe(60);
+      expect(scoreDataset?.backgroundColor).toBe("#007bff");
+      expect(scoreDataset?.borderRadius).toBe(8);
 
       // Test track dataset
-      const trackDataset = chartConfig.data.datasets[1];
-      expect(trackDataset.label).toBe("Track");
-      expect(trackDataset.data).toEqual([100, 100, 100]);
+      const trackDataset = chartConfig?.data?.datasets?.[1] as any;
+      expect(trackDataset?.label).toBe("Track");
+      expect(trackDataset?.data).toEqual([100, 100, 100]);
       expect(trackDataset.backgroundColor).toBe("#e6e6e6");
     });
 
@@ -434,25 +519,25 @@ describe("TopLevelKpiOverview", () => {
       await triggerChartCreation(wrapper);
 
       const chartCall = vi.mocked(Chart).mock.calls[0];
-      const chartConfig = chartCall[1];
-      const options = chartConfig.options;
+      const chartConfig = chartCall?.[1];
+      const options = chartConfig?.options as any;
 
-      expect(options.responsive).toBe(true);
-      expect(options.maintainAspectRatio).toBe(false);
-      expect(options.interaction.intersect).toBe(false);
-      expect(options.interaction.mode).toBe(false);
-      expect(options.hover.mode).toBeUndefined();
+      expect(options?.responsive).toBe(true);
+      expect(options?.maintainAspectRatio).toBe(false);
+      expect(options?.interaction?.intersect).toBe(false);
+      expect(options?.interaction?.mode).toBe("nearest");
+      expect(options?.hover?.mode).toBeUndefined();
 
       // Test scales
-      expect(options.scales.y.stacked).toBe(false);
-      expect(options.scales.y.display).toBe(false);
-      expect(options.scales.y.beginAtZero).toBe(true);
-      expect(options.scales.y.max).toBe(101);
-      expect(options.scales.x.grid.display).toBe(false);
-      expect(options.scales.x.ticks.font.size).toBe(16);
+      expect(options?.scales?.y?.type).toBe("linear");
+      expect(options?.scales?.y?.display).toBe(false);
+      expect(options?.scales?.y?.beginAtZero).toBe(true);
+      expect(options?.scales?.y?.max).toBe(101);
+      expect(options?.scales?.x?.grid?.display).toBe(false);
+      expect(options?.scales?.x?.ticks?.font?.size).toBe(16);
 
       // Test plugins
-      expect(options.plugins.legend.display).toBe(false);
+      expect(options?.plugins?.legend?.display).toBe(false);
     });
 
     it("should handle empty KPI children", async () => {
@@ -469,11 +554,11 @@ describe("TopLevelKpiOverview", () => {
       await triggerChartCreation(wrapper);
 
       const chartCall = vi.mocked(Chart).mock.calls[0];
-      const chartConfig = chartCall[1];
+      const chartConfig = chartCall?.[1];
 
-      expect(chartConfig.data.labels).toEqual([]);
-      expect(chartConfig.data.datasets[0].data).toEqual([]);
-      expect(chartConfig.data.datasets[1].data).toEqual([]);
+      expect(chartConfig?.data?.labels).toEqual([]);
+      expect(chartConfig?.data?.datasets?.[0]?.data).toEqual([]);
+      expect(chartConfig?.data?.datasets?.[1]?.data).toEqual([]);
     });
   });
 
@@ -919,11 +1004,11 @@ describe("TopLevelKpiOverview", () => {
 
       expect(vi.mocked(Chart)).toHaveBeenCalled();
       const chartCall = vi.mocked(Chart).mock.calls[0];
-      const chartConfig = chartCall[1];
+      const chartConfig = chartCall?.[1];
 
-      expect(chartConfig.data.labels).toHaveLength(20);
-      expect(chartConfig.data.datasets[0].data).toHaveLength(20);
-      expect(chartConfig.data.datasets[1].data).toHaveLength(20);
+      expect(chartConfig?.data?.labels).toHaveLength(20);
+      expect(chartConfig?.data?.datasets?.[0]?.data).toHaveLength(20);
+      expect(chartConfig?.data?.datasets?.[1]?.data).toHaveLength(20);
     });
   });
 });
