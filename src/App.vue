@@ -14,6 +14,7 @@ const onJsonData = (data: Result | null) => {
   if (data === null) {
     return;
   }
+  console.log(data);
   result.value = data;
   hasResults.value = true;
 };
