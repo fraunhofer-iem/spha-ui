@@ -3,6 +3,7 @@ import type {
   RepoInfo,
   Result,
   Tool,
+  ToolInfoAndOrigin,
   Threshold,
 } from "../model/Result.ts";
 
@@ -24,13 +25,13 @@ export function parse(raw: any): Result | undefined {
   };
 
   const healthScore = extractScore(raw.resultHierarchy.root?.result) ?? -1;
-  const tools: Tool[] = raw.origins.map((origin: any) => {
+  const tools: Tool[] = raw.origins.map((toolAndOrigin: ToolInfoAndOrigin) => {
     return {
-      name: origin.name ?? "N/A",
-      findings: origin.origin ?? [],
+      name: toolAndOrigin.toolInfo?.name ?? "N/A",
+      findings: toolAndOrigin.origins ?? [],
       downloadLink: "N/A", //TODO: derive from name / store findings and make them downloadable
       icon: "", // TODO: derive icon from name
-      description: "", // TODO: derive description from tool name
+      description: toolAndOrigin.toolInfo?.description ?? "", // Use description from toolInfo
     };
   });
 

@@ -332,8 +332,8 @@ describe("Parser", () => {
       const dataWithIncompleteOrigins = {
         ...kpiResultsSmall,
         origins: [
-          { name: undefined, origin: [] },
-          { name: "TestTool", origin: undefined },
+          { toolInfo: { name: undefined, description: undefined }, origins: [] },
+          { toolInfo: { name: "TestTool", description: "Test description" }, origins: undefined },
         ],
       };
 
@@ -343,10 +343,12 @@ describe("Parser", () => {
 
       const firstTool = result!.tools[0];
       expect(firstTool?.name).toBe("N/A");
+      expect(firstTool?.description).toBe("");
       expect(firstTool?.findings).toHaveLength(0);
 
       const secondTool = result!.tools[1];
       expect(secondTool?.name).toBe("TestTool");
+      expect(secondTool?.description).toBe("Test description");
       expect(secondTool?.findings).toHaveLength(0);
     });
   });

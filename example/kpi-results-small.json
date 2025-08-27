@@ -27,8 +27,11 @@
   },
   "origins": [
     {
-      "name": "ESLint",
-      "origin": [
+      "toolInfo": {
+        "name": "ESLint",
+        "description": "JavaScript and TypeScript linter"
+      },
+      "origins": [
         {
           "id": "eslint-1",
           "message": "Missing semicolon"
@@ -40,8 +43,11 @@
       ]
     },
     {
-      "name": "SonarQube",
-      "origin": [
+      "toolInfo": {
+        "name": "SonarQube",
+        "description": "Code quality and security analysis"
+      },
+      "origins": [
         {
           "id": "sonar-1",
           "message": "Code duplication detected"
@@ -49,8 +55,11 @@
       ]
     },
     {
-      "name": "Jest",
-      "origin": [
+      "toolInfo": {
+        "name": "Jest",
+        "description": "JavaScript testing framework"
+      },
+      "origins": [
         {
           "id": "jest-1",
           "message": "Low test coverage"

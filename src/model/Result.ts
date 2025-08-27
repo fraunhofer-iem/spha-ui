@@ -25,6 +25,17 @@ export interface Language {
   size: number;
 }
 
+export interface ToolInfo {
+  name: string;
+  description: string;
+  version?: string;
+}
+
+export interface ToolInfoAndOrigin {
+  toolInfo: ToolInfo;
+  origins: any[];
+}
+
 export interface Tool {
   name: string;
   scanDate?: string;
