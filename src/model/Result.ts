@@ -40,7 +40,6 @@ export interface Tool {
   name: string;
   scanDate?: string;
   findings?: any[];
-  icon?: string;
   description?: string;
 }
 

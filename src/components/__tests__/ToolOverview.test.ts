@@ -24,6 +24,25 @@ vi.mock("../../assets/styles/Colors.ts", () => ({
   background_light_grey: "#F7F9FB",
 }));
 
+// Mock import.meta.glob for dynamic icon loading
+vi.stubGlobal('import', {
+  meta: {
+    glob: vi.fn(() => ({
+      '/src/assets/img/supportedTools/eslint.svg': true,
+      '/src/assets/img/supportedTools/sonarqube.svg': true,
+      '/src/assets/img/supportedTools/security-scanner.svg': true,
+      '/src/assets/img/supportedTools/performance-tool.svg': true,
+      '/src/assets/img/supportedTools/github.svg': true,
+      '/src/assets/img/supportedTools/gitlab.svg': true,
+      '/src/assets/img/supportedTools/ort.svg': true,
+      '/src/assets/img/supportedTools/osv.svg': true,
+      '/src/assets/img/supportedTools/trivy.svg': true,
+      '/src/assets/img/supportedTools/trufflehog.svg': true,
+      '/src/assets/img/supportedTools/technicallaganalyzer.svg': true,
+    }))
+  }
+});
+
 describe("ToolOverview", () => {
   let wrapper: VueWrapper<any>;
   let mockTools: Tool[];
