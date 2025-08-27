@@ -29,7 +29,6 @@ export interface Tool {
   name: string;
   scanDate?: string;
   findings?: any[];
-  downloadLink: string;
   icon?: string;
   description?: string;
 }
