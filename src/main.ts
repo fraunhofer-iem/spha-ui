@@ -7,15 +7,15 @@ import './assets/styles/dashboard-card.scss';
 declare var __DEMO_MODE__: string;
 
 async function main() {
+    let App;
     if (__DEMO_MODE__) {
         console.log('Running in demo mode');
-        const App = await import("./App-demo.vue");
-        createApp(App.default).mount('#app')
+        App = await import("./App-demo.vue");
     } else {
         console.log('Running in default mode');
-        const App = await import("./App.vue");
-        createApp(App.default).mount('#app')
+        App = await import("./App.vue");
     }
+    createApp(App.default).mount('#app')
 }
 
 main();
