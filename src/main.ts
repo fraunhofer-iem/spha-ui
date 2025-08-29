@@ -4,6 +4,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js"
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './assets/styles/dashboard-card.scss';
 
+declare var __DEMO_MODE__: string;
+
 async function main() {
     if (__DEMO_MODE__) {
         console.log('Running in demo mode');
