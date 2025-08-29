@@ -1,12 +1,12 @@
-import type { Kpi } from "../model/Result.ts";
+import type {Kpi} from "../model/Result.ts";
 
 export interface KpiThresholdAnalysis {
-  totalKpis: number;
-  kpisAboveThreshold: number;
-  kpisBelowThreshold: number;
-  kpisAbove: Kpi[];
-  kpisBelow: Kpi[];
-  percentage: number;
+    totalKpis: number;
+    kpisAboveThreshold: number;
+    kpisBelowThreshold: number;
+    kpisAbove: Kpi[];
+    kpisBelow: Kpi[];
+    percentage: number;
 }
 
 /**
@@ -16,28 +16,28 @@ export interface KpiThresholdAnalysis {
  * @returns Analysis of KPIs above/below threshold
  */
 export function getKpisOverThreshold(
-  rootKpi: Kpi,
-  defaultThreshold: number = 60,
+    rootKpi: Kpi,
+    defaultThreshold: number = 60,
 ): KpiThresholdAnalysis {
-  const kpis = rootKpi.children;
-  const kpisAbove = kpis.filter((kpi) => {
-    const threshold = getKpiThreshold(kpi, defaultThreshold);
-    return kpi.score >= threshold;
-  });
-  const kpisBelow = kpis.filter((kpi) => {
-    const threshold = getKpiThreshold(kpi, defaultThreshold);
-    return kpi.score < threshold;
-  });
+    const kpis = rootKpi.children;
+    const kpisAbove = kpis.filter((kpi) => {
+        const threshold = getKpiThreshold(kpi, defaultThreshold);
+        return kpi.score >= threshold;
+    });
+    const kpisBelow = kpis.filter((kpi) => {
+        const threshold = getKpiThreshold(kpi, defaultThreshold);
+        return kpi.score < threshold;
+    });
 
-  return {
-    totalKpis: kpis.length,
-    kpisAboveThreshold: kpisAbove.length,
-    kpisBelowThreshold: kpisBelow.length,
-    kpisAbove,
-    kpisBelow,
-    percentage:
-      kpis.length > 0 ? Math.round((kpisAbove.length / kpis.length) * 100) : 0,
-  };
+    return {
+        totalKpis: kpis.length,
+        kpisAboveThreshold: kpisAbove.length,
+        kpisBelowThreshold: kpisBelow.length,
+        kpisAbove,
+        kpisBelow,
+        percentage:
+            kpis.length > 0 ? Math.round((kpisAbove.length / kpis.length) * 100) : 0,
+    };
 }
 
 /**
@@ -47,15 +47,15 @@ export function getKpisOverThreshold(
  * @returns The effective threshold value
  */
 export function getKpiThreshold(
-  kpi: Kpi,
-  defaultThreshold: number = 60,
+    kpi: Kpi,
+    defaultThreshold: number = 60,
 ): number {
-  if (!kpi.thresholds || kpi.thresholds.length === 0) {
-    return defaultThreshold;
-  }
+    if (!kpi.thresholds || kpi.thresholds.length === 0) {
+        return defaultThreshold;
+    }
 
-  // Use the smallest threshold if multiple are available
-  return Math.min(...kpi.thresholds.map((t) => t.value));
+    // Use the smallest threshold if multiple are available
+    return Math.min(...kpi.thresholds.map((t) => t.value));
 }
 
 /**
@@ -64,48 +64,48 @@ export function getKpiThreshold(
  * @returns Descriptive text for the dashboard
  */
 export function generateKpiSummaryText(analysis: KpiThresholdAnalysis): string {
-  const { kpisAboveThreshold, totalKpis, percentage } = analysis;
+    const {kpisAboveThreshold, totalKpis, percentage} = analysis;
 
-  if (totalKpis === 0) {
-    return "No KPIs available for analysis.";
-  }
+    if (totalKpis === 0) {
+        return "No KPIs available for analysis.";
+    }
 
-  const numberWords = [
-    "zero",
-    "one",
-    "two",
-    "three",
-    "four",
-    "five",
-    "six",
-    "seven",
-    "eight",
-    "nine",
-    "ten",
-  ];
+    const numberWords = [
+        "zero",
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "eight",
+        "nine",
+        "ten",
+    ];
 
-  const kpisAboveText =
-    kpisAboveThreshold <= 10
-      ? numberWords[kpisAboveThreshold]
-      : kpisAboveThreshold.toString();
+    const kpisAboveText =
+        kpisAboveThreshold <= 10
+            ? numberWords[kpisAboveThreshold]
+            : kpisAboveThreshold.toString();
 
-  const totalKpisText =
-    totalKpis <= 10 ? numberWords[totalKpis] : totalKpis.toString();
+    const totalKpisText =
+        totalKpis <= 10 ? numberWords[totalKpis] : totalKpis.toString();
 
-  let statusText: string;
-  if (percentage >= 80) {
-    statusText = "The project is in excellent shape.";
-  } else if (percentage >= 60) {
-    statusText = "The project is in good shape.";
-  } else if (percentage >= 40) {
-    statusText = "The project needs some attention.";
-  } else {
-    statusText = "The project requires immediate attention.";
-  }
+    let statusText: string;
+    if (percentage >= 80) {
+        statusText = "The project is in excellent shape.";
+    } else if (percentage >= 60) {
+        statusText = "The project is in good shape.";
+    } else if (percentage >= 40) {
+        statusText = "The project needs some attention.";
+    } else {
+        statusText = "The project requires immediate attention.";
+    }
 
-  const plural = totalKpis === 1 ? "KPI is" : "KPIs are";
+    const plural = totalKpis === 1 ? "KPI is" : "KPIs are";
 
-  return `${kpisAboveText.charAt(0).toUpperCase() + kpisAboveText.slice(1)} out of ${totalKpisText} ${plural} above the threshold. ${statusText} Click Details below to see more.`;
+    return `${kpisAboveText!.charAt(0).toUpperCase() + kpisAboveText!.slice(1)} out of ${totalKpisText} ${plural} above the threshold. ${statusText} Click Details below to see more.`;
 }
 
 /**
@@ -114,10 +114,10 @@ export function generateKpiSummaryText(analysis: KpiThresholdAnalysis): string {
  * @returns CSS class or color indicator
  */
 export function getKpiStatusColor(percentage: number): string {
-  if (percentage >= 80) return "text-success";
-  if (percentage >= 60) return "text-primary";
-  if (percentage >= 40) return "text-warning";
-  return "text-danger";
+    if (percentage >= 80) return "text-success";
+    if (percentage >= 60) return "text-primary";
+    if (percentage >= 40) return "text-warning";
+    return "text-danger";
 }
 
 /**
@@ -127,30 +127,30 @@ export function getKpiStatusColor(percentage: number): string {
  * @returns Debug information about thresholds used for each KPI
  */
 export function getKpiThresholdDebugInfo(
-  rootKpi: Kpi,
-  defaultThreshold: number = 60,
+    rootKpi: Kpi,
+    defaultThreshold: number = 60,
 ): Array<{
-  id: string;
-  displayName: string;
-  score: number;
-  effectiveThreshold: number;
-  availableThresholds: Array<{ name: string; value: number }>;
-  isAboveThreshold: boolean;
-  usesDefault: boolean;
+    id: string;
+    displayName: string;
+    score: number;
+    effectiveThreshold: number;
+    availableThresholds: Array<{ name: string; value: number }>;
+    isAboveThreshold: boolean;
+    usesDefault: boolean;
 }> {
-  return rootKpi.children.map((kpi) => {
-    const effectiveThreshold = getKpiThreshold(kpi, defaultThreshold);
-    const availableThresholds = kpi.thresholds || [];
-    const usesDefault = !kpi.thresholds || kpi.thresholds.length === 0;
+    return rootKpi.children.map((kpi) => {
+        const effectiveThreshold = getKpiThreshold(kpi, defaultThreshold);
+        const availableThresholds = kpi.thresholds || [];
+        const usesDefault = !kpi.thresholds || kpi.thresholds.length === 0;
 
-    return {
-      id: kpi.id,
-      displayName: kpi.displayName,
-      score: kpi.score,
-      effectiveThreshold,
-      availableThresholds,
-      isAboveThreshold: kpi.score >= effectiveThreshold,
-      usesDefault,
-    };
-  });
+        return {
+            id: kpi.id,
+            displayName: kpi.displayName,
+            score: kpi.score,
+            effectiveThreshold,
+            availableThresholds,
+            isAboveThreshold: kpi.score >= effectiveThreshold,
+            usesDefault,
+        };
+    });
 }

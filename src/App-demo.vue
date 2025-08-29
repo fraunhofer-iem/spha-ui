@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import Dashboard from "./views/Dashboard.vue";
-import ResultSelection from "./views/ResultSelection.vue";
 import Navbar from "./components/Navbar.vue";
 import type {Result} from "./model/Result.ts";
 
 const projectName: string | undefined = undefined;
 
-const hasResults = ref(false);
 const result = ref<Result | null>(null);
 
 const onJsonData = (data: Result | null) => {
@@ -16,8 +14,13 @@ const onJsonData = (data: Result | null) => {
   }
   console.log(data);
   result.value = data;
-  hasResults.value = true;
 };
+
+// Check for programmatic file loading on mount
+onMounted(async () => {
+
+});
+
 
 </script>
 
@@ -26,12 +29,6 @@ const onJsonData = (data: Result | null) => {
       :title="projectName"
   ></Navbar>
   <div class="container mt-4">
-    <div v-if="hasResults">
-      <Dashboard v-if="result" v-bind="result"/>
-    </div>
-
-    <div v-else>
-      <ResultSelection @file-dropped="onJsonData"/>
-    </div>
+    <Dashboard v-if="result" v-bind="result"/>
   </div>
 </template>
