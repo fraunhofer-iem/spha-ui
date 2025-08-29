@@ -21,14 +21,14 @@ const onJsonData = (data: Result | null) => {
 onMounted(async () => {
   try {
     // Load demo file from public folder
-    const response = await fetch('/kpi-results.json');
+    const response = await fetch('https://raw.githubusercontent.com/fraunhofer-iem/spha-ui/refs/heads/main/example/kpi-results.json');
     if (!response.ok) {
       throw new Error(`Failed to load demo file: ${response.status}`);
     }
-    
+
     const rawData = await response.json();
     const parsedResult = parse(rawData);
-    
+
     if (parsedResult) {
       onJsonData(parsedResult);
       console.log('Demo file loaded successfully:', parsedResult);
