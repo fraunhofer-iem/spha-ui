@@ -42,7 +42,7 @@ const getToolIconPath = (toolName: string): string | null => {
   });
 
   if (matchingIcon) {
-    const iconPath = `/src/assets/img/supportedTools/${matchingIcon}.svg`;
+    const iconPath = `./../assets/img/supportedTools/${matchingIcon}.svg`;
     console.log('Found matching icon:', matchingIcon, 'Path:', iconPath);
     return iconPath;
   }
