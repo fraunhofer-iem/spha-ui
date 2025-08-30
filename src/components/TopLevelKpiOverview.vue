@@ -12,6 +12,7 @@ import {
     Tooltip,
 } from "chart.js";
 import DashboardCard from "./DashboardCard.vue";
+import TopLevelKpisModal from "./TopLevelKpisModal.vue";
 import { background_grey, blue_chart } from "../assets/styles/Colors.ts";
 import type { Kpi } from "../model/Result.ts";
 import {
@@ -48,6 +49,9 @@ const kpis: KpiView[] = root.children.map((child) => {
 
 const chartCanvas = ref<HTMLCanvasElement | null>(null);
 let chartInstance: Chart | null = null;
+
+// Modal state
+const showModal = ref(false);
 
 // KPI analysis computed properties
 const kpiAnalysis = computed(() => getKpisOverThreshold(root, 60));
@@ -158,8 +162,11 @@ watch(
 );
 
 const handleButtonClick = () => {
-    // Handle button click event
-    console.log("Details button clicked");
+    showModal.value = true;
+};
+
+const handleCloseModal = () => {
+    showModal.value = false;
 };
 </script>
 
@@ -199,6 +206,13 @@ const handleButtonClick = () => {
                 </div>
             </div>
         </div>
+        
+        <!-- Top Level KPIs Modal -->
+        <TopLevelKpisModal 
+            :show="showModal" 
+            :root-kpi="root" 
+            @close="handleCloseModal" 
+        />
     </DashboardCard>
 </template>
 
