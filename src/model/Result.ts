@@ -6,6 +6,7 @@ export interface Threshold {
 export interface Kpi {
   displayName: string;
   score: number;
+  resultType?: string;
   id: string;
   children: Kpi[];
   thresholds?: Threshold[];
