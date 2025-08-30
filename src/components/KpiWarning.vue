@@ -63,7 +63,7 @@ const handleButtonClick = () => {
   <DashboardCard title="Critical KPIs">
     <div v-if="warnings">
       <div class="align-items-start text-start">
-        <div class="alert alert-warning" role="alert">
+        <div v-if="warningKpis.length > 0" class="alert alert-warning" role="alert">
           <div class="warning-header">
             <i class="bi bi-exclamation-triangle-fill me-2"></i>
             <strong>Warning!</strong>
@@ -72,7 +72,7 @@ const handleButtonClick = () => {
             {{ warningKpis.length }} KPIs have low values.
           </div>
         </div>
-        <div class="alert alert-danger" role="alert">
+        <div v-if="criticalKpis.length > 0" class="alert alert-danger" role="alert">
           <div class="warning-header">
             <i class="bi bi-exclamation-triangle-fill me-2"></i>
             <strong>Warning!</strong>
