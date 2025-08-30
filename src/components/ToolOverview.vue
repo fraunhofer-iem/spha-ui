@@ -8,48 +8,30 @@ const props = defineProps<{
   tools: Array<Tool>;
 }>();
 
-const getToolIconPath = (toolName: string): string | null => {
-  // Normalize function to make matching case-insensitive and ignore spaces/hyphens
-  const normalize = (str: string): string => {
-    return str.toLowerCase().replace(/[\s-_]/g, '').replace(/[^a-z0-9]/g, '');
-  };
+// --- ICON RESOLUTION FIX ---
+// Import all SVGs eagerly and get their resolved URLs
+const iconModules = import.meta.glob(
+    "../assets/img/supportedTools/*.svg",
+    {eager: true, import: "default"}
+);
 
-  // Normalize the input tool name
-  const normalizedToolName = normalize(toolName);
+// Build a normalized lookup map: toolName -> icon URL
+const normalize = (str: string): string =>
+    str.toLowerCase().replace(/[\s-_]/g, "").replace(/[^a-z0-9]/g, "");
 
-  console.log('Tool name:', toolName, 'Normalized:', normalizedToolName);
-
-  // Dynamically import all SVG files from the supportedTools directory
-  const iconModules = import.meta.glob('/src/assets/img/supportedTools/*.svg', {eager: true});
-
-  // Extract available icon names from the imported modules
-  const availableIcons = Object.keys(iconModules).map(path => {
-    const match = path.match(/\/([^/]+)\.svg$/);
-    return match ? match[1] : '';
-  }).filter(name => name !== '');
-
-  console.log('Available icons:', availableIcons);
-
-  // Find matching icon by comparing normalized versions
-  const matchingIcon = availableIcons.find(iconName => {
-    if (iconName) {
-      const normalizedIconName = normalize(iconName);
-      console.log('Comparing:', normalizedToolName, 'with', normalizedIconName);
-      return normalizedToolName === normalizedIconName;
-    } else {
-      return false
-    }
-  });
-
-  if (matchingIcon) {
-    const iconPath = `./../assets/img/supportedTools/${matchingIcon}.svg`;
-    console.log('Found matching icon:', matchingIcon, 'Path:', iconPath);
-    return iconPath;
+const iconMap: Record<string, string> = {};
+Object.entries(iconModules).forEach(([path, url]) => {
+  const match = path.match(/\/([^/]+)\.svg$/);
+  if (match && match[1]) {
+    const normalizedName = normalize(match[1]);
+    iconMap[normalizedName] = url as string;
   }
+});
 
-  console.log('No matching icon found for:', toolName);
-  return null;
+const getToolIconPath = (toolName: string): string | null => {
+  return iconMap[normalize(toolName)] ?? null;
 };
+// --- END FIX ---
 
 const formattedScanDates = computed(() => {
   return props.tools.map((tool) => {
@@ -71,20 +53,16 @@ const formattedScanDates = computed(() => {
 });
 
 const downloadAll = () => {
-  // Collect all findings from all tools
-  const allFindings = props.tools.reduce(
-      (acc, tool) => {
-        if (tool.findings && tool.findings.length > 0) {
-          acc[tool.name] = {
-            scanDate: tool.scanDate,
-            findings: tool.findings,
-            findingsCount: tool.findings.length,
-          };
-        }
-        return acc;
-      },
-      {} as Record<string, any>,
-  );
+  const allFindings = props.tools.reduce((acc, tool) => {
+    if (tool.findings && tool.findings.length > 0) {
+      acc[tool.name] = {
+        scanDate: tool.scanDate,
+        findings: tool.findings,
+        findingsCount: tool.findings.length,
+      };
+    }
+    return acc;
+  }, {} as Record<string, any>);
 
   if (Object.keys(allFindings).length === 0) {
     console.log("No findings to download from any tools");
@@ -140,24 +118,22 @@ const downloadToolFindings = (tool: Tool) => {
             :style="`background-color: ${background_light_grey}`"
         >
           <div class="row">
-            <div
-                class="col align-items-end d-flex justify-content-center align-self-center"
-            >
+            <div class="col align-items-end d-flex justify-content-center align-self-center">
               <img
                   v-if="getToolIconPath(tool.name)"
                   :src="getToolIconPath(tool.name)!"
-                  alt="Software Product Health Assistant"
+                  alt="Tool Icon"
                   width="60"
               />
               <div
                   v-else
                   class="text-muted d-flex align-items-center justify-content-center"
                   style="
-                                    width: 60px;
-                                    height: 60px;
-                                    border: 1px solid #dee2e6;
-                                    border-radius: 4px;
-                                "
+                  width: 60px;
+                  height: 60px;
+                  border: 1px solid #dee2e6;
+                  border-radius: 4px;
+                "
               >
                 <i class="bi bi-gear-fill"></i>
               </div>
@@ -189,6 +165,6 @@ const downloadToolFindings = (tool: Tool) => {
 
 <style scoped>
 .bi {
-  font-size: 1.5rem; /* Make icons larger */
+  font-size: 1.5rem;
 }
 </style>
