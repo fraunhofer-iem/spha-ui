@@ -46,6 +46,16 @@ vi.mock("../assets/styles/Colors.ts", () => ({
 describe("HealthScore", () => {
   let wrapper: VueWrapper<any>;
   let mockChartInstance: any;
+  
+  const mockRootKpi = {
+    displayName: "Overall Health",
+    score: 85,
+    id: "root",
+    children: [
+      { displayName: "Code Quality", score: 90, id: "quality", children: [] },
+      { displayName: "Security", score: 80, id: "security", children: [] }
+    ]
+  };
 
   beforeEach(() => {
     mockChartInstance = {
@@ -68,6 +78,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 75,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -79,6 +90,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 85,
+          rootKpi: mockRootKpi,
         },
       });
 

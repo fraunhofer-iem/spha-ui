@@ -14,7 +14,7 @@ const props = defineProps<Result>();
 <template>
     <div class="row">
         <div class="col-md-3 mb-3">
-            <HealthScore :score="props.healthScore" />
+            <HealthScore :score="props.healthScore" :root-kpi="props.root" />
         </div>
         <div class="col-md-6 mb-3">
             <ProjectOverview v-bind="props.repoInfo" />

@@ -9,7 +9,9 @@ import {
 } from "chart.js";
 import annotationPlugin from "chartjs-plugin-annotation";
 import DashboardCard from "./DashboardCard.vue";
+import HealthScoreModal from "./HealthScoreModal.vue";
 import { blue_chart } from "../assets/styles/Colors.ts";
+import type { Kpi } from "../model/Result.ts";
 
 // https://www.chartjs.org/chartjs-plugin-annotation/3.1.0/guide/types/doughnutLabel.html
 Chart.register(
@@ -22,7 +24,19 @@ Chart.register(
 
 const props = defineProps<{
     score: number;
+    rootKpi: Kpi;
 }>();
+
+// Modal state management
+const showModal = ref(false);
+
+const openModal = () => {
+    showModal.value = true;
+};
+
+const closeModal = () => {
+    showModal.value = false;
+};
 
 const chartCanvas2 = ref<HTMLCanvasElement | null>(null);
 let chartInstance: Chart<"doughnut"> | null = null;
@@ -113,12 +127,19 @@ onUnmounted(() => {
                 <button
                     type="button"
                     class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg"
+                    @click="openModal"
                 >
                     Details
                 </button>
             </div>
         </footer>
     </DashboardCard>
+    
+    <HealthScoreModal 
+        :show="showModal" 
+        :root-kpi="rootKpi" 
+        @close="closeModal"
+    />
 </template>
 
 <style scoped>
