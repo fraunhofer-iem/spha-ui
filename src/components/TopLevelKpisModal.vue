@@ -73,7 +73,7 @@ const handleClose = () => {
 
 <style scoped>
 .kpi-list {
-  max-height: 400px;
+  max-height: 500px;
   overflow-y: auto;
 }
 
