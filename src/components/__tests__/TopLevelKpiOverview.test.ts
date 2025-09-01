@@ -740,19 +740,19 @@ describe("TopLevelKpiOverview", () => {
         { displayName: "Test Coverage", score: 88 },
       ]);
 
-      // Spy on console.log to verify button click handling
-      const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
-
       wrapper = mount(TopLevelKpiOverview, {
         props: kpiProps,
       });
 
       const button = wrapper.find("button");
+      
+      // Check that modal is initially closed
+      expect((wrapper.vm as any).showModal).toBe(false);
+      
       await button.trigger("click");
 
-      expect(consoleSpy).toHaveBeenCalledWith("Details button clicked");
-
-      consoleSpy.mockRestore();
+      // Check that modal is opened after button click
+      expect((wrapper.vm as any).showModal).toBe(true);
     });
 
     it("should not crash on multiple button clicks", async () => {
@@ -760,22 +760,24 @@ describe("TopLevelKpiOverview", () => {
         { displayName: "Maintainability", score: 70 },
       ]);
 
-      const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
-
       wrapper = mount(TopLevelKpiOverview, {
         props: kpiProps,
       });
 
       const button = wrapper.find("button");
 
-      // Multiple clicks
-      await button.trigger("click");
-      await button.trigger("click");
-      await button.trigger("click");
+      // Check that modal is initially closed
+      expect((wrapper.vm as any).showModal).toBe(false);
 
-      expect(consoleSpy).toHaveBeenCalledTimes(3);
-
-      consoleSpy.mockRestore();
+      // Multiple clicks should all result in modal being open
+      await button.trigger("click");
+      expect((wrapper.vm as any).showModal).toBe(true);
+      
+      await button.trigger("click");
+      expect((wrapper.vm as any).showModal).toBe(true);
+      
+      await button.trigger("click");
+      expect((wrapper.vm as any).showModal).toBe(true);
     });
   });
 

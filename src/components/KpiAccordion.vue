@@ -104,7 +104,7 @@ const isAccordionExpanded = (kpiId: string): boolean => {
           </div>
 
           <!-- Children KPIs -->
-          <div v-if="sortChildren(kpi.children).length > 0">
+          <div v-if="kpi.children?.length > 0">
             <h6 class="mb-3 text-muted">Sub-KPIs</h6>
             <KpiItem
                 v-for="childKpi in sortChildren(kpi.children)"
@@ -112,7 +112,7 @@ const isAccordionExpanded = (kpiId: string): boolean => {
                 :kpi="childKpi"
             />
           </div>
-          <div v-else-if="kpi.children && kpi.children.length === 0" class="text-muted text-center py-2">
+          <div v-else-if="kpi.children?.length === 0" class="text-muted text-center py-2">
             <small>No sub-KPIs available</small>
           </div>
         </div>

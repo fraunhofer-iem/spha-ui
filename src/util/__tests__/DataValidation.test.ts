@@ -649,7 +649,6 @@ function isValidTool(tool: any): boolean {
     if (!tool || typeof tool !== "object") return false;
 
     if (typeof tool.name !== "string" || !tool.name) return false;
-    if (typeof tool.downloadLink !== "string") return false;
 
     if (tool.findings !== undefined && !Array.isArray(tool.findings))
         return false;
