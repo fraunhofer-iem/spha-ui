@@ -10,6 +10,8 @@ export interface Kpi {
   id: string;
   children: Kpi[];
   thresholds?: Threshold[];
+  description?: string;
+  tags?: string[];
 }
 
 export interface RepoInfo {

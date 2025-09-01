@@ -36,6 +36,9 @@ const handleClose = () => {
             <div class="kpi-info">
               <h6 class="mb-1 fw-bold">{{ kpi.displayName }}</h6>
               <small class="text-muted">ID: {{ kpi.id }}</small>
+              <div v-if="kpi.description" class="mt-1">
+                <small class="text-muted">{{ kpi.description }}</small>
+              </div>
             </div>
             <div class="kpi-score text-end">
               <span class="badge bg-primary fs-6 px-3 py-2">
@@ -52,6 +55,18 @@ const handleClose = () => {
                 class="badge bg-light text-dark me-1"
               >
                 {{ threshold.name }}: {{ threshold.value }}
+              </span>
+            </div>
+          </div>
+          <div v-if="kpi.tags && kpi.tags.length > 0" class="mt-2">
+            <small class="text-muted">Tags:</small>
+            <div class="mt-1">
+              <span 
+                v-for="tag in kpi.tags" 
+                :key="tag"
+                class="badge bg-secondary me-1"
+              >
+                {{ tag }}
               </span>
             </div>
           </div>

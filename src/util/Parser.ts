@@ -60,6 +60,8 @@ function nodeToKpi(node: any): Kpi {
     id: node.typeId ?? "N/A",
     children: node.edges?.map((edge: any) => nodeToKpi(edge.target)) ?? [],
     thresholds: thresholds?.length ? thresholds : undefined,
+    description: node.metaInfo.description,
+    tags: node.metaInfo.tags,
   };
 }
 
