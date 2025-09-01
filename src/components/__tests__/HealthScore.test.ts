@@ -104,7 +104,7 @@ describe("HealthScore", () => {
     it("should pass correct data to chart", async () => {
       const score = 65;
       wrapper = mount(HealthScore, {
-        props: { score },
+        props: { score, rootKpi: mockRootKpi },
       });
 
       await wrapper.vm.$nextTick();
@@ -119,6 +119,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 90,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -138,7 +139,7 @@ describe("HealthScore", () => {
     it("should display score correctly in annotation", async () => {
       const score = 42;
       wrapper = mount(HealthScore, {
-        props: { score },
+        props: { score, rootKpi: mockRootKpi },
       });
 
       await wrapper.vm.$nextTick();
@@ -156,6 +157,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 0,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -176,6 +178,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 100,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -196,6 +199,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 75.5,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -218,6 +222,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 80,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -246,6 +251,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 60,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -263,6 +269,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 55,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -285,6 +292,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 70,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -302,6 +310,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 50,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -318,6 +327,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 90,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -330,6 +340,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 30,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -349,6 +360,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 75,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -371,6 +383,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 85,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -383,6 +396,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 65,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -394,6 +408,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 40,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -409,6 +424,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 95,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -423,6 +439,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: -10,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -443,6 +460,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 120,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -463,6 +481,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 75,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -478,6 +497,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 50,
+          rootKpi: mockRootKpi,
         },
         attachTo: document.body,
       });
@@ -498,6 +518,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 25,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -514,6 +535,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 40,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -537,6 +559,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 10,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -559,6 +582,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 88,
+          rootKpi: mockRootKpi,
         },
       });
 
@@ -574,6 +598,7 @@ describe("HealthScore", () => {
       wrapper = mount(HealthScore, {
         props: {
           score: 77,
+          rootKpi: mockRootKpi,
         },
       });
 
