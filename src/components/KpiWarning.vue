@@ -3,52 +3,14 @@ import DashboardCard from "./DashboardCard.vue";
 import KpiDetailsModal from "./KpiDetailsModal.vue";
 import {computed, ref} from "vue";
 import type {Kpi} from "../model/Result.ts";
+import { useKpiFilters } from "../composables/kpiUtils.ts";
 
 const props = defineProps<{
   root: Kpi;
 }>();
 
-const getAllKpis = (kpi: Kpi): Kpi[] => {
-  const result = [kpi];
-  if (kpi.children && kpi.children.length > 0) {
-    kpi.children.forEach((child) => {
-      result.push(...getAllKpis(child));
-    });
-  }
-  return result;
-};
-
-const allKpis = computed(() => getAllKpis(props.root));
-
-const getLowestThreshold = (kpi: Kpi): number | null => {
-  if (!kpi.thresholds || kpi.thresholds.length === 0) {
-    return null;
-  }
-  return Math.min(...kpi.thresholds.map(t => t.value));
-};
-
-const warningKpis = computed(() =>
-    allKpis.value.filter((kpi) => {
-      if (!kpi.children || kpi.children.length === 0) {
-        return false;
-      }
-      const threshold = getLowestThreshold(kpi);
-      const warningThreshold = threshold !== null ? threshold + 10 : 50;
-      const isAlreadyCritical = criticalKpis.value.includes(kpi);
-      return (kpi.score < warningThreshold) && !isAlreadyCritical;
-    }),
-);
-
-const criticalKpis = computed(() =>
-    allKpis.value.filter((kpi) => {
-      if (!kpi.children || kpi.children.length === 0) {
-        return false;
-      }
-      const threshold = getLowestThreshold(kpi);
-      const criticalThreshold = threshold !== null ? threshold - 10 : 20;
-      return kpi.score < criticalThreshold;
-    }),
-);
+const rootComputed = computed(() => props.root);
+const { criticalKpis, warningKpis } = useKpiFilters(rootComputed);
 
 const warnings = computed(
     () => warningKpis.value.length != 0 || criticalKpis.value.length != 0,

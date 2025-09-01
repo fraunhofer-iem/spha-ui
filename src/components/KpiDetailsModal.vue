@@ -3,6 +3,7 @@ import Modal from './Modal.vue';
 import KpiItem from './KpiItem.vue';
 import type {Kpi} from '../model/Result.ts';
 import {computed} from 'vue';
+import {getBadgeClass, isCriticalKpi, isWarningKpi, sortChildren, useKpiFilters} from '../composables/kpiUtils.ts';
 
 interface Props {
   root: Kpi;
@@ -21,92 +22,15 @@ const handleClose = () => {
   emit('close');
 };
 
-// Get all KPIs recursively
-const getAllKpis = (kpi: Kpi): Kpi[] => {
-  const result = [kpi];
-  if (kpi.children && kpi.children.length > 0) {
-    kpi.children.forEach((child) => {
-      result.push(...getAllKpis(child));
-    });
-  }
-  return result;
-};
-
-const getLowestThreshold = (kpi: Kpi): number | null => {
-  if (!kpi.thresholds || kpi.thresholds.length === 0) {
-    return null;
-  }
-  return Math.min(...kpi.thresholds.map(t => t.value));
-};
-
-// Get KPIs with critical or low values (excluding top-level KPIs)
-const criticalAndLowKpis = computed(() => {
-  const allKpis = getAllKpis(props.root);
-
-  return allKpis.filter((kpi) => {
-    // Skip the root KPI (top-level)
-    if (kpi.id === props.root.id) {
-      return false;
-    }
-
-    // Only include KPIs that have children (same as KpiWarning.vue)
-    if (!kpi.children || kpi.children.length === 0) {
-      return false;
-    }
-
-    // Only include KPIs with critical/low scores
-    const threshold = getLowestThreshold(kpi);
-    const warningThreshold = threshold !== null ? threshold + 10 : 50;
-
-    return kpi.score < warningThreshold && kpi.score !== -1;
-  });
-});
-
-// Sort KPIs by severity (critical first, then warning)
-const sortedKpis = computed(() => {
-  return criticalAndLowKpis.value.sort((a, b) => {
-    const getThresholdA = getLowestThreshold(a);
-    const getThresholdB = getLowestThreshold(b);
-    const criticalThresholdA = getThresholdA !== null ? getThresholdA - 10 : 20;
-    const criticalThresholdB = getThresholdB !== null ? getThresholdB - 10 : 20;
-
-    const isCriticalA = a.score < criticalThresholdA;
-    const isCriticalB = b.score < criticalThresholdB;
-
-    if (isCriticalA && !isCriticalB) return -1;
-    if (!isCriticalA && isCriticalB) return 1;
-
-    return a.score - b.score; // Sort by score within same severity level
-  });
-});
-
-// Sort children function (same as HealthScoreModal)
-const sortChildren = (children: Kpi[] | undefined) => {
-  if (!children || children.length === 0) {
-    return [];
-  }
-
-  const validKpis = children.filter(kpi => kpi.score !== -1);
-  const insufficientDataKpis = children.filter(kpi => kpi.score === -1);
-
-  return [...validKpis, ...insufficientDataKpis];
-};
+const rootComputed = computed(() => props.root);
+const {sortedKpisBySeverity} = useKpiFilters(rootComputed);
 
 const getCriticalCount = computed(() => {
-  return sortedKpis.value.filter(kpi => {
-    const threshold = getLowestThreshold(kpi);
-    const criticalThreshold = threshold !== null ? threshold - 10 : 20;
-    return kpi.score < criticalThreshold;
-  }).length;
+  return sortedKpisBySeverity.value.filter(kpi => isCriticalKpi(kpi)).length;
 });
 
 const getWarningCount = computed(() => {
-  return sortedKpis.value.filter(kpi => {
-    const threshold = getLowestThreshold(kpi);
-    const criticalThreshold = threshold !== null ? threshold - 10 : 20;
-    const warningThreshold = threshold !== null ? threshold + 10 : 50;
-    return kpi.score >= criticalThreshold && kpi.score < warningThreshold;
-  }).length;
+  return sortedKpisBySeverity.value.filter(kpi => isWarningKpi(kpi)).length;
 });
 </script>
 
@@ -117,7 +41,7 @@ const getWarningCount = computed(() => {
       @close="handleClose"
   >
     <div class="kpi-list">
-      <div v-if="sortedKpis.length > 0" class="accordion" id="kpiDetailsAccordion">
+      <div v-if="sortedKpisBySeverity.length > 0" class="accordion" id="kpiDetailsAccordion">
         <!-- Summary -->
         <div class="mb-4">
           <div v-if="getCriticalCount > 0" class="alert alert-danger mb-2">
@@ -131,7 +55,7 @@ const getWarningCount = computed(() => {
         </div>
 
         <!-- KPI List -->
-        <div v-for="(kpi) in sortedKpis" :key="kpi.id" class="accordion-item mb-3">
+        <div v-for="(kpi) in sortedKpisBySeverity" :key="kpi.id" class="accordion-item mb-3">
           <h2 class="accordion-header" :id="`heading-${kpi.id}`">
             <button
                 class="accordion-button collapsed kpi-header"
@@ -162,19 +86,7 @@ const getWarningCount = computed(() => {
                   <span v-if="kpi.score === -1" class="badge bg-secondary fs-6 px-3 py-2">
                     Insufficient Data
                   </span>
-                  <span v-else class="badge fs-6 px-3 py-2" :class="{
-                    'bg-danger': (() => {
-                      const threshold = getLowestThreshold(kpi);
-                      const criticalThreshold = threshold !== null ? threshold - 10 : 20;
-                      return kpi.score < criticalThreshold;
-                    })(),
-                    'bg-warning': (() => {
-                      const threshold = getLowestThreshold(kpi);
-                      const criticalThreshold = threshold !== null ? threshold - 10 : 20;
-                      const warningThreshold = threshold !== null ? threshold + 10 : 50;
-                      return kpi.score >= criticalThreshold && kpi.score < warningThreshold;
-                    })()
-                  }">
+                  <span v-else :class="`badge ${getBadgeClass(kpi)} fs-6 px-3 py-2`">
                     {{ Math.round(kpi.score) }}/100
                   </span>
                 </div>

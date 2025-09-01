@@ -3,6 +3,7 @@ import Modal from './Modal.vue';
 import KpiItem from './KpiItem.vue';
 import type {Kpi} from '../model/Result.ts';
 import { computed, ref } from 'vue';
+import { getBadgeClass, sortChildren } from '../composables/kpiUtils.ts';
 
 interface Props {
   show: boolean;
@@ -19,37 +20,13 @@ const handleClose = () => {
   emit('close');
 };
 
-// Get badge class based on KPI score and thresholds (for accordion headers only)
-const getBadgeClass = (kpi: Kpi): string => {
-  if (kpi.score === -1) {
-    return 'bg-secondary';
-  }
-  
-  const threshold = kpi.thresholds && kpi.thresholds.length > 0 
-    ? Math.min(...kpi.thresholds.map(t => t.value)) 
-    : null;
-  const criticalThreshold = threshold !== null ? threshold - 10 : 20;
-  const warningThreshold = threshold !== null ? threshold + 10 : 50;
-  
-  if (kpi.score < criticalThreshold) {
-    return 'bg-danger';
-  } else if (kpi.score < warningThreshold) {
-    return 'bg-warning';
-  } else {
-    return 'bg-success';
-  }
-};
-
 // Sort KPIs: move items with score -1 to the end
 const sortedKpis = computed(() => {
   if (!props.rootKpi.children || props.rootKpi.children.length === 0) {
     return [];
   }
   
-  const validKpis = props.rootKpi.children.filter(kpi => kpi.score !== -1);
-  const insufficientDataKpis = props.rootKpi.children.filter(kpi => kpi.score === -1);
-  
-  return [...validKpis, ...insufficientDataKpis];
+  return sortChildren(props.rootKpi.children);
 });
 
 // Accordion state management
@@ -65,18 +42,6 @@ const toggleAccordion = (kpiId: string) => {
 
 const isAccordionExpanded = (kpiId: string) => {
   return expandedAccordions.value.has(kpiId);
-};
-
-// Sort children KPIs the same way as top-level KPIs
-const sortChildren = (children: Kpi[] | undefined) => {
-  if (!children || children.length === 0) {
-    return [];
-  }
-  
-  const validKpis = children.filter(kpi => kpi.score !== -1);
-  const insufficientDataKpis = children.filter(kpi => kpi.score === -1);
-  
-  return [...validKpis, ...insufficientDataKpis];
 };
 </script>
 

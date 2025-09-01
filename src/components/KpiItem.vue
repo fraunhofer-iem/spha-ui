@@ -1,39 +1,13 @@
 <script setup lang="ts">
 import type {Kpi} from '../model/Result.ts';
 import { ref } from 'vue';
+import { getBadgeClass, sortChildren } from '../composables/kpiUtils.ts';
 
 interface Props {
   kpi: Kpi;
 }
 
 const props = defineProps<Props>();
-
-// Get the lowest threshold value for a KPI
-const getLowestThreshold = (kpi: Kpi): number | null => {
-  if (!kpi.thresholds || kpi.thresholds.length === 0) {
-    return null;
-  }
-  return Math.min(...kpi.thresholds.map(t => t.value));
-};
-
-// Get badge class based on KPI score and thresholds
-const getBadgeClass = (kpi: Kpi): string => {
-  if (kpi.score === -1) {
-    return 'bg-secondary';
-  }
-
-  const threshold = getLowestThreshold(kpi);
-  const criticalThreshold = threshold !== null ? threshold - 10 : 20;
-  const warningThreshold = threshold !== null ? threshold + 10 : 50;
-
-  if (kpi.score < criticalThreshold) {
-    return 'bg-danger';
-  } else if (kpi.score < warningThreshold) {
-    return 'bg-warning';
-  } else {
-    return 'bg-success';
-  }
-};
 
 // Accordion state management for nested KPIs
 const isExpanded = ref(false);
@@ -45,18 +19,6 @@ const toggleAccordion = () => {
 // Check if KPI has children
 const hasChildren = () => {
   return props.kpi.children && props.kpi.children.length > 0;
-};
-
-// Sort children KPIs (same logic as in HealthScoreModal)
-const sortChildren = (children: Kpi[] | undefined) => {
-  if (!children || children.length === 0) {
-    return [];
-  }
-  
-  const validKpis = children.filter(kpi => kpi.score !== -1);
-  const insufficientDataKpis = children.filter(kpi => kpi.score === -1);
-  
-  return [...validKpis, ...insufficientDataKpis];
 };
 </script>
 
