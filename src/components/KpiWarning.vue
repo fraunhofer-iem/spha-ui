@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import DashboardCard from "./DashboardCard.vue";
-import {computed} from "vue";
+import KpiDetailsModal from "./KpiDetailsModal.vue";
+import {computed, ref} from "vue";
 import type {Kpi} from "../model/Result.ts";
 
 const props = defineProps<{
@@ -53,9 +54,15 @@ const warnings = computed(
     () => warningKpis.value.length != 0 || criticalKpis.value.length != 0,
 );
 
+// Modal state
+const showModal = ref(false);
+
 const handleButtonClick = () => {
-  // Handle button click event
-  console.log("Details button clicked");
+  showModal.value = true;
+};
+
+const handleModalClose = () => {
+  showModal.value = false;
 };
 </script>
 
@@ -105,6 +112,13 @@ const handleButtonClick = () => {
         </div>
       </div>
     </div>
+
+    <!-- KPI Details Modal -->
+    <KpiDetailsModal
+        :root="root"
+        :show="showModal"
+        @close="handleModalClose"
+    />
   </DashboardCard>
 </template>
 
