@@ -12,7 +12,7 @@ import {
     Tooltip,
 } from "chart.js";
 import DashboardCard from "./DashboardCard.vue";
-import TopLevelKpisModal from "./TopLevelKpisModal.vue";
+import HealthScoreModal from "./HealthScoreModal.vue";
 import { background_grey, blue_chart } from "../assets/styles/Colors.ts";
 import type { Kpi } from "../model/Result.ts";
 import {
@@ -208,7 +208,7 @@ const handleCloseModal = () => {
         </div>
         
         <!-- Top Level KPIs Modal -->
-        <TopLevelKpisModal 
+        <HealthScoreModal 
             :show="showModal" 
             :root-kpi="root" 
             @close="handleCloseModal" 
