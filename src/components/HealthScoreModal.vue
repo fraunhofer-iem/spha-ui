@@ -108,6 +108,16 @@ const sortChildren = (children: Kpi[] | undefined) => {
                   <div v-if="kpi.description" class="mt-1">
                     <small class="text-muted">{{ kpi.description }}</small>
                   </div>
+                  <div v-if="kpi.tags && kpi.tags.length > 0" class="mt-1">
+                    <span
+                        v-for="tag in kpi.tags"
+                        :key="tag"
+                        class="badge bg-secondary me-1"
+                        style="font-size: 0.7em;"
+                    >
+                      {{ tag }}
+                    </span>
+                  </div>
                 </div>
                 <div class="kpi-score text-end">
                   <span v-if="kpi.score === -1" class="badge bg-secondary fs-6 px-3 py-2">
@@ -136,18 +146,6 @@ const sortChildren = (children: Kpi[] | undefined) => {
                       class="badge bg-light text-dark me-1"
                   >
                     {{ threshold.name }}: {{ threshold.value }}
-                  </span>
-                </div>
-              </div>
-              <div v-if="kpi.tags && kpi.tags.length > 0" class="mb-3">
-                <small class="text-muted">Tags:</small>
-                <div class="mt-1">
-                  <span
-                      v-for="tag in kpi.tags"
-                      :key="tag"
-                      class="badge bg-secondary me-1"
-                  >
-                    {{ tag }}
                   </span>
                 </div>
               </div>
