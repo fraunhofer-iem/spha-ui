@@ -18,6 +18,33 @@ const handleClose = () => {
   emit('close');
 };
 
+// Get the lowest threshold value for a KPI
+const getLowestThreshold = (kpi: Kpi): number | null => {
+  if (!kpi.thresholds || kpi.thresholds.length === 0) {
+    return null;
+  }
+  return Math.min(...kpi.thresholds.map(t => t.value));
+};
+
+// Get badge class based on KPI score and thresholds
+const getBadgeClass = (kpi: Kpi): string => {
+  if (kpi.score === -1) {
+    return 'bg-secondary';
+  }
+  
+  const threshold = getLowestThreshold(kpi);
+  const criticalThreshold = threshold !== null ? threshold - 10 : 20;
+  const warningThreshold = threshold !== null ? threshold + 10 : 50;
+  
+  if (kpi.score < criticalThreshold) {
+    return 'bg-danger';
+  } else if (kpi.score < warningThreshold) {
+    return 'bg-warning';
+  } else {
+    return 'bg-success';
+  }
+};
+
 // Sort KPIs: move items with score -1 to the end
 const sortedKpis = computed(() => {
   if (!props.rootKpi.children || props.rootKpi.children.length === 0) {
@@ -56,7 +83,7 @@ const sortedKpis = computed(() => {
               <span v-if="kpi.score === -1" class="badge bg-secondary fs-6 px-3 py-2">
                 Insufficient Data
               </span>
-              <span v-else class="badge bg-primary fs-6 px-3 py-2">
+              <span v-else :class="`badge ${getBadgeClass(kpi)} fs-6 px-3 py-2`">
                 {{ Math.round(kpi.score) }}/100
               </span>
             </div>
