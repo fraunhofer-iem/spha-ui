@@ -71,6 +71,6 @@ const handleBackdropClick = (event: Event) => {
 }
 
 .modal-content {
-  min-height: 600px;
+  min-height: 800px;
 }
 </style>

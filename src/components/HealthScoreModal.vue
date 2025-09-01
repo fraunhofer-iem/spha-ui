@@ -96,7 +96,7 @@ const sortedKpis = computed(() => {
 
 <style scoped>
 .kpi-list {
-  max-height: 500px;
+  max-height: 700px;
   overflow-y: auto;
 }
 
