@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import Modal from './Modal.vue';
 import type {Kpi} from '../model/Result.ts';
+import { computed } from 'vue';
 
 interface Props {
   show: boolean;
   rootKpi: Kpi;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: 'close'): void;
@@ -16,6 +17,18 @@ const emit = defineEmits<{
 const handleClose = () => {
   emit('close');
 };
+
+// Sort KPIs: move items with score -1 to the end
+const sortedKpis = computed(() => {
+  if (!props.rootKpi.children || props.rootKpi.children.length === 0) {
+    return [];
+  }
+  
+  const validKpis = props.rootKpi.children.filter(kpi => kpi.score !== -1);
+  const insufficientDataKpis = props.rootKpi.children.filter(kpi => kpi.score === -1);
+  
+  return [...validKpis, ...insufficientDataKpis];
+});
 </script>
 
 <template>
@@ -26,9 +39,9 @@ const handleClose = () => {
   >
     <div class="kpi-list">
       <h6 class="mb-3 text-muted">Top Level KPIs</h6>
-      <div v-if="rootKpi.children && rootKpi.children.length > 0">
+      <div v-if="sortedKpis.length > 0">
         <div
-            v-for="kpi in rootKpi.children"
+            v-for="kpi in sortedKpis"
             :key="kpi.id"
             class="kpi-item mb-3 p-3 border rounded"
         >
@@ -40,7 +53,10 @@ const handleClose = () => {
               </div>
             </div>
             <div class="kpi-score text-end">
-              <span class="badge bg-primary fs-6 px-3 py-2">
+              <span v-if="kpi.score === -1" class="badge bg-secondary fs-6 px-3 py-2">
+                Insufficient Data
+              </span>
+              <span v-else class="badge bg-primary fs-6 px-3 py-2">
                 {{ Math.round(kpi.score) }}/100
               </span>
             </div>
