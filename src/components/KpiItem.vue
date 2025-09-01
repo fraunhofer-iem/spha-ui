@@ -5,7 +5,7 @@ interface Props {
   kpi: Kpi;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
 // Get the lowest threshold value for a KPI
 const getLowestThreshold = (kpi: Kpi): number | null => {
@@ -20,11 +20,11 @@ const getBadgeClass = (kpi: Kpi): string => {
   if (kpi.score === -1) {
     return 'bg-secondary';
   }
-  
+
   const threshold = getLowestThreshold(kpi);
   const criticalThreshold = threshold !== null ? threshold - 10 : 20;
   const warningThreshold = threshold !== null ? threshold + 10 : 50;
-  
+
   if (kpi.score < criticalThreshold) {
     return 'bg-danger';
   } else if (kpi.score < warningThreshold) {
