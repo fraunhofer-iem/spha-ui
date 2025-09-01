@@ -64,4 +64,13 @@ const handleBackdropClick = (event: Event) => {
 .modal-backdrop {
   z-index: 1040;
 }
+
+.modal-dialog {
+  max-width: 800px;
+  width: 90%;
+}
+
+.modal-content {
+  min-height: 600px;
+}
 </style>

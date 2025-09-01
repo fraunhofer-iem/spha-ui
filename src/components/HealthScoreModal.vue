@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Modal from './Modal.vue';
-import type { Kpi } from '../model/Result.ts';
+import type {Kpi} from '../model/Result.ts';
 
 interface Props {
   show: boolean;
@@ -19,23 +19,25 @@ const handleClose = () => {
 </script>
 
 <template>
-  <Modal 
-    :show="show" 
-    title="Health Score Details" 
-    @close="handleClose"
+  <Modal
+      :show="show"
+      title="Health Score Details"
+      @close="handleClose"
   >
     <div class="kpi-list">
       <h6 class="mb-3 text-muted">Top Level KPIs</h6>
       <div v-if="rootKpi.children && rootKpi.children.length > 0">
-        <div 
-          v-for="kpi in rootKpi.children" 
-          :key="kpi.id"
-          class="kpi-item mb-3 p-3 border rounded"
+        <div
+            v-for="kpi in rootKpi.children"
+            :key="kpi.id"
+            class="kpi-item mb-3 p-3 border rounded"
         >
           <div class="d-flex justify-content-between align-items-center">
             <div class="kpi-info">
               <h6 class="mb-1 fw-bold">{{ kpi.displayName }}</h6>
-              <small class="text-muted">ID: {{ kpi.id }}</small>
+              <div v-if="kpi.description" class="mt-1">
+                <small class="text-muted">{{ kpi.description }}</small>
+              </div>
             </div>
             <div class="kpi-score text-end">
               <span class="badge bg-primary fs-6 px-3 py-2">
@@ -46,12 +48,24 @@ const handleClose = () => {
           <div v-if="kpi.thresholds && kpi.thresholds.length > 0" class="mt-2">
             <small class="text-muted">Thresholds:</small>
             <div class="mt-1">
-              <span 
-                v-for="threshold in kpi.thresholds" 
-                :key="threshold.name"
-                class="badge bg-light text-dark me-1"
+              <span
+                  v-for="threshold in kpi.thresholds"
+                  :key="threshold.name"
+                  class="badge bg-light text-dark me-1"
               >
                 {{ threshold.name }}: {{ threshold.value }}
+              </span>
+            </div>
+          </div>
+          <div v-if="kpi.tags && kpi.tags.length > 0" class="mt-2">
+            <small class="text-muted">Tags:</small>
+            <div class="mt-1">
+              <span
+                  v-for="tag in kpi.tags"
+                  :key="tag"
+                  class="badge bg-secondary me-1"
+              >
+                {{ tag }}
               </span>
             </div>
           </div>
@@ -66,7 +80,7 @@ const handleClose = () => {
 
 <style scoped>
 .kpi-list {
-  max-height: 400px;
+  max-height: 500px;
   overflow-y: auto;
 }
 

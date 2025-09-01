@@ -6,9 +6,12 @@ export interface Threshold {
 export interface Kpi {
   displayName: string;
   score: number;
+  resultType?: string;
   id: string;
   children: Kpi[];
   thresholds?: Threshold[];
+  description?: string;
+  tags?: string[];
 }
 
 export interface RepoInfo {

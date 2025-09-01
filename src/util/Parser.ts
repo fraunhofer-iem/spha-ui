@@ -56,9 +56,12 @@ function nodeToKpi(node: any): Kpi {
   return {
     displayName: node.metaInfo.displayName ?? "N/a", // TODO: derive name from typeId
     score: extractScore(node.result) ?? -1,
+    resultType: node.result?.type,
     id: node.typeId ?? "N/A",
     children: node.edges?.map((edge: any) => nodeToKpi(edge.target)) ?? [],
     thresholds: thresholds?.length ? thresholds : undefined,
+    description: node.metaInfo.description,
+    tags: node.metaInfo.tags,
   };
 }
 
