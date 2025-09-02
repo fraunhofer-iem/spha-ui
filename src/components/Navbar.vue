@@ -7,6 +7,14 @@ withDefaults(defineProps<{title?: string}>(), {
   title: 'Software Product Health Assistant'
 })
 
+const emit = defineEmits<{
+  uploadClicked: []
+}>();
+
+const handleUploadClick = () => {
+  emit('uploadClicked');
+};
+
 const updateTime = () => {
   const now = new Date();
   formattedTime.value = now.toLocaleTimeString('en-US', {
@@ -42,7 +50,7 @@ onUnmounted(() => {
         <div class="me-3 time-display p-3">
           <p class="h5">{{ formattedTime }}</p>
         </div>
-        <button type="button" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg">Settings</button>
+        <button type="button" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg" @click="handleUploadClick">Upload</button>
       </div>
     </div>
   </nav>

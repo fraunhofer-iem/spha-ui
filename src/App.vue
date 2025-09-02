@@ -19,11 +19,17 @@ const onJsonData = (data: Result | null) => {
   hasResults.value = true;
 };
 
+const onUploadClicked = () => {
+  hasResults.value = false;
+  result.value = null;
+};
+
 </script>
 
 <template>
   <Navbar
       :title="projectName"
+      @upload-clicked="onUploadClicked"
   ></Navbar>
   <div class="container mt-4">
     <div v-if="hasResults">

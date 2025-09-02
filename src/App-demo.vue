@@ -4,10 +4,12 @@ import Dashboard from "./views/Dashboard.vue";
 import Navbar from "./components/Navbar.vue";
 import type {Result} from "./model/Result.ts";
 import {parse} from "./util/Parser.ts";
+import ResultSelection from "./views/ResultSelection.vue";
 
 const projectName: string | undefined = undefined;
 
 const result = ref<Result | null>(null);
+const hasResults = ref(false);
 
 const onJsonData = (data: Result | null) => {
   if (data === null) {
@@ -15,6 +17,7 @@ const onJsonData = (data: Result | null) => {
   }
   console.log(data);
   result.value = data;
+  hasResults.value = true;
 };
 
 // Check for programmatic file loading on mount
@@ -32,6 +35,7 @@ onMounted(async () => {
     if (parsedResult) {
       onJsonData(parsedResult);
       console.log('Demo file loaded successfully:', parsedResult);
+      hasResults.value = true;
     } else {
       console.error('Failed to parse demo file data');
     }
@@ -41,13 +45,24 @@ onMounted(async () => {
 });
 
 
+const onUploadClicked = () => {
+  hasResults.value = false;
+  result.value = null;
+};
+
 </script>
 
 <template>
   <Navbar
       :title="projectName"
+      @upload-clicked="onUploadClicked"
   ></Navbar>
   <div class="container mt-4">
-    <Dashboard v-if="result" v-bind="result"/>
+    <div v-if="hasResults">
+      <Dashboard v-if="result" v-bind="result"/>
+    </div>
+    <div v-else>
+      <ResultSelection @file-dropped="onJsonData"/>
+    </div>
   </div>
 </template>
