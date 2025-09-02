@@ -59,14 +59,29 @@ npm run dev
 
 ### Available Scripts
 
+**Development:**
 - `npm run dev` - Start development server
+- `npm run dev:demo` - Start development server in demo mode
 - `npm run build` - Build for production
+- `npm run build:demo` - Build for production in demo mode
 - `npm run preview` - Preview production build
-- `npm run test` - Run all tests
-- `npm run test:unit` - Run unit tests
+
+**Testing:**
+- `npm run test` - Run tests in watch mode
+- `npm run test:unit` - Run unit tests (util & model)
 - `npm run test:components` - Run component tests
 - `npm run test:integration` - Run integration tests
+- `npm run test:all` - Run all test suites sequentially
 - `npm run test:coverage` - Generate test coverage report
+- `npm run test:coverage:unit` - Generate coverage for unit tests
+- `npm run test:coverage:components` - Generate coverage for component tests
+- `npm run test:ui` - Run tests with UI interface
+- `npm run test:ci` - Run tests for CI with JUnit and JSON reports
+- `npm run test:run` - Run tests once (no watch)
+- `npm run test:watch` - Run tests in watch mode
+- `npm run test:debug` - Run tests with debugger
+- `npm run test:performance` - Run tests with heap usage logging
+- `npm run test:verbose` - Run tests with verbose output
 
 ### Project Structure
 
@@ -74,10 +89,15 @@ npm run dev
 src/
 ├── components/        # Reusable Vue components
 ├── views/            # Page-level components
+├── composables/      # Vue composition functions
 ├── model/            # TypeScript interfaces and models
 ├── util/             # Utility functions and helpers
 ├── assets/           # Static assets (images, styles)
-└── __tests__/        # Test files
+│   ├── img/          # Images including supported tools
+│   └── styles/       # SASS/CSS styles
+├── __tests__/        # Integration test files
+├── __test__/         # Additional test directory
+└── *//__tests__/     # Component and utility test files
 ```
 
 ### Testing
