@@ -3,7 +3,7 @@ import {mount, type VueWrapper} from "@vue/test-utils";
 import App from "../App.vue";
 import {parse} from "../util/Parser";
 import type {Kpi} from "../model/Result";
-import {createMockFile, createMockFileList,} from "../__test__/setup";
+import {createMockFile, createMockFileList,} from "./setup.ts";
 
 // Import test data
 import kpiResultsSmall from "../../example/kpi-results-small.json";

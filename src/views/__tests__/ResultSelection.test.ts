@@ -2,7 +2,7 @@ import {beforeEach, describe, expect, it, vi} from "vitest";
 import {mount, type VueWrapper} from "@vue/test-utils";
 import ResultSelection from "../ResultSelection.vue";
 import {parse} from "../../util/Parser";
-import {createMockFileList, createMockResult} from "../../__test__/setup";
+import {createMockFileList, createMockResult} from "../../__tests__/setup";
 
 // Mock the Parser module
 vi.mock("../../util/Parser", () => ({
