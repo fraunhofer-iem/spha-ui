@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import {computed} from "vue";
+import {computed, ref} from "vue";
 import DashboardCard from "./DashboardCard.vue";
+import Modal from "./Modal.vue";
 import type {Kpi} from "../model/Result.ts";
 
 const props = defineProps<{
@@ -67,6 +68,54 @@ const emptyCount = computed(() => {
 const totalCount = computed(() => {
   return getUniqueKpiResults(props.root).size;
 });
+
+/**
+ * Get all empty KPIs with their details for modal display
+ */
+const getEmptyKpiDetails = (kpi: Kpi): Kpi[] => {
+  const emptyKpis: Kpi[] = [];
+
+  // Check if current KPI has empty result
+  if (kpi.resultType === "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty") {
+    emptyKpis.push(kpi);
+  }
+
+  // Recursively check children
+  if (kpi.children && kpi.children.length > 0) {
+    kpi.children.forEach((child) => {
+      emptyKpis.push(...getEmptyKpiDetails(child));
+    });
+  }
+
+  return emptyKpis;
+};
+
+/**
+ * Get unique empty KPIs for modal display
+ */
+const emptyKpis = computed(() => {
+  const allEmptyKpis = getEmptyKpiDetails(props.root);
+  const uniqueEmptyKpis = new Map<string, Kpi>();
+
+  allEmptyKpis.forEach(kpi => {
+    if (!uniqueEmptyKpis.has(kpi.id)) {
+      uniqueEmptyKpis.set(kpi.id, kpi);
+    }
+  });
+
+  return Array.from(uniqueEmptyKpis.values());
+});
+
+// Modal state
+const showModal = ref(false);
+
+const openModal = () => {
+  showModal.value = true;
+};
+
+const closeModal = () => {
+  showModal.value = false;
+};
 </script>
 
 <template>
@@ -91,7 +140,53 @@ const totalCount = computed(() => {
         </div>
       </div>
     </div>
+    <footer>
+      <div class="d-grid ps-4 pe-4 pt-4">
+        <button
+            type="button"
+            class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg"
+            @click="openModal"
+        >
+          Details
+        </button>
+      </div>
+    </footer>
   </DashboardCard>
+
+  <!-- Missing KPIs Modal -->
+  <Modal
+      title="Missing KPI Results"
+      :show="showModal"
+      @close="closeModal"
+  >
+    <div class="empty-kpi-list">
+      <div v-if="emptyKpis.length > 0">
+        <div class="alert alert-warning mb-4">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          <strong>{{ emptyKpis.length }}</strong> KPI{{ emptyKpis.length !== 1 ? 's' : '' }} with missing results
+        </div>
+
+        <div class="list-group">
+          <div
+              v-for="kpi in emptyKpis"
+              :key="kpi.id"
+              class="list-group-item"
+          >
+            <div class="d-flex w-100 justify-content-between align-items-center">
+              <div>
+                <h6 class="mb-1">{{ kpi.displayName }}</h6>
+                <small class="text-muted">ID: {{ kpi.id }}</small>
+              </div>
+              <span class="badge bg-secondary">Empty Result</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-else class="text-muted text-center py-4">
+        <p>No KPIs with missing results found</p>
+      </div>
+    </div>
+  </Modal>
 </template>
 
 <style scoped>
@@ -103,6 +198,6 @@ const totalCount = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80%;
+  height: 70%;
 }
 </style>
