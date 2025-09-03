@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
-import Dashboard from "./views/Dashboard.vue";
 import Navbar from "./components/Navbar.vue";
 import type {Result} from "./model/Result.ts";
 import {parse} from "./util/Parser.ts";
-import ResultSelection from "./views/ResultSelection.vue";
+import ProductDetails from "./views/ProductDetails.vue";
+import ResultUpload from "./views/ResultUpload.vue";
 
 const projectName: string | undefined = undefined;
 
@@ -64,10 +64,10 @@ const onBackClicked = () => {
   ></Navbar>
   <div class="container mt-4">
     <div v-if="hasResults">
-      <Dashboard v-if="result" v-bind="result"/>
+      <ProductDetails v-if="result" v-bind="result"/>
     </div>
     <div v-else>
-      <ResultSelection @file-dropped="onJsonData"/>
+      <ResultUpload @file-dropped="onJsonData"/>
     </div>
   </div>
 </template>
