@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import {computed} from "vue";
 import DashboardCard from "./DashboardCard.vue";
-import type { Kpi } from "../model/Result.ts";
+import type {Kpi} from "../model/Result.ts";
 
 const props = defineProps<{
   root: Kpi;
@@ -12,12 +12,12 @@ const props = defineProps<{
  */
 const getUniqueKpiResults = (kpi: Kpi): Map<string, string> => {
   const resultMap = new Map<string, string>();
-  
+
   // Add current KPI's result type if it exists, using id (typeId) as key
   if (kpi.resultType && kpi.id) {
     resultMap.set(kpi.id, kpi.resultType);
   }
-  
+
   // Recursively process children
   if (kpi.children && kpi.children.length > 0) {
     kpi.children.forEach((child) => {
@@ -30,7 +30,7 @@ const getUniqueKpiResults = (kpi: Kpi): Map<string, string> => {
       });
     });
   }
-  
+
   return resultMap;
 };
 
@@ -39,15 +39,15 @@ const getUniqueKpiResults = (kpi: Kpi): Map<string, string> => {
  */
 const emptyKpiPercentage = computed(() => {
   const uniqueResults = getUniqueKpiResults(props.root);
-  
+
   if (uniqueResults.size === 0) {
     return 0;
   }
-  
+
   const emptyCount = Array.from(uniqueResults.values()).filter(
-    resultType => resultType === "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+      resultType => resultType === "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
   ).length;
-  
+
   return Math.round((emptyCount / uniqueResults.size) * 100);
 });
 
@@ -57,7 +57,7 @@ const emptyKpiPercentage = computed(() => {
 const emptyCount = computed(() => {
   const uniqueResults = getUniqueKpiResults(props.root);
   return Array.from(uniqueResults.values()).filter(
-    resultType => resultType === "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
+      resultType => resultType === "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty"
   ).length;
 });
 
@@ -70,23 +70,25 @@ const totalCount = computed(() => {
 </script>
 
 <template>
-  <DashboardCard title="Empty KPI Results">
-    <div class="text-center">
-      <div class="display-4 fw-bold text-warning mb-2">
-        {{ emptyKpiPercentage }}%
-      </div>
-      <div class="text-muted mb-3">
-        {{ emptyCount }} of {{ totalCount }} KPIs have empty results
-      </div>
-      <div class="progress" style="height: 10px;">
-        <div 
-          class="progress-bar bg-warning" 
-          role="progressbar" 
-          :style="`width: ${emptyKpiPercentage}%`"
-          :aria-valuenow="emptyKpiPercentage" 
-          aria-valuemin="0" 
-          aria-valuemax="100"
-        ></div>
+  <DashboardCard title="Missing KPI Results">
+    <div class="content-wrapper">
+      <div class="text-center">
+        <div class="display-4 fw-bold text-warning mb-2">
+          {{ emptyKpiPercentage }}%
+        </div>
+        <div class="text-muted mb-3">
+          {{ emptyCount }} of {{ totalCount }} KPIs have empty results
+        </div>
+        <div class="progress" style="height: 10px;">
+          <div
+              class="progress-bar bg-warning"
+              role="progressbar"
+              :style="`width: ${emptyKpiPercentage}%`"
+              :aria-valuenow="emptyKpiPercentage"
+              aria-valuemin="0"
+              aria-valuemax="100"
+          ></div>
+        </div>
       </div>
     </div>
   </DashboardCard>
@@ -95,5 +97,12 @@ const totalCount = computed(() => {
 <style scoped>
 .display-4 {
   font-size: 2.5rem;
+}
+
+.content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
 }
 </style>
