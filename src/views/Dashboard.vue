@@ -5,6 +5,7 @@ import HealthScore from "./../components/HealthScore.vue";
 import TopLevelKpiOverview from "./../components/TopLevelKpiOverview.vue";
 import KpiDetailsModal from "./../components/KpiDetailsModal.vue";
 import ToolOverview from "./../components/ToolOverview.vue";
+import EmptyKpiCard from "./../components/EmptyKpiCard.vue";
 
 import type {Result} from "../model/Result.ts";
 import { computed, ref } from "vue";
@@ -56,7 +57,9 @@ const handleModalClose = () => {
     <div class="col-md-3 mb-3">
       <RepoLanguagesPieChart :languages="props.repoInfo.repoLanguages"/>
     </div>
-
+    <div class="col-md-3 mb-3">
+      <EmptyKpiCard :root="props.root"/>
+    </div>
   </div>
   <div class="row">
     <div class="col-md-12 mb-3">
