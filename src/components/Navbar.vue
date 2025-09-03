@@ -3,16 +3,22 @@ import {onMounted, onUnmounted, ref} from "vue";
 
 const formattedTime = ref<string>('');
 
-withDefaults(defineProps<{title?: string}>(), {
-  title: 'Software Product Health Assistant'
+withDefaults(defineProps<{title?: string, showOnDashboard?: boolean}>(), {
+  title: 'Software Product Health Assistant',
+  showOnDashboard: false
 })
 
 const emit = defineEmits<{
-  uploadClicked: []
+  uploadClicked: [],
+  backClicked: []
 }>();
 
 const handleUploadClick = () => {
   emit('uploadClicked');
+};
+
+const handleBackClick = () => {
+  emit('backClicked');
 };
 
 const updateTime = () => {
@@ -50,7 +56,8 @@ onUnmounted(() => {
         <div class="me-3 time-display p-3">
           <p class="h5">{{ formattedTime }}</p>
         </div>
-        <button type="button" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg" @click="handleUploadClick">Upload</button>
+        <button v-if="showOnDashboard" type="button" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg" @click="handleUploadClick">Upload</button>
+        <button v-else type="button" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg" @click="handleBackClick">Back</button>
       </div>
     </div>
   </nav>

@@ -21,7 +21,10 @@ const onJsonData = (data: Result | null) => {
 
 const onUploadClicked = () => {
   hasResults.value = false;
-  result.value = null;
+};
+
+const onBackClicked = () => {
+  hasResults.value = true;
 };
 
 </script>
@@ -29,7 +32,9 @@ const onUploadClicked = () => {
 <template>
   <Navbar
       :title="projectName"
+      :show-on-dashboard="hasResults"
       @upload-clicked="onUploadClicked"
+      @back-clicked="onBackClicked"
   ></Navbar>
   <div class="container mt-4">
     <div v-if="hasResults">
