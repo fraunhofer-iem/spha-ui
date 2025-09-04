@@ -6,12 +6,13 @@ interface Props {
   activeView?: string;
 }
 
-withDefaults(defineProps<Props>(), {
-  activeView: 'product-details'
+const props = withDefaults(defineProps<Props>(), {
+  activeView: 'projects-overview'
 });
 
 const emit = defineEmits<{
   navigateTo: [view: string];
+  sidebarToggle: [collapsed: boolean];
 }>();
 
 const isCollapsed = ref(false);
@@ -22,13 +23,31 @@ const handleNavigation = (view: string) => {
 
 const toggleSidebar = () => {
   isCollapsed.value = !isCollapsed.value;
+  emit('sidebarToggle', isCollapsed.value);
 };
 
 const handleImageClick = () => {
   if (isCollapsed.value) {
     isCollapsed.value = false;
+    emit('sidebarToggle', isCollapsed.value);
   }
 };
+
+// Helper function to get popover attributes
+const getPopoverAttrs = (content: string) => ({
+  'data-bs-toggle': isCollapsed.value ? 'popover' : '',
+  'data-bs-placement': isCollapsed.value ? 'right' : '',
+  'data-bs-trigger': isCollapsed.value ? 'hover' : '',
+  'data-bs-content': isCollapsed.value ? content : ''
+});
+
+// Helper function to get navigation link classes
+const getNavLinkClasses = (viewName: string) => ({
+  'bg-primary text-white': props.activeView === viewName,
+  'text-dark': props.activeView !== viewName,
+  'justify-content-center': isCollapsed.value,
+  'px-3': !isCollapsed.value
+});
 
 let popovers: Popover[] = [];
 
@@ -37,20 +56,20 @@ const initializePopovers = () => {
   popovers.forEach(popover => popover.dispose());
   popovers = [];
 
-  // if (isCollapsed.value) {
-    // Initialize popovers for all elements with data-bs-toggle="popover"
-    const popoverElements = document.querySelectorAll('[data-bs-toggle="popover"]');
-    popoverElements.forEach(element => {
-      const popover = new Popover(element as Element);
-      popovers.push(popover);
-    });
-  // }
+  // Initialize popovers for all elements with data-bs-toggle="popover"
+  const popoverElements = document.querySelectorAll('[data-bs-toggle="popover"]');
+  popoverElements.forEach(element => {
+    const popover = new Popover(element as Element);
+    popovers.push(popover);
+  });
 };
 
 onMounted(() => {
   nextTick(() => {
     initializePopovers();
   });
+  // Emit initial sidebar state
+  emit('sidebarToggle', isCollapsed.value);
 });
 
 watch(isCollapsed, () => {
@@ -71,19 +90,16 @@ watch(isCollapsed, () => {
           class="sidebar-logo"
           @click="handleImageClick"
           :style="{ cursor: isCollapsed ? 'e-resize' : 'default' }"
-          :data-bs-toggle="isCollapsed ? 'popover' : ''"
-          :data-bs-placement="isCollapsed ? 'right' : ''"
-          :data-bs-trigger="isCollapsed ? 'hover' : ''"
-          :data-bs-content="isCollapsed ? 'Open Sidebar' : ''">
+          v-bind="getPopoverAttrs('Open Sidebar')">
 
-      <a class="btn  btn-sm ms-2"
+      <a class="btn ms-2"
          v-if="!isCollapsed"
          style="cursor:w-resize"
          @click="toggleSidebar"
-         :data-bs-toggle="!isCollapsed ? 'popover' : ''"
-         :data-bs-placement="!isCollapsed ? 'bottom' : ''"
-         :data-bs-trigger="!isCollapsed ? 'hover' : ''"
-         :data-bs-content="!isCollapsed ? 'Collapse Sidebar' : ''">
+         :data-bs-toggle="'popover'"
+         :data-bs-placement="'bottom'"
+         :data-bs-trigger="'hover'"
+         :data-bs-content="'Collapse Sidebar'">
         <i class="bi bi-layout-sidebar" style="font-size: 1.5rem"></i>
       </a>
     </div>
@@ -93,17 +109,9 @@ watch(isCollapsed, () => {
         <a
             href="#"
             class="nav-link d-flex align-items-center py-3 mb-2 rounded"
-            :class="{
-            'bg-primary text-white': activeView === 'projects-overview',
-            'text-dark': activeView !== 'projects-overview',
-            'justify-content-center': isCollapsed,
-            'px-3': !isCollapsed
-          }"
+            :class="getNavLinkClasses('projects-overview')"
             @click.prevent="handleNavigation('projects-overview')"
-            :data-bs-toggle="isCollapsed ? 'popover' : ''"
-            :data-bs-placement="isCollapsed ? 'right' : ''"
-            :data-bs-trigger="isCollapsed ? 'hover' : ''"
-            :data-bs-content="isCollapsed ? 'Projects Overview' : ''"
+            v-bind="getPopoverAttrs('Projects Overview')"
         >
           <i class="bi bi-list-ul" :class="{ 'me-3': !isCollapsed }"></i>
           <span v-if="!isCollapsed">Projects Overview</span>
@@ -112,17 +120,9 @@ watch(isCollapsed, () => {
         <a
             href="#"
             class="nav-link d-flex align-items-center py-3 mb-2 rounded"
-            :class="{
-            'bg-primary text-white': activeView === 'product-details',
-            'text-dark': activeView !== 'product-details',
-            'justify-content-center': isCollapsed,
-            'px-3': !isCollapsed
-          }"
+            :class="getNavLinkClasses('product-details')"
             @click.prevent="handleNavigation('product-details')"
-            :data-bs-toggle="isCollapsed ? 'popover' : ''"
-            :data-bs-placement="isCollapsed ? 'right' : ''"
-            :data-bs-trigger="isCollapsed ? 'hover' : ''"
-            :data-bs-content="isCollapsed ? 'Product Details' : ''"
+            v-bind="getPopoverAttrs('Product Details')"
         >
           <i class="bi bi-graph-up" :class="{ 'me-3': !isCollapsed }"></i>
           <span v-if="!isCollapsed">Product Details</span>
@@ -131,17 +131,9 @@ watch(isCollapsed, () => {
         <a
             href="#"
             class="nav-link d-flex align-items-center py-3 mb-2 rounded"
-            :class="{
-            'bg-primary text-white': activeView === 'result-upload',
-            'text-dark': activeView !== 'result-upload',
-            'justify-content-center': isCollapsed,
-            'px-3': !isCollapsed
-          }"
+            :class="getNavLinkClasses('result-upload')"
             @click.prevent="handleNavigation('result-upload')"
-            :data-bs-toggle="isCollapsed ? 'popover' : ''"
-            :data-bs-placement="isCollapsed ? 'right' : ''"
-            :data-bs-trigger="isCollapsed ? 'hover' : ''"
-            :data-bs-content="isCollapsed ? 'Result Upload' : ''"
+            v-bind="getPopoverAttrs('Result Upload')"
         >
           <i class="bi bi-cloud-upload" :class="{ 'me-3': !isCollapsed }"></i>
           <span v-if="!isCollapsed">Result Upload</span>

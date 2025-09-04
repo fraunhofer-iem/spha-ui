@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import Navbar from "./components/Navbar.vue";
 import Sidebar from "./components/Sidebar.vue";
 import type {Result} from "./model/Result.ts";
 import ProductDetails from "./views/ProductDetails.vue";
 import ProjectsOverview from "./views/ProjectsOverview.vue";
 import ResultUpload from "./views/ResultUpload.vue";
+import {parse} from "./util/Parser.ts";
 
 const projectName: string | undefined = undefined;
 
 const hasResults = ref(false);
 const result = ref<Result | null>(null);
 const activeView = ref<string>('result-upload');
+const sidebarCollapsed = ref(false);
 
 const onJsonData = (data: Result | null) => {
   if (data === null) {
@@ -44,6 +46,10 @@ const onBackClicked = () => {
   }
 };
 
+const onSidebarToggle = (collapsed: boolean) => {
+  sidebarCollapsed.value = collapsed;
+};
+
 </script>
 
 <template>
@@ -52,10 +58,11 @@ const onBackClicked = () => {
     <Sidebar
         :active-view="activeView"
         @navigate-to="onNavigateTo"
+        @sidebar-toggle="onSidebarToggle"
     />
 
     <!-- Main Content Area -->
-    <div class="flex-grow-1" style="margin-left: 250px;">
+    <div class="flex-grow-1 main-content" :style="`margin-left: ${sidebarCollapsed ? '80px' : '250px'};`">
       <Navbar
           :title="projectName"
           :show-on-dashboard="hasResults"
@@ -92,3 +99,15 @@ const onBackClicked = () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.main-content {
+  transition: margin-left 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0 !important;
+  }
+}
+</style>
