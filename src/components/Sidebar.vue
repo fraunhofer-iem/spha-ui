@@ -22,6 +22,12 @@ const handleNavigation = (view: string) => {
 const toggleSidebar = () => {
   isCollapsed.value = !isCollapsed.value;
 };
+
+const handleImageClick = () => {
+  if (isCollapsed.value) {
+    isCollapsed.value = false;
+  }
+};
 </script>
 
 <template>
@@ -31,8 +37,11 @@ const toggleSidebar = () => {
           src="./../assets/img/SPHA_Icon_Light.svg"
           alt="Software Product Health Assistant"
           width="50"
-          class="sidebar-logo">
+          class="sidebar-logo"
+          @click="handleImageClick"
+          :style="{ cursor: isCollapsed ? 'pointer' : 'default' }">
       <button 
+          v-if="!isCollapsed"
           class="btn btn-outline-secondary btn-sm ms-2 collapse-btn"
           @click="toggleSidebar"
           :title="isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'">
