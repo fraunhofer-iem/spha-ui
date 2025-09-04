@@ -37,14 +37,14 @@ const initializePopovers = () => {
   popovers.forEach(popover => popover.dispose());
   popovers = [];
 
-  if (isCollapsed.value) {
+  // if (isCollapsed.value) {
     // Initialize popovers for all elements with data-bs-toggle="popover"
     const popoverElements = document.querySelectorAll('[data-bs-toggle="popover"]');
     popoverElements.forEach(element => {
       const popover = new Popover(element as Element);
       popovers.push(popover);
     });
-  }
+  // }
 };
 
 onMounted(() => {
@@ -75,18 +75,17 @@ watch(isCollapsed, () => {
           :data-bs-placement="isCollapsed ? 'right' : ''"
           :data-bs-trigger="isCollapsed ? 'hover' : ''"
           :data-bs-content="isCollapsed ? 'Open Sidebar' : ''">
-      <span
-          v-if="!isCollapsed"
-          class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover"
-          data-bs-content="Disabled popover"
-      >
 
-      <a class="btn  btn-sm ms-2 collapse-btn"
+      <a class="btn  btn-sm ms-2"
+         v-if="!isCollapsed"
          style="cursor:w-resize"
-         @click="toggleSidebar">
+         @click="toggleSidebar"
+         :data-bs-toggle="!isCollapsed ? 'popover' : ''"
+         :data-bs-placement="!isCollapsed ? 'bottom' : ''"
+         :data-bs-trigger="!isCollapsed ? 'hover' : ''"
+         :data-bs-content="!isCollapsed ? 'Collapse Sidebar' : ''">
         <i class="bi bi-layout-sidebar" style="font-size: 1.5rem"></i>
       </a>
-      </span>
     </div>
     <div class="p-3">
       <nav class="nav flex-column">
@@ -161,17 +160,6 @@ watch(isCollapsed, () => {
 
 .sidebar-logo {
   transition: all 0.3s ease;
-}
-
-.collapse-btn {
-  flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
 }
 
 .nav-link {
