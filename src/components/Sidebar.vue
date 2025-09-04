@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {nextTick, onMounted, ref, watch} from 'vue';
+import {Popover} from 'bootstrap';
 
 interface Props {
   activeView?: string;
@@ -28,6 +29,35 @@ const handleImageClick = () => {
     isCollapsed.value = false;
   }
 };
+
+let popovers: Popover[] = [];
+
+const initializePopovers = () => {
+  // Dispose existing popovers
+  popovers.forEach(popover => popover.dispose());
+  popovers = [];
+
+  if (isCollapsed.value) {
+    // Initialize popovers for all elements with data-bs-toggle="popover"
+    const popoverElements = document.querySelectorAll('[data-bs-toggle="popover"]');
+    popoverElements.forEach(element => {
+      const popover = new Popover(element as Element);
+      popovers.push(popover);
+    });
+  }
+};
+
+onMounted(() => {
+  nextTick(() => {
+    initializePopovers();
+  });
+});
+
+watch(isCollapsed, () => {
+  nextTick(() => {
+    initializePopovers();
+  });
+});
 </script>
 
 <template>
@@ -40,15 +70,23 @@ const handleImageClick = () => {
           width="50"
           class="sidebar-logo"
           @click="handleImageClick"
-          :style="{ cursor: isCollapsed ? 'e-resize' : 'default' }">
-      <button
+          :style="{ cursor: isCollapsed ? 'e-resize' : 'default' }"
+          :data-bs-toggle="isCollapsed ? 'popover' : ''"
+          :data-bs-placement="isCollapsed ? 'right' : ''"
+          :data-bs-trigger="isCollapsed ? 'hover' : ''"
+          :data-bs-content="isCollapsed ? 'Open Sidebar' : ''">
+      <span
           v-if="!isCollapsed"
-          class="btn  btn-sm ms-2 collapse-btn"
-          style="cursor:w-resize"
-          @click="toggleSidebar"
-          :title="isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'">
+          class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover"
+          data-bs-content="Disabled popover"
+      >
+
+      <a class="btn  btn-sm ms-2 collapse-btn"
+         style="cursor:w-resize"
+         @click="toggleSidebar">
         <i class="bi bi-layout-sidebar" style="font-size: 1.5rem"></i>
-      </button>
+      </a>
+      </span>
     </div>
     <div class="p-3">
       <nav class="nav flex-column">
@@ -63,7 +101,10 @@ const handleImageClick = () => {
             'px-3': !isCollapsed
           }"
             @click.prevent="handleNavigation('projects-overview')"
-            :title="isCollapsed ? 'Projects Overview' : ''"
+            :data-bs-toggle="isCollapsed ? 'popover' : ''"
+            :data-bs-placement="isCollapsed ? 'right' : ''"
+            :data-bs-trigger="isCollapsed ? 'hover' : ''"
+            :data-bs-content="isCollapsed ? 'Projects Overview' : ''"
         >
           <i class="bi bi-list-ul" :class="{ 'me-3': !isCollapsed }"></i>
           <span v-if="!isCollapsed">Projects Overview</span>
@@ -79,7 +120,10 @@ const handleImageClick = () => {
             'px-3': !isCollapsed
           }"
             @click.prevent="handleNavigation('product-details')"
-            :title="isCollapsed ? 'Product Details' : ''"
+            :data-bs-toggle="isCollapsed ? 'popover' : ''"
+            :data-bs-placement="isCollapsed ? 'right' : ''"
+            :data-bs-trigger="isCollapsed ? 'hover' : ''"
+            :data-bs-content="isCollapsed ? 'Product Details' : ''"
         >
           <i class="bi bi-graph-up" :class="{ 'me-3': !isCollapsed }"></i>
           <span v-if="!isCollapsed">Product Details</span>
@@ -95,7 +139,10 @@ const handleImageClick = () => {
             'px-3': !isCollapsed
           }"
             @click.prevent="handleNavigation('result-upload')"
-            :title="isCollapsed ? 'Result Upload' : ''"
+            :data-bs-toggle="isCollapsed ? 'popover' : ''"
+            :data-bs-placement="isCollapsed ? 'right' : ''"
+            :data-bs-trigger="isCollapsed ? 'hover' : ''"
+            :data-bs-content="isCollapsed ? 'Result Upload' : ''"
         >
           <i class="bi bi-cloud-upload" :class="{ 'me-3': !isCollapsed }"></i>
           <span v-if="!isCollapsed">Result Upload</span>
