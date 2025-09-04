@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import {ref} from 'vue';
 
 interface Props {
   activeView?: string;
@@ -31,7 +31,8 @@ const handleImageClick = () => {
 </script>
 
 <template>
-  <div class="sidebar border-end vh-100 position-fixed" :style="`width: ${isCollapsed ? '80px' : '250px'}; z-index: 1000;`">
+  <div class="sidebar border-end vh-100 position-fixed"
+       :style="`width: ${isCollapsed ? '80px' : '250px'}; z-index: 1000;`">
     <div class="mt-2 p-3 d-flex align-items-center justify-content-between">
       <img
           src="./../assets/img/SPHA_Icon_Light.svg"
@@ -39,13 +40,14 @@ const handleImageClick = () => {
           width="50"
           class="sidebar-logo"
           @click="handleImageClick"
-          :style="{ cursor: isCollapsed ? 'pointer' : 'default' }">
-      <button 
+          :style="{ cursor: isCollapsed ? 'e-resize' : 'default' }">
+      <button
           v-if="!isCollapsed"
-          class="btn btn-outline-secondary btn-sm ms-2 collapse-btn"
+          class="btn  btn-sm ms-2 collapse-btn"
+          style="cursor:w-resize"
           @click="toggleSidebar"
           :title="isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'">
-        <i :class="isCollapsed ? 'bi bi-chevron-right' : 'bi bi-chevron-left'"></i>
+        <i class="bi bi-layout-sidebar" style="font-size: 1.5rem"></i>
       </button>
     </div>
     <div class="p-3">
