@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import Navbar from "./components/Navbar.vue";
 import Sidebar from "./components/Sidebar.vue";
 import type {Result} from "./model/Result.ts";
 import ProductDetails from "./views/ProductDetails.vue";
 import ProjectsOverview from "./views/ProjectsOverview.vue";
 import ResultUpload from "./views/ResultUpload.vue";
-import {parse} from "./util/Parser.ts";
 
 const projectName: string | undefined = undefined;
 
@@ -70,7 +69,7 @@ const onSidebarToggle = (collapsed: boolean) => {
           @back-clicked="onBackClicked"
       ></Navbar>
 
-      <div class="container mt-4">
+      <div class="container-fluid mt-4">
 
         <!-- Projects Overview View -->
         <div v-if="activeView === 'projects-overview'">
