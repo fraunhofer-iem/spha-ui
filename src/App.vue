@@ -122,7 +122,7 @@ const onProductSelected = (productId: string) => {
 
         <!-- Product List -->
         <div v-else-if="activeView === 'product-list'">
-          <ProductList/>
+          <ProductList :products="products"/>
         </div>
 
         <!-- Fallback: Show upload if trying to access product details without data -->
