@@ -70,6 +70,15 @@ const onSidebarToggle = (collapsed: boolean) => {
   sidebarCollapsed.value = collapsed;
 };
 
+const onProductSelected = (productId: string) => {
+  const product = products.value.find(p => p.id === productId);
+  if (product) {
+    selectedProduct.value = product;
+    selectedProductId.value = productId;
+    activeView.value = 'product-details';
+  }
+};
+
 </script>
 
 <template>
@@ -77,7 +86,9 @@ const onSidebarToggle = (collapsed: boolean) => {
     <!-- Sidebar -->
     <Sidebar
         :active-view="activeView"
+        :products="products"
         @navigate-to="onNavigateTo"
+        @product-selected="onProductSelected"
         @sidebar-toggle="onSidebarToggle"
     />
 

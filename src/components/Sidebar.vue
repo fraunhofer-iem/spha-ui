@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import {nextTick, onMounted, ref, watch} from 'vue';
 import {Popover} from 'bootstrap';
+import type {Product} from '../model/Result';
 
 interface Props {
   activeView?: string;
+  products?: Product[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  activeView: 'projects-overview'
+  activeView: 'projects-overview',
+  products: () => []
 });
 
 const emit = defineEmits<{
   navigateTo: [view: string];
+  productSelected: [productId: string];
   sidebarToggle: [collapsed: boolean];
 }>();
 
@@ -20,6 +24,10 @@ const isProductsExpanded = ref(true);
 
 const handleNavigation = (view: string) => {
   emit('navigateTo', view);
+};
+
+const handleProductSelection = (productId: string) => {
+  emit('productSelected', productId);
 };
 
 const toggleSidebar = () => {
@@ -148,21 +156,13 @@ watch(isCollapsed, () => {
           <!-- Sub-items -->
           <div v-if="!isCollapsed && isProductsExpanded" class="sub-items ms-3 mt-1">
             <a
+                v-for="product in props.products"
+                :key="product.id"
                 href="#"
                 class="nav-link sub-nav-item d-flex align-items-center py-2 px-3 mb-1 rounded"
-                :class="getNavLinkClasses('kpi-tree')"
-                @click.prevent="handleNavigation('kpi-tree')"
+                @click.prevent="handleProductSelection(product.id)"
             >
-              <span>KPI Tree</span>
-            </a>
-
-            <a
-                href="#"
-                class="nav-link sub-nav-item d-flex align-items-center py-2 px-3 mb-1 rounded"
-                :class="getNavLinkClasses('tool-results')"
-                @click.prevent="handleNavigation('tool-results')"
-            >
-              <span>Tool Results</span>
+              <span :title="product.description">{{ product.name }}</span>
             </a>
           </div>
         </div>
