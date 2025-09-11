@@ -51,4 +51,13 @@ export interface Result {
   repoInfo: RepoInfo;
   root: Kpi;
   tools: Tool[];
+  createdAt: string; // defaults to upload date
+}
+
+export interface Product {
+  id: string;
+  name: string;
+  description?: string;
+  results: Result[];
+  createdAt?: string;
 }

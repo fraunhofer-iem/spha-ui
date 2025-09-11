@@ -2,7 +2,7 @@
 import {ref} from "vue";
 import Navbar from "./components/Navbar.vue";
 import Sidebar from "./components/Sidebar.vue";
-import type {Result} from "./model/Result.ts";
+import type {Result, Product} from "./model/Result.ts";
 import ProductDetails from "./views/ProductDetails.vue";
 import ProjectsOverview from "./views/ProjectsOverview.vue";
 import ResultUpload from "./views/ResultUpload.vue";
@@ -10,36 +10,55 @@ import ProductList from "./views/ProductList.vue";
 
 const projectName: string | undefined = undefined;
 
-const hasResults = ref(false);
-const result = ref<Result | null>(null);
+const products = ref<Product[]>([]);
+const selectedProductId = ref<string | null>(null);
+const selectedResultIndex = ref<number>(0);
 const activeView = ref<string>('result-upload');
 const sidebarCollapsed = ref(false);
+
+const hasProducts = ref(false);
+const selectedProduct = ref<Product | null>(null);
+const selectedResult = ref<Result | null>(null);
 
 const onJsonData = (data: Result | null) => {
   if (data === null) {
     return;
   }
   console.log(data);
-  result.value = data;
-  hasResults.value = true;
+  
+  // Create a new product for this result
+  const productName = data.repoInfo.projectName || `Product ${products.value.length + 1}`;
+  const newProduct: Product = {
+    id: `product-${Date.now()}`,
+    name: productName,
+    description: `Analysis results for ${productName}`,
+    results: [data],
+    createdAt: new Date().toISOString()
+  };
+  
+  products.value.push(newProduct);
+  selectedProductId.value = newProduct.id;
+  selectedResultIndex.value = 0;
+  selectedProduct.value = newProduct;
+  selectedResult.value = data;
+  hasProducts.value = true;
   activeView.value = 'product-details';
 };
 
 const onNavigateTo = (view: string) => {
   activeView.value = view;
-  if (view === 'product-details' && !hasResults.value) {
-    // If navigating to product details but no results, go to upload instead
+  if (view === 'product-details' && !hasProducts.value) {
+    // If navigating to product details but no products, go to upload instead
     activeView.value = 'result-upload';
   }
 };
 
 const onUploadClicked = () => {
   activeView.value = 'result-upload';
-  hasResults.value = false;
 };
 
 const onBackClicked = () => {
-  if (hasResults.value) {
+  if (hasProducts.value) {
     activeView.value = 'product-details';
   } else {
     activeView.value = 'result-upload';
@@ -65,7 +84,7 @@ const onSidebarToggle = (collapsed: boolean) => {
     <div class="flex-grow-1 main-content" :style="`margin-left: ${sidebarCollapsed ? '80px' : '250px'};`">
       <Navbar
           :title="projectName"
-          :show-on-dashboard="hasResults"
+          :show-on-dashboard="hasProducts"
           @upload-clicked="onUploadClicked"
           @back-clicked="onBackClicked"
       ></Navbar>
@@ -78,8 +97,8 @@ const onSidebarToggle = (collapsed: boolean) => {
         </div>
 
         <!-- Product Details View -->
-        <div v-else-if="activeView === 'product-details'">
-          <ProductDetails v-bind="result"/>
+        <div v-else-if="activeView === 'product-details' && selectedResult">
+          <ProductDetails v-bind="selectedResult"/>
         </div>
 
         <!-- Result Upload View -->
