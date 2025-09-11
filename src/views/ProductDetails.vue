@@ -7,14 +7,15 @@ import KpiDetailsModal from "./../components/KpiDetailsModal.vue";
 import ToolOverview from "./../components/ToolOverview.vue";
 import EmptyKpiCard from "./../components/EmptyKpiCard.vue";
 
-import type {Result} from "../model/Result.ts";
-import { computed, ref } from "vue";
-import { useKpiFilters } from "../composables/kpiUtils.ts";
+import type {Product} from "../model/Result.ts";
+import {computed, ref} from "vue";
+import {useKpiFilters} from "../composables/kpiUtils.ts";
 
-const props = defineProps<Result>();
+const props = defineProps<Product>();
 
-const rootComputed = computed(() => props.root);
-const { criticalKpis, warningKpis } = useKpiFilters(rootComputed);
+const lastResult = computed(() => props.results[props.results.length - 1]);
+const rootComputed = computed(() => lastResult.value?.root);
+const {criticalKpis, warningKpis} = useKpiFilters(rootComputed);
 
 const hasCritical = computed(() => criticalKpis.value.length > 0);
 const hasWarnings = computed(() => warningKpis.value.length > 0);
@@ -33,43 +34,49 @@ const handleModalClose = () => {
 
 <template>
   <div v-if="hasCritical" class="alert alert-danger alert-dismissible" role="alert">
-    <div>You have {{ criticalKpis.length }} critical KPIs. Click <a href="#" class="alert-link" @click.prevent="handleAlertClick">here</a> for details.</div>
+    <div>You have {{ criticalKpis.length }} critical KPIs. Click <a href="#" class="alert-link"
+                                                                    @click.prevent="handleAlertClick">here</a> for
+      details.
+    </div>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
   <div v-if="hasWarnings" class="alert alert-warning alert-dismissible" role="alert">
-    <div>You have {{ warningKpis.length }} warning KPIs. Click <a href="#" class="alert-link" @click.prevent="handleAlertClick">here</a> for details.</div>
+    <div>You have {{ warningKpis.length }} warning KPIs. Click <a href="#" class="alert-link"
+                                                                  @click.prevent="handleAlertClick">here</a> for
+      details.
+    </div>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
   <div class="row">
     <div class="col-md-3 mb-3">
-      <HealthScore :score="props.healthScore" :root-kpi="props.root"/>
+      <HealthScore :score="lastResult!.healthScore" :root-kpi="lastResult!.root"/>
     </div>
 
     <div class="col-md-9 mb-3">
-      <TopLevelKpiOverview v-bind="props.root"/>
+      <TopLevelKpiOverview v-bind="lastResult!.root"/>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-3">
-      <ProjectOverview v-bind="props.repoInfo"/>
+      <ProjectOverview v-bind="lastResult!.repoInfo"/>
     </div>
     <div class="col-md-3 mb-3">
-      <RepoLanguagesPieChart :languages="props.repoInfo.repoLanguages"/>
+      <RepoLanguagesPieChart :languages="lastResult!.repoInfo.repoLanguages"/>
     </div>
     <div class="col-md-3 mb-3">
-      <EmptyKpiCard :root="props.root"/>
+      <EmptyKpiCard :root="lastResult!.root"/>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12 mb-3">
-      <ToolOverview :tools="props.tools"/>
+      <ToolOverview :tools="lastResult!.tools"/>
     </div>
   </div>
 
   <!-- KPI Details Modal -->
   <KpiDetailsModal
-      :root="props.root"
+      :root="lastResult!.root"
       :show="showModal"
       @close="handleModalClose"
   />

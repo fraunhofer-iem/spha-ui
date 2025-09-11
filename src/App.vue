@@ -2,7 +2,7 @@
 import {ref} from "vue";
 import Navbar from "./components/Navbar.vue";
 import Sidebar from "./components/Sidebar.vue";
-import type {Result, Product} from "./model/Result.ts";
+import type {Product, Result} from "./model/Result.ts";
 import ProductDetails from "./views/ProductDetails.vue";
 import ProjectsOverview from "./views/ProjectsOverview.vue";
 import ResultUpload from "./views/ResultUpload.vue";
@@ -18,29 +18,36 @@ const sidebarCollapsed = ref(false);
 
 const hasProducts = ref(false);
 const selectedProduct = ref<Product | null>(null);
-const selectedResult = ref<Result | null>(null);
 
 const onJsonData = (data: Result | null) => {
   if (data === null) {
     return;
   }
   console.log(data);
-  
+
   // Create a new product for this result
   const productName = data.repoInfo.projectName || `Product ${products.value.length + 1}`;
-  const newProduct: Product = {
-    id: `product-${Date.now()}`,
-    name: productName,
-    description: `Analysis results for ${productName}`,
-    results: [data],
-    createdAt: new Date().toISOString()
-  };
-  
-  products.value.push(newProduct);
-  selectedProductId.value = newProduct.id;
-  selectedResultIndex.value = 0;
-  selectedProduct.value = newProduct;
-  selectedResult.value = data;
+  const idx = products.value.findIndex(product => product.name === productName);
+  let product: Product
+  if (idx == -1) {
+    product = {
+      id: `product-${Date.now()}`,
+      name: productName,
+      description: `Analysis results for ${productName}`,
+      results: [data],
+      createdAt: new Date().toISOString()
+    };
+
+    products.value.push(product);
+    selectedProductId.value = product.id;
+    selectedResultIndex.value = 0;
+
+  } else {
+    product = products.value[idx]!!;
+    product.results.push(data);
+  }
+
+  selectedProduct.value = product;
   hasProducts.value = true;
   activeView.value = 'product-details';
 };
@@ -97,8 +104,8 @@ const onSidebarToggle = (collapsed: boolean) => {
         </div>
 
         <!-- Product Details View -->
-        <div v-else-if="activeView === 'product-details' && selectedResult">
-          <ProductDetails v-bind="selectedResult"/>
+        <div v-else-if="activeView === 'product-details' && selectedProduct">
+          <ProductDetails v-bind="selectedProduct"/>
         </div>
 
         <!-- Result Upload View -->
