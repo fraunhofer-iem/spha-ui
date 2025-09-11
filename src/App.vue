@@ -86,6 +86,8 @@ const onSidebarToggle = (collapsed: boolean) => {
       <Navbar
           :title="projectName"
           :show-on-dashboard="hasProducts"
+          :selected-product-name="selectedProduct?.name"
+          :current-view="activeView"
           @upload-clicked="onUploadClicked"
       ></Navbar>
 

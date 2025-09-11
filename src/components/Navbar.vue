@@ -1,11 +1,38 @@
 <script setup lang="ts">
-import {onMounted, onUnmounted, ref} from "vue";
+import {computed, onMounted, onUnmounted, ref} from "vue";
 
 const formattedTime = ref<string>('');
 
-withDefaults(defineProps<{ title?: string, showOnDashboard?: boolean }>(), {
-  title: '', // ToDo: this should be the view title or the product name if a product is selected
-  showOnDashboard: false
+const props = withDefaults(defineProps<{ title?: string, showOnDashboard?: boolean, selectedProductName?: string, currentView?: string }>(), {
+  title: '',
+  showOnDashboard: false,
+  selectedProductName: '',
+  currentView: ''
+})
+
+// Compute the display title based on selected product or current view
+const displayTitle = computed(() => {
+  if (props.selectedProductName) {
+    return props.selectedProductName;
+  }
+  
+  if (props.title) {
+    return props.title;
+  }
+  
+  // Default view titles
+  switch (props.currentView) {
+    case 'projects-overview':
+      return 'Projects Overview';
+    case 'product-details':
+      return 'Product Details';
+    case 'result-upload':
+      return 'Upload Results';
+    case 'product-list':
+      return 'Product List';
+    default:
+      return 'Software Product Health Assistant';
+  }
 })
 
 
@@ -34,7 +61,7 @@ onUnmounted(() => {
   <nav class="navbar">
     <div class="container mt-2 d-flex justify-content-between align-items-center">
 
-      <h3 class="fw-bold mx-auto">{{ title }}</h3>
+      <h3 class="fw-bold mx-auto">{{ displayTitle }}</h3>
       <div class="d-flex align-items-center">
         <div class="me-3 time-display p-3">
           <p class="h5">{{ formattedTime }}</p>
