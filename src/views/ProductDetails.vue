@@ -19,11 +19,13 @@ interface Props {
 const props = defineProps<Props>();
 const route = useRoute();
 
-// Use the selected product from props (passed from App.vue via router-view)
-const product = computed(() => props.selectedProduct);
+// Use the selectedProduct prop directly
+const product = computed(() => {
+  return props.selectedProduct || null;
+});
 
 // Check if product has any results
-const hasResults = computed(() => product.value?.results.length > 0);
+const hasResults = computed(() => (product.value?.results.length ?? 0) > 0);
 const lastResult = computed(() => hasResults.value ? product.value!.results[product.value!.results.length - 1] : null);
 const rootComputed = computed(() => lastResult.value?.root);
 const {criticalKpis, warningKpis} = useKpiFilters(rootComputed);
@@ -65,10 +67,10 @@ const handleUploadClick = () => {
               There are currently no analysis results for the product "{{ product?.name }}".
               Upload a result file to view the dashboard.
             </p>
-            <button 
-              type="button" 
-              class="btn btn-primary btn-lg"
-              @click="handleUploadClick"
+            <button
+                type="button"
+                class="btn btn-primary btn-lg"
+                @click="handleUploadClick"
             >
               <i class="bi bi-upload me-2"></i>
               Upload Result

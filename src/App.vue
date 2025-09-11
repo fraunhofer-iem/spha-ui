@@ -44,25 +44,19 @@ const onJsonData = (data: Result | null) => {
 
   selectedProduct.value = product;
   hasProducts.value = true;
-  router.push({ name: 'product-details', params: { id: product.id } });
+  router.push({name: 'product-details', params: {id: product.id}});
 };
 
 const onNavigateTo = (view: string) => {
   if (view !== 'product-details') {
     selectedProduct.value = null;
   }
-  
-  if (view === 'product-details' && !hasProducts.value) {
-    // If navigating to product details but no products, go to upload instead
-    router.push({ name: 'result-upload' });
-    return;
-  }
-  
-  router.push({ name: view });
+
+  router.push({name: view});
 };
 
 const onUploadClicked = () => {
-  router.push({ name: 'result-upload' });
+  router.push({name: 'result-upload'});
 };
 
 
@@ -74,7 +68,7 @@ const onProductSelected = (productId: string) => {
   const product = products.value.find(p => p.id === productId);
   if (product) {
     selectedProduct.value = product;
-    router.push({ name: 'product-details', params: { id: product.id } });
+    router.push({name: 'product-details', params: {id: product.id}});
   }
 };
 
@@ -101,11 +95,10 @@ const onProductSelected = (productId: string) => {
       ></Navbar>
 
       <div class="container-fluid mt-4">
-        <router-view 
-          :products="products" 
-          :selected-product="selectedProduct"
-          @file-dropped="onJsonData" 
-          @product-selected="onProductSelected" 
+        <router-view
+            :selected-product="selectedProduct"
+            @file-dropped="onJsonData"
+            @product-selected="onProductSelected"
         />
       </div>
     </div>
