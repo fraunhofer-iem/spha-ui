@@ -6,11 +6,13 @@ import type {Product} from '../model/Result';
 interface Props {
   activeView?: string;
   products?: Product[];
+  selectedProduct?: Product | null;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   activeView: 'projects-overview',
-  products: () => []
+  products: () => [],
+  selectedProduct: null
 });
 
 const emit = defineEmits<{
@@ -162,6 +164,7 @@ watch(isCollapsed, () => {
                 :key="product.id"
                 href="#"
                 class="nav-link sub-nav-item d-flex align-items-center py-2 px-3 mb-1 rounded ms-3"
+                :class="{ 'active': props.selectedProduct?.id === product.id }"
                 @click.prevent="handleProductSelection(product.id)"
             >
               <span :title="product.description">{{ product.name }}</span>

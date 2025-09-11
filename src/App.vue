@@ -85,6 +85,7 @@ const onProductSelected = (productId: string) => {
     <Sidebar
         :active-view="activeView"
         :products="products"
+        :selected-product="selectedProduct"
         @navigate-to="onNavigateTo"
         @product-selected="onProductSelected"
         @sidebar-toggle="onSidebarToggle"
