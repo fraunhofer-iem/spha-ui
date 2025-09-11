@@ -11,7 +11,6 @@ import ProductList from "./views/ProductList.vue";
 const projectName: string | undefined = undefined;
 
 const products = ref<Product[]>([]);
-const selectedProductId = ref<string | null>(null);
 const activeView = ref<string>('result-upload');
 const sidebarCollapsed = ref(false);
 
@@ -39,7 +38,6 @@ const onJsonData = (data: Result | null) => {
     };
 
     products.value.push(product);
-    selectedProductId.value = product.id;
 
   } else {
     product = products.value[idx]!!;
@@ -75,7 +73,6 @@ const onProductSelected = (productId: string) => {
   const product = products.value.find(p => p.id === productId);
   if (product) {
     selectedProduct.value = product;
-    selectedProductId.value = productId;
     activeView.value = 'product-details';
   }
 };

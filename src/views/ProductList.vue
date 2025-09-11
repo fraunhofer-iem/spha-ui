@@ -58,12 +58,7 @@ const onProductClick = (product: Product) => {
 
         <!-- Products Table -->
         <div v-else class="card border-0 shadow-sm">
-          <div class="card-header bg-gradient bg-primary text-white py-3">
-            <h5 class="mb-0 fw-semibold">
-              <i class="bi bi-list-ul me-2"></i>
-              Products Overview
-            </h5>
-          </div>
+
 
           <div class="table-responsive">
             <table class="table table-hover mb-0">

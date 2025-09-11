@@ -273,7 +273,7 @@ watch(isCollapsed, () => {
 }
 
 .sub-nav-item.active {
-  background: #d9dbff;
+  background: #e6e7ff;
   color: #6366f1;
   font-weight: 500;
 }
