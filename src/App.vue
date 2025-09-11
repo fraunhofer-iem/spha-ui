@@ -12,7 +12,6 @@ const projectName: string | undefined = undefined;
 
 const products = ref<Product[]>([]);
 const selectedProductId = ref<string | null>(null);
-const selectedResultIndex = ref<number>(0);
 const activeView = ref<string>('result-upload');
 const sidebarCollapsed = ref(false);
 
@@ -40,7 +39,6 @@ const onJsonData = (data: Result | null) => {
 
     products.value.push(product);
     selectedProductId.value = product.id;
-    selectedResultIndex.value = 0;
 
   } else {
     product = products.value[idx]!!;
@@ -53,6 +51,9 @@ const onJsonData = (data: Result | null) => {
 };
 
 const onNavigateTo = (view: string) => {
+  if (view !== 'product-details') {
+    selectedProduct.value = null;
+  }
   activeView.value = view;
   if (view === 'product-details' && !hasProducts.value) {
     // If navigating to product details but no products, go to upload instead
@@ -64,13 +65,6 @@ const onUploadClicked = () => {
   activeView.value = 'result-upload';
 };
 
-const onBackClicked = () => {
-  if (hasProducts.value) {
-    activeView.value = 'product-details';
-  } else {
-    activeView.value = 'result-upload';
-  }
-};
 
 const onSidebarToggle = (collapsed: boolean) => {
   sidebarCollapsed.value = collapsed;
@@ -93,7 +87,6 @@ const onSidebarToggle = (collapsed: boolean) => {
           :title="projectName"
           :show-on-dashboard="hasProducts"
           @upload-clicked="onUploadClicked"
-          @back-clicked="onBackClicked"
       ></Navbar>
 
       <div class="container-fluid mt-4">

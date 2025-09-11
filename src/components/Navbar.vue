@@ -4,7 +4,7 @@ import {onMounted, onUnmounted, ref} from "vue";
 const formattedTime = ref<string>('');
 
 withDefaults(defineProps<{ title?: string, showOnDashboard?: boolean }>(), {
-  title: 'Software Product Health Assistant',
+  title: '', // ToDo: this should be the view title or the product name if a product is selected
   showOnDashboard: false
 })
 
