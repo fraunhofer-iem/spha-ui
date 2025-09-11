@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import {nextTick, onMounted, ref, watch} from 'vue';
+import {useRoute} from 'vue-router';
 import {Popover} from 'bootstrap';
 import type {Product} from '../model/Result';
 
 interface Props {
-  activeView?: string;
   products?: Product[];
   selectedProduct?: Product | null;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  activeView: 'projects-overview',
   products: () => [],
   selectedProduct: null
 });
+
+const route = useRoute();
 
 const emit = defineEmits<{
   navigateTo: [view: string];
@@ -22,13 +23,6 @@ const emit = defineEmits<{
 }>();
 
 const isCollapsed = ref(false);
-const handleNavigation = (view: string) => {
-  emit('navigateTo', view);
-};
-
-const handleProductSelection = (productId: string) => {
-  emit('productSelected', productId);
-};
 
 const toggleSidebar = () => {
   isCollapsed.value = !isCollapsed.value;
@@ -51,8 +45,8 @@ const getPopoverAttrs = (content: string) => ({
 });
 
 // Helper function to get navigation link classes
-const getNavLinkClasses = (viewName: string) => ({
-  'active': props.activeView === viewName,
+const getNavLinkClasses = (routeName: string) => ({
+  'active': route.name === routeName,
   'justify-content-center': isCollapsed.value,
   'px-3': !isCollapsed.value
 });
@@ -119,69 +113,64 @@ watch(isCollapsed, () => {
       <nav class="nav flex-column">
 
         <!-- Project Overview -->
-        <a
-            href="#"
+        <router-link
+            :to="{ name: 'projects-overview' }"
             class="nav-link nav-item d-flex align-items-center py-2 px-3 mb-2 rounded"
             :class="getNavLinkClasses('projects-overview')"
-            @click.prevent="handleNavigation('projects-overview')"
             v-bind="getPopoverAttrs('Project Overview')"
         >
           <i class="bi bi-grid-3x3-gap me-2" v-if="!isCollapsed"></i>
           <i class="bi bi-grid-3x3-gap" v-else></i>
           <span v-if="!isCollapsed">Overview</span>
-        </a>
+        </router-link>
 
         <!-- Products -->
-        <a
-            href="#"
+        <router-link
+            :to="{ name: 'product-list' }"
             class="nav-link nav-item d-flex align-items-center py-2 px-3 mb-2 rounded"
             :class="getNavLinkClasses('product-list')"
-            @click.prevent="handleNavigation('product-list')"
             v-bind="getPopoverAttrs('Product List')"
         >
           <i class="bi bi-box me-2" v-if="!isCollapsed"></i>
           <i class="bi bi-box" v-else></i>
           <span v-if="!isCollapsed">Products</span>
-        </a>
+        </router-link>
 
         <!-- Result Upload (collapsed state) -->
-        <a
+        <router-link
             v-if="isCollapsed"
-            href="#"
+            :to="{ name: 'result-upload' }"
             class="nav-link nav-item d-flex align-items-center py-2 px-3 mb-2 rounded"
             :class="getNavLinkClasses('result-upload')"
-            @click.prevent="handleNavigation('result-upload')"
             v-bind="getPopoverAttrs('Result Upload')"
         >
           <i class="bi bi-cloud-upload"></i>
-        </a>
+        </router-link>
 
         <!-- Products List with Scrollable Area -->
         <div v-if="!isCollapsed" class="products-section flex-grow-1 d-flex flex-column">
           <div class="products-scrollable">
-            <a
+            <router-link
                 v-for="product in props.products"
                 :key="product.id"
-                href="#"
+                :to="{ name: 'product-details', params: { id: product.id } }"
                 class="nav-link sub-nav-item d-flex align-items-center py-2 px-3 mb-1 rounded ms-3"
                 :class="{ 'active': props.selectedProduct?.id === product.id }"
-                @click.prevent="handleProductSelection(product.id)"
             >
               <span :title="product.description">{{ product.name }}</span>
-            </a>
+            </router-link>
           </div>
           
           <!-- Sticky Result Upload Button -->
           <div class="sticky-upload-btn">
-            <a
-                href="#"
+            <router-link
+                :to="{ name: 'result-upload' }"
                 class="nav-link nav-item d-flex align-items-center py-2 px-3 mb-2 rounded"
                 :class="getNavLinkClasses('result-upload')"
-                @click.prevent="handleNavigation('result-upload')"
             >
               <i class="bi bi-cloud-upload me-2"></i>
               <span>Result Upload</span>
-            </a>
+            </router-link>
           </div>
         </div>
       </nav>

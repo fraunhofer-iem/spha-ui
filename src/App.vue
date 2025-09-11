@@ -1,17 +1,15 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import {useRouter} from "vue-router";
 import Navbar from "./components/Navbar.vue";
 import Sidebar from "./components/Sidebar.vue";
 import type {Product, Result} from "./model/Result.ts";
-import ProductDetails from "./views/ProductDetails.vue";
-import ProjectsOverview from "./views/ProjectsOverview.vue";
-import ResultUpload from "./views/ResultUpload.vue";
-import ProductList from "./views/ProductList.vue";
+
+const router = useRouter();
 
 const projectName: string | undefined = undefined;
 
 const products = ref<Product[]>([]);
-const activeView = ref<string>('result-upload');
 const sidebarCollapsed = ref(false);
 
 const hasProducts = ref(false);
@@ -46,22 +44,25 @@ const onJsonData = (data: Result | null) => {
 
   selectedProduct.value = product;
   hasProducts.value = true;
-  activeView.value = 'product-details';
+  router.push({ name: 'product-details', params: { id: product.id } });
 };
 
 const onNavigateTo = (view: string) => {
   if (view !== 'product-details') {
     selectedProduct.value = null;
   }
-  activeView.value = view;
+  
   if (view === 'product-details' && !hasProducts.value) {
     // If navigating to product details but no products, go to upload instead
-    activeView.value = 'result-upload';
+    router.push({ name: 'result-upload' });
+    return;
   }
+  
+  router.push({ name: view });
 };
 
 const onUploadClicked = () => {
-  activeView.value = 'result-upload';
+  router.push({ name: 'result-upload' });
 };
 
 
@@ -73,7 +74,7 @@ const onProductSelected = (productId: string) => {
   const product = products.value.find(p => p.id === productId);
   if (product) {
     selectedProduct.value = product;
-    activeView.value = 'product-details';
+    router.push({ name: 'product-details', params: { id: product.id } });
   }
 };
 
@@ -83,7 +84,6 @@ const onProductSelected = (productId: string) => {
   <div class="d-flex">
     <!-- Sidebar -->
     <Sidebar
-        :active-view="activeView"
         :products="products"
         :selected-product="selectedProduct"
         @navigate-to="onNavigateTo"
@@ -97,40 +97,16 @@ const onProductSelected = (productId: string) => {
           :title="projectName"
           :show-on-dashboard="hasProducts"
           :selected-product-name="selectedProduct?.name"
-          :current-view="activeView"
           @upload-clicked="onUploadClicked"
       ></Navbar>
 
       <div class="container-fluid mt-4">
-
-        <!-- Projects Overview View -->
-        <div v-if="activeView === 'projects-overview'">
-          <ProjectsOverview/>
-        </div>
-
-        <!-- Product Details View -->
-        <div v-else-if="activeView === 'product-details' && selectedProduct">
-          <ProductDetails v-bind="selectedProduct"/>
-        </div>
-
-        <!-- Result Upload View -->
-        <div v-else-if="activeView === 'result-upload'">
-          <ResultUpload @file-dropped="onJsonData"/>
-        </div>
-
-        <!-- Product List -->
-        <div v-else-if="activeView === 'product-list'">
-          <ProductList :products="products" @product-selected="onProductSelected"/>
-        </div>
-
-        <!-- Fallback: Show upload if trying to access product details without data -->
-        <div v-else>
-          <div class="alert alert-info" role="alert">
-            <i class="bi bi-info-circle me-2"></i>
-            Please upload a result file to view product details.
-          </div>
-          <ResultUpload @file-dropped="onJsonData"/>
-        </div>
+        <router-view 
+          :products="products" 
+          :selected-product="selectedProduct"
+          @file-dropped="onJsonData" 
+          @product-selected="onProductSelected" 
+        />
       </div>
     </div>
   </div>

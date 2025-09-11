@@ -9,13 +9,22 @@ import EmptyKpiCard from "./../components/EmptyKpiCard.vue";
 
 import type {Product} from "../model/Result.ts";
 import {computed, ref} from "vue";
+import {useRoute} from "vue-router";
 import {useKpiFilters} from "../composables/kpiUtils.ts";
 
-const props = defineProps<Product>();
+interface Props {
+  selectedProduct?: Product | null;
+}
+
+const props = defineProps<Props>();
+const route = useRoute();
+
+// Use the selected product from props (passed from App.vue via router-view)
+const product = computed(() => props.selectedProduct);
 
 // Check if product has any results
-const hasResults = computed(() => props.results.length > 0);
-const lastResult = computed(() => hasResults.value ? props.results[props.results.length - 1] : null);
+const hasResults = computed(() => product.value?.results.length > 0);
+const lastResult = computed(() => hasResults.value ? product.value!.results[product.value!.results.length - 1] : null);
 const rootComputed = computed(() => lastResult.value?.root);
 const {criticalKpis, warningKpis} = useKpiFilters(rootComputed);
 
@@ -53,7 +62,7 @@ const handleUploadClick = () => {
             <i class="bi bi-inbox display-1 text-muted mb-4"></i>
             <h4 class="text-muted mb-3">No Results Available</h4>
             <p class="text-muted mb-4">
-              There are currently no analysis results for the product "{{ name }}".
+              There are currently no analysis results for the product "{{ product?.name }}".
               Upload a result file to view the dashboard.
             </p>
             <button 
