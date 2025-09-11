@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Product } from '../model/Result.ts';
+import type {Product} from '../model/Result.ts';
 
 interface Props {
   products?: Product[];
@@ -8,6 +8,10 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   products: () => []
 });
+
+const emit = defineEmits<{
+  'product-selected': [productId: string]
+}>();
 
 const getNewestVersion = (product: Product): string => {
   if (product.results.length === 0) return 'Unknown';
@@ -26,40 +30,44 @@ const getProjectUrl = (product: Product): string => {
   const lastResult = product.results[product.results.length - 1];
   return lastResult?.repoInfo.projectUrl || '#';
 };
+
+const onProductClick = (product: Product) => {
+  emit('product-selected', product.id);
+};
 </script>
 
 <template>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
 
-      <!-- Empty State -->
-      <div v-if="props.products.length === 0" class="text-center py-5">
-        <div class="card border-0 shadow-sm">
-          <div class="card-body py-5">
-            <i class="bi bi-inbox display-1 text-muted mb-3"></i>
-            <h4 class="text-muted mb-3">No Products Available</h4>
-            <p class="text-muted mb-4">Upload some result files to see your products here.</p>
-            <div class="alert alert-info border-0" role="alert">
-              <i class="bi bi-info-circle me-2"></i>
-              Get started by uploading your first analysis result
+        <!-- Empty State -->
+        <div v-if="props.products.length === 0" class="text-center py-5">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body py-5">
+              <i class="bi bi-inbox display-1 text-muted mb-3"></i>
+              <h4 class="text-muted mb-3">No Products Available</h4>
+              <p class="text-muted mb-4">Upload some result files to see your products here.</p>
+              <div class="alert alert-info border-0" role="alert">
+                <i class="bi bi-info-circle me-2"></i>
+                Get started by uploading your first analysis result
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      
-      <!-- Products Table -->
-      <div v-else class="card border-0 shadow-sm">
-        <div class="card-header bg-gradient bg-primary text-white py-3">
-          <h5 class="mb-0 fw-semibold">
-            <i class="bi bi-list-ul me-2"></i>
-            Products Overview
-          </h5>
-        </div>
-        
-        <div class="table-responsive">
-          <table class="table table-hover mb-0">
-            <thead class="table-light">
+
+        <!-- Products Table -->
+        <div v-else class="card border-0 shadow-sm">
+          <div class="card-header bg-gradient bg-primary text-white py-3">
+            <h5 class="mb-0 fw-semibold">
+              <i class="bi bi-list-ul me-2"></i>
+              Products Overview
+            </h5>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
               <tr>
                 <th scope="col" class="fw-semibold text-dark py-3 ps-4">
                   <i class="bi bi-box me-2 text-primary"></i>
@@ -78,9 +86,10 @@ const getProjectUrl = (product: Product): string => {
                   Repository
                 </th>
               </tr>
-            </thead>
-            <tbody>
-              <tr v-for="product in props.products" :key="product.id" class="border-bottom">
+              </thead>
+              <tbody>
+              <tr v-for="product in props.products" :key="product.id" class="border-bottom clickable-row"
+                  @click="onProductClick(product)">
                 <td class="py-4 ps-4">
                   <div class="d-flex align-items-center">
                     <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
@@ -100,23 +109,23 @@ const getProjectUrl = (product: Product): string => {
                 </td>
                 <td class="py-4 align-middle">
                   <div class="language-tags">
-                    <span class="badge bg-warning bg-gradient text-dark px-2 py-1 me-1 mb-1" 
-                          v-for="lang in getUsedLanguages(product).split(', ').slice(0, 3)" 
+                    <span class="badge bg-warning bg-gradient text-dark px-2 py-1 me-1 mb-1"
+                          v-for="lang in getUsedLanguages(product).split(', ').slice(0, 3)"
                           :key="lang">
                       {{ lang }}
                     </span>
-                    <span v-if="getUsedLanguages(product).split(', ').length > 3" 
+                    <span v-if="getUsedLanguages(product).split(', ').length > 3"
                           class="badge bg-light text-dark px-2 py-1">
                       +{{ getUsedLanguages(product).split(', ').length - 3 }} more
                     </span>
                   </div>
                 </td>
                 <td class="py-4 pe-4 align-middle">
-                  <a 
-                    v-if="getProjectUrl(product) !== '#'" 
-                    :href="getProjectUrl(product)" 
-                    target="_blank" 
-                    class="btn btn-outline-info btn-sm px-3 py-2 fw-semibold"
+                  <a
+                      v-if="getProjectUrl(product) !== '#'"
+                      :href="getProjectUrl(product)"
+                      target="_blank"
+                      class="btn btn-outline-info btn-sm px-3 py-2 fw-semibold"
                   >
                     <i class="bi bi-box-arrow-up-right me-1"></i>
                     View Repository
@@ -127,29 +136,24 @@ const getProjectUrl = (product: Product): string => {
                   </span>
                 </td>
               </tr>
-            </tbody>
-          </table>
-        </div>
-        
-        <div class="card-footer bg-light border-0 py-3">
-          <div class="row align-items-center">
-            <div class="col">
-              <small class="text-muted">
-                <i class="bi bi-info-circle me-1"></i>
-                Showing all {{ props.products.length }} products
-              </small>
-            </div>
-            <div class="col-auto">
-              <small class="text-muted">
-                Last updated: {{ new Date().toLocaleDateString() }}
-              </small>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card-footer bg-light border-0 py-3">
+            <div class="row align-items-center">
+              <div class="col">
+                <small class="text-muted">
+                  <i class="bi bi-info-circle me-1"></i>
+                  Showing all {{ props.products.length }} products
+                </small>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <style scoped>
@@ -164,5 +168,14 @@ const getProjectUrl = (product: Product): string => {
 .btn-sm {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
+}
+
+.clickable-row {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.clickable-row:hover {
+  background-color: rgba(0, 123, 255, 0.05) !important;
 }
 </style>
