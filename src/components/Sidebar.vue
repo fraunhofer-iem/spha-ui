@@ -16,7 +16,7 @@ const emit = defineEmits<{
 }>();
 
 const isCollapsed = ref(false);
-const isProductDetailsExpanded = ref(true);
+const isProductsExpanded = ref(true);
 
 const handleNavigation = (view: string) => {
   emit('navigateTo', view);
@@ -28,7 +28,7 @@ const toggleSidebar = () => {
 };
 
 const toggleProductDetails = () => {
-  isProductDetailsExpanded.value = !isProductDetailsExpanded.value;
+  isProductsExpanded.value = !isProductsExpanded.value;
 };
 
 const handleImageClick = () => {
@@ -124,7 +124,7 @@ watch(isCollapsed, () => {
         >
           <i class="bi bi-grid-3x3-gap me-2" v-if="!isCollapsed"></i>
           <i class="bi bi-grid-3x3-gap" v-else></i>
-          <span v-if="!isCollapsed">Project "X" Overview</span>
+          <span v-if="!isCollapsed">Overview</span>
         </a>
 
         <!-- Product Details (Expandable) -->
@@ -132,21 +132,21 @@ watch(isCollapsed, () => {
           <a
               href="#"
               class="nav-link nav-item d-flex align-items-center py-2 px-3 rounded"
-              :class="getNavLinkClasses('product-details')"
-              @click.prevent="toggleProductDetails"
-              v-bind="getPopoverAttrs('Product Details')"
+              :class="getNavLinkClasses('product-list')"
+              @click.prevent="handleNavigation('product-list'); toggleProductDetails()"
+              v-bind="getPopoverAttrs('Product List')"
           >
             <i class="bi bi-box me-2" v-if="!isCollapsed"></i>
             <i class="bi bi-box" v-else></i>
-            <span v-if="!isCollapsed" class="flex-grow-1">Product Details</span>
+            <span v-if="!isCollapsed" class="flex-grow-1">Products</span>
             <i v-if="!isCollapsed"
                class="bi ms-auto"
-               :class="isProductDetailsExpanded ? 'bi-chevron-down' : 'bi-chevron-right'"
+               :class="isProductsExpanded ? 'bi-chevron-down' : 'bi-chevron-right'"
                style="font-size: 0.8rem;"></i>
           </a>
 
           <!-- Sub-items -->
-          <div v-if="!isCollapsed && isProductDetailsExpanded" class="sub-items ms-3 mt-1">
+          <div v-if="!isCollapsed && isProductsExpanded" class="sub-items ms-3 mt-1">
             <a
                 href="#"
                 class="nav-link sub-nav-item d-flex align-items-center py-2 px-3 mb-1 rounded"

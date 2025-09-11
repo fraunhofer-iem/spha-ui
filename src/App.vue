@@ -6,6 +6,7 @@ import type {Result} from "./model/Result.ts";
 import ProductDetails from "./views/ProductDetails.vue";
 import ProjectsOverview from "./views/ProjectsOverview.vue";
 import ResultUpload from "./views/ResultUpload.vue";
+import ProductList from "./views/ProductList.vue";
 
 const projectName: string | undefined = undefined;
 
@@ -84,6 +85,11 @@ const onSidebarToggle = (collapsed: boolean) => {
         <!-- Result Upload View -->
         <div v-else-if="activeView === 'result-upload'">
           <ResultUpload @file-dropped="onJsonData"/>
+        </div>
+
+        <!-- Product List -->
+        <div v-else-if="activeView === 'product-list'">
+          <ProductList/>
         </div>
 
         <!-- Fallback: Show upload if trying to access product details without data -->
