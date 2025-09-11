@@ -33,6 +33,7 @@ const onJsonData = (data: Result | null) => {
       id: `product-${Date.now()}`,
       name: productName,
       description: `Analysis results for ${productName}`,
+      version: data.repoInfo.version,
       results: [data],
       createdAt: new Date().toISOString()
     };

@@ -20,6 +20,7 @@ export interface RepoInfo {
   contributors?: number;
   projectUrl?: string;
   projectName?: string;
+  version?: string;
   repoLanguages: Language[];
 }
 
@@ -58,6 +59,7 @@ export interface Product {
   id: string;
   name: string;
   description?: string;
+  version?: string;
   results: Result[];
   createdAt?: string;
 }
