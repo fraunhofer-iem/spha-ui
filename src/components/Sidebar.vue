@@ -182,33 +182,6 @@ watch(isCollapsed, () => {
       </nav>
     </div>
 
-    <!-- Collapse Toggle Button -->
-    <div class="collapse-toggle position-absolute" v-if="!isCollapsed">
-      <button
-          class="btn btn-sm"
-          @click="toggleSidebar"
-          :data-bs-toggle="'popover'"
-          :data-bs-placement="'right'"
-          :data-bs-trigger="'hover'"
-          :data-bs-content="'Collapse Sidebar'"
-      >
-        <i class="bi bi-chevron-left"></i>
-      </button>
-    </div>
-
-    <!-- Expand Button (when collapsed) -->
-    <div class="expand-toggle position-absolute" v-if="isCollapsed">
-      <button
-          class="btn btn-sm"
-          @click="toggleSidebar"
-          :data-bs-toggle="'popover'"
-          :data-bs-placement="'right'"
-          :data-bs-trigger="'hover'"
-          :data-bs-content="'Expand Sidebar'"
-      >
-        <i class="bi bi-chevron-right"></i>
-      </button>
-    </div>
   </div>
 </template>
 
@@ -222,14 +195,6 @@ watch(isCollapsed, () => {
   overflow-y: auto;
 }
 
-.logo-section {
-  background: transparent;
-  border-bottom: 1px solid #e0e0e9;
-}
-
-.logo-container {
-  transition: all 0.3s ease;
-}
 
 .navigation {
   padding-top: 1rem;
@@ -284,11 +249,6 @@ watch(isCollapsed, () => {
   right: -12px;
 }
 
-.expand-toggle {
-  bottom: 2rem;
-  right: -12px;
-}
-
 .collapse-toggle button,
 .expand-toggle button {
   background: white;
@@ -300,7 +260,7 @@ watch(isCollapsed, () => {
   align-items: center;
   justify-content: center;
   padding: 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .collapse-toggle button:hover,
