@@ -32,17 +32,7 @@ const getProjectUrl = (product: Product): string => {
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <!-- Header Section -->
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-          <h2 class="fw-bold text-primary mb-1">Product List</h2>
-          <p class="text-muted mb-0">Manage and view all your products</p>
-        </div>
-        <div class="badge bg-light text-dark fs-6 px-3 py-2">
-          {{ props.products.length }} {{ props.products.length === 1 ? 'Product' : 'Products' }}
-        </div>
-      </div>
-      
+
       <!-- Empty State -->
       <div v-if="props.products.length === 0" class="text-center py-5">
         <div class="card border-0 shadow-sm">
