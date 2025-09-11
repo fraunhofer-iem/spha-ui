@@ -20,8 +20,6 @@ const emit = defineEmits<{
 }>();
 
 const isCollapsed = ref(false);
-const isProductsExpanded = ref(true);
-
 const handleNavigation = (view: string) => {
   emit('navigateTo', view);
 };
@@ -33,10 +31,6 @@ const handleProductSelection = (productId: string) => {
 const toggleSidebar = () => {
   isCollapsed.value = !isCollapsed.value;
   emit('sidebarToggle', isCollapsed.value);
-};
-
-const toggleProductDetails = () => {
-  isProductsExpanded.value = !isProductsExpanded.value;
 };
 
 const handleImageClick = () => {
@@ -135,50 +129,58 @@ watch(isCollapsed, () => {
           <span v-if="!isCollapsed">Overview</span>
         </a>
 
-        <!-- Product Details (Expandable) -->
-        <div class="nav-item-group mb-2">
-          <a
-              href="#"
-              class="nav-link nav-item d-flex align-items-center py-2 px-3 rounded"
-              :class="getNavLinkClasses('product-list')"
-              @click.prevent="handleNavigation('product-list'); toggleProductDetails()"
-              v-bind="getPopoverAttrs('Product List')"
-          >
-            <i class="bi bi-box me-2" v-if="!isCollapsed"></i>
-            <i class="bi bi-box" v-else></i>
-            <span v-if="!isCollapsed" class="flex-grow-1">Products</span>
-            <i v-if="!isCollapsed"
-               class="bi ms-auto"
-               :class="isProductsExpanded ? 'bi-chevron-down' : 'bi-chevron-right'"
-               style="font-size: 0.8rem;"></i>
-          </a>
-
-          <!-- Sub-items -->
-          <div v-if="!isCollapsed && isProductsExpanded" class="sub-items ms-3 mt-1">
-            <a
-                v-for="product in props.products"
-                :key="product.id"
-                href="#"
-                class="nav-link sub-nav-item d-flex align-items-center py-2 px-3 mb-1 rounded"
-                @click.prevent="handleProductSelection(product.id)"
-            >
-              <span :title="product.description">{{ product.name }}</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Result Upload -->
+        <!-- Products -->
         <a
+            href="#"
+            class="nav-link nav-item d-flex align-items-center py-2 px-3 mb-2 rounded"
+            :class="getNavLinkClasses('product-list')"
+            @click.prevent="handleNavigation('product-list')"
+            v-bind="getPopoverAttrs('Product List')"
+        >
+          <i class="bi bi-box me-2" v-if="!isCollapsed"></i>
+          <i class="bi bi-box" v-else></i>
+          <span v-if="!isCollapsed">Products</span>
+        </a>
+
+        <!-- Result Upload (collapsed state) -->
+        <a
+            v-if="isCollapsed"
             href="#"
             class="nav-link nav-item d-flex align-items-center py-2 px-3 mb-2 rounded"
             :class="getNavLinkClasses('result-upload')"
             @click.prevent="handleNavigation('result-upload')"
             v-bind="getPopoverAttrs('Result Upload')"
         >
-          <i class="bi bi-cloud-upload me-2" v-if="!isCollapsed"></i>
-          <i class="bi bi-cloud-upload" v-else></i>
-          <span v-if="!isCollapsed">Result Upload</span>
+          <i class="bi bi-cloud-upload"></i>
         </a>
+
+        <!-- Products List with Scrollable Area -->
+        <div v-if="!isCollapsed" class="products-section flex-grow-1 d-flex flex-column">
+          <div class="products-scrollable">
+            <a
+                v-for="product in props.products"
+                :key="product.id"
+                href="#"
+                class="nav-link sub-nav-item d-flex align-items-center py-2 px-3 mb-1 rounded ms-3"
+                @click.prevent="handleProductSelection(product.id)"
+            >
+              <span :title="product.description">{{ product.name }}</span>
+            </a>
+          </div>
+          
+          <!-- Sticky Result Upload Button -->
+          <div class="sticky-upload-btn">
+            <a
+                href="#"
+                class="nav-link nav-item d-flex align-items-center py-2 px-3 mb-2 rounded"
+                :class="getNavLinkClasses('result-upload')"
+                @click.prevent="handleNavigation('result-upload')"
+            >
+              <i class="bi bi-cloud-upload me-2"></i>
+              <span>Result Upload</span>
+            </a>
+          </div>
+        </div>
       </nav>
     </div>
 
@@ -198,6 +200,44 @@ watch(isCollapsed, () => {
 
 .navigation {
   padding-top: 1rem;
+  height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+}
+
+.products-section {
+  min-height: 0;
+  flex: 1;
+}
+
+.products-scrollable {
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(100vh - 300px);
+}
+
+.products-scrollable::-webkit-scrollbar {
+  width: 4px;
+}
+
+.products-scrollable::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.products-scrollable::-webkit-scrollbar-thumb {
+  background: #c0c0d0;
+  border-radius: 2px;
+}
+
+.products-scrollable::-webkit-scrollbar-thumb:hover {
+  background: #a0a0b0;
+}
+
+.sticky-upload-btn {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e9;
+  background: #f5f5fb;
 }
 
 .nav-link {
