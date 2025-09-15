@@ -2,9 +2,35 @@
 import type {Product} from '../model/Result.ts';
 import {store} from "../store.ts";
 import {useRouter} from "vue-router";
+import {ref, computed} from "vue";
 
-const products = store.products
 const router = useRouter()
+
+// Sorting state
+const sortColumn = ref<string | null>(null)
+const sortDirection = ref<'asc' | 'desc'>('desc')
+
+// Computed sorted products
+const products = computed(() => {
+  const productList = [...store.products]
+  
+  if (sortColumn.value === 'healthScore') {
+    return productList.sort((a, b) => {
+      const scoreA = getCurrentHealthScore(a)
+      const scoreB = getCurrentHealthScore(b)
+      
+      // Handle null values - put them at the end
+      if (scoreA === null && scoreB === null) return 0
+      if (scoreA === null) return 1
+      if (scoreB === null) return -1
+      
+      const comparison = scoreA - scoreB
+      return sortDirection.value === 'asc' ? comparison : -comparison
+    })
+  }
+  
+  return productList
+})
 
 const getNewestVersion = (product: Product): string => {
   if (product.results.length === 0) return 'Unknown';
@@ -36,6 +62,18 @@ const getHealthScoreColorClass = (score: number | null): string => {
   if (score >= 50) return 'bg-warning bg-gradient text-dark';
   return 'bg-danger bg-gradient';
 };
+
+// Sorting function
+const sortBy = (column: string) => {
+  if (sortColumn.value === column) {
+    // Toggle direction if clicking the same column
+    sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc'
+  } else {
+    // Set new column and default to descending for health scores
+    sortColumn.value = column
+    sortDirection.value = 'desc'
+  }
+}
 
 const onProductClick = (product: Product) => {
   router.push({name: 'product-details', params: {id: product.id}})
@@ -82,9 +120,18 @@ const onProductClick = (product: Product) => {
                   <i class="bi bi-code-slash me-2 text-warning"></i>
                   Languages
                 </th>
-                <th scope="col" class="fw-semibold text-dark py-3">
-                  <i class="bi bi-heart-pulse me-2 text-danger"></i>
-                  Health Score
+                <th scope="col" class="fw-semibold text-dark py-3 user-select-none sortable-header" 
+                    @click="sortBy('healthScore')" 
+                    style="cursor: pointer;">
+                  <div class="d-flex align-items-center">
+                    <i class="bi bi-heart-pulse me-2 text-danger"></i>
+                    Health Score
+                    <span class="ms-2">
+                      <i v-if="sortColumn === 'healthScore' && sortDirection === 'desc'" class="bi bi-arrow-down text-primary"></i>
+                      <i v-else-if="sortColumn === 'healthScore' && sortDirection === 'asc'" class="bi bi-arrow-up text-primary"></i>
+                      <i v-else class="bi bi-arrow-down-up text-muted opacity-50"></i>
+                    </span>
+                  </div>
                 </th>
                 <th scope="col" class="fw-semibold text-dark py-3 pe-4">
                   <i class="bi bi-link-45deg me-2 text-info"></i>
@@ -193,5 +240,13 @@ const onProductClick = (product: Product) => {
 
 .clickable-row:hover {
   background-color: rgba(0, 123, 255, 0.05) !important;
+}
+
+.sortable-header:hover {
+  background-color: rgba(0, 123, 255, 0.1) !important;
+}
+
+.sortable-header:active {
+  background-color: rgba(0, 123, 255, 0.15) !important;
 }
 </style>
