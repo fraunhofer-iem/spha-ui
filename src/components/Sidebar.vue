@@ -1,24 +1,22 @@
 <script setup lang="ts">
-import {nextTick, onMounted, ref, watch} from 'vue';
+import {computed, nextTick, onMounted, ref, watch} from 'vue';
 import {useRoute} from 'vue-router';
 import {Popover} from 'bootstrap';
-import type {Product} from '../model/Result';
+import {store} from "../store.ts";
 
-interface Props {
-  products?: Product[];
-  selectedProduct?: Product | null;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  products: () => [],
-  selectedProduct: null
-});
 
 const route = useRoute();
+const selectedProduct = computed(() => {
+  if (route.name === 'product-details' && route.params.id && typeof route.params.id === 'string') {
+    return store.getProductById(route.params.id)
+  } else {
+    return null
+  }
+});
+
+const products = store.products
 
 const emit = defineEmits<{
-  navigateTo: [view: string];
-  productSelected: [productId: string];
   sidebarToggle: [collapsed: boolean];
 }>();
 
@@ -151,16 +149,16 @@ watch(isCollapsed, () => {
         <div v-if="!isCollapsed" class="products-section flex-grow-1 d-flex flex-column">
           <div class="products-scrollable">
             <router-link
-                v-for="product in props.products"
+                v-for="product in products"
                 :key="product.id"
                 :to="{ name: 'product-details', params: { id: product.id } }"
                 class="nav-link sub-nav-item d-flex align-items-center py-2 px-3 mb-1 rounded ms-3"
-                :class="{ 'active': props.selectedProduct?.id === product.id }"
+                :class="{ 'active': selectedProduct?.id === product.id }"
             >
               <span :title="product.description">{{ product.name }}</span>
             </router-link>
           </div>
-          
+
           <!-- Sticky Result Upload Button -->
           <div class="sticky-upload-btn">
             <router-link

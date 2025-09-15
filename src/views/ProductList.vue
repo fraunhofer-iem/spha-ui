@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import type {Product} from '../model/Result.ts';
 import {store} from "../store.ts";
+import {useRouter} from "vue-router";
 
 const products = store.products
-
-const emit = defineEmits<{
-  'product-selected': [productId: string]
-}>();
+const router = useRouter()
 
 const getNewestVersion = (product: Product): string => {
   if (product.results.length === 0) return 'Unknown';
@@ -27,7 +25,7 @@ const getProjectUrl = (product: Product): string => {
 };
 
 const onProductClick = (product: Product) => {
-  emit('product-selected', product.id);
+  router.push({name: 'product-details', params: {id: product.id}})
 };
 </script>
 

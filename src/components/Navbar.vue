@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import {onMounted, onUnmounted, ref} from "vue";
+import {computed, onMounted, onUnmounted, ref} from "vue";
+import {store} from "../store.ts";
+import {useRoute} from "vue-router";
 
 const formattedTime = ref<string>('');
 
-const props = withDefaults(defineProps<{ title?: string }>(), {
-  title: '',
-})
+const route = useRoute()
+
+const title = computed(() => {
+  if (route.name === 'product-details' && route.params.id && typeof route.params.id === 'string') {
+    const product = store.getProductById(route.params.id)
+    return product?.name ?? ""
+  }
+  return ""
+});
 
 
 const updateTime = () => {
@@ -33,7 +41,7 @@ onUnmounted(() => {
   <nav class="navbar">
     <div class="container mt-2 d-flex justify-content-between align-items-center">
 
-      <h3 class="fw-bold mx-auto">{{ props.title }}</h3>
+      <h3 class="fw-bold mx-auto">{{ title }}</h3>
       <div class="d-flex align-items-center">
         <div class="me-3 time-display p-3">
           <p class="h5">{{ formattedTime }}</p>
