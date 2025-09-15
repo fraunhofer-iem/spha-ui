@@ -18,6 +18,7 @@ export function parse(raw: any): Result | undefined {
     contributors: raw.projectInfo.numberOfContributors ?? -1,
     projectUrl: raw.projectInfo.url ?? "N/A",
     projectName: raw.projectInfo.name ?? "N/A",
+    version: raw.projectInfo.version ?? "N/A",
     repoLanguages: raw.projectInfo.usedLanguages ?? {
       name: "N/A",
       percentage: 100,
@@ -42,6 +43,7 @@ export function parse(raw: any): Result | undefined {
     repoInfo,
     root,
     tools,
+    createdAt: new Date().toISOString(),
   };
 }
 

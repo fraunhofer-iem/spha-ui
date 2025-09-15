@@ -1,25 +1,20 @@
 <script setup lang="ts">
-import {onMounted, onUnmounted, ref} from "vue";
+import {computed, onMounted, onUnmounted, ref} from "vue";
+import {store} from "../store.ts";
+import {useRoute} from "vue-router";
 
 const formattedTime = ref<string>('');
 
-withDefaults(defineProps<{title?: string, showOnDashboard?: boolean}>(), {
-  title: 'Software Product Health Assistant',
-  showOnDashboard: false
-})
+const route = useRoute()
 
-const emit = defineEmits<{
-  uploadClicked: [],
-  backClicked: []
-}>();
+const title = computed(() => {
+  if (route.name === 'product-details' && route.params.id && typeof route.params.id === 'string') {
+    const product = store.getProductById(route.params.id)
+    return product?.name ?? ""
+  }
+  return ""
+});
 
-const handleUploadClick = () => {
-  emit('uploadClicked');
-};
-
-const handleBackClick = () => {
-  emit('backClicked');
-};
 
 const updateTime = () => {
   const now = new Date();
@@ -45,19 +40,12 @@ onUnmounted(() => {
 <template>
   <nav class="navbar">
     <div class="container mt-2 d-flex justify-content-between align-items-center">
-      <a class="navbar-brand" href="#">
-        <img
-            src="./../assets/img/SPHA_Logo_Secondary.svg"
-            alt="Software Product Health Assistant"
-            width="250">
-      </a>
+
       <h3 class="fw-bold mx-auto">{{ title }}</h3>
       <div class="d-flex align-items-center">
         <div class="me-3 time-display p-3">
           <p class="h5">{{ formattedTime }}</p>
         </div>
-        <button v-if="showOnDashboard" type="button" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg" @click="handleUploadClick">Upload</button>
-        <button v-else type="button" class="text-primary-emphasis fw-bold bg-primary-subtle btn btn-lg" @click="handleBackClick">Back</button>
       </div>
     </div>
   </nav>

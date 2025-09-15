@@ -1,48 +1,42 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import Dashboard from "./views/Dashboard.vue";
-import ResultSelection from "./views/ResultSelection.vue";
 import Navbar from "./components/Navbar.vue";
-import type {Result} from "./model/Result.ts";
+import Sidebar from "./components/Sidebar.vue";
 
-const projectName: string | undefined = undefined;
 
-const hasResults = ref(false);
-const result = ref<Result | null>(null);
-
-const onJsonData = (data: Result | null) => {
-  if (data === null) {
-    return;
-  }
-  console.log(data);
-  result.value = data;
-  hasResults.value = true;
-};
-
-const onUploadClicked = () => {
-  hasResults.value = false;
-};
-
-const onBackClicked = () => {
-  hasResults.value = true;
+const sidebarCollapsed = ref(false);
+const onSidebarToggle = (collapsed: boolean) => {
+  sidebarCollapsed.value = collapsed;
 };
 
 </script>
 
 <template>
-  <Navbar
-      :title="projectName"
-      :show-on-dashboard="hasResults"
-      @upload-clicked="onUploadClicked"
-      @back-clicked="onBackClicked"
-  ></Navbar>
-  <div class="container mt-4">
-    <div v-if="hasResults">
-      <Dashboard v-if="result" v-bind="result"/>
-    </div>
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <Sidebar
+        @sidebar-toggle="onSidebarToggle"
+    />
 
-    <div v-else>
-      <ResultSelection @file-dropped="onJsonData"/>
+    <!-- Main Content Area -->
+    <div class="flex-grow-1 main-content" :style="`margin-left: ${sidebarCollapsed ? '80px' : '250px'};`">
+      <Navbar/>
+
+      <div class="container-fluid mt-4">
+        <router-view/>
+      </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.main-content {
+  transition: margin-left 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0 !important;
+  }
+}
+</style>
