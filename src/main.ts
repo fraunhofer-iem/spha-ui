@@ -14,23 +14,30 @@ async function main() {
     const App = await import("./App.vue");
     createApp(App.default).use(router).mount('#app')
 
+    if (__DEMO_MODE__) {
 
-    try {
-        // Load demo file from public folder
-        const response = await fetch('https://raw.githubusercontent.com/fraunhofer-iem/spha-ui/refs/heads/main/example/kpi-results.json');
-        if (response.ok) {
+        const fetchDemoData = async function (url: string) {
+            try {
+                // Load demo file from public folder
+                const response = await fetch(url);
+                if (response.ok) {
 
-            const rawData = await response.json();
-            const parsedResult = parse(rawData);
+                    const rawData = await response.json();
+                    const parsedResult = parse(rawData);
 
-            if (parsedResult) {
-                store.addResult(parsedResult);
-            } else {
-                console.error('Failed to parse demo file data');
+                    if (parsedResult) {
+                        store.addResult(parsedResult);
+                    } else {
+                        console.error('Failed to parse demo file data');
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading demo file:', error);
             }
         }
-    } catch (error) {
-        console.error('Error loading demo file:', error);
+        const data1 = 'https://raw.githubusercontent.com/fraunhofer-iem/spha-ui/refs/heads/main/example/kpi-results.json'
+        const data2 = 'https://raw.githubusercontent.com/fraunhofer-iem/spha-ui/refs/heads/main/example/kpi-results-small.json'
+        await Promise.all([fetchDemoData(data1), fetchDemoData(data2)])
     }
 }
 
