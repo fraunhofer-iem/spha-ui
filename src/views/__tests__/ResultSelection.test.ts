@@ -1,8 +1,9 @@
 import {beforeEach, describe, expect, it, vi} from "vitest";
 import {mount, type VueWrapper} from "@vue/test-utils";
-import ResultSelection from "../ResultSelection.vue";
+import {createRouter, createWebHistory} from "vue-router";
 import {parse} from "../../util/Parser";
 import {createMockFileList, createMockResult} from "../../__tests__/setup";
+import ResultUpload from "../ResultUpload.vue";
 
 // Mock the Parser module
 vi.mock("../../util/Parser", () => ({
@@ -17,7 +18,25 @@ describe("ResultSelection", () => {
         mockParse = vi.mocked(parse);
         mockParse.mockClear();
 
-        wrapper = mount(ResultSelection);
+        // Create a test router
+        const router = createRouter({
+            history: createWebHistory(),
+            routes: [
+                { path: '/', component: { template: '<div>Home</div>' } },
+                { path: '/upload', component: { template: '<div>Upload</div>' } },
+                { path: '/product/:id', name: 'product-details', component: { template: '<div>Product</div>' } }
+            ]
+        });
+
+        wrapper = mount(ResultUpload, {
+            global: {
+                plugins: [router],
+                stubs: {
+                    'router-link': true,
+                    'router-view': true
+                }
+            }
+        });
     });
 
     describe("File Validation", () => {
@@ -468,7 +487,7 @@ describe("ResultSelection", () => {
     });
 
     describe("Component Integration", () => {
-        it("should emit null when processing fails", async () => {
+        it("should handle processing failures gracefully", async () => {
             const jsonFile = new File(["invalid json"], "test.json", {
                 type: "application/json",
             });
@@ -487,14 +506,11 @@ describe("ResultSelection", () => {
 
             await wrapper.vm.$nextTick();
 
-            const emittedEvents = wrapper.emitted("fileDropped");
-            expect(emittedEvents).toBeDefined();
-            if (emittedEvents) {
-                expect(emittedEvents[0]).toEqual([null]);
-            }
+            expect(wrapper.vm.error).toContain("Failed to parse JSON");
+            expect(wrapper.vm.successMessage).toBe("");
         });
 
-        it("should emit parsed result when processing succeeds", async () => {
+        it("should process valid files and show success message", async () => {
             const jsonFile = new File(['{"test": true}'], "test.json", {
                 type: "application/json",
             });
@@ -515,11 +531,8 @@ describe("ResultSelection", () => {
 
             await wrapper.vm.$nextTick();
 
-            const emittedEvents = wrapper.emitted("fileDropped");
-            expect(emittedEvents).toBeDefined();
-            if (emittedEvents) {
-                expect(emittedEvents[0]).toEqual([mockResult]);
-            }
+            expect(wrapper.vm.successMessage).toBe("JSON file processed successfully!");
+            expect(wrapper.vm.error).toBe("");
         });
     });
 });

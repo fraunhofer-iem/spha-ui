@@ -1,12 +1,19 @@
 <script setup lang="ts">
-import {onMounted, onUnmounted, ref} from "vue";
+import {computed, onMounted, onUnmounted, ref} from "vue";
+import {store} from "../store.ts";
+import {useRoute} from "vue-router";
 
 const formattedTime = ref<string>('');
 
-withDefaults(defineProps<{ title?: string, showOnDashboard?: boolean }>(), {
-  title: 'Software Product Health Assistant',
-  showOnDashboard: false
-})
+const route = useRoute()
+
+const title = computed(() => {
+  if (route.name === 'product-details' && route.params.id && typeof route.params.id === 'string') {
+    const product = store.getProductById(route.params.id)
+    return product?.name ?? ""
+  }
+  return ""
+});
 
 
 const updateTime = () => {
