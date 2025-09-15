@@ -7,10 +7,6 @@ import ProductList from '../views/ProductList.vue'
 const routes = [
     {
         path: '/',
-        redirect: '/upload'
-    },
-    {
-        path: '/projects',
         name: 'projects-overview',
         component: ProjectsOverview
     },
