@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import {createRouter, createWebHashHistory} from 'vue-router'
 import ProjectsOverview from '../views/ProjectsOverview.vue'
 import ProductDetails from '../views/ProductDetails.vue'
 import ResultUpload from '../views/ResultUpload.vue'
@@ -33,7 +33,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHistory('/spha-ui/'),
+    history: createWebHashHistory('/spha-ui/'),
     routes
 })
 
