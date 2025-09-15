@@ -24,6 +24,19 @@ const getProjectUrl = (product: Product): string => {
   return lastResult?.repoInfo.projectUrl || '#';
 };
 
+const getCurrentHealthScore = (product: Product): number | null => {
+  if (product.results.length === 0) return null;
+  const lastResult = product.results[product.results.length - 1];
+  return lastResult?.healthScore ?? null;
+};
+
+const getHealthScoreColorClass = (score: number | null): string => {
+  if (score === null) return 'bg-light text-muted';
+  if (score >= 70) return 'bg-success bg-gradient';
+  if (score >= 50) return 'bg-warning bg-gradient text-dark';
+  return 'bg-danger bg-gradient';
+};
+
 const onProductClick = (product: Product) => {
   router.push({name: 'product-details', params: {id: product.id}})
 };
@@ -69,6 +82,10 @@ const onProductClick = (product: Product) => {
                   <i class="bi bi-code-slash me-2 text-warning"></i>
                   Languages
                 </th>
+                <th scope="col" class="fw-semibold text-dark py-3">
+                  <i class="bi bi-heart-pulse me-2 text-danger"></i>
+                  Health Score
+                </th>
                 <th scope="col" class="fw-semibold text-dark py-3 pe-4">
                   <i class="bi bi-link-45deg me-2 text-info"></i>
                   Repository
@@ -107,6 +124,17 @@ const onProductClick = (product: Product) => {
                       +{{ getUsedLanguages(product).split(', ').length - 3 }} more
                     </span>
                   </div>
+                </td>
+                <td class="py-4 align-middle">
+                  <span v-if="getCurrentHealthScore(product) !== null"
+                        :class="`badge ${getHealthScoreColorClass(getCurrentHealthScore(product))} px-3 py-2 fs-6 fw-normal`">
+                    <i class="bi bi-heart-pulse me-1"></i>
+                    {{ getCurrentHealthScore(product) }}
+                  </span>
+                  <span v-else class="badge bg-light text-muted px-3 py-2">
+                    <i class="bi bi-x-circle me-1"></i>
+                    No Score
+                  </span>
                 </td>
                 <td class="py-4 pe-4 align-middle">
                   <a
