@@ -1,13 +1,8 @@
 <script setup lang="ts">
 import type {Product} from '../model/Result.ts';
+import {store} from "../store.ts";
 
-interface Props {
-  products?: Product[];
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  products: () => []
-});
+const products = store.products
 
 const emit = defineEmits<{
   'product-selected': [productId: string]
@@ -42,7 +37,7 @@ const onProductClick = (product: Product) => {
       <div class="col-12">
 
         <!-- Empty State -->
-        <div v-if="props.products.length === 0" class="text-center py-5">
+        <div v-if="products.length === 0" class="text-center py-5">
           <div class="card border-0 shadow-sm">
             <div class="card-body py-5">
               <i class="bi bi-inbox display-1 text-muted mb-3"></i>
@@ -83,7 +78,7 @@ const onProductClick = (product: Product) => {
               </tr>
               </thead>
               <tbody>
-              <tr v-for="product in props.products" :key="product.id" class="border-bottom clickable-row"
+              <tr v-for="product in products" :key="product.id" class="border-bottom clickable-row"
                   @click="onProductClick(product)">
                 <td class="py-4 ps-4">
                   <div class="d-flex align-items-center">
@@ -140,7 +135,7 @@ const onProductClick = (product: Product) => {
               <div class="col">
                 <small class="text-muted">
                   <i class="bi bi-info-circle me-1"></i>
-                  Showing all {{ props.products.length }} products
+                  Showing all {{ products.length }} products
                 </small>
               </div>
             </div>

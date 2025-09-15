@@ -7,22 +7,20 @@ import KpiDetailsModal from "./../components/KpiDetailsModal.vue";
 import ToolOverview from "./../components/ToolOverview.vue";
 import EmptyKpiCard from "./../components/EmptyKpiCard.vue";
 
-import type {Product} from "../model/Result.ts";
 import {computed, ref} from "vue";
-import {useRoute} from "vue-router";
 import {useKpiFilters} from "../composables/kpiUtils.ts";
+import {store} from "../store.ts";
 
 interface Props {
-  selectedProduct?: Product | null;
+  id: string;
 }
 
 const props = defineProps<Props>();
-const route = useRoute();
 
 // Use the selectedProduct prop directly
-const product = computed(() => {
-  return props.selectedProduct || null;
-});
+const product = computed(() =>
+    store.getProductById(props.id)
+);
 
 // Check if product has any results
 const hasResults = computed(() => (product.value?.results.length ?? 0) > 0);
@@ -44,13 +42,8 @@ const handleModalClose = () => {
   showModal.value = false;
 };
 
-// Emit event to parent to handle upload
-const emit = defineEmits<{
-  uploadClicked: []
-}>();
-
 const handleUploadClick = () => {
-  emit('uploadClicked');
+  // ToDo: open upload popup
 };
 </script>
 

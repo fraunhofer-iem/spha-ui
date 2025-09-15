@@ -4,15 +4,13 @@ import {useRouter} from "vue-router";
 import Navbar from "./components/Navbar.vue";
 import Sidebar from "./components/Sidebar.vue";
 import type {Product, Result} from "./model/Result.ts";
+import {store} from "./store.ts";
 
 const router = useRouter();
 
-const projectName: string | undefined = undefined;
-
-const products = ref<Product[]>([]);
+const products = store.products;
 const sidebarCollapsed = ref(false);
 
-const hasProducts = ref(false);
 const selectedProduct = ref<Product | null>(null);
 
 const onJsonData = (data: Result | null) => {
@@ -21,29 +19,9 @@ const onJsonData = (data: Result | null) => {
   }
   console.log(data);
 
-  // Create a new product for this result
-  const productName = data.repoInfo.projectName || `Product ${products.value.length + 1}`;
-  const idx = products.value.findIndex(product => product.name === productName);
-  let product: Product
-  if (idx == -1) {
-    product = {
-      id: `product-${Date.now()}`,
-      name: productName,
-      description: `Analysis results for ${productName}`,
-      version: data.repoInfo.version,
-      results: [data],
-      createdAt: new Date().toISOString()
-    };
-
-    products.value.push(product);
-
-  } else {
-    product = products.value[idx]!!;
-    product.results.push(data);
-  }
-
+  const product = store.addResult(data);
+  // ToDo: calls tore
   selectedProduct.value = product;
-  hasProducts.value = true;
   router.push({name: 'product-details', params: {id: product.id}});
 };
 
@@ -55,9 +33,10 @@ const onNavigateTo = (view: string) => {
   router.push({name: view});
 };
 
-const onUploadClicked = () => {
-  router.push({name: 'result-upload'});
-};
+// ToDo: check if it can be removed
+// const onUploadClicked = () => {
+//   router.push({name: 'result-upload'});
+// };
 
 
 const onSidebarToggle = (collapsed: boolean) => {
@@ -65,7 +44,7 @@ const onSidebarToggle = (collapsed: boolean) => {
 };
 
 const onProductSelected = (productId: string) => {
-  const product = products.value.find(p => p.id === productId);
+  const product = products.find(p => p.id === productId);
   if (product) {
     selectedProduct.value = product;
     router.push({name: 'product-details', params: {id: product.id}});
@@ -88,15 +67,11 @@ const onProductSelected = (productId: string) => {
     <!-- Main Content Area -->
     <div class="flex-grow-1 main-content" :style="`margin-left: ${sidebarCollapsed ? '80px' : '250px'};`">
       <Navbar
-          :title="projectName"
-          :show-on-dashboard="hasProducts"
-          :selected-product-name="selectedProduct?.name"
-          @upload-clicked="onUploadClicked"
+          :title="selectedProduct?.name ?? ''"
       ></Navbar>
 
       <div class="container-fluid mt-4">
         <router-view
-            :selected-product="selectedProduct"
             @file-dropped="onJsonData"
             @product-selected="onProductSelected"
         />
