@@ -11,7 +11,8 @@ async function main() {
     let App;
     if (__DEMO_MODE__) {
         console.log('Running in demo mode');
-        App = await import("./App-demo.vue");
+        App = await import("./App.vue");
+        // App = await import("./App-demo.vue");
     } else {
         console.log('Running in default mode');
         App = await import("./App.vue");

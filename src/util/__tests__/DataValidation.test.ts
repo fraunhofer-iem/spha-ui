@@ -5,6 +5,7 @@ import type {Kpi, Language, RepoInfo, Result, Threshold, Tool,} from "../../mode
 describe("Data Validation Utilities", () => {
     describe("Result Structure Validation", () => {
         const createValidResult = (): Result => ({
+            createdAt: "2024-01-15",
             healthScore: 75,
             repoInfo: {
                 projectName: "Test Project",
@@ -482,6 +483,7 @@ describe("Data Validation Utilities", () => {
         it("should perform deep validation of nested structures", () => {
             const complexResult: Result = {
                 healthScore: 75,
+                createdAt: "2024-01-15",
                 repoInfo: {
                     projectName: "Complex Project",
                     stars: 500,
@@ -532,6 +534,7 @@ describe("Data Validation Utilities", () => {
 
         it("should detect errors in nested structures", () => {
             const invalidResult: Result = {
+                createdAt: "2024-01-15",
                 healthScore: 75,
                 repoInfo: {
                     projectName: "Invalid Project",

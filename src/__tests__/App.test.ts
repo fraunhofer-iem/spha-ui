@@ -44,6 +44,7 @@ describe("App", () => {
     let consoleSpy: any;
 
     const mockResult: Result = {
+        createdAt: "2024-01-15T12:00:00Z",
         healthScore: 78,
         repoInfo: {
             projectName: "Awesome Project",
