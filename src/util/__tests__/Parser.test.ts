@@ -68,6 +68,7 @@ describe("Parser", () => {
                 contributors: 8,
                 projectUrl: "https://github.com/example/awesome-project",
                 projectName: "Awesome Project",
+                version: "1.5.2",
                 repoLanguages: [
                     {name: "TypeScript", size: 65.2},
                     {name: "JavaScript", size: 20.8},
