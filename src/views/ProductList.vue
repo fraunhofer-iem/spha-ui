@@ -17,8 +17,8 @@ const products = computed(() => {
   
   if (sortColumn.value === 'healthScore') {
     return productList.sort((a, b) => {
-      const scoreA = getCurrentHealthScore(a)
-      const scoreB = getCurrentHealthScore(b)
+      const scoreA = a.getCurrentHealthScore()
+      const scoreB = b.getCurrentHealthScore()
       
       // Handle null values - put them at the end
       if (scoreA === null && scoreB === null) return 0
@@ -32,64 +32,6 @@ const products = computed(() => {
   
   return productList
 })
-
-const getNewestVersion = (product: Product): string => {
-  if (product.results.length === 0) return 'Unknown';
-  const lastResult = product.results[product.results.length - 1];
-  return lastResult?.repoInfo.version || 'Unknown';
-};
-
-const getUsedLanguages = (product: Product): string => {
-  if (product.results.length === 0) return 'Unknown';
-  const lastResult = product.results[product.results.length - 1];
-  return lastResult?.repoInfo.repoLanguages.map(lang => lang.name).join(', ') || 'Unknown';
-};
-
-const getProjectUrl = (product: Product): string => {
-  if (product.results.length === 0) return '#';
-  const lastResult = product.results[product.results.length - 1];
-  return lastResult?.repoInfo.projectUrl || '#';
-};
-
-const getCurrentHealthScore = (product: Product): number | null => {
-  if (product.results.length === 0) return null;
-  const lastResult = product.results[product.results.length - 1];
-  return lastResult?.healthScore ?? null;
-};
-
-const getHealthScoreColorClass = (score: number | null): string => {
-  if (score === null) return 'bg-light text-muted';
-  if (score >= 70) return 'bg-success bg-gradient';
-  if (score >= 50) return 'bg-warning bg-gradient text-dark';
-  return 'bg-danger bg-gradient';
-};
-
-const getHealthScoreTrend = (product: Product): number | null => {
-  console.log("Trends")
-  if (product.results.length < 2) return null;
-  const currentScore = product.results[product.results.length - 1]?.healthScore;
-  const previousScore = product.results[product.results.length - 2]?.healthScore;
-
-
-  console.log(currentScore, previousScore)
-  if (currentScore === undefined || previousScore === undefined) return null;
-  
-  return currentScore - previousScore;
-};
-
-const getTrendColorClass = (trend: number | null): string => {
-  if (trend === null) return 'text-muted';
-  if (trend > 0) return 'text-success';
-  if (trend < 0) return 'text-danger';
-  return 'text-muted'; // for trend === 0
-};
-
-const getTrendIcon = (trend: number | null): string => {
-  if (trend === null) return '';
-  if (trend > 0) return 'bi-arrow-up';
-  if (trend < 0) return 'bi-arrow-down';
-  return 'bi-dash'; // for trend === 0
-};
 
 // Sorting function
 const sortBy = (column: string) => {
@@ -188,32 +130,32 @@ const onProductClick = (product: Product) => {
                 <td class="py-4 align-middle">
                   <span class="badge bg-success bg-gradient px-3 py-2 fs-6 fw-normal">
                     <i class="bi bi-tag-fill me-1"></i>
-                    {{ getNewestVersion(product) }}
+                    {{ product.getNewestVersion() }}
                   </span>
                 </td>
                 <td class="py-4 align-middle">
                   <div class="language-tags">
                     <span class="badge bg-warning bg-gradient text-dark px-2 py-1 me-1 mb-1"
-                          v-for="lang in getUsedLanguages(product).split(', ').slice(0, 3)"
+                          v-for="lang in product.getUsedLanguages().split(', ').slice(0, 3)"
                           :key="lang">
                       {{ lang }}
                     </span>
-                    <span v-if="getUsedLanguages(product).split(', ').length > 3"
+                    <span v-if="product.getUsedLanguages().split(', ').length > 3"
                           class="badge bg-light text-dark px-2 py-1">
-                      +{{ getUsedLanguages(product).split(', ').length - 3 }} more
+                      +{{ product.getUsedLanguages().split(', ').length - 3 }} more
                     </span>
                   </div>
                 </td>
                 <td class="py-4 align-middle">
-                  <div v-if="getCurrentHealthScore(product) !== null" class="d-flex align-items-center">
-                    <span :class="`badge ${getHealthScoreColorClass(getCurrentHealthScore(product))} px-3 py-2 fs-6 fw-normal me-2`">
+                  <div v-if="product.getCurrentHealthScore() !== null" class="d-flex align-items-center">
+                    <span :class="`badge ${product.getHealthScoreColorClass()} px-3 py-2 fs-6 fw-normal me-2`">
                       <i class="bi bi-heart-pulse me-1"></i>
-                      {{ getCurrentHealthScore(product) }}
+                      {{ product.getCurrentHealthScore() }}
                     </span>
-                    <div v-if="getHealthScoreTrend(product) !== null" 
-                         :class="`small ${getTrendColorClass(getHealthScoreTrend(product))} fw-semibold`">
-                      <i :class="`bi ${getTrendIcon(getHealthScoreTrend(product))} me-1`"></i>
-                      {{ Math.abs(getHealthScoreTrend(product)!) }}
+                    <div v-if="product.getHealthScoreTrend() !== null" 
+                         :class="`small ${product.getTrendColorClass()} fw-semibold`">
+                      <i :class="`bi ${product.getTrendIcon()} me-1`"></i>
+                      {{ Math.abs(product.getHealthScoreTrend()!) }}
                     </div>
                   </div>
                   <span v-else class="badge bg-light text-muted px-3 py-2">
@@ -230,8 +172,8 @@ const onProductClick = (product: Product) => {
                 </td>
                 <td class="py-4 pe-4 align-middle">
                   <a
-                      v-if="getProjectUrl(product) !== '#'"
-                      :href="getProjectUrl(product)"
+                      v-if="product.getProjectUrl() !== '#'"
+                      :href="product.getProjectUrl()"
                       target="_blank"
                       class="btn btn-outline-info btn-sm px-3 py-2 fw-semibold"
                   >

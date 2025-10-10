@@ -9,7 +9,7 @@ const avgHealthScore = computed(() => {
   if (products.length === 0) return 0;
   const score = 0
   return products.reduce((acc, product) => {
-    return acc + (product.results[product.results.length - 1]?.healthScore ?? 0)
+    return acc + (product.getCurrentHealthScore() ?? 0)
   }, score) / products.length
 })
 

@@ -1,5 +1,5 @@
 import {reactive} from "vue";
-import type {Product, Result} from "./model/Result.ts";
+import {Product, type Result} from "./model/Result.ts";
 
 // Simple hash function for deterministic ID generation
 function generateDeterministicId(name: string, url: string = ""): string {
@@ -34,14 +34,14 @@ function addResult(result: Result) {
     const idx = store.products.findIndex(product => product.name === productName);
     let product: Product
     if (idx == -1) {
-        product = {
-            id: generateDeterministicId(productName, projectUrl),
-            name: productName,
-            description: `Analysis results for ${productName}`,
-            version: result.repoInfo.version,
-            results: [result],
-            createdAt: new Date().toISOString()
-        };
+        product = new Product(
+            generateDeterministicId(productName, projectUrl),
+            productName,
+            [result],
+            `Analysis results for ${productName}`,
+            result.repoInfo.version,
+            new Date().toISOString()
+        );
 
         store.products.push(product);
 

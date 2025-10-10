@@ -27,32 +27,14 @@ let chartInstance: Chart<"line"> | null = null;
 // Get product from store
 const product = computed(() => store.getProductById(props.productId));
 
-// Extract health data for chart
-const getHealthDataForChart = () => {
-  if (!product.value || product.value.results.length === 0) {
-    return { labels: [], data: [] };
-  }
-  
-  const labels: string[] = [];
-  const data: number[] = [];
-  
-  product.value.results.forEach((result) => {
-    const date = new Date(result.createdAt);
-    labels.push(date.toLocaleDateString());
-    data.push(result.healthScore);
-  });
-  
-  return { labels, data };
-};
-
 const renderChart = () => {
-  if (!chartCanvas.value) return;
+  if (!chartCanvas.value || !product.value) return;
   
-  const { labels, data } = getHealthDataForChart();
+  const { labels, data } = product.value.getHealthDataForChart();
   
   if (data.length === 0) return;
   
-  // Destroy existing chart instance if it exists
+  // Destroy an existing chart instance if it exists
   if (chartInstance) {
     chartInstance.destroy();
   }
@@ -138,8 +120,8 @@ onUnmounted(() => {
 .chart-container {
   position: relative;
   display: inline-block;
-  width: 120px;
-  height: 3rem;
+  width: 140px;
+  height: 4rem;
 }
 
 .chart-container canvas {
