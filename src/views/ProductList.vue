@@ -2,7 +2,21 @@
 import type {Product} from '../model/Result.ts';
 import {store} from "../store.ts";
 import {useRouter} from "vue-router";
-import {ref, computed} from "vue";
+import {ref, computed, onMounted, nextTick} from "vue";
+import {
+  Chart,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  LineController,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
+// Register Chart.js components
+Chart.register(CategoryScale, LinearScale, PointElement, LineElement, LineController, Title, Tooltip, Legend);
 
 const router = useRouter()
 
@@ -105,6 +119,98 @@ const sortBy = (column: string) => {
 const onProductClick = (product: Product) => {
   router.push({name: 'product-details', params: {id: product.id}})
 };
+
+// Chart-related functions
+const getHealthDataForChart = (product: Product) => {
+  if (product.results.length === 0) return { labels: [], data: [] };
+  
+  const labels: string[] = [];
+  const data: number[] = [];
+  
+  product.results.forEach((result) => {
+    const date = new Date(result.createdAt);
+    labels.push(date.toLocaleDateString());
+    data.push(result.healthScore);
+  });
+  
+  return { labels, data };
+};
+
+const createChart = (canvasId: string, product: Product) => {
+  const canvas = document.getElementById(canvasId) as HTMLCanvasElement;
+  if (!canvas) return;
+  
+  const { labels, data } = getHealthDataForChart(product);
+  
+  if (data.length === 0) return;
+  
+  new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Health Score',
+        data,
+        borderColor: 'rgb(75, 192, 192)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        tension: 0.4,
+        fill: true,
+        pointRadius: 3,
+        pointHoverRadius: 5,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          mode: 'index',
+          intersect: false,
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          grid: {
+            display: false
+          },
+          ticks: {
+            display: false
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            display: false
+          }
+        }
+      },
+      elements: {
+        point: {
+          radius: 2
+        }
+      }
+    }
+  });
+};
+
+const initializeCharts = () => {
+  nextTick(() => {
+    products.value.forEach((product) => {
+      createChart(`chart-${product.id}`, product);
+    });
+  });
+};
+
+onMounted(() => {
+  initializeCharts();
+});
 </script>
 
 <template>
@@ -159,6 +265,10 @@ const onProductClick = (product: Product) => {
                       <i v-else class="bi bi-arrow-down-up text-muted opacity-50"></i>
                     </span>
                   </div>
+                </th>
+                <th scope="col" class="fw-semibold text-dark py-3">
+                  <i class="bi bi-graph-up me-2 text-success"></i>
+                  Health Trend
                 </th>
                 <th scope="col" class="fw-semibold text-dark py-3 pe-4">
                   <i class="bi bi-link-45deg me-2 text-info"></i>
@@ -216,6 +326,15 @@ const onProductClick = (product: Product) => {
                     No Score
                   </span>
                 </td>
+                <td class="py-4 align-middle">
+                  <div v-if="product.results.length > 1" class="chart-container" style="width: 120px; height: 60px;">
+                    <canvas :id="`chart-${product.id}`"></canvas>
+                  </div>
+                  <div v-else class="text-muted small">
+                    <i class="bi bi-info-circle me-1"></i>
+                    Not enough data
+                  </div>
+                </td>
                 <td class="py-4 pe-4 align-middle">
                   <a
                       v-if="getProjectUrl(product) !== '#'"
@@ -269,6 +388,16 @@ const onProductClick = (product: Product) => {
 .clickable-row {
   cursor: pointer;
   transition: background-color 0.2s ease;
+}
+
+.chart-container {
+  position: relative;
+  display: inline-block;
+}
+
+.chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .clickable-row:hover {

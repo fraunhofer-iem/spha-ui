@@ -25,6 +25,7 @@ async function main() {
                     const rawData = await response.json();
                     const parsedResult = parse(rawData);
 
+                    console.log("parsed", url)
                     if (parsedResult) {
                         store.addResult(parsedResult);
                     } else {
@@ -36,8 +37,9 @@ async function main() {
             }
         }
         const data1 = 'https://raw.githubusercontent.com/fraunhofer-iem/spha-ui/refs/heads/main/example/kpi-results.json'
-        const data2 = 'https://raw.githubusercontent.com/fraunhofer-iem/spha-ui/refs/heads/main/example/kpi-results-small.json'
-        await Promise.all([fetchDemoData(data1), fetchDemoData(data2)])
+        const data2 = 'https://raw.githubusercontent.com/fraunhofer-iem/spha-ui/refs/heads/main/example/kpi-results-2.json'
+        const data3 = 'https://raw.githubusercontent.com/fraunhofer-iem/spha-ui/refs/heads/main/example/kpi-results-small.json'
+        await Promise.all([fetchDemoData(data1), fetchDemoData(data2), fetchDemoData(data3)])
     }
 }
 
