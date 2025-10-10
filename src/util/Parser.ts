@@ -38,12 +38,28 @@ export function parse(raw: any): Result | undefined {
 
   const root: Kpi = nodeToKpi(raw.resultHierarchy.root);
 
+  // Try to parse createdAt from raw data, fallback to current date if not available or invalid
+  let createdAt: string;
+  if (raw.createdAt && typeof raw.createdAt === 'string' && raw.createdAt.trim() !== '') {
+    const parsedDate = new Date(raw.createdAt);
+    // Check if the parsed date is valid
+    if (!isNaN(parsedDate.getTime())) {
+      createdAt = parsedDate.toISOString();
+    } else {
+      // Invalid date string, use current date
+      createdAt = new Date().toISOString();
+    }
+  } else {
+    // Field not present or empty, use current date
+    createdAt = new Date().toISOString();
+  }
+
   return {
     healthScore,
     repoInfo,
     root,
     tools,
-    createdAt: new Date().toISOString(),
+    createdAt,
   };
 }
 
