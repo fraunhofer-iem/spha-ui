@@ -129,7 +129,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="chart-container" style="width: 120px; height: 60px;">
+  <div class="chart-container">
     <canvas ref="chartCanvas"></canvas>
   </div>
 </template>
@@ -138,6 +138,8 @@ onUnmounted(() => {
 .chart-container {
   position: relative;
   display: inline-block;
+  width: 120px;
+  height: 3rem;
 }
 
 .chart-container canvas {
