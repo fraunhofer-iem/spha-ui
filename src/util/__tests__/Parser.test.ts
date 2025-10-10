@@ -2,11 +2,19 @@ import {beforeEach, describe, expect, it} from "vitest";
 import {parse} from "./../Parser";
 import type {Kpi, RepoInfo, Result} from "../../model/Result";
 import kpiResultsSmall from "../../../example/kpi-results-small.json";
+import kpiNew from "../../../example/kpi-new.json";
 
 describe("Parser", () => {
     describe("parse function", () => {
         it("should successfully parse valid kpi-results-small.json", () => {
             const result = parse(kpiResultsSmall);
+
+            expect(result).toBeDefined();
+            expect(result).not.toBeNull();
+        });
+
+        it("should successfully parse valid kpi-new.json", () => {
+            const result = parse(kpiNew);
 
             expect(result).toBeDefined();
             expect(result).not.toBeNull();

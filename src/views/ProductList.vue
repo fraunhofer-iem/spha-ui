@@ -63,13 +63,40 @@ const getHealthScoreColorClass = (score: number | null): string => {
   return 'bg-danger bg-gradient';
 };
 
+const getHealthScoreTrend = (product: Product): number | null => {
+  console.log("Trends")
+  if (product.results.length < 2) return null;
+  const currentScore = product.results[product.results.length - 1]?.healthScore;
+  const previousScore = product.results[product.results.length - 2]?.healthScore;
+
+
+  console.log(currentScore, previousScore)
+  if (currentScore === undefined || previousScore === undefined) return null;
+  
+  return currentScore - previousScore;
+};
+
+const getTrendColorClass = (trend: number | null): string => {
+  if (trend === null) return 'text-muted';
+  if (trend > 0) return 'text-success';
+  if (trend < 0) return 'text-danger';
+  return 'text-muted'; // for trend === 0
+};
+
+const getTrendIcon = (trend: number | null): string => {
+  if (trend === null) return '';
+  if (trend > 0) return 'bi-arrow-up';
+  if (trend < 0) return 'bi-arrow-down';
+  return 'bi-dash'; // for trend === 0
+};
+
 // Sorting function
 const sortBy = (column: string) => {
   if (sortColumn.value === column) {
     // Toggle direction if clicking the same column
     sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc'
   } else {
-    // Set new column and default to descending for health scores
+    // Set a new column and default to descending for health scores
     sortColumn.value = column
     sortDirection.value = 'desc'
   }
@@ -173,11 +200,17 @@ const onProductClick = (product: Product) => {
                   </div>
                 </td>
                 <td class="py-4 align-middle">
-                  <span v-if="getCurrentHealthScore(product) !== null"
-                        :class="`badge ${getHealthScoreColorClass(getCurrentHealthScore(product))} px-3 py-2 fs-6 fw-normal`">
-                    <i class="bi bi-heart-pulse me-1"></i>
-                    {{ getCurrentHealthScore(product) }}
-                  </span>
+                  <div v-if="getCurrentHealthScore(product) !== null" class="d-flex align-items-center">
+                    <span :class="`badge ${getHealthScoreColorClass(getCurrentHealthScore(product))} px-3 py-2 fs-6 fw-normal me-2`">
+                      <i class="bi bi-heart-pulse me-1"></i>
+                      {{ getCurrentHealthScore(product) }}
+                    </span>
+                    <div v-if="getHealthScoreTrend(product) !== null" 
+                         :class="`small ${getTrendColorClass(getHealthScoreTrend(product))} fw-semibold`">
+                      <i :class="`bi ${getTrendIcon(getHealthScoreTrend(product))} me-1`"></i>
+                      {{ Math.abs(getHealthScoreTrend(product)!) }}
+                    </div>
+                  </div>
                   <span v-else class="badge bg-light text-muted px-3 py-2">
                     <i class="bi bi-x-circle me-1"></i>
                     No Score

@@ -62,4 +62,5 @@ export interface Product {
   version?: string;
   results: Result[];
   createdAt?: string;
+  // TODO: add product group
 }
