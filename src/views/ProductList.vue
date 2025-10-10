@@ -156,19 +156,22 @@ const createChart = (canvasId: string, product: Product) => {
         tension: 0.4,
         fill: true,
         pointRadius: 3,
-        pointHoverRadius: 5,
+        pointHoverRadius: 3,
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      interaction: {
+        mode: undefined,
+        intersect: false,
+      },
       plugins: {
         legend: {
           display: false
         },
         tooltip: {
-          mode: 'index',
-          intersect: false,
+          enabled: false
         }
       },
       scales: {
