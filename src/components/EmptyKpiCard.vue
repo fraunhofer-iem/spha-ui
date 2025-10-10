@@ -14,7 +14,7 @@ const props = defineProps<{
 const getUniqueKpiResults = (kpi: Kpi): Map<string, string> => {
   const resultMap = new Map<string, string>();
 
-  // Add current KPI's result type if it exists, using id (typeId) as key
+  // Add the current KPI's result type if it exists, using id (typeId) as key
   if (kpi.resultType && kpi.id) {
     resultMap.set(kpi.id, kpi.resultType);
   }
@@ -23,7 +23,7 @@ const getUniqueKpiResults = (kpi: Kpi): Map<string, string> => {
   if (kpi.children && kpi.children.length > 0) {
     kpi.children.forEach((child) => {
       const childResults = getUniqueKpiResults(child);
-      // Merge child results, but don't overwrite existing entries (first occurrence wins)
+      // Merge child results but don't overwrite existing entries (first occurrence wins)
       childResults.forEach((resultType, id) => {
         if (!resultMap.has(id)) {
           resultMap.set(id, resultType);
@@ -75,7 +75,7 @@ const totalCount = computed(() => {
 const getEmptyKpiDetails = (kpi: Kpi): Kpi[] => {
   const emptyKpis: Kpi[] = [];
 
-  // Check if current KPI has empty result
+  // Check if current KPI has an empty result
   if (kpi.resultType === "de.fraunhofer.iem.spha.model.kpi.hierarchy.KpiCalculationResult.Empty") {
     emptyKpis.push(kpi);
   }
