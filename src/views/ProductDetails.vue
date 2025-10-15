@@ -92,7 +92,7 @@ const handleUploadClick = () => {
     </div>
     <div class="row">
       <div class="col-md-3 mb-3">
-        <HealthScore :score="lastResult!.healthScore" :root-kpi="lastResult!.root"/>
+        <HealthScore :product="product!"/>
       </div>
 
       <div class="col-md-9 mb-3">
