@@ -63,7 +63,7 @@ const renderChart = () => {
     dLabel: {
       type: "doughnutLabel",
       content: () => [`${bounded}/100`, `${trendIcon}${trendAbs.value}`, "score"],
-      font: [{size: 40, weight: "bold"}, {size: 16, weight: "bold"}, {size: 25}],
+      font: [{size: 40, weight: "bold"}, {size: 20, weight: "bold"}, {size: 25}],
       color: ["black", trendColor, "grey"],
     },
   };
