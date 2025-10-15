@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { mount, type VueWrapper } from "@vue/test-utils";
 import HealthScore from "../HealthScore.vue";
 import { Chart } from "chart.js";
+import { Product, type Kpi } from "../../model/Result.ts";
 
 // Mock Chart.js
 vi.mock("chart.js", () => {
@@ -46,15 +47,27 @@ vi.mock("../assets/styles/Colors.ts", () => ({
 describe("HealthScore", () => {
   let wrapper: VueWrapper<any>;
   let mockChartInstance: any;
-  
-  const mockRootKpi = {
+
+  const mockRootKpi: Kpi = {
     displayName: "Overall Health",
     score: 85,
     id: "root",
     children: [
       { displayName: "Code Quality", score: 90, id: "quality", children: [] },
-      { displayName: "Security", score: 80, id: "security", children: [] }
-    ]
+      { displayName: "Security", score: 80, id: "security", children: [] },
+    ],
+  } as any;
+
+  const buildProduct = (scores: number[], rootKpi: Kpi = mockRootKpi) => {
+    const now = Date.now();
+    const results = scores.map((s, idx) => ({
+      healthScore: s,
+      repoInfo: { repoLanguages: [] },
+      root: rootKpi,
+      tools: [],
+      createdAt: new Date(now + idx * 1000).toISOString(),
+    }));
+    return new Product("p1", "Prod 1", results as any);
   };
 
   beforeEach(() => {
@@ -74,23 +87,21 @@ describe("HealthScore", () => {
   });
 
   describe("Component Initialization", () => {
-    it("should mount with required score prop", () => {
+    it("should mount with required product prop", () => {
       wrapper = mount(HealthScore, {
         props: {
-          score: 75,
-          rootKpi: mockRootKpi,
+          product: buildProduct([75]),
         },
       });
 
       expect(wrapper.exists()).toBe(true);
-      expect(wrapper.props().score).toBe(75);
+      expect(wrapper.props().product).toBeTruthy();
     });
 
     it("should create chart on mount", async () => {
       wrapper = mount(HealthScore, {
         props: {
-          score: 85,
-          rootKpi: mockRootKpi,
+          product: buildProduct([85]),
         },
       });
 
@@ -104,7 +115,7 @@ describe("HealthScore", () => {
     it("should pass correct data to chart", async () => {
       const score = 65;
       wrapper = mount(HealthScore, {
-        props: { score, rootKpi: mockRootKpi },
+        props: { product: buildProduct([score]) },
       });
 
       await wrapper.vm.$nextTick();
@@ -118,8 +129,7 @@ describe("HealthScore", () => {
     it("should configure chart with correct options", async () => {
       wrapper = mount(HealthScore, {
         props: {
-          score: 90,
-          rootKpi: mockRootKpi,
+          product: buildProduct([90]),
         },
       });
 
@@ -136,10 +146,10 @@ describe("HealthScore", () => {
   });
 
   describe("Score Display Logic", () => {
-    it("should display score correctly in annotation", async () => {
+    it("should display score correctly in annotation (first and third lines)", async () => {
       const score = 42;
       wrapper = mount(HealthScore, {
-        props: { score, rootKpi: mockRootKpi },
+        props: { product: buildProduct([score]) },
       });
 
       await wrapper.vm.$nextTick();
@@ -150,15 +160,13 @@ describe("HealthScore", () => {
         chartConfig.options.plugins.annotation.annotations.dLabel;
 
       const content = annotation.content();
-      expect(content).toEqual([`${score}/100`, "score"]);
+      expect(content[0]).toBe(`${score}/100`);
+      expect(content[2]).toBe("score");
     });
 
     it("should handle zero score", async () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 0,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([0]) },
       });
 
       await wrapper.vm.$nextTick();
@@ -171,15 +179,13 @@ describe("HealthScore", () => {
       const annotation =
         chartConfig.options.plugins.annotation.annotations.dLabel;
       const content = annotation.content();
-      expect(content).toEqual(["0/100", "score"]);
+      expect(content[0]).toBe("0/100");
+      expect(content[2]).toBe("score");
     });
 
     it("should handle maximum score", async () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 100,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([100]) },
       });
 
       await wrapper.vm.$nextTick();
@@ -192,15 +198,13 @@ describe("HealthScore", () => {
       const annotation =
         chartConfig.options.plugins.annotation.annotations.dLabel;
       const content = annotation.content();
-      expect(content).toEqual(["100/100", "score"]);
+      expect(content[0]).toBe("100/100");
+      expect(content[2]).toBe("score");
     });
 
     it("should handle decimal scores", async () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 75.5,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([75.5]) },
       });
 
       await wrapper.vm.$nextTick();
@@ -213,17 +217,15 @@ describe("HealthScore", () => {
       const annotation =
         chartConfig.options.plugins.annotation.annotations.dLabel;
       const content = annotation.content();
-      expect(content).toEqual(["75.5/100", "score"]);
+      expect(content[0]).toBe("75.5/100");
+      expect(content[2]).toBe("score");
     });
   });
 
   describe("Chart Styling and Configuration", () => {
     it("should configure chart colors correctly", async () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 80,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([80]) },
       });
 
       await wrapper.vm.$nextTick();
@@ -249,10 +251,7 @@ describe("HealthScore", () => {
 
     it("should disable interactions", async () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 60,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([60]) },
       });
 
       await wrapper.vm.$nextTick();
@@ -267,10 +266,7 @@ describe("HealthScore", () => {
 
     it("should configure annotation styling", async () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 55,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([55]) },
       });
 
       await wrapper.vm.$nextTick();
@@ -283,17 +279,15 @@ describe("HealthScore", () => {
       expect(annotation.type).toBe("doughnutLabel");
       expect(annotation.font).toEqual([
         { size: 40, weight: "bold" },
+        { size: 20, weight: "bold" },
         { size: 25 },
       ]);
-      expect(annotation.color).toEqual(["black", "grey"]);
+      expect(annotation.color).toEqual(["black", "grey", "grey"]);
     });
 
     it("should hide legend", async () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 70,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([70]) },
       });
 
       await wrapper.vm.$nextTick();
@@ -306,18 +300,15 @@ describe("HealthScore", () => {
   });
 
   describe("Chart Lifecycle Management", () => {
-    it("should destroy previous chart when score changes", async () => {
+    it("should destroy previous chart when product (score) changes", async () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 50,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([50]) },
       });
 
       await wrapper.vm.$nextTick();
 
-      // Change the score
-      await wrapper.setProps({ score: 80 });
+      // Change the score by replacing the product with a new one
+      await wrapper.setProps({ product: buildProduct([80]) });
 
       expect(mockChartInstance.destroy).toHaveBeenCalled();
       expect(Chart).toHaveBeenCalledTimes(2); // Initial + after prop change
@@ -325,10 +316,7 @@ describe("HealthScore", () => {
 
     it("should destroy chart on component unmount", () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 90,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([90]) },
       });
 
       wrapper.unmount();
@@ -338,18 +326,15 @@ describe("HealthScore", () => {
 
     it("should handle multiple score changes correctly", async () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 30,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([30]) },
       });
 
       await wrapper.vm.$nextTick();
 
-      // Change score multiple times
-      await wrapper.setProps({ score: 50 });
-      await wrapper.setProps({ score: 70 });
-      await wrapper.setProps({ score: 90 });
+      // Change score multiple times via new product instances
+      await wrapper.setProps({ product: buildProduct([50]) });
+      await wrapper.setProps({ product: buildProduct([70]) });
+      await wrapper.setProps({ product: buildProduct([90]) });
 
       expect(mockChartInstance.destroy).toHaveBeenCalledTimes(3);
       expect(Chart).toHaveBeenCalledTimes(4); // Initial + 3 changes
@@ -358,10 +343,7 @@ describe("HealthScore", () => {
     it("should not crash if canvas is not available", async () => {
       // Mock a scenario where canvas ref is null
       wrapper = mount(HealthScore, {
-        props: {
-          score: 75,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([75]) },
       });
 
       await wrapper.vm.$nextTick();
@@ -381,10 +363,7 @@ describe("HealthScore", () => {
   describe("Component Structure", () => {
     it("should render DashboardCard with correct title", () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 85,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([85]) },
       });
 
       expect(
@@ -394,10 +373,7 @@ describe("HealthScore", () => {
 
     it("should render canvas element", () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 65,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([65]) },
       });
 
       const canvas = wrapper.find("canvas");
@@ -406,10 +382,7 @@ describe("HealthScore", () => {
 
     it("should render Details button", () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 40,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([40]) },
       });
 
       const button = wrapper.find("button");
@@ -422,10 +395,7 @@ describe("HealthScore", () => {
 
     it("should have correct chart container styling", () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 95,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([95]) },
       });
 
       const chartContainer = wrapper.find(".chart-container");
@@ -435,12 +405,9 @@ describe("HealthScore", () => {
   });
 
   describe("Edge Cases and Error Handling", () => {
-    it("should handle negative score gracefully", async () => {
+    it("should handle negative score gracefully (bounded to 0)", async () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: -10,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([-10]) },
       });
 
       await wrapper.vm.$nextTick();
@@ -448,20 +415,18 @@ describe("HealthScore", () => {
       const chartCall = (Chart as any).mock.calls[0];
       const chartConfig = chartCall[1];
 
-      expect(chartConfig.data.datasets[0].data).toEqual([-10, 110]);
+      expect(chartConfig.data.datasets[0].data).toEqual([0, 100]);
 
       const annotation =
         chartConfig.options.plugins.annotation.annotations.dLabel;
       const content = annotation.content();
-      expect(content).toEqual(["-10/100", "score"]);
+      expect(content[0]).toBe("0/100");
+      expect(content[2]).toBe("score");
     });
 
-    it("should handle score over 100", async () => {
+    it("should handle score over 100 (bounded to 100)", async () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 120,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([120]) },
       });
 
       await wrapper.vm.$nextTick();
@@ -469,20 +434,18 @@ describe("HealthScore", () => {
       const chartCall = (Chart as any).mock.calls[0];
       const chartConfig = chartCall[1];
 
-      expect(chartConfig.data.datasets[0].data).toEqual([120, -20]);
+      expect(chartConfig.data.datasets[0].data).toEqual([100, 0]);
 
       const annotation =
         chartConfig.options.plugins.annotation.annotations.dLabel;
       const content = annotation.content();
-      expect(content).toEqual(["120/100", "score"]);
+      expect(content[0]).toBe("100/100");
+      expect(content[2]).toBe("score");
     });
 
     it("should handle chart destruction when chart instance is null", () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 75,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([75]) },
       });
 
       // Set chart instance to null
@@ -495,10 +458,7 @@ describe("HealthScore", () => {
     it("should not render chart if canvas ref is not available initially", async () => {
       // Create a scenario where canvas is not immediately available
       wrapper = mount(HealthScore, {
-        props: {
-          score: 50,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([50]) },
         attachTo: document.body,
       });
 
@@ -514,29 +474,23 @@ describe("HealthScore", () => {
   });
 
   describe("Reactivity and Watchers", () => {
-    it("should watch score prop deeply", async () => {
+    it("should re-render when product (score) changes", async () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 25,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([25]) },
       });
 
       await wrapper.vm.$nextTick();
       vi.clearAllMocks();
 
-      // Change score
-      await wrapper.setProps({ score: 75 });
+      // Change score by replacing product
+      await wrapper.setProps({ product: buildProduct([75]) });
 
       expect(Chart).toHaveBeenCalled();
     });
 
-    it("should update chart data when score changes", async () => {
+    it("should update chart data when score changes via product", async () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 40,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([40]) },
       });
 
       await wrapper.vm.$nextTick();
@@ -547,7 +501,7 @@ describe("HealthScore", () => {
       expect(chartConfig.data.datasets[0].data).toEqual([40, 60]);
 
       // Change score
-      await wrapper.setProps({ score: 80 });
+      await wrapper.setProps({ product: buildProduct([80]) });
 
       // Verify updated data
       chartCall = (Chart as any).mock.calls[1]; // Second call after prop change
@@ -557,18 +511,15 @@ describe("HealthScore", () => {
 
     it("should handle rapid score changes", async () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 10,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([10]) },
       });
 
       await wrapper.vm.$nextTick();
 
-      // Rapid changes
+      // Rapid changes via new product instances
       const scores = [20, 30, 40, 50, 60];
       for (const score of scores) {
-        await wrapper.setProps({ score });
+        await wrapper.setProps({ product: buildProduct([score]) });
       }
 
       // Should have destroyed and recreated chart for each change
@@ -580,10 +531,7 @@ describe("HealthScore", () => {
   describe("Button Interactions", () => {
     it("should handle Details button click", async () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 88,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([88]) },
       });
 
       const button = wrapper.find("button");
@@ -596,10 +544,7 @@ describe("HealthScore", () => {
 
     it("should have correct button styling", () => {
       wrapper = mount(HealthScore, {
-        props: {
-          score: 77,
-          rootKpi: mockRootKpi,
-        },
+        props: { product: buildProduct([77]) },
       });
 
       const button = wrapper.find("button");
