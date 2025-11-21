@@ -62,7 +62,11 @@ const renderChart = () => {
   const annotation: any = {
     dLabel: {
       type: "doughnutLabel",
-      content: () => [`${bounded}/100`, `${trendIcon}${trendAbs.value}`, "score"],
+      content: () => [
+        `${bounded}/100`,
+        trend.value == null ? "-" : `${trendIcon}${trendAbs.value}`,
+        "score",
+      ],
       font: [{size: 40, weight: "bold"}, {size: 20, weight: "bold"}, {size: 25}],
       color: ["black", trendColor, "grey"],
     },
