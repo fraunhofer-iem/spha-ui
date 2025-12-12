@@ -1,3 +1,6 @@
+# Archived
+We migrated the contents of this repository into SPHA's main [repository](https://github.com/fraunhofer-iem/spha)
+
 # SPHA Visualization
 
 A web-based dashboard for visualizing Software Project Health Assistant (SPHA) results. This Vue.js application provides comprehensive insights into software project health metrics, security vulnerabilities, and quality indicators.
